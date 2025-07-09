@@ -106,7 +106,7 @@ internal static class TokenAssert
             Assert.That(actual.Name, Is.EqualTo(expected.Name));
             if (!ignoreExtent)
             {
-                TokenAssert.AreEqual(expected.Extent, actual!.Extent);
+                TokenAssert.AreEqual(expected.Extent, actual.Extent);
             }
         });
     }
@@ -202,7 +202,7 @@ internal static class TokenAssert
             }
             TokenAssert.AreEqual(expected.StartPosition, actual.StartPosition);
             TokenAssert.AreEqual(expected.EndPosition, actual.EndPosition);
-            Assert.That(actual!.Text, Is.EqualTo(expected.Text));
+            Assert.That(actual.Text, Is.EqualTo(expected.Text));
         });
     }
 

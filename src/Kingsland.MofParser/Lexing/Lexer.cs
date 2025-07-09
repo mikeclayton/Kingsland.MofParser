@@ -559,7 +559,12 @@ public static class Lexer
 
         var token = default(SyntaxToken);
         var signChar = default(SourceChar);
-        var firstDigitBlock = new List<SourceChar>();
+
+        // the part of the number before the decimal place
+        var integerSourceChars = new List<SourceChar>();
+
+        // the part of the number after the decimal place
+        var fractionSourceChars = new List<SourceChar>();
 
         var currentState = stateLeadingSign;
         while (currentState != stateDone)
@@ -606,10 +611,10 @@ public static class Lexer
                     // we don't know which base the value is in yet, but if it's hexadecimal them
                     // we should be reading the "0x" part here, so restrict digits to decimal in
                     // all cases
-                    (firstDigitBlock, thisReader) = thisReader.ReadWhile(StringValidator.IsDecimalDigit);
-                    sourceChars.AddRange(firstDigitBlock);
+                    (integerSourceChars, thisReader) = thisReader.ReadWhile(StringValidator.IsDecimalDigit);
+                    sourceChars.AddRange(integerSourceChars);
                     // now we can do some validation
-                    if (firstDigitBlock.Count == 0)
+                    if (integerSourceChars.Count == 0)
                     {
                         // only realValue allows no digits in the first block, and
                         // we've already handled that at the start of this case
@@ -639,14 +644,14 @@ public static class Lexer
                             // realValue
                             stateRealValue,
                         _ =>
-                            // by elmination, this must be an octalValue or decimalValue
+                            // by elimination, this must be an octalValue or decimalValue
                             stateOctalOrDecimalValue
                     };
                     break;
 
                 case stateOctalOrDecimalValue:
                     // we're reading an octalValue or decimalValue, but we're not sure which yet...
-                    if ((firstDigitBlock.First().Value == '0') && (firstDigitBlock.Count > 1))
+                    if ((integerSourceChars.First().Value == '0') && (integerSourceChars.Count > 1))
                     {
                         currentState = stateOctalValue;
                     }
@@ -659,7 +664,7 @@ public static class Lexer
                 case stateBinaryValue:
                     // we're trying to read a binaryValue, so check all the characters in the digit block are valid,
                     // i.e. 1*binaryDigit
-                    if (firstDigitBlock.Any(c => !StringValidator.IsBinaryDigit(c.Value)))
+                    if (integerSourceChars.Any(c => !StringValidator.IsBinaryDigit(c.Value)))
                     {
                         throw new UnexpectedCharacterException(
                             sourceChar ?? throw new NullReferenceException()
@@ -669,7 +674,7 @@ public static class Lexer
                     (sourceChar, thisReader) = thisReader.Read(c => (c == 'b') || (c == 'B'));
                     sourceChars.Add(sourceChar);
                     // now build the return value
-                    var binaryValue = ParseBinaryValueDigits(firstDigitBlock, signChar);
+                    var binaryValue = ParseBinaryValueDigits(integerSourceChars, signChar);
                     token = new IntegerLiteralToken(SourceExtent.From(sourceChars), IntegerKind.BinaryValue, binaryValue);
                     // and we're done
                     currentState = stateDone;
@@ -679,20 +684,20 @@ public static class Lexer
                     // we're trying to read an octalValue (since decimalValue can't start with a
                     // leading '0') so check all the characters in the digit block are valid,
                     // i.e. "0" 1*octalDigit
-                    if ((firstDigitBlock.Count < 2) || (firstDigitBlock.First().Value != '0'))
+                    if ((integerSourceChars.Count < 2) || (integerSourceChars.First().Value != '0'))
                     {
                         throw new UnexpectedCharacterException(
                             sourceChar ?? throw new NullReferenceException()
                         );
                     }
-                    if (firstDigitBlock.Skip(1).Any(c => !StringValidator.IsOctalDigit(c.Value)))
+                    if (integerSourceChars.Skip(1).Any(c => !StringValidator.IsOctalDigit(c.Value)))
                     {
                         throw new UnexpectedCharacterException(
                             sourceChar ?? throw new NullReferenceException()
                         );
                     }
                     // now build the return value
-                    var octalValue = ParseOctalValueDigits(firstDigitBlock, signChar);
+                    var octalValue = ParseOctalValueDigits(integerSourceChars, signChar);
                     token = new IntegerLiteralToken(SourceExtent.From(sourceChars), IntegerKind.OctalValue, octalValue);
                     // and we're done
                     currentState = stateDone;
@@ -700,7 +705,7 @@ public static class Lexer
 
                 case stateHexValue:
                     // we're trying to read a hexValue, so we should have just read a leading zero
-                    if ((firstDigitBlock.Count != 1) || (firstDigitBlock.First().Value != '0'))
+                    if ((integerSourceChars.Count != 1) || (integerSourceChars.First().Value != '0'))
                     {
                         throw new UnexpectedCharacterException(
                             sourceChar ?? throw new NullReferenceException()
@@ -727,24 +732,24 @@ public static class Lexer
                     // we're trying to read a decimalValue (since that's the only remaining option),
                     // so check all the characters in the digit block are valid,
                     // i.e. "0" / positiveDecimalDigit *decimalDigit
-                    if ((firstDigitBlock.Count == 1) && (firstDigitBlock.First().Value == '0'))
+                    if ((integerSourceChars.Count == 1) && (integerSourceChars.First().Value == '0'))
                     {
                         // "0"
                     }
-                    else if (!StringValidator.IsPositiveDecimalDigit(firstDigitBlock.First().Value))
+                    else if (!StringValidator.IsPositiveDecimalDigit(integerSourceChars.First().Value))
                     {
                         throw new UnexpectedCharacterException(
                             sourceChar ?? throw new NullReferenceException()
                         );
                     }
-                    else if (firstDigitBlock.Skip(1).Any(c => !StringValidator.IsDecimalDigit(c.Value)))
+                    else if (integerSourceChars.Skip(1).Any(c => !StringValidator.IsDecimalDigit(c.Value)))
                     {
                         throw new UnexpectedCharacterException(
                             sourceChar ?? throw new NullReferenceException()
                         );
                     }
                     // build the return value
-                    var decimalValue = ParseDecimalValueDigits(firstDigitBlock, signChar);
+                    var decimalValue = ParseDecimalValueDigits(integerSourceChars, signChar);
                     token = new IntegerLiteralToken(SourceExtent.From(sourceChars), IntegerKind.DecimalValue, decimalValue);
                     // and we're done
                     currentState = stateDone;
@@ -753,13 +758,14 @@ public static class Lexer
                 case stateRealValue:
                     // we're trying to read a realValue, so check all the characters in the digit block are valid,
                     // i.e. *decimalDigit
-                    if (firstDigitBlock.Any(c => !StringValidator.IsDecimalDigit(c.Value)))
+                    if (integerSourceChars.Any(c => !StringValidator.IsDecimalDigit(c.Value)))
                     {
                         throw new UnexpectedCharacterException(
                             sourceChar ?? throw new NullReferenceException()
                         );
                     }
-                    // all the characters are valid, so consume the decimal point
+                    // all the characters are valid, so consume a decimal point
+                    // (if there's no decimal point this would be an integer value, not a real value)
                     (sourceChar, thisReader) = thisReader.Read('.');
                     sourceChars.Add(sourceChar);
                     // and go to the next state
@@ -768,12 +774,12 @@ public static class Lexer
 
                 case stateRealValueFraction:
                     // 1*decimalDigit
-                    (var realFractionDigits, thisReader) = thisReader.ReadWhile(StringValidator.IsHexDigit);
-                    if (realFractionDigits.Count == 0)
+                    (fractionSourceChars, thisReader) = thisReader.ReadWhile(StringValidator.IsDecimalDigit);
+                    if (fractionSourceChars.Count == 0)
                     {
                         throw new UnexpectedCharacterException(thisReader.Peek());
                     }
-                    sourceChars.AddRange(realFractionDigits);
+                    sourceChars.AddRange(fractionSourceChars);
                     // ( "e" / "E" )
                     if (!thisReader.Eof())
                     {
@@ -785,11 +791,11 @@ public static class Lexer
                         }
                     }
                     // build the return value
-                    var realIntegerValue = ParseDecimalValueDigits(firstDigitBlock, signChar);
-                    var realFractionValue = (double)ParseDecimalValueDigits(realFractionDigits, signChar);
-                    if (realFractionDigits.Count > 0)
+                    var realIntegerValue = ParseDecimalValueDigits(integerSourceChars, signChar);
+                    var realFractionValue = (double)ParseDecimalValueDigits(fractionSourceChars, signChar);
+                    if (fractionSourceChars.Count > 0)
                     {
-                        realFractionValue /= Math.Pow(10, realFractionDigits.Count);
+                        realFractionValue /= Math.Pow(10, fractionSourceChars.Count);
                     }
                     token = new RealLiteralToken(
                         SourceExtent.From(sourceChars),
@@ -800,7 +806,7 @@ public static class Lexer
                     break;
 
                 case stateRealValueExponent:
-                    throw new InvalidOperationException();
+                    throw new NotImplementedException("Support for exponents in 'real' values is not currently implemented.");
 
                 case stateDone:
                     // the main while loop should exit before we ever get here

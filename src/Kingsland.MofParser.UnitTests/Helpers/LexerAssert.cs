@@ -166,14 +166,14 @@ internal static class LexerAssert
             WhitespaceToken token =>
                 TokenCompare.AreEqual(token, (WhitespaceToken?)actualToken, ignoreExtent),
             _ =>
-                throw new NotImplementedException($"Cannot compare type '{expectedToken?.GetType().Name}'")
+                throw new NotImplementedException($"Cannot compare type '{expectedToken.GetType().Name}'")
         };
         if (!tokensEqual)
         {
             LexerAssert.Fail(
                 $"Actual token does not match expected token",
                 $"{expectedToken.GetType().Name} (\"{LexerAssert.EscapeString(expectedToken.GetSourceString())}\")",
-                $"{actualToken?.GetType().Name} (\"{LexerAssert.EscapeString(actualToken?.GetSourceString() ?? string.Empty )}\")",
+                $"{actualToken.GetType().Name} (\"{LexerAssert.EscapeString(actualToken.GetSourceString() ?? string.Empty )}\")",
                 index
             );
         }
@@ -199,7 +199,7 @@ internal static class LexerAssert
             result.Append(
                 mappings.TryGetValue(c, out var lookup)
                     ? lookup
-                    : new string(new char[] { c })
+                    : new([c])
             );
         }
         return result.ToString();

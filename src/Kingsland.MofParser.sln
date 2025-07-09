@@ -28,12 +28,20 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{7CE2C4E1-F0BA-45AD-A224-181AEE1AF26E}"
 	ProjectSection(SolutionItems) = preProject
 		..\.github\workflows\01_build_test_publish.yaml = ..\.github\workflows\01_build_test_publish.yaml
-		..\.github\workflows\02_codeql.yaml = ..\.github\workflows\02_codeql.yaml
+		..\.github\workflows\99_codeql.yaml = ..\.github\workflows\99_codeql.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{6E890646-7B55-4818-9DFC-71561A9DF646}"
 	ProjectSection(SolutionItems) = preProject
 		Kingsland.MofParser.nuspec = Kingsland.MofParser.nuspec
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".docs", ".docs", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		..\LICENSE = ..\LICENSE
+		..\LICENSE-lgpl3 = ..\LICENSE-lgpl3
+		..\LICENSE-mit = ..\LICENSE-mit
+		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
 Global

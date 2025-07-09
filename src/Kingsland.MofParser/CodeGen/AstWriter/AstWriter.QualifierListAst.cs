@@ -30,7 +30,7 @@ public sealed partial class AstWriter
             if (prevQualifierValue is not null)
             {
                 this.WriteString(',');
-                if (!omitSpaceQuirkEnabled || !prevQualifierValue.QualifierName!.IsKeyword("in") || !thisQualifierValue.QualifierName.IsKeyword("out"))
+                if (!omitSpaceQuirkEnabled || !prevQualifierValue.QualifierName.IsKeyword("in") || !thisQualifierValue.QualifierName.IsKeyword("out"))
                 {
                     this.WriteString(' ');
                 }

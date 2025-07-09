@@ -5,14 +5,6 @@ namespace Kingsland.MofParser.Ast;
 public abstract record AstNode : ParseFx.Parsing.AstNode
 {
 
-    #region Constructors
-
-    protected AstNode() : base()
-    {
-    }
-
-    #endregion
-
     #region Object Overrides
 
     public sealed override string ToString()

@@ -1,3 +1,4 @@
+
 Kingsland.MofParser
 ===================
 
@@ -83,4 +84,14 @@ Post a bug report (and / or send a Pull Request) on the Issues page if you encou
 License
 -------
 
-This project is licensed under the GNU Lesser General Public License (LGPL) v3. See LICENSE.txt for details.
+This project is licensed under the following licenses:
+
+* MIT License
+* GNU Lesser General Public License v3.0 only
+
+Choose one of these licenses for your use of this project,
+subject to the terms and conditions of the license you select.
+
+See LICENSE, LICENSE-lgpl3 and LICENSE-mit for details.
+
+`SPDX-License-Identifier: MIT OR LGPL-3.0-only`

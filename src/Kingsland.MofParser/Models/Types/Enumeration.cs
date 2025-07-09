@@ -7,7 +7,7 @@ public sealed class Enumeration
     {
         this.Name = name ?? throw new ArgumentNullException(nameof(name));
         this.UnderlyingType =
-            new Type[] { typeof(string), typeof(int) }
+            new[] { typeof(string), typeof(int) }
                 .Contains(underlyingType ?? throw new ArgumentNullException(nameof(underlyingType)))
             ? underlyingType
             : throw new ArgumentException(

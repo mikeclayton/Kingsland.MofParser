@@ -39,7 +39,7 @@ internal static partial class ParserEngine
         // *( *WS singleStringValue )
         while (stream.TryRead<StringLiteralToken>(out var stringLiteral))
         {
-            node.StringLiteralValues.Add(stringLiteral!);
+            node.StringLiteralValues.Add(stringLiteral);
         }
 
         node.Value = string.Join(

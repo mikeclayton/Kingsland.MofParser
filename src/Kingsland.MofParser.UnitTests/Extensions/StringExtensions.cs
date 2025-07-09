@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-
-namespace Kingsland.MofParser.UnitTests.Extensions;
+﻿namespace Kingsland.MofParser.UnitTests.Extensions;
 
 internal static class StringExtensions
 {

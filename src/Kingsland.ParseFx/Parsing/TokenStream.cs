@@ -11,7 +11,8 @@ public sealed class TokenStream
 
     public TokenStream(IEnumerable<SyntaxToken> source)
     {
-        this.Source = source?.ToList() ?? throw new ArgumentNullException(nameof(source));
+        this.Source = (source ?? throw new ArgumentNullException(nameof(source)))
+            .ToList();
         this.Position = 0;
     }
 

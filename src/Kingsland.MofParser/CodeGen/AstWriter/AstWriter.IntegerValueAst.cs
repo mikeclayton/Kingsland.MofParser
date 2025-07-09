@@ -21,7 +21,7 @@ public sealed partial class AstWriter
 
         // 100
         this.WriteString(
-            node.IntegerLiteralToken?.Text
+            node.IntegerLiteralToken.Text
                 ?? throw new InvalidOperationException()
         );
 

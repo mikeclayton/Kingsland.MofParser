@@ -80,18 +80,29 @@ jobs:
           name: app
           path: .build/app
 
+      # this needs to be run relative to the root of the repository
+      # as the relative file paths in the report won't match the paths
+      # github looks for otherwise
       - name: dotnet tool jb inspectcode
-        working-directory: ${{ env.BUILD_PATH }}
         run: |
           dotnet new tool-manifest
           dotnet tool install JetBrains.ReSharper.GlobalTools
-          dotnet tool run jb inspectcode "./Kingsland.MofParser.sln" -output="../.build/out/jb-inspectcode.xml" --no-build
+          dotnet tool run jb inspectcode "src/Kingsland.MofParser.sln" -output=".build/out/jb-inspectcode.sarif" --no-build
 
-      - name: upload jb-inspectcode.xml
-        uses: actions/upload-artifact@v3
+      - name: upload jb-inspectcode.sarif
+        uses: github/codeql-action/upload-sarif@v3
         with:
-          name: jb-inspectcode.xml
-          path: .build/out/jb-inspectcode.xml
+          sarif_file: .build/out/jb-inspectcode.sarif
+
+      # prerequisite for nuget on linux as its a dotnet *framework* application
+      - name: install mono
+        run: |
+          sudo apt install mono-devel
+
+      - name: setup nuget
+        uses: nuget/setup-nuget@v2
+        with:
+          nuget-version: latest
 
       - name: nuget pack
         run: nuget pack src/Kingsland.MofParser.nuspec
