@@ -93,6 +93,11 @@ jobs:
           name: jb-inspectcode.xml
           path: .build/out/jb-inspectcode.xml
 
+      # prerequisite for nuget on linux as its a dotnet *framework* application
+      - name: install mono
+        run: |
+          sudo apt install mono-devel
+
       - name: setup nuget
         uses: nuget/setup-nuget@v2
         with:
