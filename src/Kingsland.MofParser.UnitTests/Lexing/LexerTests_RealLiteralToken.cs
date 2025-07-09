@@ -124,6 +124,36 @@ public static partial class LexerTests
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
         }
 
+        [Test]
+        public static void ShouldReadRealValueExponent_9_236_E_000()
+        {
+            // see https://github.com/KingslandConsulting/Kingsland.MofParser/issues/85
+            var sourceText = "9.236E+000";
+            var expectedTokens = new TokenBuilder()
+                .RealLiteralToken(
+                    new SourcePosition(0, 1, 1),
+                    new SourcePosition(3, 1, 4),
+                    "9.236E+000", 9.236
+                )
+                .ToList();
+            LexerTests.AssertLexerTest(sourceText, expectedTokens);
+        }
+
+        [Test]
+        public static void ShouldReadRealValueExponent_9_236_E_005()
+        {
+            // see https://github.com/KingslandConsulting/Kingsland.MofParser/issues/85
+            var sourceText = "9.236E+005";
+            var expectedTokens = new TokenBuilder()
+                .RealLiteralToken(
+                    new SourcePosition(0, 1, 1),
+                    new SourcePosition(3, 1, 4),
+                    "9.236E+005", 923_600
+                )
+                .ToList();
+            LexerTests.AssertLexerTest(sourceText, expectedTokens);
+        }
+
     }
 
 }
