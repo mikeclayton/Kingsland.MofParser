@@ -7,7 +7,7 @@
     <owners>Michael Clayton</owners>
     <license type="expression">MIT or LGPL-3.0-only</license>
     <projectUrl>https://github.com/KingslandConsulting/MofParser</projectUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>A C# library for parsing the contents of Managed Object Format (MOF) files</description>
     <dependencies>
       <group targetFramework="net8.0" />
