@@ -86,12 +86,12 @@ License
 
 This project is licensed under the following licenses:
 
-* MIT License (https://opensource.org/license/mit/)
+* MIT License
 * GNU Lesser General Public License v3.0 only
 
-You may choose one of these licenses for your use of this project,
+Choose one of these licenses for your use of this project,
 subject to the terms and conditions of the license you select.
 
-See LICENSE, LICENSE.lgpl and License.mit for details.
+See LICENSE, LICENSE-lgpl3 and LICENSE-mit for details.
 
 `SPDX-License-Identifier: MIT OR LGPL-3.0-only`
