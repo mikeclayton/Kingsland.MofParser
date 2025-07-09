@@ -92,12 +92,16 @@ public static partial class RoundtripTests
     private static void AssertRoundtripException(string sourceText, string expectedMessage, ParserQuirks parserQuirks = ParserQuirks.None)
     {
         var tokens = Lexer.Lex(SourceReader.From(sourceText)).ToList();
-        var tokensMof = TokenSerializer.ToSourceText(tokens);
+        // check the lexer tokens roundtrip
+        var actualSource = TokenSerializer.ToSourceText(tokens);
+        Assert.Equals(sourceText, actualSource);
+        // check the lexer throws the expected exception type
         var ex = Assert.Throws<UnexpectedTokenException>(
             () => {
                 var astNodes = Parser.Parse(tokens, parserQuirks);
             }
         );
+        // check the exception details match
         Assert.Multiple(() =>
         {
             Assert.That(ex, Is.Not.Null);

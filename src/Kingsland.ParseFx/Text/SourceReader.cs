@@ -181,7 +181,9 @@ public sealed class SourceReader
             else
             {
                 // not a match, so force an exception
-                (sourceChar, thisReader) = thisReader.Read(expectedChar);
+                thisReader.Read(expectedChar);
+                // just in case that didn't throw an exception
+                throw new InvalidOperationException();
             }
         }
         return (sourceChars, thisReader);

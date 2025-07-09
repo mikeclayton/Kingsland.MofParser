@@ -18,7 +18,7 @@ public sealed partial class AstWriter
         // FALSE
 
         this.WriteString(
-            node.Token?.Text
+            node.Token.Text
                 ?? (node.Value ? Constants.TRUE : Constants.FALSE)
         );
 

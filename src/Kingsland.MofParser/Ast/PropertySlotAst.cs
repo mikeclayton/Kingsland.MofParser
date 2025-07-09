@@ -25,10 +25,6 @@ public sealed record PropertySlotAst : AstNode
     public sealed class Builder
     {
 
-        public Builder()
-        {
-        }
-
         public IdentifierToken? PropertyName
         {
             get;

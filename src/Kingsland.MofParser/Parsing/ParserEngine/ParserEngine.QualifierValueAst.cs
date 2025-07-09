@@ -68,7 +68,7 @@ internal static partial class ParserEngine
                 node.Flavors.Add(stream.Read<IdentifierToken>());
                 while (stream.TryRead<IdentifierToken>(out var identifier))
                 {
-                    node.Flavors.Add(identifier!);
+                    node.Flavors.Add(identifier);
                 }
             }
         }

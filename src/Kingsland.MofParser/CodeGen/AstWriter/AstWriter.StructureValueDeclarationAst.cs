@@ -49,7 +49,7 @@ public sealed partial class AstWriter
         );
 
         // ;
-        this.WriteString(node.StatementEnd?.Text ?? ";");
+        this.WriteString(node.StatementEnd.Text ?? ";");
 
     }
 
