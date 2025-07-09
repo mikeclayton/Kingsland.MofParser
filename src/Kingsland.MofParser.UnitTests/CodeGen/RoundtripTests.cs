@@ -94,7 +94,7 @@ public static partial class RoundtripTests
         var tokens = Lexer.Lex(SourceReader.From(sourceText)).ToList();
         // check the lexer tokens roundtrip
         var actualSource = TokenSerializer.ToSourceText(tokens);
-        Assert.Equals(sourceText, actualSource);
+        Assert.That(sourceText, Is.EqualTo(actualSource));
         // check the lexer throws the expected exception type
         var ex = Assert.Throws<UnexpectedTokenException>(
             () => {
