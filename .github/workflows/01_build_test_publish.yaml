@@ -88,7 +88,7 @@ jobs:
           dotnet tool run jb inspectcode "./Kingsland.MofParser.sln" -output="../.build/out/jb-inspectcode.xml" --no-build
 
       - name: upload jb-inspectcode.xml
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: jb-inspectcode.xml
           path: .build/out/jb-inspectcode.xml
