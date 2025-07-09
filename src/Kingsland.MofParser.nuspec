@@ -15,7 +15,7 @@
     <tags>powershell dsc mof parser</tags>
   </metadata>
   <files>
-    <file src="Kingsland.MofParser\bin\Release\net8.0\*.dll" target="\lib\net8.0" />
-    <file src="Kingsland.MofParser\bin\Release\net8.0\*.pdb" target="\lib\net8.0" />
+    <file src="Kingsland.MofParser\bin\Release\net9.0\*.dll" target="\lib\net9.0" />
+    <file src="Kingsland.MofParser\bin\Release\net9.0\*.pdb" target="\lib\net9.0" />
   </files>
 </package>
