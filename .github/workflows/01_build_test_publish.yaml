@@ -93,6 +93,11 @@ jobs:
           name: jb-inspectcode.xml
           path: .build/out/jb-inspectcode.xml
 
+      - name: setup nuget
+        uses: nuget/setup-nuget@v2
+        with:
+          nuget-version: latest
+
       - name: nuget pack
         run: nuget pack src/Kingsland.MofParser.nuspec
 
