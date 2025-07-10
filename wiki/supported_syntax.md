@@ -107,7 +107,7 @@ create an issue with an example of the MOF text that fails and I'll look at impl
                 decimalValue ........................................ Yes
 
             7.6.1.2 Real value
-                realValue ........................................... Yes (no support for exponent)
+                realValue ........................................... Yes
 
             7.6.1.3 String values
                 singleStringValue ................................... Yes
