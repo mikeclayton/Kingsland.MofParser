@@ -1,6 +1,3 @@
 ﻿namespace Kingsland.MofParser.Models;
 
-internal sealed class ModelSerializer
-{
-
-}
+internal sealed class ModelSerializer;

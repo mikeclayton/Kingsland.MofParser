@@ -13,6 +13,4 @@
 ///                        propertyDeclaration
 ///
 /// </remarks>
-public interface IStructureFeatureAst : IClassFeatureAst
-{
-}
+public interface IStructureFeatureAst : IClassFeatureAst;

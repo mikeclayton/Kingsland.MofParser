@@ -242,35 +242,33 @@ public static partial class ParserTests
             );
             var actualAst = Parser.Parse(tokens);
             var expectedAst = new MofSpecificationAst(
-                new ReadOnlyCollection<MofProductionAst>([
-                    new InstanceValueDeclarationAst(
-                        new IdentifierToken("instance"),
-                        new IdentifierToken("of"),
-                        new IdentifierToken("myType"),
-                        new IdentifierToken("as"),
-                        new AliasIdentifierToken("Alias00000070"),
-                        new PropertyValueListAst([
-                            new PropertySlotAst(
-                                new IdentifierToken("ServerURLs"),
-                                new LiteralValueArrayAst([
-                                    new StringValueAst.Builder {
-                                        StringLiteralValues = [
-                                            new StringLiteralToken("https://URL1")
-                                        ],
-                                        Value = "https://URL1"
-                                    }.Build(),
-                                    new StringValueAst.Builder {
-                                        StringLiteralValues = [
-                                            new StringLiteralToken("https://URL2")
-                                        ],
-                                        Value = "https://URL2"
-                                    }.Build()
-                                ])
+                new InstanceValueDeclarationAst(
+                    new IdentifierToken("instance"),
+                    new IdentifierToken("of"),
+                    new IdentifierToken("myType"),
+                    new IdentifierToken("as"),
+                    new AliasIdentifierToken("Alias00000070"),
+                    new PropertyValueListAst(
+                        new PropertySlotAst(
+                            new IdentifierToken("ServerURLs"),
+                            new LiteralValueArrayAst(
+                                new StringValueAst.Builder {
+                                    StringLiteralValues = [
+                                        new StringLiteralToken("https://URL1")
+                                    ],
+                                    Value = "https://URL1"
+                                }.Build(),
+                                new StringValueAst.Builder {
+                                    StringLiteralValues = [
+                                        new StringLiteralToken("https://URL2")
+                                    ],
+                                    Value = "https://URL2"
+                                }.Build()
                             )
-                        ]),
-                        new StatementEndToken()
-                    )
-                ])
+                        )
+                    ),
+                    new StatementEndToken()
+                )
             );
             var actualJson = TestUtils.ConvertToJson(actualAst);
             var expectedJson = TestUtils.ConvertToJson(expectedAst);

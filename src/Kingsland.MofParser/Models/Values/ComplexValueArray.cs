@@ -7,9 +7,8 @@ public sealed class ComplexValueArray : ComplexTypeValue
 {
 
     public ComplexValueArray(params ComplexValueBase[] values)
+        : this((IEnumerable<ComplexValueBase>)values)
     {
-        this.Values = (values ?? throw new ArgumentNullException(nameof(values)))
-            .ToList().AsReadOnly();
     }
 
     public ComplexValueArray(IEnumerable<ComplexValueBase> values)

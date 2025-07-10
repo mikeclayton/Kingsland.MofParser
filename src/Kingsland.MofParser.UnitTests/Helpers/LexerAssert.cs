@@ -171,7 +171,7 @@ internal static class LexerAssert
         if (!tokensEqual)
         {
             LexerAssert.Fail(
-                $"Actual token does not match expected token",
+                 "Actual token does not match expected token ",
                 $"{expectedToken.GetType().Name} (\"{LexerAssert.EscapeString(expectedToken.GetSourceString())}\")",
                 $"{actualToken.GetType().Name} (\"{LexerAssert.EscapeString(actualToken.GetSourceString() ?? string.Empty )}\")",
                 index
