@@ -20,7 +20,7 @@ public static partial class LexerTests
                 .NullLiteralToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(3, 1, 4),
-                    "null"
+                    sourceText
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -34,7 +34,7 @@ public static partial class LexerTests
                 .NullLiteralToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(3, 1, 4),
-                    "Null"
+                    sourceText
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -48,7 +48,7 @@ public static partial class LexerTests
                 .NullLiteralToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(3, 1, 4),
-                    "NULL"
+                    sourceText
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);

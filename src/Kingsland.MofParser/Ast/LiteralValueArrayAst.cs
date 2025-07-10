@@ -46,14 +46,13 @@ public sealed record LiteralValueArrayAst : PrimitiveTypeValueAst
     #region Constructors
 
     internal LiteralValueArrayAst()
-        : this([])
+        : this((IEnumerable<LiteralValueAst>)[])
     {
     }
 
     public LiteralValueArrayAst(params LiteralValueAst[] values)
+        : this((IEnumerable<LiteralValueAst>)values)
     {
-        this.Values = (values ?? throw new ArgumentNullException(nameof(values)))
-            .ToList().AsReadOnly();
     }
 
     internal LiteralValueArrayAst(

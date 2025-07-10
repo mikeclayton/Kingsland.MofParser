@@ -20,7 +20,7 @@ public static partial class LexerTests
                 .WhitespaceToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(4, 1, 5),
-                    "     "
+                    sourceText
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -34,7 +34,7 @@ public static partial class LexerTests
                 .WhitespaceToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(4, 1, 5),
-                    "\t\t\t\t\t"
+                    sourceText
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -48,7 +48,7 @@ public static partial class LexerTests
                 .WhitespaceToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(4, 5, 1),
-                    "\r\r\r\r\r"
+                    sourceText
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -62,7 +62,7 @@ public static partial class LexerTests
                 .WhitespaceToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(4, 5, 1),
-                    "\n\n\n\n\n"
+                    sourceText
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -76,7 +76,7 @@ public static partial class LexerTests
                 .WhitespaceToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(9, 5, 2),
-                    "\r\n\r\n\r\n\r\n\r\n"
+                    sourceText
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -91,7 +91,7 @@ public static partial class LexerTests
                 .WhitespaceToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(29, 14, 2),
-                    "     \t\t\t\t\t\r\r\r\r\r\n\n\n\n\n\r\n\r\n\r\n\r\n\r\n"
+                    sourceText
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);

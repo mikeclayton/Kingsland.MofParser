@@ -46,14 +46,13 @@ public sealed record EnumValueArrayAst : EnumTypeValueAst
     #region Constructors
 
     internal EnumValueArrayAst()
-        : this([])
+        : this((IEnumerable<EnumValueAst>)[])
     {
     }
 
     public EnumValueArrayAst(params EnumValueAst[] values)
+        : this((IEnumerable<EnumValueAst>)values)
     {
-        this.Values = (values ?? throw new ArgumentNullException(nameof(values)))
-            .ToList().AsReadOnly();
     }
 
     internal EnumValueArrayAst(

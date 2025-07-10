@@ -7,9 +7,8 @@ public sealed class LiteralValueArray : PrimitiveTypeValue
 {
 
     public LiteralValueArray(params LiteralValue[] values)
+        : this((IEnumerable<LiteralValue>)values)
     {
-        this.Values = (values ?? throw new ArgumentNullException(nameof(values)))
-            .ToList().AsReadOnly();
     }
 
     public LiteralValueArray(IEnumerable<LiteralValue> values)

@@ -20,7 +20,7 @@ public static partial class LexerTests
                 .BooleanLiteralToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(4, 1, 5),
-                    "false", false
+                    sourceText, false
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -34,7 +34,7 @@ public static partial class LexerTests
                 .BooleanLiteralToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(4, 1, 5),
-                    "False", false
+                    sourceText, false
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -48,7 +48,7 @@ public static partial class LexerTests
                 .BooleanLiteralToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(4, 1, 5),
-                    "FALSE", false
+                    sourceText, false
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -62,7 +62,7 @@ public static partial class LexerTests
                 .BooleanLiteralToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(3, 1, 4),
-                    "true", true
+                    sourceText, true
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -76,7 +76,7 @@ public static partial class LexerTests
                 .BooleanLiteralToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(3, 1, 4),
-                    "True", true
+                    sourceText, true
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -90,7 +90,7 @@ public static partial class LexerTests
                 .BooleanLiteralToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(3, 1, 4),
-                    "TRUE", true
+                    sourceText, true
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);

@@ -7,9 +7,8 @@ public sealed class EnumValueArray : EnumTypeValue
 {
 
     public EnumValueArray(params EnumValue[] values)
+        : this((IEnumerable<EnumValue>)values)
     {
-        this.Values = (values ?? throw new ArgumentNullException(nameof(values)))
-            .ToList().AsReadOnly();
     }
 
     public EnumValueArray(IEnumerable<EnumValue> values)

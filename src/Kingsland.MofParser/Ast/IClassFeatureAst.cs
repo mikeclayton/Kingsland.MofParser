@@ -17,6 +17,4 @@ namespace Kingsland.MofParser.Ast;
 ///                        propertyDeclaration
 ///
 /// </remarks>
-public interface IClassFeatureAst : IAstNode
-{
-}
+public interface IClassFeatureAst : IAstNode;

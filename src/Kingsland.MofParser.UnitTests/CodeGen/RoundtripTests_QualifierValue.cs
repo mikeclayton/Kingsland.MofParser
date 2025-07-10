@@ -132,9 +132,8 @@ public static partial class RoundtripTests
                    [read: ToSubClass, MappingStrings{""Win32API|AccessControl|Windows NT Privileges""}: ToSubClass] string PrivilegesRequired[];
                 };
             ".TrimIndent(newline).TrimString(newline);
-            var errorline = 1;
             var expectedMessage = @$"
-                Unexpected token found at Position {13 + (errorline - 1) * newline.Length}, Line Number {errorline}, Column Number 14.
+                Unexpected token found at Position {13}, Line Number {1}, Column Number {14}.
                 Token Type: 'ColonToken'
                 Token Text: ':'
             ".TrimIndent(newline).TrimString(newline);

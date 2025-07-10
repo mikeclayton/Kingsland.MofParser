@@ -46,7 +46,12 @@ public sealed record MofSpecificationAst : AstNode
     #region Constructors
 
     internal MofSpecificationAst()
-        : this([])
+        : this((IEnumerable<MofProductionAst>)[])
+    {
+    }
+
+    public MofSpecificationAst(params MofProductionAst[] values)
+        : this((IEnumerable<MofProductionAst>)values)
     {
     }
 

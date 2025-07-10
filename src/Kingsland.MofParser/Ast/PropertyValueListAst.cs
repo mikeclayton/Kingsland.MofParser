@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Kingsland.MofParser.Ast;
 
@@ -52,9 +53,14 @@ public sealed record PropertyValueListAst : AstNode
     #region Constructors
 
     internal PropertyValueListAst()
-        : this([])
+        : this((IEnumerable<PropertySlotAst>)[])
     {
 
+    }
+
+    public PropertyValueListAst(params PropertySlotAst[] values)
+        : this((IEnumerable<PropertySlotAst>)values)
+    {
     }
 
     internal PropertyValueListAst(
