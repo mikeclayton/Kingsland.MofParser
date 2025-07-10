@@ -20,7 +20,7 @@ public static partial class LexerTests
                 .PragmaToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(6, 1, 7),
-                    "#pragma"
+                    sourceText
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -34,7 +34,7 @@ public static partial class LexerTests
                 .PragmaToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(6, 1, 7),
-                    "#Pragma"
+                    sourceText
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -48,7 +48,7 @@ public static partial class LexerTests
                 .PragmaToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(6, 1, 7),
-                    "#PRAGMA"
+                    sourceText
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);

@@ -20,7 +20,7 @@ public static partial class LexerTests
                 .AttributeCloseToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(0, 1, 1),
-                    "]"
+                    sourceText
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -40,7 +40,7 @@ public static partial class LexerTests
                 .AttributeOpenToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(0, 1, 1),
-                    "["
+                    sourceText
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -60,7 +60,7 @@ public static partial class LexerTests
                 .BlockCloseToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(0, 1, 1),
-                    "}"
+                    sourceText
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -80,7 +80,7 @@ public static partial class LexerTests
                 .BlockOpenToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(0, 1, 1),
-                    "{"
+                    sourceText
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -100,7 +100,7 @@ public static partial class LexerTests
                 .ColonToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(0, 1, 1),
-                    ":"
+                    sourceText
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -120,7 +120,7 @@ public static partial class LexerTests
                 .CommaToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(0, 1, 1),
-                    ","
+                    sourceText
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -140,7 +140,7 @@ public static partial class LexerTests
                 .DotOperatorToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(0, 1, 1),
-                    "."
+                    sourceText
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -179,7 +179,7 @@ public static partial class LexerTests
                 .EqualsOperatorToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(0, 1, 1),
-                    "="
+                    sourceText
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -199,7 +199,7 @@ public static partial class LexerTests
                 .ParenthesisCloseToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(0, 1, 1),
-                    ")"
+                    sourceText
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -219,7 +219,7 @@ public static partial class LexerTests
                 .ParenthesisOpenToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(0, 1, 1),
-                    "("
+                    sourceText
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -239,7 +239,7 @@ public static partial class LexerTests
                 .StatementEndToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(0, 1, 1),
-                    ";"
+                    sourceText
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);

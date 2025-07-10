@@ -1,4 +1,5 @@
 ﻿using Kingsland.MofParser.Tokens;
+using Kingsland.ParseFx.Lexing;
 using Kingsland.ParseFx.Text;
 using NUnit.Framework;
 
@@ -22,7 +23,7 @@ public static partial class LexerTests
                 .IntegerLiteralToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(1, 1, 2),
-                    "0b", IntegerKind.BinaryValue, 0
+                    sourceText, IntegerKind.BinaryValue, 0
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -36,49 +37,77 @@ public static partial class LexerTests
                 .IntegerLiteralToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(1, 1, 2),
-                    "1b", IntegerKind.BinaryValue, 1
+                    sourceText, IntegerKind.BinaryValue, 1
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
         }
 
         [Test]
-        public static void ShouldReadBinaryValue00000b()
+        public static void ShouldReadBinaryValue0000b()
         {
-            var sourceText = "00000b";
+            var sourceText = "0000b";
             var expectedTokens = new TokenBuilder()
                 .IntegerLiteralToken(
                     new SourcePosition(0, 1, 1),
-                    new SourcePosition(5, 1, 6),
-                    "00000b", IntegerKind.BinaryValue, 0
+                    new SourcePosition(4, 1, 5),
+                   sourceText, IntegerKind.BinaryValue, 0b0000
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
         }
 
         [Test]
-        public static void ShouldReadBinaryValue10000b()
+        public static void ShouldReadBinaryValue1000b()
         {
-            var sourceText = "10000b";
+            var sourceText = "1000b";
             var expectedTokens = new TokenBuilder()
                 .IntegerLiteralToken(
                     new SourcePosition(0, 1, 1),
-                    new SourcePosition(5, 1, 6),
-                    "10000b", IntegerKind.BinaryValue, 16
+                    new SourcePosition(4, 1, 5),
+                    sourceText, IntegerKind.BinaryValue, 0b1000
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
         }
 
         [Test]
-        public static void ShouldReadBinaryValue11111b()
+        public static void ShouldReadBinaryValuePlus1000b()
         {
-            var sourceText = "11111b";
+            var sourceText = "+1000b";
             var expectedTokens = new TokenBuilder()
                 .IntegerLiteralToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(5, 1, 6),
-                    "11111b", IntegerKind.BinaryValue, 31
+                    sourceText, IntegerKind.BinaryValue, 0b1000
+                )
+                .ToList();
+            LexerTests.AssertLexerTest(sourceText, expectedTokens);
+        }
+
+        [Test]
+        public static void ShouldReadBinaryValueMinus1000b()
+        {
+            var sourceText = "-1000b";
+            var expectedTokens = new TokenBuilder()
+                .IntegerLiteralToken(
+                    new SourcePosition(0, 1, 1),
+                    new SourcePosition(5, 1, 6),
+                    sourceText, IntegerKind.BinaryValue, -0b1000
+                )
+                .ToList();
+            LexerTests.AssertLexerTest(sourceText, expectedTokens);
+        }
+
+        [Test]
+        public static void ShouldReadBinaryValue1111b()
+        {
+            var sourceText = "1111b";
+            var expectedTokens = new TokenBuilder()
+                .IntegerLiteralToken(
+                    new SourcePosition(0, 1, 1),
+                    new SourcePosition(4, 1, 5),
+                    sourceText, IntegerKind.BinaryValue, 0b1111
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -94,7 +123,7 @@ public static partial class LexerTests
                 .IntegerLiteralToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(1, 1, 2),
-                    "00", IntegerKind.OctalValue, 0
+                    sourceText, IntegerKind.OctalValue, 0
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -108,7 +137,7 @@ public static partial class LexerTests
                 .IntegerLiteralToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(1, 1, 2),
-                    "01", IntegerKind.OctalValue, 1
+                    sourceText, IntegerKind.OctalValue, 1
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -122,7 +151,7 @@ public static partial class LexerTests
                 .IntegerLiteralToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(4, 1, 5),
-                    "00000", IntegerKind.OctalValue, 0
+                    sourceText, IntegerKind.OctalValue, 0
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -136,7 +165,35 @@ public static partial class LexerTests
                 .IntegerLiteralToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(4, 1, 5),
-                    "01000", IntegerKind.OctalValue, 512
+                    sourceText, IntegerKind.OctalValue, 512
+                )
+                .ToList();
+            LexerTests.AssertLexerTest(sourceText, expectedTokens);
+        }
+
+        [Test]
+        public static void ShouldReadOctalValuePlus01000()
+        {
+            var sourceText = "+01000";
+            var expectedTokens = new TokenBuilder()
+                .IntegerLiteralToken(
+                    new SourcePosition(0, 1, 1),
+                    new SourcePosition(5, 1, 6),
+                    sourceText, IntegerKind.OctalValue, 512
+                )
+                .ToList();
+            LexerTests.AssertLexerTest(sourceText, expectedTokens);
+        }
+
+        [Test]
+        public static void ShouldReadOctalValueMinus01000()
+        {
+            var sourceText = "-01000";
+            var expectedTokens = new TokenBuilder()
+                .IntegerLiteralToken(
+                    new SourcePosition(0, 1, 1),
+                    new SourcePosition(5, 1, 6),
+                    sourceText, IntegerKind.OctalValue, -512
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -150,7 +207,7 @@ public static partial class LexerTests
                 .IntegerLiteralToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(4, 1, 5),
-                    "01111", IntegerKind.OctalValue, 585
+                    sourceText, IntegerKind.OctalValue, 585
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -164,7 +221,7 @@ public static partial class LexerTests
                 .IntegerLiteralToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(4, 1, 5),
-                    "04444", IntegerKind.OctalValue, 2340
+                    sourceText, IntegerKind.OctalValue, 2340
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -178,10 +235,29 @@ public static partial class LexerTests
                 .IntegerLiteralToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(4, 1, 5),
-                    "07777", IntegerKind.OctalValue, 4095
+                    sourceText, IntegerKind.OctalValue, 4095
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
+        }
+
+        [Test]
+        public static void ShouldThrowOctalValue09()
+        {
+            // make sure strings of more than one character that start with a leading "0" are *not* parsed as decimal values
+            // (i.e. "09" is not a valid octal value because of the "9", but could potentially parse as 9 (decimal) if not handled correctly)
+            var sourceText = "09";
+            var expectedTokens = new TokenBuilder()
+                .IntegerLiteralToken(
+                    new SourcePosition(0, 1, 1),
+                    new SourcePosition(0, 1, 1),
+                    sourceText, IntegerKind.DecimalValue, 0
+                )
+                .ToList();
+            var ex = Assert.Throws<UnexpectedCharacterException>(
+                () => LexerTests.AssertLexerTest(sourceText, expectedTokens)
+            ) ?? throw new InvalidOperationException();
+            Assert.That(ex.Message, Is.EqualTo("Unexpected character '9' found at Position 1, Line Number 1, Column Number 2"));
         }
 
         // hexValue
@@ -194,7 +270,7 @@ public static partial class LexerTests
                 .IntegerLiteralToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(2, 1, 3),
-                    "0x0", IntegerKind.HexValue, 0
+                    sourceText, IntegerKind.HexValue, 0
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -208,7 +284,7 @@ public static partial class LexerTests
                 .IntegerLiteralToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(5, 1, 6),
-                    "0x0000", IntegerKind.HexValue, 0
+                    sourceText, IntegerKind.HexValue, 0
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -222,7 +298,35 @@ public static partial class LexerTests
                 .IntegerLiteralToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(5, 1, 6),
-                    "0x8888", IntegerKind.HexValue, 34952
+                    sourceText, IntegerKind.HexValue, 0x8888
+                )
+                .ToList();
+            LexerTests.AssertLexerTest(sourceText, expectedTokens);
+        }
+
+        [Test]
+        public static void ShouldReadHexValuePlus0x8888()
+        {
+            var sourceText = "+0x8888";
+            var expectedTokens = new TokenBuilder()
+                .IntegerLiteralToken(
+                    new SourcePosition(0, 1, 1),
+                    new SourcePosition(6, 1, 7),
+                    sourceText, IntegerKind.HexValue, 0x8888
+                )
+                .ToList();
+            LexerTests.AssertLexerTest(sourceText, expectedTokens);
+        }
+
+        [Test]
+        public static void ShouldReadHexValueMinus0x8888()
+        {
+            var sourceText = "-0x8888";
+            var expectedTokens = new TokenBuilder()
+                .IntegerLiteralToken(
+                    new SourcePosition(0, 1, 1),
+                    new SourcePosition(6, 1, 7),
+                    sourceText, IntegerKind.HexValue, -0x8888
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -236,7 +340,7 @@ public static partial class LexerTests
                 .IntegerLiteralToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(5, 1, 6),
-                    "0xabcd", IntegerKind.HexValue, 43981
+                    sourceText, IntegerKind.HexValue, 0xabcd
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -250,7 +354,7 @@ public static partial class LexerTests
                 .IntegerLiteralToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(5, 1, 6),
-                    "0xABCD", IntegerKind.HexValue, 43981
+                    sourceText, IntegerKind.HexValue, 0xABCD
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -266,7 +370,7 @@ public static partial class LexerTests
                 .IntegerLiteralToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(0, 1, 1),
-                    "0", IntegerKind.DecimalValue, 0
+                    sourceText, IntegerKind.DecimalValue, 0
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -280,7 +384,7 @@ public static partial class LexerTests
                 .IntegerLiteralToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(4, 1, 5),
-                    "12345", IntegerKind.DecimalValue, 12345
+                    sourceText, IntegerKind.DecimalValue, 12345
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -294,7 +398,7 @@ public static partial class LexerTests
                 .IntegerLiteralToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(5, 1, 6),
-                    "+12345", IntegerKind.DecimalValue, 12345
+                    sourceText, IntegerKind.DecimalValue, 12345
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -308,7 +412,7 @@ public static partial class LexerTests
                 .IntegerLiteralToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(5, 1, 6),
-                    "-12345", IntegerKind.DecimalValue, -12345
+                    sourceText, IntegerKind.DecimalValue, -12345
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
@@ -322,7 +426,7 @@ public static partial class LexerTests
                 .IntegerLiteralToken(
                     new SourcePosition(0, 1, 1),
                     new SourcePosition(9, 1, 10),
-                    "1234567890", IntegerKind.DecimalValue, 1234567890
+                   sourceText, IntegerKind.DecimalValue, 1234567890
                 )
                 .ToList();
             LexerTests.AssertLexerTest(sourceText, expectedTokens);
