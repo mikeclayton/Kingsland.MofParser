@@ -1,5 +1,4 @@
-﻿using Kingsland.MofParser.Models.Values;
-using Kingsland.MofParser.Parsing;
+﻿using Kingsland.MofParser.Parsing;
 using Kingsland.MofParser.Tokens;
 using Kingsland.ParseFx.Lexing;
 using Kingsland.ParseFx.Syntax;
@@ -791,7 +790,7 @@ public static class Lexer
                                 throw new UnexpectedCharacterException(
                                     invalidChar ?? throw new NullReferenceException()
                                 );
-                            };
+                            }
                         }
                         // build the return value
                         var decimalValue = ParseIntegerValueDigits(integerSourceChars, 10, integerSign);
@@ -864,7 +863,6 @@ public static class Lexer
                             (var signChar, thisReader) = thisReader.Read();
                             sourceChars.Add(signChar);
                             exponentSign = (signChar.Value == '-') ? -1 : 1;
-                            peekChar = thisReader.Peek();
                         }
                         // read the exponent value
                         // 1*decimalDigit

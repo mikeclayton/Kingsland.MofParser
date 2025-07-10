@@ -34,14 +34,14 @@ public static partial class ParserTests
                 )
             );
             var actualAst = Parser.Parse(tokens);
-            var expectedAst = new MofSpecificationAst([
+            var expectedAst = new MofSpecificationAst(
                 new InstanceValueDeclarationAst(
                     new IdentifierToken("instance"),
                     new IdentifierToken("of"),
                     new IdentifierToken("myType"),
                     new IdentifierToken("as"),
                     new AliasIdentifierToken("Alias0000006E"),
-                    new PropertyValueListAst([
+                    new PropertyValueListAst(
                         new PropertySlotAst(
                             new IdentifierToken("ServerURL"),
                             new StringValueAst.Builder {
@@ -51,10 +51,10 @@ public static partial class ParserTests
                                 Value = "https://URL"
                             }.Build()
                         )
-                    ]),
+                    ),
                     new StatementEndToken()
                 )
-            ]);
+            );
             var actualJson = TestUtils.ConvertToJson(actualAst);
             var expectedJson = TestUtils.ConvertToJson(expectedAst);
             Assert.That(actualJson, Is.EqualTo(expectedJson));
@@ -93,14 +93,14 @@ public static partial class ParserTests
                         new IdentifierToken("myType"),
                         new IdentifierToken("as"),
                         new AliasIdentifierToken("Alias00000070"),
-                        new PropertyValueListAst([
+                        new PropertyValueListAst(
                             new PropertySlotAst(
                                 new IdentifierToken("Reference"),
                                 new ComplexValueAst(
                                     new AliasIdentifierToken("Alias0000006E")
                                 )
                             )
-                        ]),
+                        ),
                         new StatementEndToken()
                     )
                 ])
@@ -136,24 +136,22 @@ public static partial class ParserTests
             );
             var actualAst = Parser.Parse(tokens);
             var expectedAst = new MofSpecificationAst(
-                new ReadOnlyCollection<MofProductionAst>([
-                    new InstanceValueDeclarationAst(
-                        new IdentifierToken("instance"),
-                        new IdentifierToken("of"),
-                        new IdentifierToken("myType"),
-                        new IdentifierToken("as"),
-                        new AliasIdentifierToken("Alias00000070"),
-                        new PropertyValueListAst(
-                            [
-                                new PropertySlotAst(
-                                    new IdentifierToken("Reference"),
-                                    new LiteralValueArrayAst()
-                                )
-                            ]
-                        ),
-                        new StatementEndToken()
-                    )
-                ])
+                new InstanceValueDeclarationAst(
+                    new IdentifierToken("instance"),
+                    new IdentifierToken("of"),
+                    new IdentifierToken("myType"),
+                    new IdentifierToken("as"),
+                    new AliasIdentifierToken("Alias00000070"),
+                    new PropertyValueListAst(
+                        [
+                            new PropertySlotAst(
+                                new IdentifierToken("Reference"),
+                                new LiteralValueArrayAst()
+                            )
+                        ]
+                    ),
+                    new StatementEndToken()
+                )
             );
             var actualJson = TestUtils.ConvertToJson(actualAst);
             var expectedJson = TestUtils.ConvertToJson(expectedAst);
@@ -186,28 +184,26 @@ public static partial class ParserTests
             );
             var actualAst = Parser.Parse(tokens);
             var expectedAst = new MofSpecificationAst(
-                [
-                    new InstanceValueDeclarationAst(
-                        new IdentifierToken("instance"),
-                        new IdentifierToken("of"),
-                        new IdentifierToken("myType"),
-                        new IdentifierToken("as"),
-                        new AliasIdentifierToken("Alias00000070"),
-                        new PropertyValueListAst([
-                            new PropertySlotAst(
-                                new("Reference"),
-                                new ComplexValueArrayAst([
-                                    new ComplexValueAst(
-                                        new AliasIdentifierToken(
-                                            "Alias0000006E"
-                                        )
+                new InstanceValueDeclarationAst(
+                    new IdentifierToken("instance"),
+                    new IdentifierToken("of"),
+                    new IdentifierToken("myType"),
+                    new IdentifierToken("as"),
+                    new AliasIdentifierToken("Alias00000070"),
+                    new PropertyValueListAst(
+                        new PropertySlotAst(
+                            new("Reference"),
+                            new ComplexValueArrayAst(
+                                new ComplexValueAst(
+                                    new AliasIdentifierToken(
+                                        "Alias0000006E"
                                     )
-                                ])
+                                )
                             )
-                        ]),
-                        new StatementEndToken()
-                    )
-                ]
+                        )
+                    ),
+                    new StatementEndToken()
+                )
             );
             var actualJson = TestUtils.ConvertToJson(actualAst);
             var expectedJson = TestUtils.ConvertToJson(expectedAst);
@@ -307,58 +303,56 @@ public static partial class ParserTests
             );
             var actualAst = Parser.Parse(tokens);
             var expectedAst = new MofSpecificationAst(
-                new ReadOnlyCollection<MofProductionAst>([
-                    new InstanceValueDeclarationAst(
-                        new IdentifierToken("instance"),
-                        new IdentifierToken("of"),
-                        new IdentifierToken("myType"),
-                        new IdentifierToken("as"),
-                        new AliasIdentifierToken("Alias00000070"),
-                        new PropertyValueListAst([
-                            new PropertySlotAst(
-                                new IdentifierToken("MyBinaryValue"),
-                                new IntegerValueAst(
-                                    new IntegerLiteralToken(
-                                        IntegerKind.BinaryValue, 0b101010
-                                    )
-                                )
-                            ),
-                            new PropertySlotAst(
-                                new("MyOctalValue"),
-                                new IntegerValueAst(
-                                    new IntegerLiteralToken(
-                                        IntegerKind.OctalValue, Convert.ToInt32("444444", 8)
-                                    )
-                                )
-                            ),
-                            new PropertySlotAst(
-                                new("MyHexValue"),
-                                new IntegerValueAst(
-                                    new IntegerLiteralToken(
-                                        IntegerKind.HexValue, 0xABC123
-                                    )
-                                )
-                            ),
-                            new PropertySlotAst(
-                                new("MyDecimalValue"),
-                                new IntegerValueAst(
-                                    new IntegerLiteralToken(
-                                        IntegerKind.DecimalValue, 12345
-                                    )
-                                )
-                            ),
-                            new PropertySlotAst(
-                                new("MyRealValue"),
-                                new RealValueAst(
-                                    new RealLiteralToken(
-                                        123.45
-                                    )
+                new InstanceValueDeclarationAst(
+                    new IdentifierToken("instance"),
+                    new IdentifierToken("of"),
+                    new IdentifierToken("myType"),
+                    new IdentifierToken("as"),
+                    new AliasIdentifierToken("Alias00000070"),
+                    new PropertyValueListAst(
+                        new PropertySlotAst(
+                            new IdentifierToken("MyBinaryValue"),
+                            new IntegerValueAst(
+                                new IntegerLiteralToken(
+                                    IntegerKind.BinaryValue, 0b101010
                                 )
                             )
-                        ]),
-                        new StatementEndToken()
-                    )
-                ])
+                        ),
+                        new PropertySlotAst(
+                            new("MyOctalValue"),
+                            new IntegerValueAst(
+                                new IntegerLiteralToken(
+                                    IntegerKind.OctalValue, Convert.ToInt32("444444", 8)
+                                )
+                            )
+                        ),
+                        new PropertySlotAst(
+                            new("MyHexValue"),
+                            new IntegerValueAst(
+                                new IntegerLiteralToken(
+                                    IntegerKind.HexValue, 0xABC123
+                                )
+                            )
+                        ),
+                        new PropertySlotAst(
+                            new("MyDecimalValue"),
+                            new IntegerValueAst(
+                                new IntegerLiteralToken(
+                                    IntegerKind.DecimalValue, 12345
+                                )
+                            )
+                        ),
+                        new PropertySlotAst(
+                            new("MyRealValue"),
+                            new RealValueAst(
+                                new RealLiteralToken(
+                                    123.45
+                                )
+                            )
+                        )
+                    ),
+                    new StatementEndToken()
+                )
             );
             var actualJson = TestUtils.ConvertToJson(actualAst);
             var expectedJson = TestUtils.ConvertToJson(expectedAst);

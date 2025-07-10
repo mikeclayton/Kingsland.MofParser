@@ -35,17 +35,14 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            var expectedAst = new MofSpecificationAst.Builder
-            {
-                Productions = [
-                    new AssociationDeclarationAst(
-                        new QualifierListAst(),
-                        new IdentifierToken("GOLF_MemberLocker"),
-                        null,
-                        []
-                    )
-                ]
-            }.Build();
+            var expectedAst = new MofSpecificationAst(
+                new AssociationDeclarationAst(
+                    new QualifierListAst(),
+                    new IdentifierToken("GOLF_MemberLocker"),
+                    null,
+                    []
+                )
+            );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
@@ -101,30 +98,22 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            var expectedAst = new MofSpecificationAst.Builder {
-                Productions = [
-                    new AssociationDeclarationAst.Builder {
-                        AssociationName = new IdentifierToken("GOLF_MemberLocker"),
-                        SuperAssociation = new IdentifierToken("GOLF_Base"),
-                        ClassFeatures = [
-                            new PropertyDeclarationAst.Builder {
-                                ReturnType = new IdentifierToken("GOLF_ClubMember"),
-                                ReturnTypeRef = new IdentifierToken("REF"),
-                                PropertyName = new IdentifierToken("Member"),
-                            }.Build(),
-                            new PropertyDeclarationAst.Builder {
-                                ReturnType = new IdentifierToken("GOLF_Locker"),
-                                ReturnTypeRef = new IdentifierToken("REF"),
-                                PropertyName = new IdentifierToken("Locker"),
-                            }.Build(),
-                            new PropertyDeclarationAst.Builder {
-                                ReturnType = new IdentifierToken("GOLF_Date"),
-                                PropertyName = new IdentifierToken("AssignedOnDate"),
-                            }.Build()
-                        ]
-                    }.Build()
-                ]
-            }.Build();
+            var expectedAst = new MofSpecificationAst(
+                new AssociationDeclarationAst(
+                    null, new("GOLF_MemberLocker"), new("GOLF_Base"),
+                    [
+                        new PropertyDeclarationAst(
+                            null, new("GOLF_ClubMember"), new("REF"), new("Member"), null, null
+                        ),
+                        new PropertyDeclarationAst(
+                            null, new("GOLF_Locker"), new("REF"), new("Locker"), null, null
+                        ),
+                        new PropertyDeclarationAst(
+                            null, new("GOLF_Date"), null, new ("AssignedOnDate"), null, null
+                        )
+                    ]
+                )
+            );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
@@ -176,30 +165,22 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            var expectedAst = new MofSpecificationAst.Builder
-            {
-                Productions = [
-                    new AssociationDeclarationAst.Builder {
-                        AssociationName = new IdentifierToken("GOLF_MemberLocker"),
-                        ClassFeatures = [
-                            new PropertyDeclarationAst.Builder {
-                                ReturnType = new IdentifierToken("GOLF_ClubMember"),
-                                ReturnTypeRef = new IdentifierToken("REF"),
-                                PropertyName = new IdentifierToken("Member"),
-                            }.Build(),
-                            new PropertyDeclarationAst.Builder {
-                                ReturnType = new IdentifierToken("GOLF_Locker"),
-                                ReturnTypeRef = new IdentifierToken("REF"),
-                                PropertyName = new IdentifierToken("Locker"),
-                            }.Build(),
-                            new PropertyDeclarationAst.Builder {
-                                ReturnType = new IdentifierToken("GOLF_Date"),
-                                PropertyName = new IdentifierToken("AssignedOnDate"),
-                            }.Build()
-                        ]
-                    }.Build()
-                ]
-            }.Build();
+            var expectedAst = new MofSpecificationAst(
+                new AssociationDeclarationAst(
+                    null, new("GOLF_MemberLocker"), null,
+                    [
+                        new PropertyDeclarationAst(
+                            null, new("GOLF_ClubMember"), new("REF"), new("Member"), null, null
+                        ),
+                        new PropertyDeclarationAst(
+                            null, new("GOLF_Locker"), new("REF"), new("Locker"), null, null
+                        ),
+                        new PropertyDeclarationAst(
+                            null, new("GOLF_Date"), null, new("AssignedOnDate"), null, null
+                        )
+                    ]
+                )
+            );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 

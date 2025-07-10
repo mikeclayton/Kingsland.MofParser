@@ -83,16 +83,16 @@ public sealed record StructureDeclarationAst : MofProductionAst, IStructureFeatu
     #region Constructors
 
     internal StructureDeclarationAst(
-        QualifierListAst qualifierList,
+        QualifierListAst? qualifierList,
         IdentifierToken structureName,
         IdentifierToken? superStructure,
-        IEnumerable<IStructureFeatureAst> structureFeatures
+        IEnumerable<IStructureFeatureAst>? structureFeatures
     )
     {
-        this.QualifierList = qualifierList ?? throw new ArgumentNullException(nameof(qualifierList));
+        this.QualifierList = qualifierList ?? new ();
         this.StructureName = structureName ?? throw new ArgumentNullException(nameof(structureName));
         this.SuperStructure = superStructure;
-        this.StructureFeatures = (structureFeatures ?? throw new ArgumentNullException(nameof(structureFeatures)))
+        this.StructureFeatures = (structureFeatures ?? [])
             .ToList().AsReadOnly();
     }
 

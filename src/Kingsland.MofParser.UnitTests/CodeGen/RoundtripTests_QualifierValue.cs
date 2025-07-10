@@ -133,7 +133,7 @@ public static partial class RoundtripTests
                 };
             ".TrimIndent(newline).TrimString(newline);
             var expectedMessage = @$"
-                Unexpected token found at Position {13}, Line Number {1}, Column Number {14}.
+                Unexpected token found at Position 13, Line Number 1, Column Number 14.
                 Token Type: 'ColonToken'
                 Token Text: ':'
             ".TrimIndent(newline).TrimString(newline);

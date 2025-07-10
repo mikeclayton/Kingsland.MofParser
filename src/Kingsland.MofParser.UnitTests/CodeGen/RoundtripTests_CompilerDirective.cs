@@ -30,18 +30,15 @@ public static partial class RoundtripTests
                 .StringLiteralToken("GlobalStructs/GOLF_Address.mof")
                 .ParenthesisCloseToken()
                 .ToList();
-            var expectedAst = new MofSpecificationAst.Builder {
-                Productions = [
-                    new CompilerDirectiveAst.Builder {
-                        PragmaKeyword = new PragmaToken("pragma"),
-                        PragmaName = new IdentifierToken("include"),
-                        PragmaParameter = new StringValueAst(
-                            new StringLiteralToken("GlobalStructs/GOLF_Address.mof"),
-                            "GlobalStructs/GOLF_Address.mof"
-                        )
-                    }.Build()
-                ]
-            }.Build();
+            var expectedAst = new MofSpecificationAst(
+                new CompilerDirectiveAst(
+                    new("pragma"), new("include"),
+                    new StringValueAst(
+                        new StringLiteralToken("GlobalStructs/GOLF_Address.mof"),
+                        "GlobalStructs/GOLF_Address.mof"
+                    )
+                )
+            );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
@@ -65,22 +62,17 @@ public static partial class RoundtripTests
                 .StringLiteralToken("GOLF_Address.mof")
                 .ParenthesisCloseToken()
                 .ToList();
-            var expectedAst = new MofSpecificationAst.Builder {
-                Productions = [
-                    new CompilerDirectiveAst.Builder {
-                        PragmaKeyword = new PragmaToken("pragma"),
-                        PragmaName = new IdentifierToken("include"),
-                        PragmaParameter = new StringValueAst(
-                            [
-                                new StringLiteralToken("GlobalStructs"),
-                                new StringLiteralToken("/"),
-                                new StringLiteralToken("GOLF_Address.mof")
-                            ],
-                            "GlobalStructs/GOLF_Address.mof"
-                        )
-                    }.Build()
-                ]
-            }.Build();
+            var expectedAst = new MofSpecificationAst(
+                new CompilerDirectiveAst(
+                    new("pragma"), new("include"),
+                    new StringValueAst(
+                        [
+                            new("GlobalStructs"), new("/"), new("GOLF_Address.mof")
+                        ],
+                        "GlobalStructs/GOLF_Address.mof"
+                    )
+                )
+            );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 

@@ -50,6 +50,11 @@ public sealed record QualifierListAst : AstNode
     {
     }
 
+    internal QualifierListAst(params QualifierValueAst[] qualifierValues)
+        : this((IEnumerable<QualifierValueAst>) qualifierValues)
+    {
+    }
+
     internal QualifierListAst(
         IEnumerable<QualifierValueAst> qualifierValues
     )
