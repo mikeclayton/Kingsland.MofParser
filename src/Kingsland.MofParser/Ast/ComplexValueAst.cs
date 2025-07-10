@@ -93,7 +93,7 @@ public sealed record ComplexValueAst : ComplexTypeValueAst
         this.Value = null;
         this.Of = null;
         this.TypeName = null;
-        this.PropertyValues = new([]);
+        this.PropertyValues = new();
     }
 
     public ComplexValueAst(

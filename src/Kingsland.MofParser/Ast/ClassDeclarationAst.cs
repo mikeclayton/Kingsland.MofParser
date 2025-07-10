@@ -90,8 +90,7 @@ public sealed record ClassDeclarationAst : MofProductionAst
         this.QualifierList = qualifierList ?? new();
         this.ClassName = className ?? throw new ArgumentNullException(nameof(className));
         this.SuperClass = superClass;
-        this.ClassFeatures = (classFeatures ?? [])
-            .ToList().AsReadOnly();
+        this.ClassFeatures = (classFeatures ?? []).ToList().AsReadOnly();
     }
 
     #endregion

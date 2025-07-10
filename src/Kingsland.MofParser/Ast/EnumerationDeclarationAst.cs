@@ -102,8 +102,7 @@ public sealed record EnumerationDeclarationAst : MofProductionAst, IStructureFea
         this.QualifierList = qualifierList ?? new();
         this.EnumName = enumName ?? throw new ArgumentNullException(nameof(enumName));
         this.EnumType = enumType ?? throw new ArgumentNullException(nameof(enumType));
-        this.EnumElements = (enumElements ?? Enumerable.Empty<EnumElementAst>())
-            .ToList().AsReadOnly();
+        this.EnumElements = (enumElements ?? []).ToList().AsReadOnly();
     }
 
     #endregion

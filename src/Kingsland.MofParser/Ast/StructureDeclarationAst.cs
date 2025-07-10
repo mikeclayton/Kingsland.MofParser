@@ -92,8 +92,7 @@ public sealed record StructureDeclarationAst : MofProductionAst, IStructureFeatu
         this.QualifierList = qualifierList ?? new ();
         this.StructureName = structureName ?? throw new ArgumentNullException(nameof(structureName));
         this.SuperStructure = superStructure;
-        this.StructureFeatures = (structureFeatures ?? [])
-            .ToList().AsReadOnly();
+        this.StructureFeatures = (structureFeatures ?? []).ToList().AsReadOnly();
     }
 
     #endregion
