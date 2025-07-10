@@ -21,7 +21,7 @@ internal static class TokenAssert
         else
         {
             return (ignoreExtent || TokenAssert.AreEqual(expected.Extent, actual.Extent)) &&
-                   (expected.Name == actual.Name);
+                (expected.Name == actual.Name);
         }
     }
 
@@ -102,7 +102,7 @@ internal static class TokenAssert
         else
         {
             return (ignoreExtent || TokenAssert.AreEqual(expected.Extent, actual.Extent)) &&
-                   (expected.Value == actual.Value);
+                (expected.Value == actual.Value);
         }
     }
 
@@ -199,7 +199,7 @@ internal static class TokenAssert
         else
         {
             return (ignoreExtent || TokenAssert.AreEqual(expected.Extent, actual.Extent)) &&
-                   (expected.Name == actual.Name);
+                (expected.Name == actual.Name);
         }
     }
 
@@ -216,8 +216,8 @@ internal static class TokenAssert
         else
         {
             return (ignoreExtent || TokenAssert.AreEqual(expected.Extent, actual.Extent)) &&
-                   (expected.Kind == actual.Kind) &&
-                   (expected.Value == actual.Value);
+                (expected.Kind == actual.Kind) &&
+                (expected.Value == actual.Value);
         }
     }
 
@@ -298,7 +298,7 @@ internal static class TokenAssert
         else
         {
             return (ignoreExtent || TokenAssert.AreEqual(expected.Extent, actual.Extent)) &&
-                   (expected.Value == actual.Value);
+                (expected.Value == actual.Value);
         }
     }
 
@@ -331,7 +331,7 @@ internal static class TokenAssert
         else
         {
             return (ignoreExtent || TokenAssert.AreEqual(expected.Extent, actual.Extent)) &&
-                   (expected.Value == actual.Value);
+                (expected.Value == actual.Value);
         }
     }
 
@@ -348,7 +348,7 @@ internal static class TokenAssert
         else
         {
             return (ignoreExtent || TokenAssert.AreEqual(expected.Extent, actual.Extent)) &&
-                   (expected.Value == actual.Value);
+                (expected.Value == actual.Value);
         }
     }
 

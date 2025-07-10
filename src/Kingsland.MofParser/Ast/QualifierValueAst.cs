@@ -70,11 +70,11 @@ public sealed record QualifierValueAst : AstNode
     internal QualifierValueAst(
         IdentifierToken qualifierName,
         IQualifierInitializerAst? initializer,
-        IEnumerable<IdentifierToken> flavors)
+        IEnumerable<IdentifierToken>? flavors)
     {
         this.QualifierName = qualifierName ?? throw new ArgumentNullException(nameof(qualifierName));
         this.Initializer = initializer;
-        this.Flavors = (flavors ?? throw new ArgumentNullException(nameof(flavors)))
+        this.Flavors = (flavors ?? Enumerable.Empty<IdentifierToken>())
             .ToList().AsReadOnly();
     }
 

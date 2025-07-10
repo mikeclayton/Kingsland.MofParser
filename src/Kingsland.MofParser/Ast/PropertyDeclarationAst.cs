@@ -108,19 +108,19 @@ public sealed record PropertyDeclarationAst : AstNode, IStructureFeatureAst
     #region Constructors
 
     internal PropertyDeclarationAst(
-        QualifierListAst qualifierList,
+        QualifierListAst? qualifierList,
         IdentifierToken returnType,
         IdentifierToken? returnTypeRef,
         IdentifierToken propertyName,
-        bool returnTypeIsArray,
+        bool? returnTypeIsArray,
         PropertyValueAst? initializer
     )
     {
-        this.QualifierList = qualifierList ?? throw new ArgumentNullException(nameof(qualifierList));
+        this.QualifierList = qualifierList ?? new();
         this.ReturnType = returnType ?? throw new ArgumentNullException(nameof(returnType));
         this.ReturnTypeRef = returnTypeRef;
         this.PropertyName = propertyName ?? throw new ArgumentNullException(nameof(propertyName));
-        this.ReturnTypeIsArray = returnTypeIsArray;
+        this.ReturnTypeIsArray = returnTypeIsArray ?? false;
         this.Initializer = initializer;
     }
 

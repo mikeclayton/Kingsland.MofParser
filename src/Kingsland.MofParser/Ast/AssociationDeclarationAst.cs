@@ -79,17 +79,16 @@ public sealed record AssociationDeclarationAst : MofProductionAst
     #region Constructors
 
     internal AssociationDeclarationAst(
-        QualifierListAst qualifierList,
+        QualifierListAst? qualifierList,
         IdentifierToken associationName,
         IdentifierToken? superAssociation,
-        IEnumerable<IClassFeatureAst> classFeatures
+        IEnumerable<IClassFeatureAst>? classFeatures
     )
     {
-        this.QualifierList = qualifierList ?? throw new ArgumentNullException(nameof(qualifierList));
+        this.QualifierList = qualifierList ?? new();
         this.AssociationName = associationName ?? throw new ArgumentNullException(nameof(associationName));
         this.SuperAssociation = superAssociation;
-        this.ClassFeatures = (classFeatures ?? throw new ArgumentNullException(nameof(classFeatures)))
-            .ToList().AsReadOnly();
+        this.ClassFeatures = (classFeatures ?? []).ToList().AsReadOnly();
     }
 
     #endregion

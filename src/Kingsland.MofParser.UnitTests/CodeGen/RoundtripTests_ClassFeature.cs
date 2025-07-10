@@ -50,30 +50,28 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            var expectedAst = new MofSpecificationAst.Builder {
-                Productions = [
-                    new ClassDeclarationAst.Builder {
-                        ClassName = new IdentifierToken("Sponsor"),
-                        ClassFeatures = [
-                            new PropertyDeclarationAst.Builder {
-                                QualifierList = new QualifierListAst( [
-                                    new QualifierValueAst.Builder {
-                                        QualifierName = new IdentifierToken("Description"),
-                                        Initializer = new QualifierValueInitializerAst(
-                                            new StringValueAst(
-                                                new StringLiteralToken("Monthly salary in $US"),
-                                                "Monthly salary in $US"
-                                            )
+            var expectedAst = new MofSpecificationAst(
+                new ClassDeclarationAst(
+                    null, new("Sponsor"), null,
+                    [
+                        new PropertyDeclarationAst(
+                            new(
+                                new QualifierValueAst(
+                                    new("Description"),
+                                    new QualifierValueInitializerAst(
+                                        new StringValueAst(
+                                            new StringLiteralToken("Monthly salary in $US"),
+                                            "Monthly salary in $US"
                                         )
-                                    }.Build()
-                                ]),
-                                ReturnType = new IdentifierToken("string"),
-                                PropertyName = new IdentifierToken("Name")
-                            }.Build()
-                        ],
-                    }.Build()
-                ]
-            }.Build();
+                                    ),
+                                    Enumerable.Empty<IdentifierToken>()
+                                )
+                            ),
+                            new("string"), null, new("Name"), null, null
+                        )
+                    ]
+                )
+            );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
@@ -134,18 +132,14 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            var expectedAst = new MofSpecificationAst.Builder {
-                Productions = [
-                    new ClassDeclarationAst.Builder {
-                        ClassName = new IdentifierToken("Sponsor"),
-                        ClassFeatures = [
-                            new StructureDeclarationAst.Builder {
-                                StructureName = new IdentifierToken("Nested")
-                            }.Build()
-                        ],
-                    }.Build()
-                ]
-            }.Build();
+            var expectedAst = new MofSpecificationAst(
+                new ClassDeclarationAst(
+                    null, new("Sponsor"), null,
+                    [
+                        new StructureDeclarationAst(null, new("Nested"), null, null)
+                    ]
+                )
+            );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
@@ -191,19 +185,16 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            var expectedAst = new MofSpecificationAst.Builder {
-                Productions = [
-                    new ClassDeclarationAst.Builder {
-                        ClassName = new IdentifierToken("Sponsor"),
-                        ClassFeatures = [
-                            new EnumerationDeclarationAst.Builder {
-                                EnumName = new IdentifierToken("MonthsEnum"),
-                                EnumType = new IdentifierToken("Integer")
-                            }.Build()
-                        ],
-                    }.Build()
-                ]
-            }.Build();
+            var expectedAst = new MofSpecificationAst(
+                new ClassDeclarationAst(
+                    null, new("Sponsor"), null,
+                    [
+                        new EnumerationDeclarationAst(
+                            null, new("MonthsEnum"), new("Integer"), null
+                        )
+                    ]
+                )
+            );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
@@ -237,19 +228,16 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            var expectedAst = new MofSpecificationAst.Builder {
-                Productions = [
-                    new ClassDeclarationAst.Builder {
-                        ClassName = new IdentifierToken("Sponsor"),
-                        ClassFeatures = [
-                            new PropertyDeclarationAst.Builder {
-                                PropertyName = new IdentifierToken("Name"),
-                                ReturnType = new IdentifierToken("string")
-                            }.Build()
-                        ],
-                    }.Build()
-                ]
-            }.Build();
+            var expectedAst = new MofSpecificationAst(
+                new ClassDeclarationAst(
+                    null, new("Sponsor"), null,
+                    [
+                        new PropertyDeclarationAst(
+                            null, new("string"), null, new("Name"), null, null
+                        )
+                    ]
+                )
+            );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 

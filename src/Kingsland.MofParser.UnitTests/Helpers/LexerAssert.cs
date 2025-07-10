@@ -224,7 +224,7 @@ internal static class LexerAssert
         return LexerAssert.GetFailMessage(message, string.Empty, string.Empty, index);
     }
 
-    private static string GetFailMessage(string message, string expected, string actual, int? index)
+    private static string GetFailMessage(string message, string? expected, string? actual, int? index)
     {
         var error = new StringBuilder();
         error.Append(message);

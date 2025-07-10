@@ -38,13 +38,13 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            var expectedAst = new MofSpecificationAst([
+            var expectedAst = new MofSpecificationAst(
                 new InstanceValueDeclarationAst(
                     new("instance"), new("of"), new("GOLF_ClubMember"),
-                    new([]),
+                    new(),
                     new()
                 )
-            ]);
+            );
             var expectedModule = new Module([
                 new(
                     "GOLF_ClubMember",
@@ -97,16 +97,26 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            var expectedAst = new MofSpecificationAst([
+            var expectedAst = new MofSpecificationAst(
                 new InstanceValueDeclarationAst(
                     new("instance"), new("of"), new("GOLF_ClubMember"),
-                    new([
-                        new(new("FirstName"), new StringValueAst(new StringLiteralToken("John"), "John")),
-                        new(new("LastName"), new StringValueAst(new StringLiteralToken("Doe"), "Doe"))
-                    ]),
+                    new(
+                        new PropertySlotAst(
+                            new("FirstName"),
+                            new StringValueAst(
+                                new StringLiteralToken("John"), "John"
+                            )
+                        ),
+                        new PropertySlotAst(
+                            new("LastName"),
+                            new StringValueAst(
+                                new StringLiteralToken("Doe"), "Doe"
+                            )
+                        )
+                    ),
                     new()
                 )
-            ]);
+            );
             var expectedModule = new Module([
                 new(
                     "GOLF_ClubMember",
@@ -147,13 +157,13 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            var expectedAst = new MofSpecificationAst([
+            var expectedAst = new MofSpecificationAst(
                 new InstanceValueDeclarationAst(
                     new("instance"), new("of"), new("GOLF_ClubMember"), new("as"), new("MyAliasIdentifier"),
-                    new([]),
+                    new(),
                     new()
                 )
-            ]);
+            );
             var expectedModule = new Module([
                 new(
                     "GOLF_ClubMember", "MyAliasIdentifier",

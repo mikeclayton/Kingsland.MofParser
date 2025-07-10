@@ -50,15 +50,18 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            var expectedAst = new MofSpecificationAst([
+            var expectedAst = new MofSpecificationAst(
                 new InstanceValueDeclarationAst(
                     new("instance"), new("of"), new("GOLF_ClubMember"), null, null,
-                    new([
-                        new(new("LastPaymentDate"), new LiteralValueArrayAst([]))
-                    ]),
+                    new(
+                        new PropertySlotAst(
+                            new("LastPaymentDate"),
+                            new LiteralValueArrayAst()
+                        )
+                    ),
                     new()
                 )
-            ]);
+            );
             var expectedModel = new Module([
                 new Instance(
                     "GOLF_ClubMember",
@@ -106,17 +109,20 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            var expectedAst = new MofSpecificationAst([
+            var expectedAst = new MofSpecificationAst(
                 new InstanceValueDeclarationAst(
                     new("instance"), new("of"), new("GOLF_ClubMember"), null, null,
-                    new([
-                        new(new("LastPaymentDate"), new LiteralValueArrayAst(
-                            new IntegerValueAst(new(IntegerKind.DecimalValue, 1))
-                        ))
-                    ]),
+                    new(
+                        new PropertySlotAst(
+                            new("LastPaymentDate"),
+                            new LiteralValueArrayAst(
+                                new IntegerValueAst(new(IntegerKind.DecimalValue, 1))
+                            )
+                        )
+                    ),
                     new()
                 )
-            ]);
+            );
             var expectedModel = new Module([
                 new Instance(
                     "GOLF_ClubMember",

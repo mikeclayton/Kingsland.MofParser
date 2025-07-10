@@ -81,17 +81,16 @@ public sealed record ClassDeclarationAst : MofProductionAst
     #region Constructors
 
     internal ClassDeclarationAst(
-        QualifierListAst qualifierList,
+        QualifierListAst? qualifierList,
         IdentifierToken className,
         IdentifierToken? superClass,
-        IEnumerable<IClassFeatureAst> classFeatures
+        IEnumerable<IClassFeatureAst>? classFeatures
     )
     {
-        this.QualifierList = qualifierList ?? throw new ArgumentNullException(nameof(qualifierList));
+        this.QualifierList = qualifierList ?? new();
         this.ClassName = className ?? throw new ArgumentNullException(nameof(className));
         this.SuperClass = superClass;
-        this.ClassFeatures = (classFeatures ?? throw new ArgumentNullException(nameof(classFeatures)))
-            .ToList().AsReadOnly();
+        this.ClassFeatures = (classFeatures ?? []).ToList().AsReadOnly();
     }
 
     #endregion

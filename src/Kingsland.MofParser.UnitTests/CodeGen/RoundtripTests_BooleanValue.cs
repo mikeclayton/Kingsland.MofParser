@@ -51,29 +51,20 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            var expectedAst = new MofSpecificationAst.Builder
-            {
-                Productions = [
-                    new InstanceValueDeclarationAst.Builder {
-                        Instance = new IdentifierToken("instance"),
-                        Of = new IdentifierToken("of"),
-                        TypeName = new IdentifierToken("myType"),
-                        As = new IdentifierToken("as"),
-                        Alias = new AliasIdentifierToken("Alias00000070"),
-                        PropertyValues = new PropertyValueListAst.Builder {
-                            PropertySlots = [
-                                new PropertySlotAst(
-                                    new("Reference"),
-                                    new BooleanValueAst(
-                                        new BooleanLiteralToken("TRUE", true)
-                                    )
-                                )
-                            ]
-                        }.Build(),
-                        StatementEnd = new StatementEndToken()
-                    }.Build()
-                ]
-            }.Build();
+            var expectedAst = new MofSpecificationAst(
+                new InstanceValueDeclarationAst(
+                    new("instance"), new("of"), new("myType"), new("as"), new("Alias00000070"),
+                    new(
+                        new PropertySlotAst(
+                            new("Reference"),
+                            new BooleanValueAst(
+                                new BooleanLiteralToken("TRUE", true)
+                            )
+                        )
+                    ),
+                    new()
+                )
+            );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 

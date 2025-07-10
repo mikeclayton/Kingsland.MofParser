@@ -14,7 +14,7 @@ public sealed partial class AstWriter
     {
 
         this.WriteString(
-            node.RealLiteralToken?.Text
+            node.RealLiteralToken.Text
                 ?? throw new InvalidOperationException()
         );
 
