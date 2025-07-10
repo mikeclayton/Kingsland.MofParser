@@ -38,7 +38,7 @@ public static partial class RoundtripTests
             var expectedAst = new MofSpecificationAst(
                 new ClassDeclarationAst(
                     null, new("GOLF_Base"), null,
-                    []
+                    null
                 )
             );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
@@ -73,7 +73,7 @@ public static partial class RoundtripTests
             var expectedAst = new MofSpecificationAst(
                 new ClassDeclarationAst(
                     null, new("GOLF_Base"), new("GOLF_Superclass"),
-                    []
+                    null
                 )
             );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);

@@ -84,13 +84,13 @@ public sealed record ClassDeclarationAst : MofProductionAst
         QualifierListAst? qualifierList,
         IdentifierToken className,
         IdentifierToken? superClass,
-        IEnumerable<IClassFeatureAst> classFeatures
+        IEnumerable<IClassFeatureAst>? classFeatures
     )
     {
         this.QualifierList = qualifierList ?? new();
         this.ClassName = className ?? throw new ArgumentNullException(nameof(className));
         this.SuperClass = superClass;
-        this.ClassFeatures = (classFeatures ?? throw new ArgumentNullException(nameof(classFeatures)))
+        this.ClassFeatures = (classFeatures ?? [])
             .ToList().AsReadOnly();
     }
 
