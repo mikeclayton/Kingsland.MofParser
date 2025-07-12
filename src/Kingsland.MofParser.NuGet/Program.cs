@@ -15,7 +15,7 @@ static class Program
         foreach (var instance in instances)
         {
             Console.WriteLine("--------------------------");
-            Console.Write($"instance of {instance.ClassName}");
+            Console.Write($"instance of {instance.TypeName}");
             if (!string.IsNullOrEmpty(instance.Alias))
             {
                 Console.Write($" as ${instance.Alias}");
@@ -23,7 +23,7 @@ static class Program
             Console.WriteLine();
             foreach (var property in instance.Properties)
             {
-                Console.WriteLine($"    {property.Key,-14} = {property.Value}");
+                Console.WriteLine($"    {property.Name,-14} = {property.Value}");
             }
             Console.WriteLine("--------------------------");
         }
