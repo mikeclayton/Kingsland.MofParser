@@ -112,3 +112,10 @@ jobs:
         with:
           name: nupkg
           path: ./*.nupkg
+
+      #- name: dotnet nuget push
+      #  run: |
+      #   dotnet nuget push \
+      #     "src/Kingsland.MofParser.9.0.0.nupkg" \
+      #     --api-key $NUGET_API_KEY \
+      #     --source  "https://api.nuget.org/v3/index.json"

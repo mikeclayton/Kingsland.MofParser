@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>A C# library for parsing the contents of Managed Object Format (MOF) files</description>
     <dependencies>
-      <group targetFramework="net8.0" />
+      <group targetFramework="net9.0" />
     </dependencies>
     <tags>powershell dsc mof parser</tags>
   </metadata>
