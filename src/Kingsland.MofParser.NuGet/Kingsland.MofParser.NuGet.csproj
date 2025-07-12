@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Kingsland.MofParser" Version="7.0.0" />
+    <PackageReference Include="Kingsland.MofParser" Version="9.0.1" />
   </ItemGroup>
 
 </Project>
