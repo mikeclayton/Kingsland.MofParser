@@ -62,14 +62,14 @@ public static partial class RoundtripTests
                     new()
                 )
             );
-            var expectedModel = new Module([
+            var expectedModel = new Module(
                 new Instance(
                     "GOLF_ClubMember",
                     [
                         new("LastPaymentDate", new LiteralValueArray())
                     ]
                 )
-            ]);
+            );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModel);
         }
 
@@ -123,7 +123,7 @@ public static partial class RoundtripTests
                     new()
                 )
             );
-            var expectedModel = new Module([
+            var expectedModel = new Module(
                 new Instance(
                     "GOLF_ClubMember",
                     [
@@ -135,7 +135,7 @@ public static partial class RoundtripTests
                         )
                     ]
                 )
-            ]);
+            );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModel);
         }
 
