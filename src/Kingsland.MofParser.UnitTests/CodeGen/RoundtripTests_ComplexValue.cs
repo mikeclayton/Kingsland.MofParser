@@ -143,7 +143,7 @@ public static partial class RoundtripTests
                     new()
                 )
             );
-            var expectedModule = new Module([
+            var expectedModule = new Module(
                 new Instance(
                     "GOLF_ClubMember",
                     [
@@ -158,7 +158,7 @@ public static partial class RoundtripTests
                         )
                     ]
                 )
-            ]);
+            );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 

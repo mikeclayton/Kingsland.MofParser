@@ -40,7 +40,7 @@ public static partial class RoundtripTests
                     new QualifierListAst(),
                     new IdentifierToken("GOLF_MemberLocker"),
                     null,
-                    []
+                    null
                 )
             );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);

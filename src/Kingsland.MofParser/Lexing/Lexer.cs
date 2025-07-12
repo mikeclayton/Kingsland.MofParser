@@ -520,7 +520,7 @@ public static class Lexer
             }
             if (literalValue < long.MinValue || literalValue > long.MaxValue)
             {
-                throw new OverflowException($"Value value is out of range for a {typeof(long).Name}.");
+                throw new OverflowException($"Value value is out of range for a {nameof(Int64)}.");
             }
             return (sign == -1) ? -(long)literalValue : (long)literalValue;
         }
