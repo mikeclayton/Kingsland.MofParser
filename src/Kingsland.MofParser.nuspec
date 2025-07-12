@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Kingsland.MofParser</id>
-    <version>9.0.0</version>
+    <version>1.0.0</version>
     <authors>Michael Clayton</authors>
     <owners>Michael Clayton</owners>
     <license type="expression">MIT OR LGPL-3.0-only</license>
