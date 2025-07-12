@@ -40,10 +40,10 @@ jobs:
             dotnet tool install --global GitVersion.Tool --version 5.8.2
           fi
           dotnet-gitversion
-          dotnet-gitversion /showvariable "FullSemVer"
+          dotnet-gitversion /showvariable "NuGetVersionV2"
           BUILD_NUMBER=$(
             # convert to a docker-friendly version number
-            dotnet-gitversion /showvariable "FullSemVer" \
+            dotnet-gitversion /showvariable "NuGetVersionV2" \
               | sed "s/+/-/g"
           )
           echo "build number = $BUILD_NUMBER"
@@ -104,8 +104,13 @@ jobs:
         with:
           nuget-version: latest
 
+      - name: version nuspec
+        run: |
+          sed -i "s/<version>.*<\/version>/<version>${{ env.BUILD_NUMBER }}<\/version>/" src/Kingsland.MofParser.nuspec
+
       - name: nuget pack
-        run: nuget pack src/Kingsland.MofParser.nuspec
+        run: |
+          nuget pack src/Kingsland.MofParser.nuspec
 
       - name: upload nuget package
         uses: actions/upload-artifact@v4
