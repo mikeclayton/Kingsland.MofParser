@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Parsing;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using Kingsland.MofParser.Parsing;
 using Kingsland.ParseFx.Syntax;
 using Kingsland.ParseFx.Text;
 using System.Text;
@@ -10,16 +11,19 @@ public sealed record StringLiteralToken : SyntaxToken
 
     #region Constructors
 
+    [PublicAPI]
     public StringLiteralToken(string value)
         : this(null, value)
     {
     }
 
+    [PublicAPI]
     public StringLiteralToken(SourcePosition? start, SourcePosition end, string text, string value)
         : this(new SourceExtent(start, end, text), value)
     {
     }
 
+    [PublicAPI]
     public StringLiteralToken(SourceExtent? extent, string value)
         : base(extent)
     {
@@ -30,6 +34,7 @@ public sealed record StringLiteralToken : SyntaxToken
 
     #region Properties
 
+    [PublicAPI]
     public string Value
     {
         get;
@@ -39,6 +44,7 @@ public sealed record StringLiteralToken : SyntaxToken
 
     #region SyntaxToken Interface
 
+    [PublicAPI]
     public override string GetSourceString()
     {
         return this.Text
@@ -61,6 +67,7 @@ public sealed record StringLiteralToken : SyntaxToken
             { '\r', $"{Constants.BACKSLASH}{Constants.CARRIAGERETURN_ESC}" }
         };
 
+    [PublicAPI]
     public static string EscapeString(string value)
     {
         if (string.IsNullOrEmpty(value))

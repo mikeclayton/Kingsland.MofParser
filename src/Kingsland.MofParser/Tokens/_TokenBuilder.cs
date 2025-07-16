@@ -20,7 +20,6 @@ public sealed class TokenBuilder
     private List<SyntaxToken> Tokens
     {
         get;
-        set;
     }
 
     #endregion
