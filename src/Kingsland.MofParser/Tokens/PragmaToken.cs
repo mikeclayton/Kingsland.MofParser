@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Parsing;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using Kingsland.MofParser.Parsing;
 using Kingsland.ParseFx.Syntax;
 using Kingsland.ParseFx.Text;
 
@@ -9,11 +10,13 @@ public sealed record PragmaToken : SyntaxToken
 
     #region Constructors
 
+    [PublicAPI]
     public PragmaToken()
         : this((SourceExtent?)null)
     {
     }
 
+    [PublicAPI]
     public PragmaToken(string? text)
         : this(
             text is null ? null : new SourceExtent(null, null, text)
@@ -21,11 +24,13 @@ public sealed record PragmaToken : SyntaxToken
     {
     }
 
+    [PublicAPI]
     public PragmaToken(SourcePosition? start, SourcePosition? end, string text)
         : this(new SourceExtent(start, end, text))
     {
     }
 
+    [PublicAPI]
     public PragmaToken(SourceExtent? extent)
         : base(extent)
     {
@@ -35,6 +40,7 @@ public sealed record PragmaToken : SyntaxToken
 
     #region SyntaxToken Interface
 
+    [PublicAPI]
     public override string GetSourceString()
     {
         return this.Text

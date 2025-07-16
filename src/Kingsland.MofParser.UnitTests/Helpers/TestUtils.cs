@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace Kingsland.MofParser.UnitTests.Helpers;
 
-internal sealed class TestUtils
+internal static class TestUtils
 {
 
     internal static IEnumerable<SyntaxToken> RemoveExtents(IEnumerable<SyntaxToken> tokens)

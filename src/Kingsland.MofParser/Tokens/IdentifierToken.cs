@@ -1,4 +1,5 @@
-﻿using Kingsland.ParseFx.Syntax;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using Kingsland.ParseFx.Syntax;
 using Kingsland.ParseFx.Text;
 
 namespace Kingsland.MofParser.Tokens;
@@ -8,16 +9,19 @@ public sealed record IdentifierToken : SyntaxToken
 
     #region Constructors
 
+    [PublicAPI]
     public IdentifierToken(string name)
         : this(null, name)
     {
     }
 
+    [PublicAPI]
     public IdentifierToken(SourcePosition? start, SourcePosition? end, string text)
         : this(new SourceExtent(start, end, text), text)
     {
     }
 
+    [PublicAPI]
     public IdentifierToken(SourceExtent? extent, string name)
         : base(extent)
     {
@@ -28,6 +32,7 @@ public sealed record IdentifierToken : SyntaxToken
 
     #region Properties
 
+    [PublicAPI]
     public string Name
     {
         get;
@@ -37,6 +42,7 @@ public sealed record IdentifierToken : SyntaxToken
 
     #region SyntaxToken Interface
 
+    [PublicAPI]
     public override string GetSourceString()
     {
         return this.Text
@@ -52,6 +58,7 @@ public sealed record IdentifierToken : SyntaxToken
     /// </summary>
     /// <param name="value"></param>
     /// <returns></returns>
+    [PublicAPI]
     public bool IsKeyword(string value)
     {
         return this.Name.Equals(
@@ -60,6 +67,7 @@ public sealed record IdentifierToken : SyntaxToken
         );
     }
 
+    [PublicAPI]
     public bool IsKeyword(IEnumerable<string> values)
     {
         return values.Any(
