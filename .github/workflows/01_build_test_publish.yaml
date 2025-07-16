@@ -89,7 +89,7 @@ jobs:
           dotnet tool install JetBrains.ReSharper.GlobalTools
           dotnet tool run jb inspectcode "src/Kingsland.MofParser.sln" -output=".build/out/jb-inspectcode.sarif" --no-build
 
-      - name: rewrite sarif file paths
+      - name: rewrite jb-inspectcode.sarif paths
         shell: pwsh
         run: |
           # "dotnet tool run jb inspectcode" generates a SARIF file with paths relative to the root of the repository
@@ -98,14 +98,14 @@ jobs:
           # read the sarif file from disk
           $sarif = Get-Content $sarifFile | ConvertFrom-Json
           # update the paths in the SARIF file
-          foreach ($run in $sarif.runs)
+          foreach( $run in $sarif.runs )
           {
-            foreach ($result in $run.results)
+            foreach( $result in $run.results )
             {
               # rewrite the file path to be relative to the SARIF file location
               $newPath = $result.locations[0].physicalLocation.artifactLocation.uri
               # add a "src/" to the path if it doesn't already have it
-              if (-not $newPath.StartsWith("src/") )
+              if( -not $newPath.StartsWith("src/") )
               {
                   $newPath = "src/$newPath"
               }

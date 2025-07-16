@@ -127,7 +127,7 @@ public static partial class RoundtripTests
                 new ClassDeclarationAst(
                     "Sponsor",
                     [
-                        new StructureDeclarationAst("Nested")
+                        new StructureDeclarationAst("structure", "Nested", ";")
                     ]
                 )
             );

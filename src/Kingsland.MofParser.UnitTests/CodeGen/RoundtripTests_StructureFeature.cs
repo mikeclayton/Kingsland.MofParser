@@ -52,7 +52,7 @@ public static partial class RoundtripTests
                 .ToList();
             var expectedAst = new MofSpecificationAst(
                 new StructureDeclarationAst(
-                    "Sponsor",
+                    "structure", "Sponsor",
                     [
                         new PropertyDeclarationAst(
                             [
@@ -60,7 +60,8 @@ public static partial class RoundtripTests
                             ],
                             "string", "Name"
                         )
-                    ]
+                    ],
+                    ";"
                 )
             );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
@@ -125,12 +126,13 @@ public static partial class RoundtripTests
                 .ToList();
             var expectedAst = new MofSpecificationAst(
                 new StructureDeclarationAst(
-                    "Sponsor",
+                    "structure", "Sponsor",
                     [
                         new StructureDeclarationAst(
-                            "Nested"
+                            "structure", "Nested", ";"
                         )
-                    ]
+                    ],
+                    ";"
                 )
             );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
@@ -180,12 +182,13 @@ public static partial class RoundtripTests
                 .ToList();
             var expectedAst = new MofSpecificationAst(
                 new StructureDeclarationAst(
-                    "Sponsor",
+                    "structure", "Sponsor",
                     [
                         new EnumerationDeclarationAst(
                             "MonthsEnum", "Integer"
                         )
-                    ]
+                    ],
+                    ";"
                 )
             );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
@@ -223,12 +226,13 @@ public static partial class RoundtripTests
                 .ToList();
             var expectedAst = new MofSpecificationAst(
                 new StructureDeclarationAst(
-                    "Sponsor",
+                    "structure", "Sponsor",
                     [
                         new PropertyDeclarationAst(
                             "string", "Name"
                         ),
-                    ]
+                    ],
+                    ";"
                 )
             );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);

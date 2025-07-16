@@ -46,7 +46,7 @@ internal static partial class ParserEngine
         node.QualifierList = qualifierList;
 
         // STRUCTURE
-        var structureKeyword = stream.ReadIdentifierToken(Constants.STRUCTURE);
+        node.Structure = stream.ReadIdentifierToken(Constants.STRUCTURE);
 
         // structureName
         node.StructureName = stream.ReadIdentifierToken(
@@ -80,7 +80,7 @@ internal static partial class ParserEngine
         var blockClose = stream.Read<BlockCloseToken>();
 
         // ";"
-        var statementEnd = stream.Read<StatementEndToken>();
+        node.StatementEnd = stream.Read<StatementEndToken>();
 
         return node.Build();
 

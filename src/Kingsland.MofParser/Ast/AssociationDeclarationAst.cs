@@ -1,3 +1,4 @@
+using Kingsland.MofParser.Attributes.StaticAnalysis;
 using Kingsland.MofParser.Tokens;
 using System.Collections.ObjectModel;
 
@@ -36,30 +37,35 @@ public sealed record AssociationDeclarationAst : MofProductionAst
             this.ClassFeatures = [];
         }
 
+        [PublicAPI]
         public QualifierListAst QualifierList
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? AssociationName
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? SuperAssociation
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public List<IClassFeatureAst> ClassFeatures
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public AssociationDeclarationAst Build()
         {
             return new(
@@ -110,21 +116,25 @@ public sealed record AssociationDeclarationAst : MofProductionAst
 
     #region Properties
 
+    [PublicAPI]
     public QualifierListAst QualifierList
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken AssociationName
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken? SuperAssociation
     {
         get;
     }
 
+    [PublicAPI]
     public ReadOnlyCollection<IClassFeatureAst> ClassFeatures
     {
         get;

@@ -46,6 +46,12 @@ public sealed record StructureDeclarationAst : MofProductionAst, IStructureFeatu
             set;
         }
 
+        public IdentifierToken? Structure
+        {
+            get;
+            set;
+        }
+
         public IdentifierToken? StructureName
         {
             get;
@@ -64,15 +70,23 @@ public sealed record StructureDeclarationAst : MofProductionAst, IStructureFeatu
             set;
         }
 
+        public StatementEndToken? StatementEnd
+        {
+            get;
+            set;
+        }
+
         public StructureDeclarationAst Build()
         {
             return new(
                 this.QualifierList,
+                this.Structure ?? "structure",
                 this.StructureName ?? throw new InvalidOperationException(
                     $"{nameof(this.StructureName)} property must be set before calling {nameof(Build)}."
                 ),
                 this.SuperStructure,
-                this.StructureFeatures
+                this.StructureFeatures,
+                this.StatementEnd ?? ";"
             );
         }
 
@@ -83,31 +97,56 @@ public sealed record StructureDeclarationAst : MofProductionAst, IStructureFeatu
     #region Constructors
 
     internal StructureDeclarationAst(
+        IdentifierToken structure,
         IdentifierToken structureName,
-        IdentifierToken? superStructure = null,
-        IEnumerable<IStructureFeatureAst>? structureFeatures = null
-    ) : this(null, structureName, superStructure, structureFeatures)
+        StatementEndToken statementEnd
+    ) : this(null, structure, structureName, null, null, statementEnd)
     {
     }
 
     internal StructureDeclarationAst(
+        IdentifierToken structure,
         IdentifierToken structureName,
-        IStructureFeatureAst[] structureFeatures
-    ) : this(null, structureName, null, structureFeatures)
+        IdentifierToken? superStructure,
+        StatementEndToken statementEnd
+    ) : this(null, structure, structureName, superStructure, null, statementEnd)
+    {
+    }
+
+    internal StructureDeclarationAst(
+        IdentifierToken structure,
+        IdentifierToken structureName,
+        IdentifierToken? superStructure,
+        IEnumerable<IStructureFeatureAst>? structureFeatures,
+        StatementEndToken statementEnd
+    ) : this(null, structure, structureName, superStructure, structureFeatures, statementEnd)
+    {
+    }
+
+    internal StructureDeclarationAst(
+        IdentifierToken structure,
+        IdentifierToken structureName,
+        IStructureFeatureAst[] structureFeatures,
+        StatementEndToken statementEnd
+    ) : this(null, structure, structureName, null, structureFeatures, statementEnd)
     {
     }
 
     internal StructureDeclarationAst(
         QualifierListAst? qualifierList,
+        IdentifierToken structure,
         IdentifierToken structureName,
-        IdentifierToken? superStructure = null,
-        IEnumerable<IStructureFeatureAst>? structureFeatures = null
+        IdentifierToken? superStructure,
+        IEnumerable<IStructureFeatureAst>? structureFeatures,
+        StatementEndToken statementEnd
     )
     {
         this.QualifierList = qualifierList ?? new ();
+        this.Structure = structure ?? throw new ArgumentNullException(nameof(structure));
         this.StructureName = structureName ?? throw new ArgumentNullException(nameof(structureName));
         this.SuperStructure = superStructure;
         this.StructureFeatures = (structureFeatures ?? []).ToList().AsReadOnly();
+        this.StatementEnd = statementEnd ?? throw new ArgumentNullException(nameof(statementEnd));
     }
 
     #endregion
@@ -115,6 +154,11 @@ public sealed record StructureDeclarationAst : MofProductionAst, IStructureFeatu
     #region Properties
 
     public QualifierListAst QualifierList
+    {
+        get;
+    }
+
+    public IdentifierToken Structure
     {
         get;
     }
@@ -130,6 +174,11 @@ public sealed record StructureDeclarationAst : MofProductionAst, IStructureFeatu
     }
 
     public ReadOnlyCollection<IStructureFeatureAst> StructureFeatures
+    {
+        get;
+    }
+
+    public StatementEndToken StatementEnd
     {
         get;
     }

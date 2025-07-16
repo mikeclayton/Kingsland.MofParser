@@ -37,7 +37,7 @@ public static partial class RoundtripTests
                 .ToList();
             var expectedAst = new MofSpecificationAst(
                 new StructureDeclarationAst(
-                    "Sponsor"
+                    "structure", "Sponsor", ";"
                 )
             );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
@@ -71,7 +71,7 @@ public static partial class RoundtripTests
                 .ToList();
             var expectedAst = new MofSpecificationAst(
                 new StructureDeclarationAst(
-                    "Sponsor", "GOLF_MySuperstructure"
+                    "structure", "Sponsor", "GOLF_MySuperstructure", ";"
                 )
             );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
@@ -123,7 +123,7 @@ public static partial class RoundtripTests
                 .ToList();
             var expectedAst = new MofSpecificationAst(
                 new StructureDeclarationAst(
-                    "Sponsor",
+                    "structure", "Sponsor",
                     [
                         new PropertyDeclarationAst(
                             "string", "Name"
@@ -134,7 +134,8 @@ public static partial class RoundtripTests
                         new PropertyDeclarationAst(
                             "real32", "ContractAmount"
                         )
-                    ]
+                    ],
+                    ";"
                 )
             );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
