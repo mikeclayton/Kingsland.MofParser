@@ -19,6 +19,8 @@ namespace Kingsland.MofParser.Ast;
 public sealed record NullValueAst : LiteralValueAst
 {
 
+    public static readonly NullValueAst Null = new(NullLiteralToken.Null);
+
     #region Builder
 
     public sealed class Builder
@@ -44,6 +46,17 @@ public sealed record NullValueAst : LiteralValueAst
     #endregion
 
     #region Constructors
+
+    internal NullValueAst(
+    ) : this(NullLiteralToken.Null)
+    {
+    }
+
+    internal NullValueAst(
+        string text
+    ) : this(new NullLiteralToken(text))
+    {
+    }
 
     internal NullValueAst(
         NullLiteralToken token

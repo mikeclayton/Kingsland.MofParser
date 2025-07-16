@@ -43,6 +43,13 @@ public sealed record IntegerValueAst : LiteralValueAst, IEnumElementValueAst
     #region Constructors
 
     internal IntegerValueAst(
+        IntegerKind integerKind,
+        long value
+    ) : this(new IntegerLiteralToken(integerKind, value))
+    {
+    }
+
+    internal IntegerValueAst(
         IntegerLiteralToken integerLiteralToken
     )
     {
@@ -68,6 +75,15 @@ public sealed record IntegerValueAst : LiteralValueAst, IEnumElementValueAst
     public long Value
     {
         get;
+    }
+
+    #endregion
+
+    #region Converters
+
+    public static implicit operator IntegerValueAst(int value)
+    {
+        return new IntegerValueAst(IntegerKind.DecimalValue, value);
     }
 
     #endregion

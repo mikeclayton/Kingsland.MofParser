@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Tokens;
+﻿using Kingsland.MofParser.Ast;
+using Kingsland.MofParser.Tokens;
 using Kingsland.MofParser.UnitTests.Extensions;
 using NUnit.Framework;
 
@@ -44,7 +45,17 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new ClassDeclarationAst(
+                    "GOLF_Club",
+                    [
+                        new MethodDeclarationAst(
+                            "Integer", "GetMembersWithOutstandingFees"
+                        )
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test]
@@ -82,7 +93,19 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new ClassDeclarationAst(
+                    "GOLF_Club",
+                    [
+                        new MethodDeclarationAst(
+                            "Integer", "GetMembersWithOutstandingFees", [
+                                new("GOLF_ClubMember", "lateMembers")
+                            ]
+                        )
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test]
@@ -122,7 +145,19 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new ClassDeclarationAst(
+                    "GOLF_Club",
+                    [
+                        new MethodDeclarationAst(
+                            "Integer", "GetMembersWithOutstandingFees", [
+                                new("GOLF_ClubMember", "lateMembers", true)
+                            ]
+                        )
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test]
@@ -162,7 +197,19 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new ClassDeclarationAst(
+                    "GOLF_Club",
+                    [
+                        new MethodDeclarationAst(
+                            "Integer", "GetMembersWithOutstandingFees", [
+                                new("GOLF_ClubMember", "REF", "lateMembers")
+                            ]
+                        )
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test]
@@ -206,7 +253,19 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new ClassDeclarationAst(
+                    "GOLF_Club",
+                    [
+                        new MethodDeclarationAst(
+                            "Integer", "GetMembersWithOutstandingFees", [
+                                new("GOLF_ClubMember", "REF", "lateMembers", new ComplexValueAst("MyDefaultValueAlias"))
+                            ]
+                        )
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test(Description = "https://github.com/mikeclayton/MofParser/issues/27")]
@@ -248,29 +307,19 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            //var expectedAst = new MofSpecificationAst.Builder
-            //{
-            //    Productions = [
-            //        new ClassDeclarationAst.Builder {
-            //            ClassName = new IdentifierToken("GOLF_Professional"),
-            //            SuperClass = new IdentifierToken("GOLF_ClubMember"),
-            //            ClassFeatures = new List<IClassFeatureAst> {
-            //                new MethodDeclarationAst.Builder {
-            //                    ReturnType = new IdentifierToken("GOLF_ResultCodeEnum"),
-            //                    MethodName = new IdentifierToken("GetNumberOfProfessionals"),
-            //                    Parameters = new List<ParameterDeclarationAst> {
-            //                        new ParameterDeclarationAst.Builder {
-            //                             ParameterType = new IdentifierToken("ProfessionalStatusEnum"),
-            //                             ParameterName = new IdentifierToken("Status")
-            //                             DefaultValue = new StringLiteralToken("Professional")
-            //                        }.Build()
-            //                    }
-            //                }.Build(),
-            //            }
-            //        }.Build()
-            //    ]
-            //}.Build();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new ClassDeclarationAst(
+                    "GOLF_Professional", "GOLF_ClubMember",
+                    [
+                        new MethodDeclarationAst(
+                            "GOLF_ResultCodeEnum", "GetNumberOfProfessionals", [
+                                new("ProfessionalStatusEnum", "Status")
+                            ]
+                        )
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test]
@@ -316,29 +365,19 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            //var expectedAst = new MofSpecificationAst.Builder
-            //{
-            //    Productions = new List<MofProductionAst> {
-            //        new ClassDeclarationAst.Builder {
-            //            ClassName = new IdentifierToken("GOLF_Professional"),
-            //            SuperClass = new IdentifierToken("GOLF_ClubMember"),
-            //            ClassFeatures = new List<IClassFeatureAst> {
-            //                new MethodDeclarationAst.Builder {
-            //                    ReturnType = new IdentifierToken("GOLF_ResultCodeEnum"),
-            //                    MethodName = new IdentifierToken("GetNumberOfProfessionals"),
-            //                    Parameters = new List<ParameterDeclarationAst> {
-            //                        new ParameterDeclarationAst.Builder {
-            //                             ParameterType = new IdentifierToken("ProfessionalStatusEnum"),
-            //                             ParameterName = new IdentifierToken("Status")
-            //                             DefaultValue = new StringLiteralToken("Professional")
-            //                        }.Build()
-            //                    }
-            //                }.Build(),
-            //            }
-            //        }.Build()
-            //    }
-            //}.Build();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new ClassDeclarationAst(
+                    "GOLF_Professional", "GOLF_ClubMember",
+                    [
+                        new MethodDeclarationAst(
+                            "GOLF_ResultCodeEnum", "GetNumberOfProfessionals", [
+                                new("ProfessionalStatusEnum", "Status", new EnumValueAst("Professional"))
+                            ]
+                        )
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test]
@@ -378,7 +417,19 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new ClassDeclarationAst(
+                    "GOLF_Club",
+                    [
+                        new MethodDeclarationAst(
+                            "Integer", true, "GetMembersWithOutstandingFees", [
+                                new("GOLF_ClubMember", "lateMembers")
+                            ]
+                        )
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test(Description = "https://github.com/mikeclayton/MofParser/issues/38")]
@@ -434,7 +485,21 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new ClassDeclarationAst(
+                    "GOLF_Professional", "GOLF_ClubMember",
+                    [
+                        new MethodDeclarationAst(
+                            "GOLF_ResultCodeEnum", "GetNumberOfProfessionals", [
+                                new("Integer", "NoOfPros"),
+                                new("GOLF_Club", "Club"),
+                                new("ProfessionalStatusEnum", "Status", new EnumValueAst("Professional"))
+                            ]
+                        )
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test(Description = "https://github.com/mikeclayton/MofParser/issues/28")]
@@ -592,7 +657,54 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new ClassDeclarationAst(
+                    "Win32_SoftwareFeature", "CIM_SoftwareFeature",
+                    [
+                        new MethodDeclarationAst(
+                            "uint8", "ReinstallUint8", [
+                                new("integer", "ReinstallMode", 1)
+                            ]
+                        ),
+                        new MethodDeclarationAst(
+                            "uint16", "ReinstallUint16", [
+                                new("integer", "ReinstallMode", 1)
+                            ]
+                        ),
+                        new MethodDeclarationAst(
+                            "uint32", "ReinstallUint32", [
+                                new("integer", "ReinstallMode", 1)
+                            ]
+                        ),
+                        new MethodDeclarationAst(
+                            "uint64", "ReinstallUint64", [
+                                new("integer", "ReinstallMode", 1)
+                            ]
+                        ),
+                        new MethodDeclarationAst(
+                            "sint8", "ReinstallUint8", [
+                                new("integer", "ReinstallMode", 1)
+                            ]
+                        ),
+                        new MethodDeclarationAst(
+                            "sint16", "ReinstallUint16", [
+                                new("integer", "ReinstallMode", 1)
+                            ]
+                        ),
+                        new MethodDeclarationAst(
+                            "sint32", "ReinstallUint32", [
+                                new("integer", "ReinstallMode", 1)
+                            ]
+                        ),
+                        new MethodDeclarationAst(
+                            "sint64", "ReinstallUint64", [
+                                new("integer", "ReinstallMode", 1)
+                            ]
+                        )
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test(Description = "https://github.com/mikeclayton/MofParser/issues/28")]
@@ -750,7 +862,54 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new ClassDeclarationAst(
+                    "Win32_SoftwareFeature", "CIM_SoftwareFeature",
+                    [
+                        new MethodDeclarationAst(
+                            "integer", "ReinstallUint8", [
+                                new("uint8", "ReinstallMode", 1)
+                            ]
+                        ),
+                        new MethodDeclarationAst(
+                            "integer", "ReinstallUint16", [
+                                new("uint16", "ReinstallMode", 1)
+                            ]
+                        ),
+                        new MethodDeclarationAst(
+                            "integer", "ReinstallUint32", [
+                                new("uint32", "ReinstallMode", 1)
+                            ]
+                        ),
+                        new MethodDeclarationAst(
+                            "integer", "ReinstallUint64", [
+                                new("uint64", "ReinstallMode", 1)
+                            ]
+                        ),
+                        new MethodDeclarationAst(
+                            "integer", "ReinstallUint8", [
+                                new("sint8", "ReinstallMode", 1)
+                            ]
+                        ),
+                        new MethodDeclarationAst(
+                            "integer", "ReinstallUint16", [
+                                new("sint16", "ReinstallMode", 1)
+                            ]
+                        ),
+                        new MethodDeclarationAst(
+                            "integer", "ReinstallUint32", [
+                                new("sint32", "ReinstallMode", 1)
+                            ]
+                        ),
+                        new MethodDeclarationAst(
+                            "integer", "ReinstallUint64", [
+                                new("sint64", "ReinstallMode", 1)
+                            ]
+                        )
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
     }

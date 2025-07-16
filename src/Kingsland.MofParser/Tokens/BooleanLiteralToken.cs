@@ -7,6 +7,10 @@ namespace Kingsland.MofParser.Tokens;
 public sealed record BooleanLiteralToken : SyntaxToken
 {
 
+    public static readonly BooleanLiteralToken True = new(true);
+    public static readonly BooleanLiteralToken False = new(false);
+
+
     #region Constructors
 
     public BooleanLiteralToken(bool value)

@@ -107,9 +107,32 @@ public sealed record StructureValueDeclarationAst : MofProductionAst
         IdentifierToken value,
         IdentifierToken of,
         IdentifierToken typeName,
+        IdentifierToken @as,
+        AliasIdentifierToken alias,
+        StatementEndToken statementEnd
+    ) : this(value, of, typeName, @as, alias, (PropertyValueListAst?)null, statementEnd)
+    {
+    }
+
+    internal StructureValueDeclarationAst(
+        IdentifierToken value,
+        IdentifierToken of,
+        IdentifierToken typeName,
+        IdentifierToken @as,
+        AliasIdentifierToken alias,
+        PropertySlotAst[] propertyValues,
+        StatementEndToken statementEnd
+    ) : this(value, of, typeName, @as, alias, new PropertyValueListAst(propertyValues), statementEnd)
+    {
+    }
+
+    internal StructureValueDeclarationAst(
+        IdentifierToken value,
+        IdentifierToken of,
+        IdentifierToken typeName,
         IdentifierToken? @as,
         AliasIdentifierToken? alias,
-        PropertyValueListAst propertyValues,
+        PropertyValueListAst? propertyValues,
         StatementEndToken statementEnd
     )
     {
@@ -121,7 +144,7 @@ public sealed record StructureValueDeclarationAst : MofProductionAst
             this.As = @as ?? throw new ArgumentNullException(nameof(@as));
             this.Alias = alias ?? throw new ArgumentNullException(nameof(alias));
         }
-        this.PropertyValues = propertyValues ?? throw new ArgumentNullException(nameof(propertyValues));
+        this.PropertyValues = propertyValues ?? new();
         this.StatementEnd = statementEnd ?? throw new ArgumentNullException(nameof(statementEnd));
     }
 

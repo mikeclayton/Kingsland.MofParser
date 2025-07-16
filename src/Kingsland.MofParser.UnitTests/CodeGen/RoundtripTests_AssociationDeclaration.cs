@@ -37,10 +37,7 @@ public static partial class RoundtripTests
                 .ToList();
             var expectedAst = new MofSpecificationAst(
                 new AssociationDeclarationAst(
-                    new QualifierListAst(),
-                    new IdentifierToken("GOLF_MemberLocker"),
-                    null,
-                    null
+                    "GOLF_MemberLocker"
                 )
             );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
@@ -100,16 +97,16 @@ public static partial class RoundtripTests
                 .ToList();
             var expectedAst = new MofSpecificationAst(
                 new AssociationDeclarationAst(
-                    null, new("GOLF_MemberLocker"), new("GOLF_Base"),
+                    "GOLF_MemberLocker", "GOLF_Base",
                     [
                         new PropertyDeclarationAst(
-                            null, new("GOLF_ClubMember"), new("REF"), new("Member"), null, null
+                            "GOLF_ClubMember", "REF", "Member"
                         ),
                         new PropertyDeclarationAst(
-                            null, new("GOLF_Locker"), new("REF"), new("Locker"), null, null
+                            "GOLF_Locker", "REF", "Locker"
                         ),
                         new PropertyDeclarationAst(
-                            null, new("GOLF_Date"), null, new ("AssignedOnDate"), null, null
+                            "GOLF_Date", "AssignedOnDate"
                         )
                     ]
                 )
@@ -167,16 +164,16 @@ public static partial class RoundtripTests
                 .ToList();
             var expectedAst = new MofSpecificationAst(
                 new AssociationDeclarationAst(
-                    null, new("GOLF_MemberLocker"), null,
+                    "GOLF_MemberLocker",
                     [
                         new PropertyDeclarationAst(
-                            null, new("GOLF_ClubMember"), new("REF"), new("Member"), null, null
+                            "GOLF_ClubMember", "REF", "Member"
                         ),
                         new PropertyDeclarationAst(
-                            null, new("GOLF_Locker"), new("REF"), new("Locker"), null, null
+                            "GOLF_Locker", "REF", "Locker"
                         ),
                         new PropertyDeclarationAst(
-                            null, new("GOLF_Date"), null, new("AssignedOnDate"), null, null
+                            "GOLF_Date", "AssignedOnDate"
                         )
                     ]
                 )

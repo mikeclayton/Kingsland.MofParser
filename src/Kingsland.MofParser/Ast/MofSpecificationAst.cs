@@ -50,7 +50,7 @@ public sealed record MofSpecificationAst : AstNode
     {
     }
 
-    public MofSpecificationAst(params MofProductionAst[] values)
+    internal MofSpecificationAst(params MofProductionAst[] values)
         : this((IEnumerable<MofProductionAst>)values)
     {
     }

@@ -79,6 +79,22 @@ public sealed record CompilerDirectiveAst : MofProductionAst
     internal CompilerDirectiveAst(
         PragmaToken pragmaKeyword,
         IdentifierToken pragmaName,
+        string pragmaParameter
+    ) : this(pragmaKeyword, pragmaName, new StringValueAst(pragmaParameter))
+    {
+    }
+
+    internal CompilerDirectiveAst(
+        PragmaToken pragmaKeyword,
+        IdentifierToken pragmaName,
+        string[] pragmaParameter
+    ) : this(pragmaKeyword, pragmaName, new StringValueAst(pragmaParameter))
+    {
+    }
+
+    internal CompilerDirectiveAst(
+        PragmaToken pragmaKeyword,
+        IdentifierToken pragmaName,
         StringValueAst pragmaParameter
     )
     {

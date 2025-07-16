@@ -67,15 +67,63 @@ public sealed record QualifierValueAst : AstNode
 
     #region Constructors
 
-    internal QualifierValueAst(
-        IdentifierToken qualifierName,
-        IQualifierInitializerAst? initializer,
-        IEnumerable<IdentifierToken>? flavors)
+    internal QualifierValueAst(IdentifierToken qualifierName, string value)
+        : this(
+            qualifierName,
+            new QualifierValueInitializerAst(value),
+            null
+        )
+    {
+    }
+
+    internal QualifierValueAst(IdentifierToken qualifierName, IEnumerable<string> values)
+        : this(
+            qualifierName,
+            new QualifierValueInitializerAst(
+                new StringValueAst((values ?? throw new ArgumentNullException(nameof(values))).ToArray())
+            )
+        )
+    {
+    }
+
+    internal QualifierValueAst(IdentifierToken qualifierName, IntegerKind kind, long value)
+        : this(
+            qualifierName,
+            new QualifierValueInitializerAst(
+                new IntegerValueAst(kind, value)
+            ),
+            null
+        )
+    {
+    }
+
+    internal QualifierValueAst(IdentifierToken qualifierName, string value, IEnumerable<IdentifierToken> flavors)
+        : this(
+            qualifierName,
+            new QualifierValueInitializerAst(
+                new StringValueAst(value)
+            ),
+            flavors
+        )
+    {
+    }
+
+    internal QualifierValueAst(IdentifierToken qualifierName, long value, IEnumerable<IdentifierToken>? flavors = null)
+        : this(
+            qualifierName,
+            new QualifierValueInitializerAst(
+                new IntegerValueAst(value)
+            ),
+            flavors
+        )
+    {
+    }
+
+    internal QualifierValueAst(IdentifierToken qualifierName, IQualifierInitializerAst? initializer = null, IEnumerable<IdentifierToken>? flavors = null)
     {
         this.QualifierName = qualifierName ?? throw new ArgumentNullException(nameof(qualifierName));
         this.Initializer = initializer;
-        this.Flavors = (flavors ?? Enumerable.Empty<IdentifierToken>())
-            .ToList().AsReadOnly();
+        this.Flavors = (flavors ?? []).ToList().AsReadOnly();
     }
 
     #endregion

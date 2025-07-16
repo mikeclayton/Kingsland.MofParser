@@ -48,6 +48,12 @@ public sealed record RealValueAst : LiteralValueAst
     #region Constructors
 
     internal RealValueAst(
+        double value
+    ) : this(new RealLiteralToken(value))
+    {
+    }
+
+    internal RealValueAst(
         RealLiteralToken realLiteralToken
     )
     {
@@ -67,6 +73,15 @@ public sealed record RealValueAst : LiteralValueAst
     public double Value
     {
         get;
+    }
+
+    #endregion
+
+    #region Converters
+
+    public static implicit operator RealValueAst(double value)
+    {
+        return new RealValueAst(value);
     }
 
     #endregion

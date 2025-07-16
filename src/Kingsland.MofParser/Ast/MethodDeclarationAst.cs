@@ -104,21 +104,52 @@ public sealed record MethodDeclarationAst : AstNode, IClassFeatureAst
     #region Constructors
 
     internal MethodDeclarationAst(
-        QualifierListAst qualifierList,
+        IdentifierToken returnType,
+        IdentifierToken methodName,
+        IEnumerable<ParameterDeclarationAst>? parameters = null
+    ) : this(null, returnType, null, false, methodName, parameters)
+    {
+        // Integer GetMembersWithOutstandingFees();
+        // Integer GetMembersWithOutstandingFees(GOLF_ClubMember lateMembers);
+    }
+
+    internal MethodDeclarationAst(
+        IdentifierToken returnType,
+        bool returnTypeIsArray,
+        IdentifierToken methodName,
+        IEnumerable<ParameterDeclarationAst>? parameters = null
+    ) : this(null, returnType, null, returnTypeIsArray, methodName, parameters)
+    {
+        // Integer GetMembersWithOutstandingFees(GOLF_ClubMember lateMembers);
+        // Integer[] GetMembersWithOutstandingFees(GOLF_ClubMember lateMembers);
+    }
+
+    internal MethodDeclarationAst(
+        IdentifierToken returnType,
+        IdentifierToken returnTypeRef,
+        IdentifierToken methodName,
+        IEnumerable<ParameterDeclarationAst>? parameters = null
+    ) : this(null, returnType, returnTypeRef, false, methodName, parameters)
+    {
+        // MyClass REF GetMembersWithOutstandingFees();
+        // MyClass REF GetMembersWithOutstandingFees(GOLF_ClubMember lateMembers);
+    }
+
+    internal MethodDeclarationAst(
+        QualifierListAst? qualifierList,
         IdentifierToken returnType,
         IdentifierToken? returnTypeRef,
         bool returnTypeIsArray,
         IdentifierToken methodName,
-        IEnumerable<ParameterDeclarationAst> parameters
+        IEnumerable<ParameterDeclarationAst>? parameters = null
     )
     {
-        this.QualifierList = qualifierList ?? throw new ArgumentNullException(nameof(qualifierList));
+        this.QualifierList = qualifierList ?? new();
         this.ReturnType = returnType ?? throw new ArgumentNullException(nameof(returnType));
         this.ReturnTypeRef = returnTypeRef;
         this.ReturnTypeIsArray = returnTypeIsArray;
         this.Name = methodName ?? throw new ArgumentNullException(nameof(methodName));
-        this.Parameters = (parameters ?? throw new ArgumentNullException(nameof(parameters)))
-            .ToList().AsReadOnly();
+        this.Parameters = (parameters ?? []).ToList().AsReadOnly();
     }
 
     #endregion

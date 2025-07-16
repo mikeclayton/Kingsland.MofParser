@@ -1,4 +1,6 @@
-﻿namespace Kingsland.ParseFx.Text;
+﻿using Kingsland.ParseFx.Attributes.StaticAnalysis;
+
+namespace Kingsland.ParseFx.Text;
 
 public sealed class SourcePosition
 {
@@ -16,16 +18,19 @@ public sealed class SourcePosition
 
     #region Properties
 
+    [PublicAPI]
     public int Position
     {
         get;
     }
 
+    [PublicAPI]
     public int LineNumber
     {
         get;
     }
 
+    [PublicAPI]
     public int ColumnNumber
     {
         get;
@@ -35,6 +40,7 @@ public sealed class SourcePosition
 
     #region Methods
 
+    [PublicAPI]
     public bool IsEqualTo(SourcePosition obj)
     {
         return object.ReferenceEquals(obj, this) ||

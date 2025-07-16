@@ -86,4 +86,14 @@ public sealed record EnumValueAst : EnumTypeValueAst
 
     #endregion
 
+
+    #region Converters
+
+    public static implicit operator EnumValueAst(string enumName)
+    {
+        return new EnumValueAst((IdentifierToken)enumName);
+    }
+
+    #endregion
+
 }

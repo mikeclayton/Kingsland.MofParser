@@ -51,6 +51,11 @@ public sealed record QualifierValueArrayInitializerAst : IQualifierInitializerAs
     {
     }
 
+    internal QualifierValueArrayInitializerAst(params LiteralValueAst[] values)
+        : this((IEnumerable<LiteralValueAst>)values)
+    {
+    }
+
     internal QualifierValueArrayInitializerAst(
         IEnumerable<LiteralValueAst> values
     )

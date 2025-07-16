@@ -93,10 +93,32 @@ public sealed record EnumerationDeclarationAst : MofProductionAst, IStructureFea
     #region Constructors
 
     internal EnumerationDeclarationAst(
+        IdentifierToken enumName,
+        IdentifierToken enumType,
+        IEnumerable<string>? enumElements
+    ) : this(
+        null,
+        enumName,
+        enumType,
+        (enumElements ?? throw new ArgumentNullException(nameof(enumElements)))
+            .Select(enumElement => new EnumElementAst(enumElement, (string?)null))
+    )
+    {
+    }
+
+    internal EnumerationDeclarationAst(
+        IdentifierToken enumName,
+        IdentifierToken enumType,
+        IEnumerable<EnumElementAst>? enumElements = null
+    ) : this(null, enumName, enumType, enumElements)
+    {
+    }
+
+    internal EnumerationDeclarationAst(
         QualifierListAst? qualifierList,
         IdentifierToken enumName,
         IdentifierToken enumType,
-        IEnumerable<EnumElementAst>? enumElements
+        IEnumerable<EnumElementAst>? enumElements = null
     )
     {
         this.QualifierList = qualifierList ?? new();

@@ -7,19 +7,16 @@ namespace Kingsland.MofParser.Models.Types;
 public sealed record Instance
 {
 
-    internal Instance(string typeName, IEnumerable<Property> properties)
+    internal Instance(string typeName, IEnumerable<Property>? properties = null)
         : this(typeName, null, properties)
     {
     }
 
-    internal Instance(string typeName, string? alias, IEnumerable<Property> properties)
+    internal Instance(string typeName, string? alias, IEnumerable<Property>? properties = null)
     {
         this.TypeName = typeName ?? throw new ArgumentNullException(nameof(typeName));
         this.Alias = alias;
-        this.Properties = new ReadOnlyCollection<Property>(
-            (properties ?? throw new ArgumentNullException(nameof(properties)))
-                .ToList()
-        );
+        this.Properties = (properties ?? []).ToList().AsReadOnly();
     }
 
     public string TypeName

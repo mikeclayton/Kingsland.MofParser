@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Tokens;
+﻿using Kingsland.MofParser.Ast;
+using Kingsland.MofParser.Tokens;
 using Kingsland.MofParser.UnitTests.Extensions;
 using NUnit.Framework;
 
@@ -47,7 +48,16 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new InstanceValueDeclarationAst(
+                    "instance", "of", "GOLF_ClubMember",
+                    [
+                        new("Caption", 100)
+                    ],
+                    ";"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test]
@@ -84,7 +94,16 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new InstanceValueDeclarationAst(
+                    "instance", "of", "GOLF_ClubMember",
+                    [
+                        new("Caption", 100)
+                    ],
+                    ";"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test]
@@ -121,7 +140,16 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new InstanceValueDeclarationAst(
+                    "instance", "of", "GOLF_ClubMember",
+                    [
+                        new("Caption", -100)
+                    ],
+                    ";"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test(Description = "https://github.com/mikeclayton/MofParser/issues/xx")]
@@ -320,6 +348,34 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
+            var expectedAst = new MofSpecificationAst(
+                new InstanceValueDeclarationAst(
+                    "instance", "of", "GOLF_ClubMember",
+                    [
+                        new("MyBinaryValue1", new IntegerValueAst(IntegerKind.BinaryValue, 0b101010)),
+                        new("MyBinaryValue2", new IntegerValueAst(IntegerKind.BinaryValue, 0b00101010)),
+                        new("MyBinaryValue3", new IntegerValueAst(IntegerKind.BinaryValue, +0b101010)),
+                        new("MyBinaryValue4", new IntegerValueAst(IntegerKind.BinaryValue, -0b101010)),
+                        new("MyOctalValue1", new IntegerValueAst(IntegerKind.OctalValue, Convert.ToInt32("0444444", 8))),
+                        new("MyOctalValue2", new IntegerValueAst(IntegerKind.OctalValue, Convert.ToInt32("000444444", 8))),
+                        new("MyOctalValue3", new IntegerValueAst(IntegerKind.OctalValue, Convert.ToInt32("0444444", 8))),
+                        new("MyOctalValue4", new IntegerValueAst(IntegerKind.OctalValue, -Convert.ToInt32("0444444", 8))),
+                        new("MyHexValue1", new IntegerValueAst(IntegerKind.HexValue, 0xABC123)),
+                        new("MyHexValue2", new IntegerValueAst(IntegerKind.HexValue, 0x00ABC123)),
+                        new("MyHexValue3", new IntegerValueAst(IntegerKind.HexValue, 0xABC123)),
+                        new("MyHexValue4", new IntegerValueAst(IntegerKind.HexValue, -0xABC123)),
+                        new("MyDecimalValue1", new IntegerValueAst(IntegerKind.DecimalValue, 12345)),
+                        new("MyDecimalValue2", new IntegerValueAst(IntegerKind.DecimalValue, +12345)),
+                        new("MyDecimalValue3", new IntegerValueAst(IntegerKind.DecimalValue, -12345)),
+                        new("MyRealValue1", new RealValueAst(123.45)),
+                        new("MyRealValue2", new RealValueAst(00123.45)),
+                        new("MyRealValue3", new RealValueAst(+123.45)),
+                        new("MyRealValue4", new RealValueAst(-123.45))
+                    ],
+                    ";"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
         }
 

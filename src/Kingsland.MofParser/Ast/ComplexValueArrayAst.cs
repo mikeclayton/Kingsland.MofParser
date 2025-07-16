@@ -45,7 +45,7 @@ public sealed record ComplexValueArrayAst : ComplexTypeValueAst
 
     #region Constructors
 
-    public ComplexValueArrayAst(params ComplexValueAst[] values)
+    internal ComplexValueArrayAst(params ComplexValueAst[] values)
         : this((IEnumerable<ComplexValueAst>)values)
     {
     }

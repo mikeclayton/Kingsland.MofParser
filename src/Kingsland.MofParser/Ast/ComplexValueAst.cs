@@ -96,7 +96,16 @@ public sealed record ComplexValueAst : ComplexTypeValueAst
         this.PropertyValues = new();
     }
 
-    public ComplexValueAst(
+    internal ComplexValueAst(
+        IdentifierToken value,
+        IdentifierToken of,
+        IdentifierToken typeName,
+        PropertySlotAst[] propertyValues
+    ) : this(value, of, typeName, new PropertyValueListAst(propertyValues))
+    {
+    }
+
+    internal ComplexValueAst(
         IdentifierToken value,
         IdentifierToken of,
         IdentifierToken typeName,
@@ -143,6 +152,15 @@ public sealed record ComplexValueAst : ComplexTypeValueAst
     public PropertyValueListAst PropertyValues
     {
         get;
+    }
+
+    #endregion
+
+    #region Converters
+
+    public static implicit operator ComplexValueAst(AliasIdentifierToken aliasIdentifier)
+    {
+        return new ComplexValueAst(aliasIdentifier);
     }
 
     #endregion

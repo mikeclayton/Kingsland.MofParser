@@ -81,10 +81,42 @@ public sealed record ClassDeclarationAst : MofProductionAst
     #region Constructors
 
     internal ClassDeclarationAst(
+        IdentifierToken className,
+        IEnumerable<IClassFeatureAst>? classFeatures = null
+    ) : this((QualifierListAst?)null, className, null, classFeatures)
+    {
+    }
+
+    internal ClassDeclarationAst(
+        IdentifierToken className,
+        IdentifierToken? superClass,
+        IEnumerable<IClassFeatureAst>? classFeatures = null
+    ) : this((QualifierListAst?)null, className, superClass, classFeatures)
+    {
+    }
+
+    internal ClassDeclarationAst(
+        QualifierValueAst[] qualifierList,
+        IdentifierToken className,
+        IEnumerable<IClassFeatureAst>? classFeatures = null
+    ) : this(new QualifierListAst(qualifierList), className, null, classFeatures)
+    {
+    }
+
+    internal ClassDeclarationAst(
+        QualifierValueAst[] qualifierList,
+        IdentifierToken className,
+        IdentifierToken? superClass,
+        IEnumerable<IClassFeatureAst>? classFeatures = null
+    ): this(new QualifierListAst(qualifierList), className, superClass, classFeatures)
+    {
+    }
+
+    internal ClassDeclarationAst(
         QualifierListAst? qualifierList,
         IdentifierToken className,
         IdentifierToken? superClass,
-        IEnumerable<IClassFeatureAst>? classFeatures
+        IEnumerable<IClassFeatureAst>? classFeatures = null
     )
     {
         this.QualifierList = qualifierList ?? new();

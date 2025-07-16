@@ -50,7 +50,7 @@ public sealed record LiteralValueArrayAst : PrimitiveTypeValueAst
     {
     }
 
-    public LiteralValueArrayAst(params LiteralValueAst[] values)
+    internal LiteralValueArrayAst(params LiteralValueAst[] values)
         : this((IEnumerable<LiteralValueAst>)values)
     {
     }

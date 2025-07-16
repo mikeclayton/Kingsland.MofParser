@@ -65,12 +65,58 @@ public sealed record EnumElementAst : AstNode
     #region Constructors
 
     internal EnumElementAst(
-        QualifierListAst qualifierList,
+        IdentifierToken enumElementName,
+        string? enumElementValue
+    ) : this(
+        new QualifierListAst(),
+        enumElementName,
+        (enumElementValue is null) ? null : new StringValueAst(enumElementValue)
+    )
+    {
+    }
+
+    internal EnumElementAst(
+        IdentifierToken enumElementName,
+        long? enumElementValue
+    ) : this(
+        new QualifierListAst(),
+        enumElementName,
+        (enumElementValue is null) ? null : new IntegerValueAst(enumElementValue)
+    )
+    {
+    }
+
+    internal EnumElementAst(
+        QualifierValueAst[] qualifierList,
+        IdentifierToken enumElementName,
+        string? enumElementValue
+    ) : this(
+        new QualifierListAst(qualifierList),
+        enumElementName,
+        (enumElementValue is null) ? null : new StringValueAst(enumElementValue)
+    )
+    {
+    }
+
+    internal EnumElementAst(
+        QualifierValueAst[] qualifierList,
+        IdentifierToken enumElementName,
+        long? enumElementValue
+    ) : this(
+        new QualifierListAst(qualifierList),
+        enumElementName,
+        (enumElementValue is null) ? null : new IntegerValueAst(enumElementValue)
+    )
+    {
+    }
+
+    internal EnumElementAst(
+        QualifierListAst? qualifierList,
         IdentifierToken enumElementName,
         IEnumElementValueAst? enumElementValue
     )
     {
-        this.QualifierList = qualifierList ?? throw new ArgumentNullException(nameof(qualifierList));
+        this.QualifierList = qualifierList ?? new();
         this.EnumElementName = enumElementName ?? throw new ArgumentNullException(nameof(enumElementName));
         this.EnumElementValue = enumElementValue;
     }
@@ -79,7 +125,7 @@ public sealed record EnumElementAst : AstNode
 
     #region Properties
 
-    public QualifierListAst QualifierList
+    public QualifierListAst? QualifierList
     {
         get;
     }

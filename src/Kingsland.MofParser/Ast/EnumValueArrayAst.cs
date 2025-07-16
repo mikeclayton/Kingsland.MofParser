@@ -50,7 +50,7 @@ public sealed record EnumValueArrayAst : EnumTypeValueAst
     {
     }
 
-    public EnumValueArrayAst(params EnumValueAst[] values)
+    internal EnumValueArrayAst(params EnumValueAst[] values)
         : this((IEnumerable<EnumValueAst>)values)
     {
     }

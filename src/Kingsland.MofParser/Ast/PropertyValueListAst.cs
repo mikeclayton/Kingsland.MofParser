@@ -51,13 +51,7 @@ public sealed record PropertyValueListAst : AstNode
 
     #region Constructors
 
-    internal PropertyValueListAst()
-        : this((IEnumerable<PropertySlotAst>)[])
-    {
-
-    }
-
-    public PropertyValueListAst(params PropertySlotAst[] values)
+    internal PropertyValueListAst(params PropertySlotAst[] values)
         : this((IEnumerable<PropertySlotAst>)values)
     {
     }

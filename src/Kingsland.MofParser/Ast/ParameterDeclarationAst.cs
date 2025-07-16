@@ -110,15 +110,72 @@ public sealed record ParameterDeclarationAst : AstNode
     #region Constructors
 
     internal ParameterDeclarationAst(
-        QualifierListAst qualifierList,
+        IdentifierToken parameterType,
+        IdentifierToken parameterName
+    ) : this(null, parameterType, null, parameterName, false, null)
+    {
+        // Integer MyMethod(GOLF_ClubMember lateMembers)
+    }
+
+    internal ParameterDeclarationAst(
+        IdentifierToken parameterType,
+        IdentifierToken parameterName,
+        PropertyValueAst defaultValue
+    ) : this(null, parameterType, null, parameterName, false, defaultValue)
+    {
+        // Integer MyMethod(GOLF_ClubMember REF lateMembers = 1)
+    }
+
+    internal ParameterDeclarationAst(
+        IdentifierToken parameterType,
+        IdentifierToken? parameterRef,
+        IdentifierToken parameterName
+    ) : this(null, parameterType, parameterRef, parameterName, false, null)
+    {
+        // Integer MyMethod(GOLF_ClubMember REF lateMembers)
+    }
+
+    internal ParameterDeclarationAst(
+        IdentifierToken parameterType,
+        IdentifierToken? parameterRef,
+        IdentifierToken parameterName,
+        PropertyValueAst? defaultValue
+    ) : this(null, parameterType, parameterRef, parameterName, false, defaultValue)
+    {
+        // Integer MyMethod(GOLF_ClubMember REF lateMembers = 1)
+    }
+
+    internal ParameterDeclarationAst(
+        IdentifierToken parameterType,
+        IdentifierToken parameterName,
+        bool parameterIsArray = false,
+        PropertyValueAst? defaultValue = null
+    ) : this(null, parameterType, null, parameterName, parameterIsArray , defaultValue)
+    {
+        // Integer MyMethod(GOLF_ClubMember lateMembers[] = 1)
+    }
+
+    internal ParameterDeclarationAst(
+        IdentifierToken parameterType,
+        IdentifierToken? parameterRef,
+        IdentifierToken parameterName,
+        bool parameterIsArray = false,
+        PropertyValueAst? defaultValue = null
+    ) : this(null, parameterType, parameterRef, parameterName, parameterIsArray, defaultValue)
+    {
+        // Integer MyMethod(GOLF_ClubMember REF lateMembers[] = 1)
+    }
+
+    internal ParameterDeclarationAst(
+        QualifierListAst? qualifierList,
         IdentifierToken parameterType,
         IdentifierToken? parameterRef,
         IdentifierToken parameterName,
         bool parameterIsArray,
-        PropertyValueAst? defaultValue
+        PropertyValueAst? defaultValue = null
     )
     {
-        this.QualifierList = qualifierList ?? throw new ArgumentNullException(nameof(qualifierList));
+        this.QualifierList = qualifierList ?? new();
         this.ParameterType = parameterType ?? throw new ArgumentNullException(nameof(parameterType));
         this.ParameterRef = parameterRef;
         this.ParameterName = parameterName ?? throw new ArgumentNullException(nameof(parameterName));

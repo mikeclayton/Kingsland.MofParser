@@ -7,6 +7,8 @@ namespace Kingsland.MofParser.Tokens;
 public sealed record NullLiteralToken : SyntaxToken
 {
 
+    public static readonly NullLiteralToken Null = new();
+
     #region Constructors
 
     public NullLiteralToken()

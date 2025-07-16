@@ -1,4 +1,5 @@
 ﻿using Kingsland.MofParser.Ast;
+using Kingsland.MofParser.Models.Types;
 using Kingsland.MofParser.Tokens;
 using Kingsland.MofParser.UnitTests.Extensions;
 using NUnit.Framework;
@@ -37,8 +38,7 @@ public static partial class RoundtripTests
                 .ToList();
             var expectedAst = new MofSpecificationAst(
                 new ClassDeclarationAst(
-                    null, new("GOLF_Base"), null,
-                    null
+                    "GOLF_Base"
                 )
             );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
@@ -72,8 +72,7 @@ public static partial class RoundtripTests
                 .ToList();
             var expectedAst = new MofSpecificationAst(
                 new ClassDeclarationAst(
-                    null, new("GOLF_Base"), new("GOLF_Superclass"),
-                    null
+                    "GOLF_Base", "GOLF_Superclass"
                 )
             );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
@@ -122,16 +121,14 @@ public static partial class RoundtripTests
                 .ToList();
             var expectedAst = new MofSpecificationAst(
                 new ClassDeclarationAst(
-                    null, new("GOLF_Base"), null,
+                    "GOLF_Base",
                     [
                         new PropertyDeclarationAst(
-                            null, new("string"), null, new("InstanceID"), null, null
+                            "string", "InstanceID"
                         ),
                         new PropertyDeclarationAst(
-                            null, new("string"), null, new("Caption"), null,
-                            new NullValueAst(
-                                new("Null")
-                            )
+                            "string", "Caption",
+                            NullValueAst.Null
                         )
                     ]
                 )
@@ -220,52 +217,26 @@ public static partial class RoundtripTests
                 .ToList();
             var expectedAst = new MofSpecificationAst(
                 new ClassDeclarationAst(
-                    null, new("GOLF_Base"), null,
+                    [
+                        new("Abstract"),
+                        new("OCL", new QualifierValueArrayInitializerAst("-- the key property cannot be NULL", "inv: InstanceId.size() = 10"))
+                    ],
+                    "GOLF_Base",
                     [
                         new PropertyDeclarationAst(
-                            new QualifierListAst(
-                                new QualifierValueAst(
-                                    new("Description"),
-                                    new QualifierValueInitializerAst(
-                                        new StringValueAst(
-                                            new StringLiteralToken("an instance of a class that derives from the GOLF_Base class. "),
-                                            "an instance of a class that derives from the GOLF_Base class. "
-                                        )
-                                    ),
-                                    null
-                                ),
-                                new QualifierValueAst(
-                                    new("Key"), null, null
-                                )
-                            ),
-                            new("string"), null, new("InstanceID"), null, null
+                            [
+                                new("Description", "an instance of a class that derives from the GOLF_Base class. "),
+                                new("Key")
+                            ],
+                            "string", "InstanceID"
                         ),
                         new PropertyDeclarationAst(
-                            new QualifierListAst(
-                                new QualifierValueAst(
-                                    new("Description"),
-                                    new QualifierValueInitializerAst(
-                                        new StringValueAst(
-                                            new StringLiteralToken("A short textual description (one- line string) of the"),
-                                            "an instance of a class that derives from the GOLF_Base class. "
-                                        )
-                                    ),
-                                    null
-                                ),
-                                new QualifierValueAst(
-                                    new IdentifierToken("MaxLen"),
-                                    new QualifierValueInitializerAst(
-                                        new IntegerValueAst(
-                                            new IntegerLiteralToken(IntegerKind.DecimalValue, 64)
-                                        )
-                                    ),
-                                    null
-                                )
-                            ),
-                            new("string"), null, new("Caption"), null,
-                            new NullValueAst(
-                                new NullLiteralToken("Null")
-                            )
+                            [
+                                new("Description", "A short textual description (one- line string) of the"),
+                                new("MaxLen", IntegerKind.DecimalValue, 64)
+                            ],
+                            "string", "Caption",
+                            NullValueAst.Null
                         )
                     ]
                 )

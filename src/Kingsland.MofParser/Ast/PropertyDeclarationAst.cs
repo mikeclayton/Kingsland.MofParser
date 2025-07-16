@@ -108,12 +108,71 @@ public sealed record PropertyDeclarationAst : AstNode, IStructureFeatureAst
     #region Constructors
 
     internal PropertyDeclarationAst(
+        IdentifierToken returnType,
+        IdentifierToken propertyName,
+        PropertyValueAst? initializer = null
+    ) : this(null, returnType, null, propertyName, null, initializer)
+    {
+    }
+
+    internal PropertyDeclarationAst(
+        IdentifierToken returnType,
+        IdentifierToken returnTypeRef,
+        IdentifierToken propertyName
+    ) : this(null, returnType, returnTypeRef, propertyName, null, null)
+    {
+    }
+
+    internal PropertyDeclarationAst(
+        IdentifierToken returnType,
+        IdentifierToken propertyName,
+        bool returnTypeIsArray
+    ) : this(null, returnType, null, propertyName, returnTypeIsArray, null)
+    {
+    }
+
+    internal PropertyDeclarationAst(
+        IdentifierToken returnType,
+        IdentifierToken returnTypeRef,
+        IdentifierToken propertyName,
+        PropertyValueAst initializer
+    ) : this(null, returnType, returnTypeRef, propertyName, null, initializer)
+    {
+    }
+
+    internal PropertyDeclarationAst(
+        QualifierValueAst[] qualifierList,
+        IdentifierToken returnType,
+        IdentifierToken propertyName
+    ) : this(new(qualifierList), returnType, null, propertyName, null, null)
+    {
+    }
+
+    internal PropertyDeclarationAst(
+        QualifierValueAst[] qualifierList,
+        IdentifierToken returnType,
+        IdentifierToken propertyName,
+        bool returnTypeIsArray
+    ) : this(new(qualifierList), returnType, null, propertyName, returnTypeIsArray, null)
+    {
+    }
+
+    internal PropertyDeclarationAst(
+        QualifierValueAst[] qualifierList,
+        IdentifierToken returnType,
+        IdentifierToken propertyName,
+        PropertyValueAst initializer
+    ) : this(new(qualifierList), returnType, null, propertyName, null, initializer)
+    {
+    }
+
+    internal PropertyDeclarationAst(
         QualifierListAst? qualifierList,
         IdentifierToken returnType,
         IdentifierToken? returnTypeRef,
         IdentifierToken propertyName,
         bool? returnTypeIsArray,
-        PropertyValueAst? initializer
+        PropertyValueAst? initializer = null
     )
     {
         this.QualifierList = qualifierList ?? new();

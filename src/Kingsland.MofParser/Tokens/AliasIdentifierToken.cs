@@ -53,4 +53,13 @@ public sealed record AliasIdentifierToken : SyntaxToken
 
     #endregion
 
+    #region Converters
+
+    public static implicit operator AliasIdentifierToken(string name)
+    {
+        return new AliasIdentifierToken(name);
+    }
+
+    #endregion
+
 }

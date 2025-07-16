@@ -1,4 +1,6 @@
-﻿namespace Kingsland.MofParser.Ast;
+﻿using Kingsland.MofParser.Tokens;
+
+namespace Kingsland.MofParser.Ast;
 
 /// <summary>
 /// </summary>
@@ -43,6 +45,18 @@ public sealed record QualifierValueInitializerAst : IQualifierInitializerAst
     internal QualifierValueInitializerAst(LiteralValueAst value)
     {
         this.Value = value ?? throw new ArgumentNullException(nameof(value));
+    }
+
+    internal QualifierValueInitializerAst(IntegerKind kind, long value)
+    {
+        this.Value = new IntegerValueAst(
+            new IntegerLiteralToken(kind, value)
+        );
+    }
+
+    internal QualifierValueInitializerAst(params string[] values)
+    {
+        this.Value = new StringValueAst(values);
     }
 
     #endregion

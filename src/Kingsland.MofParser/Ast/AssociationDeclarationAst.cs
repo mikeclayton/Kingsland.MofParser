@@ -79,10 +79,25 @@ public sealed record AssociationDeclarationAst : MofProductionAst
     #region Constructors
 
     internal AssociationDeclarationAst(
-        QualifierListAst? qualifierList,
+        IdentifierToken associationName,
+        IEnumerable<IClassFeatureAst>? classFeatures = null
+    ) : this(null, associationName, null, classFeatures)
+    {
+    }
+
+    internal AssociationDeclarationAst(
         IdentifierToken associationName,
         IdentifierToken? superAssociation,
-        IEnumerable<IClassFeatureAst>? classFeatures
+        IEnumerable<IClassFeatureAst>? classFeatures = null
+    ) : this(null, associationName, superAssociation, classFeatures)
+    {
+    }
+
+    internal AssociationDeclarationAst(
+        QualifierListAst? qualifierList,
+        IdentifierToken associationName,
+        IdentifierToken? superAssociation = null,
+        IEnumerable<IClassFeatureAst>? classFeatures = null
     )
     {
         this.QualifierList = qualifierList ?? new();

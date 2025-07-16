@@ -19,6 +19,9 @@ namespace Kingsland.MofParser.Ast;
 public sealed record BooleanValueAst : LiteralValueAst
 {
 
+    internal static readonly BooleanValueAst True = new(BooleanLiteralToken.True);
+    internal static readonly BooleanValueAst False = new(BooleanLiteralToken.False);
+
     #region Builder
 
     public sealed class Builder
@@ -45,6 +48,12 @@ public sealed record BooleanValueAst : LiteralValueAst
 
     #region Constructors
 
+    internal BooleanValueAst(bool value)
+        : this(new BooleanLiteralToken(value))
+    {
+
+    }
+
     internal BooleanValueAst(BooleanLiteralToken token)
     {
         this.Token = token ?? throw new ArgumentNullException(nameof(token));
@@ -61,6 +70,17 @@ public sealed record BooleanValueAst : LiteralValueAst
 
     public bool Value =>
         this.Token.Value;
+
+    #endregion
+
+    #region Converters
+
+    public static implicit operator BooleanValueAst(bool value)
+    {
+        return value
+            ? BooleanValueAst.True
+            : BooleanValueAst.False;
+    }
 
     #endregion
 

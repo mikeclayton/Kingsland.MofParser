@@ -58,9 +58,39 @@ public sealed record StringValueAst : LiteralValueAst, IEnumElementValueAst
     #region Constructors
 
     internal StringValueAst(
-        StringLiteralToken stringLiteralValue,
+        StringLiteralToken token
+    ) : this([token], token.Value)
+    {
+    }
+
+    internal StringValueAst(
+        StringLiteralToken token,
         string value
-    ) : this([stringLiteralValue], value)
+    ) : this([token], value)
+    {
+    }
+
+    internal StringValueAst(
+        string value
+    ) : this([value], value)
+    {
+    }
+
+    internal StringValueAst(
+        params string[] values
+    ) : this(
+        values.Select(s => new StringLiteralToken(s)),
+        string.Join(null, values)
+    )
+    {
+    }
+
+    internal StringValueAst(
+        params StringLiteralToken[] tokens
+    ) : this(
+        tokens,
+        string.Join(null, tokens.Select(token => token.Value))
+    )
     {
     }
 
@@ -91,6 +121,15 @@ public sealed record StringValueAst : LiteralValueAst, IEnumElementValueAst
     public string Value
     {
         get;
+    }
+
+    #endregion
+
+    #region Converters
+
+    public static implicit operator StringValueAst(string value)
+    {
+        return new StringValueAst(value);
     }
 
     #endregion

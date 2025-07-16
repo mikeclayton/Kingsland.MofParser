@@ -103,9 +103,51 @@ public sealed record InstanceValueDeclarationAst : MofProductionAst
         IdentifierToken instance,
         IdentifierToken of,
         IdentifierToken typeName,
+        StatementEndToken statementEnd
+    ) : this(instance, of, typeName, null, null, new PropertyValueListAst(), statementEnd)
+    {
+    }
+
+    internal InstanceValueDeclarationAst(
+        IdentifierToken instance,
+        IdentifierToken of,
+        IdentifierToken typeName,
+        IdentifierToken @as,
+        AliasIdentifierToken alias,
+        StatementEndToken statementEnd
+    ) : this(instance, of, typeName, @as, alias, new PropertyValueListAst(), statementEnd)
+    {
+    }
+
+    internal InstanceValueDeclarationAst(
+        IdentifierToken instance,
+        IdentifierToken of,
+        IdentifierToken typeName,
         PropertyValueListAst propertyValues,
         StatementEndToken statementEnd
     ) : this(instance, of, typeName, null, null, propertyValues, statementEnd)
+    {
+    }
+
+    internal InstanceValueDeclarationAst(
+        IdentifierToken instance,
+        IdentifierToken of,
+        IdentifierToken typeName,
+        PropertySlotAst[] propertyValues,
+        StatementEndToken statementEnd
+    ) : this(instance, of, typeName, null, null, new PropertyValueListAst(propertyValues), statementEnd)
+    {
+    }
+
+    internal InstanceValueDeclarationAst(
+        IdentifierToken instance,
+        IdentifierToken of,
+        IdentifierToken typeName,
+        IdentifierToken @as,
+        AliasIdentifierToken alias,
+        PropertySlotAst[] propertyValues,
+        StatementEndToken statementEnd
+    ) : this(instance, of, typeName, @as, alias, new PropertyValueListAst(propertyValues), statementEnd)
     {
     }
 

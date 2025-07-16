@@ -35,4 +35,17 @@ public sealed record StatementEndToken : SyntaxToken
 
     #endregion
 
+    #region Converters
+
+    public static implicit operator StatementEndToken(string text)
+    {
+        if (text is not ";")
+        {
+            throw new ArgumentException(null, nameof(text));
+        }
+        return new StatementEndToken();
+    }
+
+    #endregion
+
 }
