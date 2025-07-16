@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Tokens;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using Kingsland.MofParser.Tokens;
 using System.Collections.ObjectModel;
 
 namespace Kingsland.MofParser.Ast;
@@ -21,26 +22,31 @@ public sealed record StringValueAst : LiteralValueAst, IEnumElementValueAst
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public Builder()
         {
             this.StringLiteralValues = [];
         }
 
+        [PublicAPI]
         public List<StringLiteralToken> StringLiteralValues
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public string? Value
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public StringValueAst Build()
         {
             return new(
@@ -58,9 +64,39 @@ public sealed record StringValueAst : LiteralValueAst, IEnumElementValueAst
     #region Constructors
 
     internal StringValueAst(
-        StringLiteralToken stringLiteralValue,
+        StringLiteralToken token
+    ) : this([token], token.Value)
+    {
+    }
+
+    internal StringValueAst(
+        StringLiteralToken token,
         string value
-    ) : this([stringLiteralValue], value)
+    ) : this([token], value)
+    {
+    }
+
+    internal StringValueAst(
+        string value
+    ) : this([value], value)
+    {
+    }
+
+    internal StringValueAst(
+        params string[] values
+    ) : this(
+        values.Select(s => new StringLiteralToken(s)),
+        string.Join(null, values)
+    )
+    {
+    }
+
+    internal StringValueAst(
+        params StringLiteralToken[] tokens
+    ) : this(
+        tokens,
+        string.Join(null, tokens.Select(token => token.Value))
+    )
     {
     }
 
@@ -83,14 +119,25 @@ public sealed record StringValueAst : LiteralValueAst, IEnumElementValueAst
 
     #region Properties
 
+    [PublicAPI]
     public ReadOnlyCollection<StringLiteralToken> StringLiteralValues
     {
         get;
     }
 
+    [PublicAPI]
     public string Value
     {
         get;
+    }
+
+    #endregion
+
+    #region Converters
+
+    public static implicit operator StringValueAst(string value)
+    {
+        return new StringValueAst(value);
     }
 
     #endregion

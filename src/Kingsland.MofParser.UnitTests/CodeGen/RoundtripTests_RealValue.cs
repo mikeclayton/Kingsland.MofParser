@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Tokens;
+﻿using Kingsland.MofParser.Ast;
+using Kingsland.MofParser.Tokens;
 using Kingsland.MofParser.UnitTests.Extensions;
 using NUnit.Framework;
 
@@ -46,7 +47,16 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new InstanceValueDeclarationAst(
+                    "instance", "of", "GOLF_ClubMember",
+                    [
+                        new("Caption", 0.5)
+                    ],
+                    ";"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test(Description = "https://github.com/mikeclayton/MofParser/issues/xx")]
@@ -83,7 +93,16 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new InstanceValueDeclarationAst(
+                    "instance", "of", "GOLF_ClubMember",
+                    [
+                        new("Caption", 0.5)
+                    ],
+                    ";"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test]
@@ -120,7 +139,16 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new InstanceValueDeclarationAst(
+                    "instance", "of", "GOLF_ClubMember",
+                    [
+                        new("Caption", -0.5)
+                    ],
+                    ";"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test(Description = "https://github.com/mikeclayton/MofParser/issues/xx")]
@@ -157,7 +185,16 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new InstanceValueDeclarationAst(
+                    "instance", "of", "GOLF_ClubMember",
+                    [
+                        new("Caption", 5.0)
+                    ],
+                    ";"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test(Description = "https://github.com/mikeclayton/MofParser/issues/xx")]
@@ -194,7 +231,16 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new InstanceValueDeclarationAst(
+                    "instance", "of", "GOLF_ClubMember",
+                    [
+                        new("Caption", 0.5)
+                    ],
+                    ";"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test(Description = "https://github.com/mikeclayton/MofParser/issues/xx")]
@@ -231,7 +277,62 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new InstanceValueDeclarationAst(
+                    "instance", "of", "GOLF_ClubMember",
+                    [
+                        new("Caption", 0.50)
+                    ],
+                    ";"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+        }
+
+        [Test(Description = "https://github.com/mikeclayton/MofParser/issues/xx")]
+        public static void RealValueWithExponentShouldRoundtrip()
+        {
+            var newline = Environment.NewLine;
+            var indent = "    ";
+            var sourceText = @"
+                instance of GOLF_ClubMember
+                {
+                    Caption = .5E002;
+                };
+            ".TrimIndent(newline).TrimString(newline);
+            var expectedTokens = new TokenBuilder()
+                // instance of GOLF_ClubMember
+                .IdentifierToken("instance")
+                .WhitespaceToken(" ")
+                .IdentifierToken("of")
+                .WhitespaceToken(" ")
+                .IdentifierToken("GOLF_ClubMember")
+                .WhitespaceToken(newline)
+                // {
+                .BlockOpenToken()
+                .WhitespaceToken(newline + indent)
+                //     Caption = .5;
+                .IdentifierToken("Caption")
+                .WhitespaceToken(" ")
+                .EqualsOperatorToken()
+                .WhitespaceToken(" ")
+                .RealLiteralToken(".5E002", 50)
+                .StatementEndToken()
+                .WhitespaceToken(newline)
+                // };
+                .BlockCloseToken()
+                .StatementEndToken()
+                .ToList();
+            var expectedAst = new MofSpecificationAst(
+                new InstanceValueDeclarationAst(
+                    "instance", "of", "GOLF_ClubMember",
+                    [
+                        new("Caption", 50.0)
+                    ],
+                    ";"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
     }

@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Tokens;
+﻿using Kingsland.MofParser.Ast;
+using Kingsland.MofParser.Tokens;
 using Kingsland.MofParser.UnitTests.Extensions;
 using NUnit.Framework;
 
@@ -42,7 +43,17 @@ public static partial class RoundtripTests
                .BlockCloseToken()
                .StatementEndToken()
                .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new ClassDeclarationAst(
+                    "GOLF_Base",
+                    [
+                        new PropertyDeclarationAst(
+                            "Integer", "Severity"
+                        )
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test]
@@ -77,7 +88,17 @@ public static partial class RoundtripTests
                .BlockCloseToken()
                .StatementEndToken()
                .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new ClassDeclarationAst(
+                    "GOLF_Base",
+                    [
+                        new PropertyDeclarationAst(
+                            "Integer", "Severity", true
+                        )
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test]
@@ -114,7 +135,17 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new ClassDeclarationAst(
+                    "GOLF_Base",
+                    [
+                        new PropertyDeclarationAst(
+                            "Integer", "Severity", 0
+                        )
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test]
@@ -161,7 +192,17 @@ public static partial class RoundtripTests
                .BlockCloseToken()
                .StatementEndToken()
                .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new ClassDeclarationAst(
+                    "GOLF_Base",
+                    [
+                        new PropertyDeclarationAst(
+                            "Integer", "REF", "Severity", new LiteralValueArrayAst(1, 2, 3)
+                        )
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test(Description = "https://github.com/mikeclayton/MofParser/issues/28")]
@@ -243,7 +284,22 @@ public static partial class RoundtripTests
                .BlockCloseToken()
                .StatementEndToken()
                .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new ClassDeclarationAst(
+                    "GOLF_Base",
+                    new PropertyDeclarationAst[] {
+                        new("uint8", "SeverityUint8"),
+                        new("uint16", "SeverityUint16"),
+                        new("uint32", "SeverityUint32"),
+                        new("uint64", "SeverityUint64"),
+                        new("sint8", "SeveritySint8"),
+                        new("sint16", "SeveritySint16"),
+                        new("sint32", "SeveritySint32"),
+                        new("sint64", "SeveritySint64")
+                    }
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
     }

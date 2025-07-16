@@ -49,16 +49,11 @@ public static partial class RoundtripTests
                 .ToList();
             var expectedAst = new MofSpecificationAst(
                 new InstanceValueDeclarationAst(
-                    new("instance"), new("of"), new("GOLF_ClubMember"),
-                    new(
-                        new PropertySlotAst(
-                            new("LastPaymentDate"),
-                            new ComplexValueAst(
-                                new("MyAliasIdentifier")
-                            )
-                        )
-                    ),
-                    new()
+                    "instance", "of", "GOLF_ClubMember",
+                    [
+                        new("LastPaymentDate", new AliasIdentifierToken("MyAliasIdentifier"))
+                    ],
+                    ";"
                 )
             );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
@@ -102,18 +97,11 @@ public static partial class RoundtripTests
                 .ToList();
             var expectedAst = new MofSpecificationAst(
                 new InstanceValueDeclarationAst(
-                    new("instance"), new("of"), new("GOLF_ClubMember"),
-                    new(
-                        new PropertySlotAst(
-                            new("LastPaymentDate"),
-                            new ComplexValueArrayAst(
-                                new ComplexValueAst(
-                                    new("MyAliasIdentifier")
-                                )
-                            )
-                        )
-                    ),
-                    new()
+                    "instance", "of", "GOLF_ClubMember",
+                    [
+                        new("LastPaymentDate", new AliasIdentifierToken[] { "MyAliasIdentifier" })
+                    ],
+                    ";"
                 )
             );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);

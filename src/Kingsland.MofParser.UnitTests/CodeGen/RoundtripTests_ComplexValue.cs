@@ -51,16 +51,11 @@ public static partial class RoundtripTests
                 .ToList();
             var expectedAst = new MofSpecificationAst(
                 new InstanceValueDeclarationAst(
-                    new("instance"), new("of"), new("GOLF_ClubMember"),
-                    new(
-                        new PropertySlotAst(
-                            new("LastPaymentDate"),
-                            new ComplexValueAst(
-                                new("MyAliasIdentifier")
-                            )
-                        )
-                    ),
-                    new()
+                    "instance", "of", "GOLF_ClubMember",
+                    [
+                        new("LastPaymentDate", new AliasIdentifierToken("MyAliasIdentifier"))
+                    ],
+                    ";"
                 )
             );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
@@ -123,41 +118,38 @@ public static partial class RoundtripTests
                 .ToList();
             var expectedAst = new MofSpecificationAst(
                 new InstanceValueDeclarationAst(
-                    new("instance"), new("of"), new("GOLF_ClubMember"),
-                    new(
-                        new PropertySlotAst(
-                            new("LastPaymentDate"),
-                            new ComplexValueAst(
-                                new("value"), new("of"), new("GOLF_Date"),
-                                new(
-                                    new PropertySlotAst(
-                                        new("Month"),
-                                        new EnumValueAst(
-                                            new("July")
-                                        )
-                                    )
-                                )
-                            )
-                        )
-                    ),
-                    new()
-                )
-            );
-            var expectedModule = new Module(
-                new Instance(
-                    "GOLF_ClubMember",
+                    "instance", "of", "GOLF_ClubMember",
                     [
-                        new Property(
+                        new(
                             "LastPaymentDate",
-                            new ComplexValueObject(
-                                "GOLF_Date",
+                            new ComplexValueAst(
+                                "value", "of", "GOLF_Date",
                                 [
-                                    new("Month", new EnumValue("July"))
+                                    new("Month", new EnumValueAst("July"))
                                 ]
                             )
                         )
-                    ]
+                    ],
+                    ";"
                 )
+            );
+            var expectedModule = new Module(
+                [
+                    new Instance(
+                        "GOLF_ClubMember",
+                        [
+                            new Property(
+                                "LastPaymentDate",
+                                new ComplexValueObject(
+                                    "GOLF_Date",
+                                    [
+                                        new("Month", new EnumValue("July"))
+                                    ]
+                                )
+                            )
+                        ]
+                    )
+                ]
             );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }

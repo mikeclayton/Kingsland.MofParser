@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Tokens;
+﻿using Kingsland.MofParser.Ast;
+using Kingsland.MofParser.Tokens;
 using Kingsland.MofParser.UnitTests.Extensions;
 using NUnit.Framework;
 
@@ -13,6 +14,7 @@ public static partial class RoundtripTests
     {
 
         [Test]
+
         public static void QualifierShouldRoundtrip()
         {
             var newline = Environment.NewLine;
@@ -51,7 +53,21 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new ClassDeclarationAst(
+                    [
+                        new("Description",
+                            new QualifierValueInitializerAst(
+                                "Instances of this class represent golf clubs. A golf club is ",
+                                "an organization that provides member services to golf players ",
+                                "both amateur and professional."
+                            )
+                        )
+                    ],
+                    "GOLF_Club", "GOLF_Base"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
     }

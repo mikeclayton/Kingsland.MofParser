@@ -1,4 +1,5 @@
-﻿using Kingsland.ParseFx.Lexing;
+﻿using Kingsland.ParseFx.Attributes.StaticAnalysis;
+using Kingsland.ParseFx.Lexing;
 
 namespace Kingsland.ParseFx.Text;
 
@@ -17,11 +18,13 @@ public sealed class SourceStream
 
     #region Properties
 
+    [PublicAPI]
     private TextReader BaseReader
     {
         get;
     }
 
+    [PublicAPI]
     private List<SourceChar> Buffer
     {
         get;
@@ -31,6 +34,7 @@ public sealed class SourceStream
 
     #region Methods
 
+    [PublicAPI]
     public bool Eof(int index)
     {
         return !this.PopulateBufferToPosition(index);
@@ -40,6 +44,7 @@ public sealed class SourceStream
     /// Returns the character at the specified index of the input stream.
     /// </summary>
     /// <returns></returns>
+    [PublicAPI]
     public SourceChar Read(int index)
     {
         if (!this.PopulateBufferToPosition(index))
@@ -49,6 +54,7 @@ public sealed class SourceStream
         return this.Buffer[index];
     }
 
+    [PublicAPI]
     private bool PopulateBufferToPosition(int position)
     {
         while (this.Buffer.Count <= position)
@@ -61,6 +67,7 @@ public sealed class SourceStream
         return true;
     }
 
+    [PublicAPI]
     private bool PopulateBufferChar()
     {
         // read the next char from the stream
@@ -80,6 +87,7 @@ public sealed class SourceStream
         return true;
     }
 
+    [PublicAPI]
     private static SourcePosition GetNextPosition(SourceChar? lastChar, char nextChar)
     {
         if (lastChar == null)
@@ -101,6 +109,7 @@ public sealed class SourceStream
         };
     }
 
+    [PublicAPI]
     private static SourcePosition StartOfStream()
     {
         return new SourcePosition(
@@ -110,6 +119,7 @@ public sealed class SourceStream
         );
     }
 
+    [PublicAPI]
     private static SourcePosition StartNewLine(SourcePosition lastPosition)
     {
         return new SourcePosition(
@@ -119,6 +129,7 @@ public sealed class SourceStream
         );
     }
 
+    [PublicAPI]
     private static SourcePosition MoveToNext(SourcePosition lastPosition)
     {
         return new SourcePosition(
@@ -132,11 +143,13 @@ public sealed class SourceStream
 
     #region Factory Methods
 
+    [PublicAPI]
     public static SourceStream From(TextReader value)
     {
         return new SourceStream(value);
     }
 
+    [PublicAPI]
     public static SourceStream From(string value)
     {
         return new SourceStream(

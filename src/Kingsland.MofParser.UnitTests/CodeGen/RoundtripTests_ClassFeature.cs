@@ -52,22 +52,13 @@ public static partial class RoundtripTests
                 .ToList();
             var expectedAst = new MofSpecificationAst(
                 new ClassDeclarationAst(
-                    null, new("Sponsor"), null,
+                    "Sponsor",
                     [
                         new PropertyDeclarationAst(
-                            new(
-                                new QualifierValueAst(
-                                    new("Description"),
-                                    new QualifierValueInitializerAst(
-                                        new StringValueAst(
-                                            new StringLiteralToken("Monthly salary in $US"),
-                                            "Monthly salary in $US"
-                                        )
-                                    ),
-                                    Enumerable.Empty<IdentifierToken>()
-                                )
-                            ),
-                            new("string"), null, new("Name"), null, null
+                            [
+                                new("Description", "Monthly salary in $US")
+                            ],
+                            "string", "Name"
                         )
                     ]
                 )
@@ -134,9 +125,9 @@ public static partial class RoundtripTests
                 .ToList();
             var expectedAst = new MofSpecificationAst(
                 new ClassDeclarationAst(
-                    null, new("Sponsor"), null,
+                    "Sponsor",
                     [
-                        new StructureDeclarationAst(null, new("Nested"), null, null)
+                        new StructureDeclarationAst("structure", "Nested", ";")
                     ]
                 )
             );
@@ -187,10 +178,10 @@ public static partial class RoundtripTests
                 .ToList();
             var expectedAst = new MofSpecificationAst(
                 new ClassDeclarationAst(
-                    null, new("Sponsor"), null,
+                    "Sponsor",
                     [
                         new EnumerationDeclarationAst(
-                            null, new("MonthsEnum"), new("Integer"), null
+                            "MonthsEnum", "Integer"
                         )
                     ]
                 )
@@ -230,10 +221,10 @@ public static partial class RoundtripTests
                 .ToList();
             var expectedAst = new MofSpecificationAst(
                 new ClassDeclarationAst(
-                    null, new("Sponsor"), null,
+                    "Sponsor",
                     [
                         new PropertyDeclarationAst(
-                            null, new("string"), null, new("Name"), null, null
+                            "string", "Name"
                         )
                     ]
                 )

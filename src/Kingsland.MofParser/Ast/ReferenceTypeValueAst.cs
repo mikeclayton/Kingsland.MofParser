@@ -1,4 +1,6 @@
-﻿namespace Kingsland.MofParser.Ast;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+
+namespace Kingsland.MofParser.Ast;
 
 /// <summary>
 /// </summary>
@@ -36,15 +38,18 @@ public sealed record ReferenceTypeValueAst : PropertyValueAst
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public string? Name
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public ReferenceTypeValueAst Build()
         {
             return new(
@@ -71,6 +76,7 @@ public sealed record ReferenceTypeValueAst : PropertyValueAst
 
     #region Properties
 
+    [PublicAPI]
     public string Name
     {
         get;

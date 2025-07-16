@@ -1,4 +1,6 @@
-﻿namespace Kingsland.MofParser.Ast;
+﻿using Kingsland.MofParser.Tokens;
+
+namespace Kingsland.MofParser.Ast;
 
 /// <summary>
 /// </summary>
@@ -24,6 +26,25 @@ public abstract record LiteralValueAst : PrimitiveTypeValueAst
 
     internal LiteralValueAst()
     {
+    }
+
+    #endregion
+
+    #region Converters
+
+    public static implicit operator LiteralValueAst(int value)
+    {
+        return new IntegerValueAst(IntegerKind.DecimalValue, value);
+    }
+
+    public static implicit operator LiteralValueAst(double value)
+    {
+        return new RealValueAst(value);
+    }
+
+    public static implicit operator LiteralValueAst(string value)
+    {
+        return new StringValueAst(value);
     }
 
     #endregion

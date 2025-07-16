@@ -32,11 +32,8 @@ public static partial class RoundtripTests
                 .ToList();
             var expectedAst = new MofSpecificationAst(
                 new CompilerDirectiveAst(
-                    new("pragma"), new("include"),
-                    new StringValueAst(
-                        new StringLiteralToken("GlobalStructs/GOLF_Address.mof"),
-                        "GlobalStructs/GOLF_Address.mof"
-                    )
+                    "pragma", "include",
+                    "GlobalStructs/GOLF_Address.mof"
                 )
             );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
@@ -64,13 +61,8 @@ public static partial class RoundtripTests
                 .ToList();
             var expectedAst = new MofSpecificationAst(
                 new CompilerDirectiveAst(
-                    new("pragma"), new("include"),
-                    new StringValueAst(
-                        [
-                            new("GlobalStructs"), new("/"), new("GOLF_Address.mof")
-                        ],
-                        "GlobalStructs/GOLF_Address.mof"
-                    )
+                    "pragma", "include",
+                    [ "GlobalStructs", "/", "GOLF_Address.mof" ]
                 )
             );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);

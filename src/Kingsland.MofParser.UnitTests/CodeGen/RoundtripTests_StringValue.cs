@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Tokens;
+﻿using Kingsland.MofParser.Ast;
+using Kingsland.MofParser.Tokens;
 using Kingsland.MofParser.UnitTests.Extensions;
 using NUnit.Framework;
 
@@ -46,7 +47,16 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new InstanceValueDeclarationAst(
+                    "instance", "of", "GOLF_ClubMember",
+                    [
+                        new("Caption", "Instance of John Doe")
+                    ],
+                    ";"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test]
@@ -89,7 +99,16 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new InstanceValueDeclarationAst(
+                    "instance", "of", "GOLF_ClubMember",
+                    [
+                        new("Caption", new StringValueAst("Instance", "of", "John", "Doe"))
+                    ],
+                    ";"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test(Description = "https://github.com/mikeclayton/MofParser/issues/20")]
@@ -126,7 +145,16 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new InstanceValueDeclarationAst(
+                    "instance", "of", "GOLF_ClubMember",
+                    [
+                        new("Caption", "Instance of John Doe's GOLF_ClubMember object")
+                    ],
+                    ";"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
     }

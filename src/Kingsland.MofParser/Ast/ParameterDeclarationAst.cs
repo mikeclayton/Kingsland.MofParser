@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Tokens;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using Kingsland.MofParser.Tokens;
 
 namespace Kingsland.MofParser.Ast;
 
@@ -43,50 +44,59 @@ public sealed record ParameterDeclarationAst : AstNode
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public Builder()
         {
             this.QualifierList = new();
         }
 
+        [PublicAPI]
         public QualifierListAst QualifierList
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? ParameterType
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? ParameterRef
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? ParameterName
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public bool ParameterIsArray
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public PropertyValueAst? DefaultValue
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public ParameterDeclarationAst Build()
         {
             return new(
@@ -110,15 +120,72 @@ public sealed record ParameterDeclarationAst : AstNode
     #region Constructors
 
     internal ParameterDeclarationAst(
-        QualifierListAst qualifierList,
+        IdentifierToken parameterType,
+        IdentifierToken parameterName
+    ) : this(null, parameterType, null, parameterName, false, null)
+    {
+        // Integer MyMethod(GOLF_ClubMember lateMembers)
+    }
+
+    internal ParameterDeclarationAst(
+        IdentifierToken parameterType,
+        IdentifierToken parameterName,
+        PropertyValueAst defaultValue
+    ) : this(null, parameterType, null, parameterName, false, defaultValue)
+    {
+        // Integer MyMethod(GOLF_ClubMember REF lateMembers = 1)
+    }
+
+    internal ParameterDeclarationAst(
+        IdentifierToken parameterType,
+        IdentifierToken? parameterRef,
+        IdentifierToken parameterName
+    ) : this(null, parameterType, parameterRef, parameterName, false, null)
+    {
+        // Integer MyMethod(GOLF_ClubMember REF lateMembers)
+    }
+
+    internal ParameterDeclarationAst(
+        IdentifierToken parameterType,
+        IdentifierToken? parameterRef,
+        IdentifierToken parameterName,
+        PropertyValueAst? defaultValue
+    ) : this(null, parameterType, parameterRef, parameterName, false, defaultValue)
+    {
+        // Integer MyMethod(GOLF_ClubMember REF lateMembers = 1)
+    }
+
+    internal ParameterDeclarationAst(
+        IdentifierToken parameterType,
+        IdentifierToken parameterName,
+        bool parameterIsArray = false,
+        PropertyValueAst? defaultValue = null
+    ) : this(null, parameterType, null, parameterName, parameterIsArray , defaultValue)
+    {
+        // Integer MyMethod(GOLF_ClubMember lateMembers[] = 1)
+    }
+
+    internal ParameterDeclarationAst(
+        IdentifierToken parameterType,
+        IdentifierToken? parameterRef,
+        IdentifierToken parameterName,
+        bool parameterIsArray = false,
+        PropertyValueAst? defaultValue = null
+    ) : this(null, parameterType, parameterRef, parameterName, parameterIsArray, defaultValue)
+    {
+        // Integer MyMethod(GOLF_ClubMember REF lateMembers[] = 1)
+    }
+
+    internal ParameterDeclarationAst(
+        QualifierListAst? qualifierList,
         IdentifierToken parameterType,
         IdentifierToken? parameterRef,
         IdentifierToken parameterName,
         bool parameterIsArray,
-        PropertyValueAst? defaultValue
+        PropertyValueAst? defaultValue = null
     )
     {
-        this.QualifierList = qualifierList ?? throw new ArgumentNullException(nameof(qualifierList));
+        this.QualifierList = qualifierList ?? new();
         this.ParameterType = parameterType ?? throw new ArgumentNullException(nameof(parameterType));
         this.ParameterRef = parameterRef;
         this.ParameterName = parameterName ?? throw new ArgumentNullException(nameof(parameterName));
@@ -130,34 +197,41 @@ public sealed record ParameterDeclarationAst : AstNode
 
     #region Properties
 
+    [PublicAPI]
     public QualifierListAst QualifierList
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken ParameterType
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken ParameterName
     {
         get;
     }
 
+    [PublicAPI]
     public bool ParameterIsRef =>
         this.ParameterRef is not null;
 
+    [PublicAPI]
     public IdentifierToken? ParameterRef
     {
         get;
     }
 
+    [PublicAPI]
     public bool ParameterIsArray
     {
         get;
     }
 
+    [PublicAPI]
     public PropertyValueAst? DefaultValue
     {
         get;

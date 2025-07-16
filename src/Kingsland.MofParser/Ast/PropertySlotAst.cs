@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Tokens;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using Kingsland.MofParser.Tokens;
 
 namespace Kingsland.MofParser.Ast;
 
@@ -22,21 +23,25 @@ public sealed record PropertySlotAst : AstNode
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public IdentifierToken? PropertyName
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public PropertyValueAst? PropertyValue
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public PropertySlotAst Build()
         {
             return new(
@@ -52,6 +57,54 @@ public sealed record PropertySlotAst : AstNode
     #region Constructors
 
     internal PropertySlotAst(
+        IdentifierToken propertyName, bool value
+    ) : this(propertyName, new BooleanValueAst(value))
+    {
+    }
+
+    internal PropertySlotAst(
+        IdentifierToken propertyName, int value
+    ) : this(propertyName, new IntegerValueAst(value))
+    {
+    }
+
+    internal PropertySlotAst(
+        IdentifierToken propertyName, double value
+    ) : this(propertyName, new RealValueAst(value))
+    {
+    }
+
+    internal PropertySlotAst(
+        IdentifierToken propertyName, string value
+    ) : this(propertyName, new StringValueAst(value))
+    {
+    }
+
+    internal PropertySlotAst(
+        IdentifierToken propertyName, AliasIdentifierToken aliasIdentifier
+    ) : this(propertyName, new ComplexValueAst(aliasIdentifier))
+    {
+    }
+
+    internal PropertySlotAst(
+        IdentifierToken propertyName, AliasIdentifierToken[] aliasIdentifiers
+    ) : this(
+        propertyName,
+        new ComplexValueArrayAst(
+            (aliasIdentifiers ?? throw new ArgumentNullException(nameof(aliasIdentifiers)))
+                .Select(aliasIdentifier => new ComplexValueAst(aliasIdentifier))
+        )
+    )
+    {
+    }
+
+    internal PropertySlotAst(
+        IdentifierToken propertyName, EnumValueAst[] enumValues
+    ) : this(propertyName, new EnumValueArrayAst(enumValues))
+    {
+    }
+
+    internal PropertySlotAst(
         IdentifierToken propertyName, PropertyValueAst propertyValue
     )
     {
@@ -63,11 +116,13 @@ public sealed record PropertySlotAst : AstNode
 
     #region Properties
 
+    [PublicAPI]
     public IdentifierToken PropertyName
     {
         get;
     }
 
+    [PublicAPI]
     public PropertyValueAst PropertyValue
     {
         get;

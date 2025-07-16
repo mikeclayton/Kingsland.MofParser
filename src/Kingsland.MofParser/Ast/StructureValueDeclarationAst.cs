@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Tokens;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using Kingsland.MofParser.Tokens;
 
 namespace Kingsland.MofParser.Ast;
 
@@ -23,56 +24,66 @@ public sealed record StructureValueDeclarationAst : MofProductionAst
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public Builder()
         {
             this.PropertyValues = new();
         }
 
+        [PublicAPI]
         public IdentifierToken? Value
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? Of
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? TypeName
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? As
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public AliasIdentifierToken? Alias
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public PropertyValueListAst PropertyValues
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public StatementEndToken? StatementEnd
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public StructureValueDeclarationAst Build()
         {
             return new(
@@ -107,9 +118,32 @@ public sealed record StructureValueDeclarationAst : MofProductionAst
         IdentifierToken value,
         IdentifierToken of,
         IdentifierToken typeName,
+        IdentifierToken @as,
+        AliasIdentifierToken alias,
+        StatementEndToken statementEnd
+    ) : this(value, of, typeName, @as, alias, (PropertyValueListAst?)null, statementEnd)
+    {
+    }
+
+    internal StructureValueDeclarationAst(
+        IdentifierToken value,
+        IdentifierToken of,
+        IdentifierToken typeName,
+        IdentifierToken @as,
+        AliasIdentifierToken alias,
+        PropertySlotAst[] propertyValues,
+        StatementEndToken statementEnd
+    ) : this(value, of, typeName, @as, alias, new PropertyValueListAst(propertyValues), statementEnd)
+    {
+    }
+
+    internal StructureValueDeclarationAst(
+        IdentifierToken value,
+        IdentifierToken of,
+        IdentifierToken typeName,
         IdentifierToken? @as,
         AliasIdentifierToken? alias,
-        PropertyValueListAst propertyValues,
+        PropertyValueListAst? propertyValues,
         StatementEndToken statementEnd
     )
     {
@@ -121,7 +155,7 @@ public sealed record StructureValueDeclarationAst : MofProductionAst
             this.As = @as ?? throw new ArgumentNullException(nameof(@as));
             this.Alias = alias ?? throw new ArgumentNullException(nameof(alias));
         }
-        this.PropertyValues = propertyValues ?? throw new ArgumentNullException(nameof(propertyValues));
+        this.PropertyValues = propertyValues ?? new();
         this.StatementEnd = statementEnd ?? throw new ArgumentNullException(nameof(statementEnd));
     }
 
@@ -129,36 +163,43 @@ public sealed record StructureValueDeclarationAst : MofProductionAst
 
     #region Properties
 
+    [PublicAPI]
     public IdentifierToken Value
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken Of
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken TypeName
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken? As
     {
         get;
     }
 
+    [PublicAPI]
     public AliasIdentifierToken? Alias
     {
         get;
     }
 
+    [PublicAPI]
     public PropertyValueListAst PropertyValues
     {
         get;
     }
 
+    [PublicAPI]
     public StatementEndToken StatementEnd
     {
         get;

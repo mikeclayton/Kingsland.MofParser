@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Parsing;
+﻿using Kingsland.MofParser.Ast;
+using Kingsland.MofParser.Parsing;
 using Kingsland.MofParser.Tokens;
 using Kingsland.MofParser.UnitTests.Extensions;
 using NUnit.Framework;
@@ -39,7 +40,12 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new EnumerationDeclarationAst(
+                    "MonthsEnum", "Integer"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test]
@@ -68,7 +74,12 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new EnumerationDeclarationAst(
+                    "MonthsEnum", "String"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test]
@@ -97,7 +108,12 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new EnumerationDeclarationAst(
+                    "MonthsEnum", "GOLF_MyEnum"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test]
@@ -186,7 +202,26 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new EnumerationDeclarationAst(
+                    "MonthsEnum", "String",
+                    [
+                        "January",
+                        "February",
+                        "March",
+                        "April",
+                        "May",
+                        "June",
+                        "July",
+                        "August",
+                        "September",
+                        "October",
+                        "November",
+                        "December"
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test(Description = "https://github.com/mikeclayton/MofParser/issues/52")]
@@ -252,7 +287,15 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new EnumerationDeclarationAst(
+                    "MonthsEnum", "uint32",
+                    [
+                        new EnumElementAst("July", "July")
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
     }
@@ -302,7 +345,19 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new EnumerationDeclarationAst(
+                    "MonthsEnum", "integer",
+                    [
+                        new EnumElementAst(
+                            [
+                                new("Description", "myDescription")
+                            ],
+                            "January", 1)
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test(Description = "https://github.com/mikeclayton/MofParser/issues/41")]
@@ -340,7 +395,15 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new EnumerationDeclarationAst(
+                    "MonthsEnum", "integer",
+                    [
+                        new EnumElementAst("January", 1)
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test]
@@ -374,7 +437,15 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new EnumerationDeclarationAst(
+                    "GOLF_StatesEnum", "string",
+                    [
+                        "AL"
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test]
@@ -412,7 +483,15 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new EnumerationDeclarationAst(
+                    "GOLF_StatesEnum", "string",
+                    [
+                        new EnumElementAst("AL", "Alabama")
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
     }

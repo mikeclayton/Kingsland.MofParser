@@ -66,4 +66,13 @@ public sealed record IntegerLiteralToken : SyntaxToken
 
     #endregion
 
+    #region Converters
+
+    public static implicit operator IntegerLiteralToken(long value)
+    {
+        return new IntegerLiteralToken(IntegerKind.DecimalValue, value);
+    }
+
+    #endregion
+
 }

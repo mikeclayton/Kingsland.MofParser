@@ -73,4 +73,13 @@ public sealed record IdentifierToken : SyntaxToken
 
     #endregion
 
+    #region Converters
+
+    public static implicit operator IdentifierToken(string name)
+    {
+        return new IdentifierToken(name);
+    }
+
+    #endregion
+
 }

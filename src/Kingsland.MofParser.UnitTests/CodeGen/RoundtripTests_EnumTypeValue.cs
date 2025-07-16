@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Parsing;
+﻿using Kingsland.MofParser.Ast;
+using Kingsland.MofParser.Parsing;
 using Kingsland.MofParser.Tokens;
 using Kingsland.MofParser.UnitTests.Extensions;
 using NUnit.Framework;
@@ -47,7 +48,16 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new InstanceValueDeclarationAst(
+                    "instance", "of", "GOLF_Date",
+                    [
+                        new("Month", new EnumValueAst("July"))
+                    ],
+                    ";"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test]
@@ -86,7 +96,16 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new InstanceValueDeclarationAst(
+                    "instance", "of", "GOLF_Date",
+                    [
+                        new("Month", new EnumValueArrayAst("June"))
+                    ],
+                    ";"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test]
@@ -128,7 +147,16 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new InstanceValueDeclarationAst(
+                    "instance", "of", "GOLF_Date",
+                    [
+                        new("Month", new EnumValueArrayAst("June", "July"))
+                    ],
+                    ";"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
     }
@@ -170,7 +198,16 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new InstanceValueDeclarationAst(
+                    "instance", "of", "GOLF_Date",
+                    [
+                        new("Month", new EnumValueAst("July"))
+                    ],
+                    ";"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test]
@@ -209,7 +246,16 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new InstanceValueDeclarationAst(
+                    "instance", "of", "GOLF_Date",
+                    [
+                        new("Month", new EnumValueAst("MonthEnums", "July"))
+                    ],
+                    ";"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
     }
@@ -252,7 +298,16 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new InstanceValueDeclarationAst(
+                    "instance", "of", "GOLF_Date",
+                    [
+                        new("Month", new LiteralValueArrayAst())
+                    ],
+                    ";"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test]
@@ -291,7 +346,16 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new InstanceValueDeclarationAst(
+                    "instance", "of", "GOLF_Date",
+                    [
+                        new("Month", new EnumValueArrayAst("June"))
+                    ],
+                    ";"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test]
@@ -333,7 +397,16 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new InstanceValueDeclarationAst(
+                    "instance", "of", "GOLF_Date",
+                    [
+                        new("Month", new EnumValueArrayAst("January", "February"))
+                    ],
+                    ";"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test(Description = "https://github.com/mikeclayton/MofParser/issues/25")]
@@ -374,13 +447,17 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(
-                sourceText,
-                expectedTokens,
-                null,
-                null,
-                ParserQuirks.EnumValueArrayContainsEnumValuesNotEnumNames
+            var expectedAst = new MofSpecificationAst(
+                new InstanceValueDeclarationAst(
+                    "instance", "of", "GOLF_Date",
+                    [
+                        new("Month", new EnumValueArrayAst([new("MonthEnums", "July")]))
+                    ],
+                    ";"
+                )
             );
+            var quirks = ParserQuirks.EnumValueArrayContainsEnumValuesNotEnumNames;
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, null, quirks);
         }
 
         [Test(Description = "https://github.com/mikeclayton/MofParser/issues/25")]

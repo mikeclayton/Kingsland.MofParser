@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Tokens;
+﻿using Kingsland.MofParser.Ast;
+using Kingsland.MofParser.Tokens;
 using Kingsland.MofParser.UnitTests.Extensions;
 using NUnit.Framework;
 
@@ -34,7 +35,12 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new StructureDeclarationAst(
+                    "structure", "Sponsor", ";"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test]
@@ -42,7 +48,7 @@ public static partial class RoundtripTests
         {
             var newline = Environment.NewLine;
             var sourceText = @"
-                structure Sponsor : GOLF_MySupestructure
+                structure Sponsor : GOLF_MySuperstructure
                 {
                 };
             ".TrimIndent(newline).TrimString(newline);
@@ -54,7 +60,7 @@ public static partial class RoundtripTests
                 .WhitespaceToken(" ")
                 .ColonToken()
                 .WhitespaceToken(" ")
-                .IdentifierToken("GOLF_MySupestructure")
+                .IdentifierToken("GOLF_MySuperstructure")
                 .WhitespaceToken(newline)
                 // {
                 .BlockOpenToken()
@@ -63,7 +69,12 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new StructureDeclarationAst(
+                    "structure", "Sponsor", "GOLF_MySuperstructure", ";"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
         [Test]
@@ -110,7 +121,24 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens);
+            var expectedAst = new MofSpecificationAst(
+                new StructureDeclarationAst(
+                    "structure", "Sponsor",
+                    [
+                        new PropertyDeclarationAst(
+                            "string", "Name"
+                        ),
+                        new PropertyDeclarationAst(
+                            "GOLF_Date", "ContractSignedDate"
+                        ),
+                        new PropertyDeclarationAst(
+                            "real32", "ContractAmount"
+                        )
+                    ],
+                    ";"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
         }
 
     }

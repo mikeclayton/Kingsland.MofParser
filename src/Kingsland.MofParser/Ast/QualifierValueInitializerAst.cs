@@ -1,4 +1,7 @@
-﻿namespace Kingsland.MofParser.Ast;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using Kingsland.MofParser.Tokens;
+
+namespace Kingsland.MofParser.Ast;
 
 /// <summary>
 /// </summary>
@@ -16,15 +19,18 @@ public sealed record QualifierValueInitializerAst : IQualifierInitializerAst
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public LiteralValueAst? Value
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public QualifierValueInitializerAst Build()
         {
             return new(
@@ -45,10 +51,23 @@ public sealed record QualifierValueInitializerAst : IQualifierInitializerAst
         this.Value = value ?? throw new ArgumentNullException(nameof(value));
     }
 
+    internal QualifierValueInitializerAst(IntegerKind kind, long value)
+    {
+        this.Value = new IntegerValueAst(
+            new IntegerLiteralToken(kind, value)
+        );
+    }
+
+    internal QualifierValueInitializerAst(params string[] values)
+    {
+        this.Value = new StringValueAst(values);
+    }
+
     #endregion
 
     #region Properties
 
+    [PublicAPI]
     public LiteralValueAst Value
     {
         get;

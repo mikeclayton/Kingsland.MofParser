@@ -1,3 +1,4 @@
+using Kingsland.MofParser.Attributes.StaticAnalysis;
 using Kingsland.MofParser.Tokens;
 using System.Collections.ObjectModel;
 
@@ -27,39 +28,46 @@ public sealed record AssociationDeclarationAst : MofProductionAst
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public Builder()
         {
             this.QualifierList = new();
             this.ClassFeatures = [];
         }
 
+        [PublicAPI]
         public QualifierListAst QualifierList
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? AssociationName
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? SuperAssociation
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public List<IClassFeatureAst> ClassFeatures
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public AssociationDeclarationAst Build()
         {
             return new(
@@ -79,10 +87,25 @@ public sealed record AssociationDeclarationAst : MofProductionAst
     #region Constructors
 
     internal AssociationDeclarationAst(
-        QualifierListAst? qualifierList,
+        IdentifierToken associationName,
+        IEnumerable<IClassFeatureAst>? classFeatures = null
+    ) : this(null, associationName, null, classFeatures)
+    {
+    }
+
+    internal AssociationDeclarationAst(
         IdentifierToken associationName,
         IdentifierToken? superAssociation,
-        IEnumerable<IClassFeatureAst>? classFeatures
+        IEnumerable<IClassFeatureAst>? classFeatures = null
+    ) : this(null, associationName, superAssociation, classFeatures)
+    {
+    }
+
+    internal AssociationDeclarationAst(
+        QualifierListAst? qualifierList,
+        IdentifierToken associationName,
+        IdentifierToken? superAssociation = null,
+        IEnumerable<IClassFeatureAst>? classFeatures = null
     )
     {
         this.QualifierList = qualifierList ?? new();
@@ -95,21 +118,25 @@ public sealed record AssociationDeclarationAst : MofProductionAst
 
     #region Properties
 
+    [PublicAPI]
     public QualifierListAst QualifierList
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken AssociationName
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken? SuperAssociation
     {
         get;
     }
 
+    [PublicAPI]
     public ReadOnlyCollection<IClassFeatureAst> ClassFeatures
     {
         get;

@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Tokens;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using Kingsland.MofParser.Tokens;
 
 namespace Kingsland.MofParser.Ast;
 
@@ -19,17 +20,22 @@ namespace Kingsland.MofParser.Ast;
 public sealed record NullValueAst : LiteralValueAst
 {
 
+    internal static readonly NullValueAst Null = new(NullLiteralToken.Null);
+
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public NullLiteralToken? Token
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public NullValueAst Build()
         {
             return new(
@@ -46,6 +52,17 @@ public sealed record NullValueAst : LiteralValueAst
     #region Constructors
 
     internal NullValueAst(
+    ) : this(NullLiteralToken.Null)
+    {
+    }
+
+    internal NullValueAst(
+        string text
+    ) : this(new NullLiteralToken(text))
+    {
+    }
+
+    internal NullValueAst(
         NullLiteralToken token
     )
     {
@@ -56,6 +73,7 @@ public sealed record NullValueAst : LiteralValueAst
 
     #region Properties
 
+    [PublicAPI]
     public NullLiteralToken Token
     {
         get;

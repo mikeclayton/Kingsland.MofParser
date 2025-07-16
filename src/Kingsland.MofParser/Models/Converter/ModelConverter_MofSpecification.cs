@@ -19,7 +19,7 @@ internal static partial class ModelConverter
                 .OfType<InstanceValueDeclarationAst>()
                 .Select(ModelConverter.ConvertInstanceValueDeclarationAst)
                 .ToList()
-            );
+        );
     }
 
     #endregion

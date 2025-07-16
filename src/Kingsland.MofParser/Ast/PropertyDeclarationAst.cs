@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Tokens;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using Kingsland.MofParser.Tokens;
 
 namespace Kingsland.MofParser.Ast;
 
@@ -41,50 +42,59 @@ public sealed record PropertyDeclarationAst : AstNode, IStructureFeatureAst
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public Builder()
         {
             this.QualifierList = new();
         }
 
+        [PublicAPI]
         public QualifierListAst QualifierList
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? ReturnType
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? ReturnTypeRef
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken?PropertyName
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public bool ReturnTypeIsArray
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public PropertyValueAst? Initializer
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public PropertyDeclarationAst Build()
         {
             return new(
@@ -108,12 +118,71 @@ public sealed record PropertyDeclarationAst : AstNode, IStructureFeatureAst
     #region Constructors
 
     internal PropertyDeclarationAst(
+        IdentifierToken returnType,
+        IdentifierToken propertyName,
+        PropertyValueAst? initializer = null
+    ) : this(null, returnType, null, propertyName, null, initializer)
+    {
+    }
+
+    internal PropertyDeclarationAst(
+        IdentifierToken returnType,
+        IdentifierToken returnTypeRef,
+        IdentifierToken propertyName
+    ) : this(null, returnType, returnTypeRef, propertyName, null, null)
+    {
+    }
+
+    internal PropertyDeclarationAst(
+        IdentifierToken returnType,
+        IdentifierToken propertyName,
+        bool returnTypeIsArray
+    ) : this(null, returnType, null, propertyName, returnTypeIsArray, null)
+    {
+    }
+
+    internal PropertyDeclarationAst(
+        IdentifierToken returnType,
+        IdentifierToken returnTypeRef,
+        IdentifierToken propertyName,
+        PropertyValueAst initializer
+    ) : this(null, returnType, returnTypeRef, propertyName, null, initializer)
+    {
+    }
+
+    internal PropertyDeclarationAst(
+        QualifierValueAst[] qualifierList,
+        IdentifierToken returnType,
+        IdentifierToken propertyName
+    ) : this(new(qualifierList), returnType, null, propertyName, null, null)
+    {
+    }
+
+    internal PropertyDeclarationAst(
+        QualifierValueAst[] qualifierList,
+        IdentifierToken returnType,
+        IdentifierToken propertyName,
+        bool returnTypeIsArray
+    ) : this(new(qualifierList), returnType, null, propertyName, returnTypeIsArray, null)
+    {
+    }
+
+    internal PropertyDeclarationAst(
+        QualifierValueAst[] qualifierList,
+        IdentifierToken returnType,
+        IdentifierToken propertyName,
+        PropertyValueAst initializer
+    ) : this(new(qualifierList), returnType, null, propertyName, null, initializer)
+    {
+    }
+
+    internal PropertyDeclarationAst(
         QualifierListAst? qualifierList,
         IdentifierToken returnType,
         IdentifierToken? returnTypeRef,
         IdentifierToken propertyName,
         bool? returnTypeIsArray,
-        PropertyValueAst? initializer
+        PropertyValueAst? initializer = null
     )
     {
         this.QualifierList = qualifierList ?? new();
@@ -128,34 +197,41 @@ public sealed record PropertyDeclarationAst : AstNode, IStructureFeatureAst
 
     #region Properties
 
+    [PublicAPI]
     public QualifierListAst QualifierList
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken ReturnType
     {
         get;
     }
 
+    [PublicAPI]
     public bool ReturnTypeIsRef =>
         this.ReturnTypeRef is not null;
 
+    [PublicAPI]
     public IdentifierToken? ReturnTypeRef
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken PropertyName
     {
         get;
     }
 
+    [PublicAPI]
     public bool ReturnTypeIsArray
     {
         get;
     }
 
+    [PublicAPI]
     public PropertyValueAst? Initializer
     {
         get;

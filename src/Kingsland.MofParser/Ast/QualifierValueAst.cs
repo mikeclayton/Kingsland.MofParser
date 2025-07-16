@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Tokens;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using Kingsland.MofParser.Tokens;
 using System.Collections.ObjectModel;
 
 namespace Kingsland.MofParser.Ast;
@@ -24,32 +25,38 @@ public sealed record QualifierValueAst : AstNode
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public Builder()
         {
             this.Flavors = [];
         }
 
+        [PublicAPI]
         public IdentifierToken? QualifierName
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IQualifierInitializerAst? Initializer
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public List<IdentifierToken> Flavors
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public QualifierValueAst Build()
         {
             return new(
@@ -67,26 +74,76 @@ public sealed record QualifierValueAst : AstNode
 
     #region Constructors
 
-    internal QualifierValueAst(
-        IdentifierToken qualifierName,
-        IQualifierInitializerAst? initializer,
-        IEnumerable<IdentifierToken>? flavors)
+    internal QualifierValueAst(IdentifierToken qualifierName, string value)
+        : this(
+            qualifierName,
+            new QualifierValueInitializerAst(value),
+            null
+        )
+    {
+    }
+
+    internal QualifierValueAst(IdentifierToken qualifierName, IEnumerable<string> values)
+        : this(
+            qualifierName,
+            new QualifierValueInitializerAst(
+                new StringValueAst((values ?? throw new ArgumentNullException(nameof(values))).ToArray())
+            )
+        )
+    {
+    }
+
+    internal QualifierValueAst(IdentifierToken qualifierName, IntegerKind kind, long value)
+        : this(
+            qualifierName,
+            new QualifierValueInitializerAst(
+                new IntegerValueAst(kind, value)
+            ),
+            null
+        )
+    {
+    }
+
+    internal QualifierValueAst(IdentifierToken qualifierName, string value, IEnumerable<IdentifierToken> flavors)
+        : this(
+            qualifierName,
+            new QualifierValueInitializerAst(
+                new StringValueAst(value)
+            ),
+            flavors
+        )
+    {
+    }
+
+    internal QualifierValueAst(IdentifierToken qualifierName, long value, IEnumerable<IdentifierToken>? flavors = null)
+        : this(
+            qualifierName,
+            new QualifierValueInitializerAst(
+                new IntegerValueAst(value)
+            ),
+            flavors
+        )
+    {
+    }
+
+    internal QualifierValueAst(IdentifierToken qualifierName, IQualifierInitializerAst? initializer = null, IEnumerable<IdentifierToken>? flavors = null)
     {
         this.QualifierName = qualifierName ?? throw new ArgumentNullException(nameof(qualifierName));
         this.Initializer = initializer;
-        this.Flavors = (flavors ?? Enumerable.Empty<IdentifierToken>())
-            .ToList().AsReadOnly();
+        this.Flavors = (flavors ?? []).ToList().AsReadOnly();
     }
 
     #endregion
 
     #region Properties
 
+    [PublicAPI]
     public IdentifierToken QualifierName
     {
         get;
     }
 
+    [PublicAPI]
     public IQualifierInitializerAst? Initializer
     {
         get;
@@ -104,6 +161,7 @@ public sealed record QualifierValueAst : AstNode
     /// These aren't part of the MOF 3.0.1 spec, but we'll include them anyway for backward compatibility.
     ///
     /// </remarks>
+    [PublicAPI]
     public ReadOnlyCollection<IdentifierToken> Flavors
     {
         get;

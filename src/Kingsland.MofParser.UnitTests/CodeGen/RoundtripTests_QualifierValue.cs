@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Parsing;
+﻿using Kingsland.MofParser.Ast;
+using Kingsland.MofParser.Parsing;
 using Kingsland.MofParser.Tokens;
 using Kingsland.MofParser.UnitTests.Extensions;
 using NUnit.Framework;
@@ -111,13 +112,33 @@ public static partial class RoundtripTests
                 .BlockCloseToken()
                 .StatementEndToken()
                 .ToList();
-            RoundtripTests.AssertRoundtrip(
-                sourceText,
-                expectedTokens,
-                null,
-                null,
-                ParserQuirks.AllowMofV2Qualifiers
+            var expectedAst = new MofSpecificationAst(
+                new ClassDeclarationAst(
+                    [
+                        new("Locale", 1033, flavors: ["ToInstance"]),
+                        new("UUID", "{BE46D060-7A7C-11d2-BC85-00104B2CF71C}", flavors: ["ToInstance"])
+                    ],
+                    "Win32_PrivilegesStatus", "__ExtendedStatus",
+                    [
+                        new PropertyDeclarationAst(
+                            [
+                                new("read", flavors: ["ToSubClass"]),
+                                new("MappingStrings", new QualifierValueArrayInitializerAst("Win32API|AccessControl|Windows NT Privileges"), flavors: ["ToSubClass"])
+                            ],
+                            "string", "PrivilegesNotHeld", true
+                        ),
+                        new PropertyDeclarationAst(
+                            [
+                                new("read", flavors: ["ToSubClass"]),
+                                new("MappingStrings", new QualifierValueArrayInitializerAst("Win32API|AccessControl|Windows NT Privileges"), flavors: ["ToSubClass"])
+                            ],
+                            "string", "PrivilegesRequired", true
+                        )
+                    ]
+                )
             );
+            var quirks = ParserQuirks.AllowMofV2Qualifiers;
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, null, quirks);
         }
 
         [Test]

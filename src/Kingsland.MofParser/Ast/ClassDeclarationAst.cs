@@ -1,3 +1,4 @@
+using Kingsland.MofParser.Attributes.StaticAnalysis;
 using Kingsland.MofParser.Tokens;
 using System.Collections.ObjectModel;
 
@@ -29,39 +30,46 @@ public sealed record ClassDeclarationAst : MofProductionAst
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public Builder()
         {
             this.QualifierList = new();
             this.ClassFeatures = [];
         }
 
+        [PublicAPI]
         public QualifierListAst QualifierList
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? ClassName
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? SuperClass
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public List<IClassFeatureAst> ClassFeatures
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public ClassDeclarationAst Build()
         {
             return new(
@@ -81,10 +89,42 @@ public sealed record ClassDeclarationAst : MofProductionAst
     #region Constructors
 
     internal ClassDeclarationAst(
+        IdentifierToken className,
+        IEnumerable<IClassFeatureAst>? classFeatures = null
+    ) : this((QualifierListAst?)null, className, null, classFeatures)
+    {
+    }
+
+    internal ClassDeclarationAst(
+        IdentifierToken className,
+        IdentifierToken? superClass,
+        IEnumerable<IClassFeatureAst>? classFeatures = null
+    ) : this((QualifierListAst?)null, className, superClass, classFeatures)
+    {
+    }
+
+    internal ClassDeclarationAst(
+        QualifierValueAst[] qualifierList,
+        IdentifierToken className,
+        IEnumerable<IClassFeatureAst>? classFeatures = null
+    ) : this(new QualifierListAst(qualifierList), className, null, classFeatures)
+    {
+    }
+
+    internal ClassDeclarationAst(
+        QualifierValueAst[] qualifierList,
+        IdentifierToken className,
+        IdentifierToken? superClass,
+        IEnumerable<IClassFeatureAst>? classFeatures = null
+    ): this(new QualifierListAst(qualifierList), className, superClass, classFeatures)
+    {
+    }
+
+    internal ClassDeclarationAst(
         QualifierListAst? qualifierList,
         IdentifierToken className,
         IdentifierToken? superClass,
-        IEnumerable<IClassFeatureAst>? classFeatures
+        IEnumerable<IClassFeatureAst>? classFeatures = null
     )
     {
         this.QualifierList = qualifierList ?? new();
@@ -97,21 +137,25 @@ public sealed record ClassDeclarationAst : MofProductionAst
 
     #region Properties
 
+    [PublicAPI]
     public QualifierListAst QualifierList
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken ClassName
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken? SuperClass
     {
         get;
     }
 
+    [PublicAPI]
     public ReadOnlyCollection<IClassFeatureAst> ClassFeatures
     {
         get;

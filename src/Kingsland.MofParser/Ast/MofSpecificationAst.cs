@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using System.Collections.ObjectModel;
 
 namespace Kingsland.MofParser.Ast;
 
@@ -18,20 +19,24 @@ public sealed record MofSpecificationAst : AstNode
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public Builder()
         {
             this.Productions = [];
         }
 
+        [PublicAPI]
         public List<MofProductionAst> Productions
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public MofSpecificationAst Build()
         {
             return new(
@@ -50,7 +55,7 @@ public sealed record MofSpecificationAst : AstNode
     {
     }
 
-    public MofSpecificationAst(params MofProductionAst[] values)
+    internal MofSpecificationAst(params MofProductionAst[] values)
         : this((IEnumerable<MofProductionAst>)values)
     {
     }
@@ -67,6 +72,7 @@ public sealed record MofSpecificationAst : AstNode
 
     #region Properties
 
+    [PublicAPI]
     public ReadOnlyCollection<MofProductionAst> Productions
     {
         get;

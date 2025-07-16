@@ -90,4 +90,13 @@ public sealed record StringLiteralToken : SyntaxToken
 
     #endregion
 
+    #region Converters
+
+    public static implicit operator StringLiteralToken(string value)
+    {
+        return new StringLiteralToken(value);
+    }
+
+    #endregion
+
 }

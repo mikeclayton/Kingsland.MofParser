@@ -1,4 +1,5 @@
-﻿using Kingsland.ParseFx.Lexing;
+﻿using Kingsland.ParseFx.Attributes.StaticAnalysis;
+using Kingsland.ParseFx.Lexing;
 
 namespace Kingsland.ParseFx.Text;
 
@@ -17,11 +18,13 @@ public sealed class SourceReader
 
     #region Properties
 
+    [PublicAPI]
     public SourceStream Stream
     {
         get;
     }
 
+    [PublicAPI]
     public int Position
     {
         get;
@@ -31,6 +34,7 @@ public sealed class SourceReader
 
     #region Eof Methods
 
+    [PublicAPI]
     public bool Eof()
     {
         return this.Stream.Eof(this.Position);
@@ -44,6 +48,7 @@ public sealed class SourceReader
     /// Reads the current character off of the input stream, but does not advance the current position.
     /// </summary>
     /// <returns></returns>
+    [PublicAPI]
     public SourceChar Peek()
     {
         if (this.Eof())
@@ -57,6 +62,7 @@ public sealed class SourceReader
     /// Returns true if the current character on the input stream matches the specified value.
     /// </summary>
     /// <returns></returns>
+    [PublicAPI]
     public bool Peek(char value)
     {
         var peek = this.Peek();
@@ -67,6 +73,7 @@ public sealed class SourceReader
     /// Returns true if the current character on the input stream matches the specified predicate.
     /// </summary>
     /// <returns></returns>
+    [PublicAPI]
     public bool Peek(Func<char, bool> predicate)
     {
         var peek = this.Peek();
@@ -79,6 +86,7 @@ public sealed class SourceReader
 
     private SourceReader? _next;
 
+    [PublicAPI]
     public SourceReader Next()
     {
         this._next ??= this.Eof()
@@ -94,6 +102,7 @@ public sealed class SourceReader
     /// Reads the current character off of the input stream and advances the current position.
     /// </summary>
     /// <returns></returns>
+    [PublicAPI]
     public (SourceChar SourceChar, SourceReader NextReader) Read()
     {
         return (this.Peek(), this.Next());
@@ -104,6 +113,7 @@ public sealed class SourceReader
     /// Throws an exception if the character does not match the specified value.
     /// </summary>
     /// <returns></returns>
+    [PublicAPI]
     public (SourceChar SourceChar, SourceReader NextReader) Read(char value)
     {
         var peek = this.Peek();
@@ -119,6 +129,7 @@ public sealed class SourceReader
     /// Throws an exception if the character does not match the specified predicate.
     /// </summary>
     /// <returns></returns>
+    [PublicAPI]
     public (SourceChar SourceChar, SourceReader NextReader) Read(Func<char, bool> predicate)
     {
         var peek = this.Peek();
@@ -134,6 +145,7 @@ public sealed class SourceReader
     /// Throws an exception if the character does not match the specified predicate.
     /// </summary>
     /// <returns></returns>
+    [PublicAPI]
     public (List<SourceChar> SourceChars, SourceReader NextReader) ReadWhile(Func<char, bool> predicate)
     {
         var thisReader = this;
@@ -158,6 +170,7 @@ public sealed class SourceReader
     /// Throws an exception if the string does not match the specified value.
     /// </summary>
     /// <returns></returns>
+    [PublicAPI]
     public (List<SourceChar> SourceChars, SourceReader NextReader) ReadString(string value, bool ignoreCase = false)
     {
         var thisReader = this;
@@ -193,6 +206,7 @@ public sealed class SourceReader
 
     #region Factory Methods
 
+    [PublicAPI]
     public static SourceReader From(TextReader value)
     {
         return (value == null) ?
@@ -203,6 +217,7 @@ public sealed class SourceReader
             );
     }
 
+    [PublicAPI]
     public static SourceReader From(string value)
     {
         return (value == null) ?

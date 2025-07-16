@@ -1,4 +1,6 @@
-﻿namespace Kingsland.ParseFx.Text;
+﻿using Kingsland.ParseFx.Attributes.StaticAnalysis;
+
+namespace Kingsland.ParseFx.Text;
 
 /// <summary>
 /// Represents a character from a source stream together with the position,
@@ -19,11 +21,13 @@ public sealed class SourceChar
 
     #region Properties
 
+    [PublicAPI]
     public SourcePosition Position
     {
         get;
     }
 
+    [PublicAPI]
     public char Value
     {
         get;

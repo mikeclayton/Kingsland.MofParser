@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using System.Collections.ObjectModel;
 
 namespace Kingsland.MofParser.Ast;
 
@@ -19,20 +20,24 @@ public sealed record QualifierValueArrayInitializerAst : IQualifierInitializerAs
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public Builder()
         {
             this.Values = [];
         }
 
+        [PublicAPI]
         public List<LiteralValueAst> Values
         {
             get;
             private set;
         }
 
+        [PublicAPI]
         public QualifierValueArrayInitializerAst Build()
         {
             return new(
@@ -51,6 +56,11 @@ public sealed record QualifierValueArrayInitializerAst : IQualifierInitializerAs
     {
     }
 
+    internal QualifierValueArrayInitializerAst(params LiteralValueAst[] values)
+        : this((IEnumerable<LiteralValueAst>)values)
+    {
+    }
+
     internal QualifierValueArrayInitializerAst(
         IEnumerable<LiteralValueAst> values
     )
@@ -63,6 +73,7 @@ public sealed record QualifierValueArrayInitializerAst : IQualifierInitializerAs
 
     #region Properties
 
+    [PublicAPI]
     public ReadOnlyCollection<LiteralValueAst> Values
     {
         get;

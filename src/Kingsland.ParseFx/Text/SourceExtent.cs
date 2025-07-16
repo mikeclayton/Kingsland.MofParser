@@ -1,4 +1,6 @@
-﻿namespace Kingsland.ParseFx.Text;
+﻿using Kingsland.ParseFx.Attributes.StaticAnalysis;
+
+namespace Kingsland.ParseFx.Text;
 
 /// <summary>
 /// Denotes the start position, end position and text of a section of source code.
@@ -24,16 +26,19 @@ public sealed class SourceExtent
 
     #region Properties
 
+    [PublicAPI]
     public SourcePosition? StartPosition
     {
         get;
     }
 
+    [PublicAPI]
     public SourcePosition? EndPosition
     {
         get;
     }
 
+    [PublicAPI]
     public string? Text
     {
         get;
@@ -43,6 +48,7 @@ public sealed class SourceExtent
 
     #region Factory Methods
 
+    [PublicAPI]
     public static SourceExtent From(SourceChar @char)
     {
         return (@char is null )
@@ -54,6 +60,7 @@ public sealed class SourceExtent
             );
     }
 
+    [PublicAPI]
     public static SourceExtent? From(IList<SourceChar> chars)
     {
         var text = SourceExtent.ConvertToString(chars);
@@ -66,6 +73,7 @@ public sealed class SourceExtent
             : null;
     }
 
+    [PublicAPI]
     public static string ConvertToString(IList<SourceChar> chars) {
         return (chars is null)
             ? throw new ArgumentNullException(nameof(chars))

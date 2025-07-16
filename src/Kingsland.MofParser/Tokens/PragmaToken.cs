@@ -43,4 +43,13 @@ public sealed record PragmaToken : SyntaxToken
 
     #endregion
 
+    #region Converters
+
+    public static implicit operator PragmaToken(string text)
+    {
+        return new PragmaToken(text);
+    }
+
+    #endregion
+
 }

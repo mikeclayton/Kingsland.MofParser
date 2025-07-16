@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Tokens;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using Kingsland.MofParser.Tokens;
 
 namespace Kingsland.MofParser.Ast;
 
@@ -21,32 +22,38 @@ public sealed record EnumElementAst : AstNode
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public Builder()
         {
             this.QualifierList = new();
         }
 
+        [PublicAPI]
         public QualifierListAst QualifierList
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? EnumElementName
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IEnumElementValueAst? EnumElementValue
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public EnumElementAst Build()
         {
             return new(
@@ -65,12 +72,58 @@ public sealed record EnumElementAst : AstNode
     #region Constructors
 
     internal EnumElementAst(
-        QualifierListAst qualifierList,
+        IdentifierToken enumElementName,
+        string? enumElementValue
+    ) : this(
+        new QualifierListAst(),
+        enumElementName,
+        (enumElementValue is null) ? null : new StringValueAst(enumElementValue)
+    )
+    {
+    }
+
+    internal EnumElementAst(
+        IdentifierToken enumElementName,
+        long? enumElementValue
+    ) : this(
+        new QualifierListAst(),
+        enumElementName,
+        (enumElementValue is null) ? null : new IntegerValueAst(enumElementValue)
+    )
+    {
+    }
+
+    internal EnumElementAst(
+        QualifierValueAst[] qualifierList,
+        IdentifierToken enumElementName,
+        string? enumElementValue
+    ) : this(
+        new QualifierListAst(qualifierList),
+        enumElementName,
+        (enumElementValue is null) ? null : new StringValueAst(enumElementValue)
+    )
+    {
+    }
+
+    internal EnumElementAst(
+        QualifierValueAst[] qualifierList,
+        IdentifierToken enumElementName,
+        long? enumElementValue
+    ) : this(
+        new QualifierListAst(qualifierList),
+        enumElementName,
+        (enumElementValue is null) ? null : new IntegerValueAst(enumElementValue)
+    )
+    {
+    }
+
+    internal EnumElementAst(
+        QualifierListAst? qualifierList,
         IdentifierToken enumElementName,
         IEnumElementValueAst? enumElementValue
     )
     {
-        this.QualifierList = qualifierList ?? throw new ArgumentNullException(nameof(qualifierList));
+        this.QualifierList = qualifierList ?? new();
         this.EnumElementName = enumElementName ?? throw new ArgumentNullException(nameof(enumElementName));
         this.EnumElementValue = enumElementValue;
     }
@@ -79,16 +132,19 @@ public sealed record EnumElementAst : AstNode
 
     #region Properties
 
-    public QualifierListAst QualifierList
+    [PublicAPI]
+    public QualifierListAst? QualifierList
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken EnumElementName
     {
         get;
     }
 
+    [PublicAPI]
     public IEnumElementValueAst? EnumElementValue
     {
         get;
