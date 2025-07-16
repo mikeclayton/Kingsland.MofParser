@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using System.Collections.ObjectModel;
 
 namespace Kingsland.MofParser.Ast;
 
@@ -18,20 +19,24 @@ public sealed record ComplexValueArrayAst : ComplexTypeValueAst
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public Builder()
         {
             this.Values = [];
         }
 
+        [PublicAPI]
         public List<ComplexValueAst> Values
         {
             get;
             private set;
         }
 
+        [PublicAPI]
         public ComplexValueArrayAst Build()
         {
             return new(
@@ -62,6 +67,7 @@ public sealed record ComplexValueArrayAst : ComplexTypeValueAst
 
     #region Properties
 
+    [PublicAPI]
     public ReadOnlyCollection<ComplexValueAst> Values
     {
         get;

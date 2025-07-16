@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using System.Collections.ObjectModel;
 
 namespace Kingsland.MofParser.Ast;
 
@@ -18,20 +19,24 @@ public sealed record LiteralValueArrayAst : PrimitiveTypeValueAst
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public Builder()
         {
             this.Values = [];
         }
 
+        [PublicAPI]
         public List<LiteralValueAst> Values
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public LiteralValueArrayAst Build()
         {
             return new(
@@ -67,6 +72,7 @@ public sealed record LiteralValueArrayAst : PrimitiveTypeValueAst
 
     #region Properties
 
+    [PublicAPI]
     public ReadOnlyCollection<LiteralValueAst> Values
     {
         get;

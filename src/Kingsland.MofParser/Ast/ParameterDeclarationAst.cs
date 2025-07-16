@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Tokens;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using Kingsland.MofParser.Tokens;
 
 namespace Kingsland.MofParser.Ast;
 
@@ -43,50 +44,59 @@ public sealed record ParameterDeclarationAst : AstNode
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public Builder()
         {
             this.QualifierList = new();
         }
 
+        [PublicAPI]
         public QualifierListAst QualifierList
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? ParameterType
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? ParameterRef
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? ParameterName
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public bool ParameterIsArray
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public PropertyValueAst? DefaultValue
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public ParameterDeclarationAst Build()
         {
             return new(
@@ -187,34 +197,41 @@ public sealed record ParameterDeclarationAst : AstNode
 
     #region Properties
 
+    [PublicAPI]
     public QualifierListAst QualifierList
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken ParameterType
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken ParameterName
     {
         get;
     }
 
+    [PublicAPI]
     public bool ParameterIsRef =>
         this.ParameterRef is not null;
 
+    [PublicAPI]
     public IdentifierToken? ParameterRef
     {
         get;
     }
 
+    [PublicAPI]
     public bool ParameterIsArray
     {
         get;
     }
 
+    [PublicAPI]
     public PropertyValueAst? DefaultValue
     {
         get;

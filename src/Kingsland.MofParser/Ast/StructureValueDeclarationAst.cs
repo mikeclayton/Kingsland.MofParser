@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Tokens;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using Kingsland.MofParser.Tokens;
 
 namespace Kingsland.MofParser.Ast;
 
@@ -23,56 +24,66 @@ public sealed record StructureValueDeclarationAst : MofProductionAst
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public Builder()
         {
             this.PropertyValues = new();
         }
 
+        [PublicAPI]
         public IdentifierToken? Value
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? Of
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? TypeName
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? As
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public AliasIdentifierToken? Alias
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public PropertyValueListAst PropertyValues
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public StatementEndToken? StatementEnd
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public StructureValueDeclarationAst Build()
         {
             return new(
@@ -152,36 +163,43 @@ public sealed record StructureValueDeclarationAst : MofProductionAst
 
     #region Properties
 
+    [PublicAPI]
     public IdentifierToken Value
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken Of
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken TypeName
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken? As
     {
         get;
     }
 
+    [PublicAPI]
     public AliasIdentifierToken? Alias
     {
         get;
     }
 
+    [PublicAPI]
     public PropertyValueListAst PropertyValues
     {
         get;
     }
 
+    [PublicAPI]
     public StatementEndToken StatementEnd
     {
         get;

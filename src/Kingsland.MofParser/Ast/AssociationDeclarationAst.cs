@@ -28,9 +28,11 @@ public sealed record AssociationDeclarationAst : MofProductionAst
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public Builder()
         {
             this.QualifierList = new();

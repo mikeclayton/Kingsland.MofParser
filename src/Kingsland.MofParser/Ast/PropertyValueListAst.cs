@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using System.Collections.ObjectModel;
 
 namespace Kingsland.MofParser.Ast;
 
@@ -24,20 +25,24 @@ public sealed record PropertyValueListAst : AstNode
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public Builder()
         {
             this.PropertySlots = [];
         }
 
+        [PublicAPI]
         public List<PropertySlotAst> PropertySlots
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public PropertyValueListAst Build()
         {
             return new(
@@ -75,11 +80,13 @@ public sealed record PropertyValueListAst : AstNode
 
     #region Properties
 
+    [PublicAPI]
     public ReadOnlyCollection<PropertySlotAst> PropertySlots
     {
         get;
     }
 
+    [PublicAPI]
     public Dictionary<string, PropertyValueAst> PropertyValues
     {
         get;

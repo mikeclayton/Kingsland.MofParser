@@ -1,3 +1,4 @@
+using Kingsland.MofParser.Attributes.StaticAnalysis;
 using Kingsland.MofParser.Tokens;
 using System.Collections.ObjectModel;
 
@@ -39,39 +40,46 @@ public sealed record EnumerationDeclarationAst : MofProductionAst, IStructureFea
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public Builder()
         {
             this.QualifierList = new();
             this.EnumElements = [];
         }
 
+        [PublicAPI]
         public QualifierListAst QualifierList
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? EnumName
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? EnumType
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public List<EnumElementAst> EnumElements
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public EnumerationDeclarationAst Build()
         {
             return new(
@@ -131,21 +139,25 @@ public sealed record EnumerationDeclarationAst : MofProductionAst, IStructureFea
 
     #region Properties
 
+    [PublicAPI]
     public QualifierListAst QualifierList
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken EnumName
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken EnumType
     {
         get;
     }
 
+    [PublicAPI]
     public ReadOnlyCollection<EnumElementAst> EnumElements
     {
         get;

@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.CodeGen;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using Kingsland.MofParser.CodeGen;
 
 namespace Kingsland.MofParser.Ast;
 
@@ -7,6 +8,7 @@ public abstract record AstNode : ParseFx.Parsing.AstNode
 
     #region Object Overrides
 
+    [PublicAPI]
     public sealed override string ToString()
     {
         var buffer = new StringWriter();
@@ -19,6 +21,7 @@ public abstract record AstNode : ParseFx.Parsing.AstNode
 
     }
 
+    [PublicAPI]
     public string ToString(AstWriterOptions options)
     {
         var buffer = new StringWriter();

@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Tokens;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using Kingsland.MofParser.Tokens;
 using System.Collections.ObjectModel;
 
 namespace Kingsland.MofParser.Ast;
@@ -32,57 +33,67 @@ public sealed record QualifierTypeDeclarationAst : MofProductionAst
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public Builder()
         {
             this.QualifierList = new();
             this.Flavors = [];
         }
 
+        [PublicAPI]
         public QualifierListAst QualifierList
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? QualifierKeyword
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? QualifierName
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? QualifierType
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? QualifierScope
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? QualifierPolicy
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public List<string> Flavors
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public QualifierTypeDeclarationAst Build()
         {
             return new(
@@ -136,36 +147,43 @@ public sealed record QualifierTypeDeclarationAst : MofProductionAst
 
     #region Properties
 
+    [PublicAPI]
     public QualifierListAst QualifierList
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken QualifierKeyword
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken QualifierName
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken QualifierType
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken QualifierScope
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken QualifierPolicy
     {
         get;
     }
 
+    [PublicAPI]
     public ReadOnlyCollection<string> Flavors
     {
         get;

@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Tokens;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using Kingsland.MofParser.Tokens;
 
 namespace Kingsland.MofParser.Ast;
 
@@ -34,27 +35,32 @@ public sealed record CompilerDirectiveAst : MofProductionAst
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public PragmaToken? PragmaKeyword
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? PragmaName
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public StringValueAst? PragmaParameter
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public CompilerDirectiveAst Build()
         {
             return new(
@@ -107,16 +113,19 @@ public sealed record CompilerDirectiveAst : MofProductionAst
 
     #region Properties
 
+    [PublicAPI]
     public PragmaToken PragmaKeyword
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken PragmaName
     {
         get;
     }
 
+    [PublicAPI]
     public StringValueAst PragmaParameter
     {
         get;

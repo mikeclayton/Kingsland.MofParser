@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Tokens;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using Kingsland.MofParser.Tokens;
 using System.Collections.ObjectModel;
 
 namespace Kingsland.MofParser.Ast;
@@ -21,26 +22,31 @@ public sealed record StringValueAst : LiteralValueAst, IEnumElementValueAst
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public Builder()
         {
             this.StringLiteralValues = [];
         }
 
+        [PublicAPI]
         public List<StringLiteralToken> StringLiteralValues
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public string? Value
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public StringValueAst Build()
         {
             return new(
@@ -113,11 +119,13 @@ public sealed record StringValueAst : LiteralValueAst, IEnumElementValueAst
 
     #region Properties
 
+    [PublicAPI]
     public ReadOnlyCollection<StringLiteralToken> StringLiteralValues
     {
         get;
     }
 
+    [PublicAPI]
     public string Value
     {
         get;

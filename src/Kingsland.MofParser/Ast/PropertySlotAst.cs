@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Tokens;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using Kingsland.MofParser.Tokens;
 
 namespace Kingsland.MofParser.Ast;
 
@@ -22,21 +23,25 @@ public sealed record PropertySlotAst : AstNode
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public IdentifierToken? PropertyName
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public PropertyValueAst? PropertyValue
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public PropertySlotAst Build()
         {
             return new(
@@ -111,11 +116,13 @@ public sealed record PropertySlotAst : AstNode
 
     #region Properties
 
+    [PublicAPI]
     public IdentifierToken PropertyName
     {
         get;
     }
 
+    [PublicAPI]
     public PropertyValueAst PropertyValue
     {
         get;

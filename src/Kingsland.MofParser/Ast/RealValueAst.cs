@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Tokens;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using Kingsland.MofParser.Tokens;
 
 namespace Kingsland.MofParser.Ast;
 
@@ -23,15 +24,18 @@ public sealed record RealValueAst : LiteralValueAst
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public RealLiteralToken? RealLiteralToken
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public RealValueAst Build()
         {
             return new(

@@ -1,3 +1,4 @@
+using Kingsland.MofParser.Attributes.StaticAnalysis;
 using Kingsland.MofParser.Tokens;
 using System.Collections.ObjectModel;
 
@@ -31,51 +32,60 @@ public sealed record StructureDeclarationAst : MofProductionAst, IStructureFeatu
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public Builder()
         {
             this.QualifierList = new();
             this.StructureFeatures = [];
         }
 
+        [PublicAPI]
         public QualifierListAst QualifierList
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? Structure
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? StructureName
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? SuperStructure
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public List<IStructureFeatureAst> StructureFeatures
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public StatementEndToken? StatementEnd
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public StructureDeclarationAst Build()
         {
             return new(
@@ -153,31 +163,37 @@ public sealed record StructureDeclarationAst : MofProductionAst, IStructureFeatu
 
     #region Properties
 
+    [PublicAPI]
     public QualifierListAst QualifierList
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken Structure
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken StructureName
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken? SuperStructure
     {
         get;
     }
 
+    [PublicAPI]
     public ReadOnlyCollection<IStructureFeatureAst> StructureFeatures
     {
         get;
     }
 
+    [PublicAPI]
     public StatementEndToken StatementEnd
     {
         get;

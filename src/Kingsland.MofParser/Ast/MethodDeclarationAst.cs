@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Tokens;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using Kingsland.MofParser.Tokens;
 using System.Collections.ObjectModel;
 
 namespace Kingsland.MofParser.Ast;
@@ -36,51 +37,60 @@ public sealed record MethodDeclarationAst : AstNode, IClassFeatureAst
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public Builder()
         {
             this.QualifierList = new();
             this.Parameters = [];
         }
 
+        [PublicAPI]
         public QualifierListAst QualifierList
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? ReturnType
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? ReturnTypeRef
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public bool ReturnTypeIsArray
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? MethodName
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public List<ParameterDeclarationAst> Parameters
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public MethodDeclarationAst Build()
         {
             return new(
@@ -156,34 +166,41 @@ public sealed record MethodDeclarationAst : AstNode, IClassFeatureAst
 
     #region Properties
 
+    [PublicAPI]
     public QualifierListAst QualifierList
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken ReturnType
     {
         get;
     }
 
+    [PublicAPI]
     public bool ReturnTypeIsRef =>
         this.ReturnTypeRef is not null;
 
+    [PublicAPI]
     public IdentifierToken? ReturnTypeRef
     {
         get;
     }
 
+    [PublicAPI]
     public bool ReturnTypeIsArray
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken Name
     {
         get;
     }
 
+    [PublicAPI]
     public ReadOnlyCollection<ParameterDeclarationAst> Parameters
     {
         get;

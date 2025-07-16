@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Tokens;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using Kingsland.MofParser.Tokens;
 
 namespace Kingsland.MofParser.Ast;
 
@@ -41,50 +42,59 @@ public sealed record PropertyDeclarationAst : AstNode, IStructureFeatureAst
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public Builder()
         {
             this.QualifierList = new();
         }
 
+        [PublicAPI]
         public QualifierListAst QualifierList
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? ReturnType
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? ReturnTypeRef
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken?PropertyName
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public bool ReturnTypeIsArray
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public PropertyValueAst? Initializer
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public PropertyDeclarationAst Build()
         {
             return new(
@@ -187,34 +197,41 @@ public sealed record PropertyDeclarationAst : AstNode, IStructureFeatureAst
 
     #region Properties
 
+    [PublicAPI]
     public QualifierListAst QualifierList
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken ReturnType
     {
         get;
     }
 
+    [PublicAPI]
     public bool ReturnTypeIsRef =>
         this.ReturnTypeRef is not null;
 
+    [PublicAPI]
     public IdentifierToken? ReturnTypeRef
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken PropertyName
     {
         get;
     }
 
+    [PublicAPI]
     public bool ReturnTypeIsArray
     {
         get;
     }
 
+    [PublicAPI]
     public PropertyValueAst? Initializer
     {
         get;

@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Tokens;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using Kingsland.MofParser.Tokens;
 using System.Collections.ObjectModel;
 
 namespace Kingsland.MofParser.Ast;
@@ -24,32 +25,38 @@ public sealed record QualifierValueAst : AstNode
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public Builder()
         {
             this.Flavors = [];
         }
 
+        [PublicAPI]
         public IdentifierToken? QualifierName
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IQualifierInitializerAst? Initializer
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public List<IdentifierToken> Flavors
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public QualifierValueAst Build()
         {
             return new(
@@ -130,11 +137,13 @@ public sealed record QualifierValueAst : AstNode
 
     #region Properties
 
+    [PublicAPI]
     public IdentifierToken QualifierName
     {
         get;
     }
 
+    [PublicAPI]
     public IQualifierInitializerAst? Initializer
     {
         get;
@@ -152,6 +161,7 @@ public sealed record QualifierValueAst : AstNode
     /// These aren't part of the MOF 3.0.1 spec, but we'll include them anyway for backward compatibility.
     ///
     /// </remarks>
+    [PublicAPI]
     public ReadOnlyCollection<IdentifierToken> Flavors
     {
         get;

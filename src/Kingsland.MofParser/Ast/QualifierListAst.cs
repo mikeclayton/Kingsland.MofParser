@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using System.Collections.ObjectModel;
 
 namespace Kingsland.MofParser.Ast;
 
@@ -18,20 +19,24 @@ public sealed record QualifierListAst : AstNode
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public Builder()
         {
             this.QualifierValues = [];
         }
 
+        [PublicAPI]
         public List<QualifierValueAst> QualifierValues
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public QualifierListAst Build()
         {
             return new(
@@ -67,6 +72,7 @@ public sealed record QualifierListAst : AstNode
 
     #region Properties
 
+    [PublicAPI]
     public ReadOnlyCollection<QualifierValueAst> QualifierValues
     {
         get;

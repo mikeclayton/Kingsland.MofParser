@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Tokens;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using Kingsland.MofParser.Tokens;
 
 namespace Kingsland.MofParser.Ast;
 
@@ -21,32 +22,38 @@ public sealed record EnumElementAst : AstNode
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public Builder()
         {
             this.QualifierList = new();
         }
 
+        [PublicAPI]
         public QualifierListAst QualifierList
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IdentifierToken? EnumElementName
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IEnumElementValueAst? EnumElementValue
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public EnumElementAst Build()
         {
             return new(
@@ -125,16 +132,19 @@ public sealed record EnumElementAst : AstNode
 
     #region Properties
 
+    [PublicAPI]
     public QualifierListAst? QualifierList
     {
         get;
     }
 
+    [PublicAPI]
     public IdentifierToken EnumElementName
     {
         get;
     }
 
+    [PublicAPI]
     public IEnumElementValueAst? EnumElementValue
     {
         get;

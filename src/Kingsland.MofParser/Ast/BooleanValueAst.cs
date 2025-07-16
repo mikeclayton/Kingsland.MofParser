@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Tokens;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using Kingsland.MofParser.Tokens;
 
 namespace Kingsland.MofParser.Ast;
 
@@ -24,15 +25,18 @@ public sealed record BooleanValueAst : LiteralValueAst
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public BooleanLiteralToken? Token
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public BooleanValueAst Build()
         {
             return new(
@@ -63,11 +67,13 @@ public sealed record BooleanValueAst : LiteralValueAst
 
     #region Properties
 
+    [PublicAPI]
     public BooleanLiteralToken Token
     {
         get;
     }
 
+    [PublicAPI]
     public bool Value =>
         this.Token.Value;
 

@@ -1,4 +1,5 @@
-﻿using Kingsland.MofParser.Tokens;
+﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
+using Kingsland.MofParser.Tokens;
 
 namespace Kingsland.MofParser.Ast;
 
@@ -18,15 +19,18 @@ public sealed record IntegerValueAst : LiteralValueAst, IEnumElementValueAst
 
     #region Builder
 
+    [PublicAPI]
     public sealed class Builder
     {
 
+        [PublicAPI]
         public IntegerLiteralToken? IntegerLiteralToken
         {
             get;
             set;
         }
 
+        [PublicAPI]
         public IntegerValueAst Build()
         {
             return new(
@@ -62,16 +66,19 @@ public sealed record IntegerValueAst : LiteralValueAst, IEnumElementValueAst
 
     #region Properties
 
+    [PublicAPI]
     public IntegerLiteralToken IntegerLiteralToken
     {
         get;
     }
 
+    [PublicAPI]
     public IntegerKind Kind
     {
         get;
     }
 
+    [PublicAPI]
     public long Value
     {
         get;
