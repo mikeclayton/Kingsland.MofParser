@@ -23,7 +23,7 @@ internal static partial class ParserEngine
     ///     mofSpecification = *mofProduction
     ///
     /// </remarks>
-    private static MofSpecificationAst ParseMofSpecificationAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
+    internal static MofSpecificationAst ParseMofSpecificationAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
     {
         var node = new MofSpecificationAst.Builder();
         while (!stream.Eof)
