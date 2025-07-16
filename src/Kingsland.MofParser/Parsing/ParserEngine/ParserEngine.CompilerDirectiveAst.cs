@@ -40,7 +40,7 @@ internal static partial class ParserEngine
     ///     directiveName      = org-id "_" IDENTIFIER
     ///
     /// </remarks>
-    internal static CompilerDirectiveAst ParseCompilerDirectiveAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
+    private static CompilerDirectiveAst ParseCompilerDirectiveAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
     {
 
         var node = new CompilerDirectiveAst.Builder();

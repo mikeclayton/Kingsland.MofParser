@@ -24,7 +24,7 @@ internal static partial class ParserEngine
     ///     complexValueArray = "{" [ complexValue *( "," complexValue) ] "}"
     ///
     /// </remarks>
-    internal static ComplexValueArrayAst ParseComplexValueArrayAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
+    private static ComplexValueArrayAst ParseComplexValueArrayAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
     {
 
         // complexValueArray =

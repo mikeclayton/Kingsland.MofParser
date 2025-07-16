@@ -37,7 +37,7 @@ internal static partial class ParserEngine
     ///     STRUCTURE            = "structure" ; keyword: case insensitive
     ///
     /// </remarks>
-    internal static StructureDeclarationAst ParseStructureDeclarationAst(TokenStream stream, QualifierListAst qualifierList, ParserQuirks quirks = ParserQuirks.None)
+    private static StructureDeclarationAst ParseStructureDeclarationAst(TokenStream stream, QualifierListAst qualifierList, ParserQuirks quirks = ParserQuirks.None)
     {
 
         var node = new StructureDeclarationAst.Builder();

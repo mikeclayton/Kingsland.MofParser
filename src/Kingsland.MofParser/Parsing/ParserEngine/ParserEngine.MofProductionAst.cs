@@ -76,7 +76,7 @@ internal static partial class ParserEngine
     ///                                 [ qualifierPolicy ] ";"
     ///
     /// </remarks>
-    internal static MofProductionAst ParseMofProductionAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
+    private static MofProductionAst ParseMofProductionAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
     {
 
         var peek = stream.Peek();

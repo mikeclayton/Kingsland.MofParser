@@ -55,7 +55,7 @@ internal static partial class ParserEngine
     ///                                    [ "=" referenceTypeValue ]
     ///
     /// </remarks>
-    internal static IStructureFeatureAst ParseStructureFeatureAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
+    private static IStructureFeatureAst ParseStructureFeatureAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
     {
 
         // all structureFeatures start with an optional "[ qualifierList ]"

@@ -29,7 +29,7 @@ internal static partial class ParserEngine
     ///     qualifierName  = elementName
     ///
     /// </remarks>
-    internal static QualifierValueAst ParseQualifierValueAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
+    private static QualifierValueAst ParseQualifierValueAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
     {
 
         var node = new QualifierValueAst.Builder();

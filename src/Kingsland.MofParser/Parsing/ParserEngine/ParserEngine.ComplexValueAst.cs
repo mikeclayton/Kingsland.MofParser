@@ -27,7 +27,7 @@ internal static partial class ParserEngine
     ///                      propertyValueList )
     ///
     /// </remarks>
-    internal static ComplexValueAst ParseComplexValueAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
+    private static ComplexValueAst ParseComplexValueAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
     {
 
         var node = new ComplexValueAst.Builder();

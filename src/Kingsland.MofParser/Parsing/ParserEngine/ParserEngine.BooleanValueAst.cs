@@ -27,7 +27,7 @@ internal static partial class ParserEngine
     ///     TRUE         = "true"  ; keyword: case insensitive
     ///
     /// </remarks>
-    internal static BooleanValueAst ParseBooleanValueAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
+    private static BooleanValueAst ParseBooleanValueAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
     {
         return new(
             stream.Read<BooleanLiteralToken>()

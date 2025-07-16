@@ -47,7 +47,7 @@ internal static partial class ParserEngine
     ///     enumLiteral    = IDENTIFIER
     ///
     /// </remarks>
-    internal static PropertyValueAst ParsePropertyValueAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
+    private static PropertyValueAst ParsePropertyValueAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
     {
 
         bool IsPrimitiveValueToken(SyntaxToken token)

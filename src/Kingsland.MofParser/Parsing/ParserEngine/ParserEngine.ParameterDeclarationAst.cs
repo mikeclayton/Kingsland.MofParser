@@ -49,7 +49,7 @@ internal static partial class ParserEngine
     ///     DT_REFERENCE              = className REF
     ///
     /// </remarks>
-    internal static ParameterDeclarationAst ParseParameterDeclarationAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
+    private static ParameterDeclarationAst ParseParameterDeclarationAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
     {
 
         // [ qualifierList ]
