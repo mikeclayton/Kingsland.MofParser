@@ -45,7 +45,7 @@ internal static partial class ParserEngine
     ///     nextSchemaChar      = firstSchemaChar / decimalDigit
     ///
     /// </remarks>
-    public static EnumValueAst ParseEnumValueAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
+    internal static EnumValueAst ParseEnumValueAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
     {
 
         var node = new EnumValueAst.Builder();

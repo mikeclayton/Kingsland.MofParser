@@ -40,7 +40,7 @@ internal static partial class ParserEngine
     ///     enumTypeHeader         = [qualifierList] ENUMERATION
     ///
     /// </remarks>
-    public static IClassFeatureAst ParseClassFeatureAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
+    internal static IClassFeatureAst ParseClassFeatureAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
     {
 
         // all classFeatures start with an optional "[ qualifierList ]"

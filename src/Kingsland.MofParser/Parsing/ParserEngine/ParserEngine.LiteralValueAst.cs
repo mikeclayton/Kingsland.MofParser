@@ -30,7 +30,7 @@ internal static partial class ParserEngine
     ///                      ; dateTimeValue
     ///
     /// </remarks>
-    public static LiteralValueAst ParseLiteralValueAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
+    internal static LiteralValueAst ParseLiteralValueAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
     {
         var peek = stream.Peek();
         return peek switch

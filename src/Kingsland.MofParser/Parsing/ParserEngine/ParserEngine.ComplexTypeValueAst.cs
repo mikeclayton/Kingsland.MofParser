@@ -24,7 +24,7 @@ internal static partial class ParserEngine
     ///     complexTypeValue = complexValue / complexValueArray
     ///
     /// </remarks>
-    public static ComplexTypeValueAst ParseComplexTypeValueAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
+    internal static ComplexTypeValueAst ParseComplexTypeValueAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
     {
         if (!stream.TryPeek<BlockOpenToken>())
         {

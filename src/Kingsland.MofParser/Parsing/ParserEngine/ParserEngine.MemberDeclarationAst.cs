@@ -67,7 +67,7 @@ internal static partial class ParserEngine
     ///     parameterList     = parameterDeclaration *( "," parameterDeclaration )
     ///
     /// </remarks>
-    public static IClassFeatureAst ParseMemberDeclarationAst(
+    internal static IClassFeatureAst ParseMemberDeclarationAst(
         TokenStream stream, QualifierListAst qualifierList,
         bool allowPropertyDeclaration, bool allowMethodDeclaration,
         ParserQuirks quirks

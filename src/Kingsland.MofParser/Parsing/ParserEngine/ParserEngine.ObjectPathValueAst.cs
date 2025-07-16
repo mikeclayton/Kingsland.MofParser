@@ -36,7 +36,7 @@ internal static partial class ParserEngine
     ///     keyValue         = propertyName "=" literalValue
     ///
     /// </remarks>
-    public static PrimitiveTypeValueAst ParseObjectPathValueAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
+    internal static PrimitiveTypeValueAst ParseObjectPathValueAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
     {
         throw new NotImplementedException();
     }

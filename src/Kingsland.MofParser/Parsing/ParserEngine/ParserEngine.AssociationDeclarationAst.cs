@@ -33,7 +33,7 @@ internal static partial class ParserEngine
     ///     ASSOCIATION            = "association" ; keyword: case insensitive
     ///
     /// </remarks>
-    public static AssociationDeclarationAst ParseAssociationDeclarationAst(TokenStream stream, QualifierListAst qualifierList, ParserQuirks quirks = ParserQuirks.None)
+    internal static AssociationDeclarationAst ParseAssociationDeclarationAst(TokenStream stream, QualifierListAst qualifierList, ParserQuirks quirks = ParserQuirks.None)
     {
 
         var node = new AssociationDeclarationAst.Builder();

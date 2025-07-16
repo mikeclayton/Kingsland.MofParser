@@ -37,7 +37,7 @@ internal static partial class ParserEngine
     ///    array             = "[" "]"
     ///
     /// </remarks>
-    public static PropertyDeclarationAst ParseMethodDeclarationAst(TokenStream stream, QualifierListAst qualifierList, ParserQuirks quirks = ParserQuirks.None)
+    internal static PropertyDeclarationAst ParseMethodDeclarationAst(TokenStream stream, QualifierListAst qualifierList, ParserQuirks quirks = ParserQuirks.None)
     {
         return (PropertyDeclarationAst)ParserEngine.ParseMemberDeclarationAst(
             stream, qualifierList, false, true, quirks

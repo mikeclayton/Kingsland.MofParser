@@ -24,7 +24,7 @@ internal static partial class ParserEngine
     ///     primitiveTypeValue = literalValue / literalValueArray
     ///
     /// </remarks>
-    public static PrimitiveTypeValueAst ParsePrimitiveTypeValueAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
+    internal static PrimitiveTypeValueAst ParsePrimitiveTypeValueAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
     {
         if (!stream.TryPeek<BlockOpenToken>())
         {
