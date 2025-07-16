@@ -24,7 +24,7 @@ internal static partial class ParserEngine
     ///     enumValueArray = "{" [ enumName *( "," enumName ) ] "}"
     ///
     /// </remarks>
-    public static EnumValueArrayAst ParseEnumValueArrayAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
+    internal static EnumValueArrayAst ParseEnumValueArrayAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
     {
 
         var node = new EnumValueArrayAst.Builder();

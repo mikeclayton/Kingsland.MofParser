@@ -27,7 +27,7 @@ internal static partial class ParserEngine
     ///                                    referencePropertyDeclaration) ";"
     ///
     /// </remarks>
-    public static PropertyDeclarationAst ParsePropertyDeclarationAst(TokenStream stream, QualifierListAst qualifierList, ParserQuirks quirks = ParserQuirks.None)
+    internal static PropertyDeclarationAst ParsePropertyDeclarationAst(TokenStream stream, QualifierListAst qualifierList, ParserQuirks quirks = ParserQuirks.None)
     {
         return (PropertyDeclarationAst)ParserEngine.ParseMemberDeclarationAst(
             stream, qualifierList, true, false, quirks

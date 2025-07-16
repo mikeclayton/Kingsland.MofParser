@@ -24,7 +24,7 @@ internal static partial class ParserEngine
     ///     qualifierList = "[" qualifierValue *( "," qualifierValue ) "]"
     ///
     /// </remarks>
-    public static QualifierListAst ParseQualifierListAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
+    internal static QualifierListAst ParseQualifierListAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
     {
 
         var node = new QualifierListAst.Builder();

@@ -28,7 +28,7 @@ internal static partial class ParserEngine
     ///     alias                    = AS aliasIdentifier
     ///
     /// </remarks>
-    public static InstanceValueDeclarationAst ParseInstanceValueDeclarationAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
+    internal static InstanceValueDeclarationAst ParseInstanceValueDeclarationAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
     {
 
         var node = new InstanceValueDeclarationAst.Builder();

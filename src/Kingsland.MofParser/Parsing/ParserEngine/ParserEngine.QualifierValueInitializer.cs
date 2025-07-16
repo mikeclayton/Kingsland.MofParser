@@ -24,7 +24,7 @@ internal static partial class ParserEngine
     ///     qualifierValueInitializer = "(" literalValue ")"
     ///
     /// </remarks>
-    public static QualifierValueInitializerAst ParseQualifierValueInitializer(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
+    internal static QualifierValueInitializerAst ParseQualifierValueInitializer(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
     {
         var node = new QualifierValueInitializerAst.Builder();
         // "("

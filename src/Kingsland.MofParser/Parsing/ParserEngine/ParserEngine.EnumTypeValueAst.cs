@@ -24,7 +24,7 @@ internal static partial class ParserEngine
     ///     enumTypeValue = enumValue / enumValueArray
     ///
     /// </remarks>
-    public static EnumTypeValueAst ParseEnumTypeValueAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
+    internal static EnumTypeValueAst ParseEnumTypeValueAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
     {
         if (!stream.TryPeek<BlockOpenToken>())
         {

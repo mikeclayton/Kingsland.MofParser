@@ -25,7 +25,7 @@ internal static partial class ParserEngine
     ///     integerValue = binaryValue / octalValue / hexValue / decimalValue
     ///
     /// </remarks>
-    public static IntegerValueAst ParseIntegerValueAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
+    internal static IntegerValueAst ParseIntegerValueAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
     {
         var node = new IntegerValueAst.Builder();
         node.IntegerLiteralToken = stream.Read<IntegerLiteralToken>();

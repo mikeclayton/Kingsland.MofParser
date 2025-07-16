@@ -27,7 +27,7 @@ internal static partial class ParserEngine
     ///                        ; second
     ///
     /// </remarks>
-    public static NullValueAst ParseNullValueAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
+    internal static NullValueAst ParseNullValueAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
     {
         return new NullValueAst.Builder
         {
