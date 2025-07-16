@@ -28,7 +28,7 @@ internal static partial class ParserEngine
     ///     positiveDecimalDigit = "1"..."9"
     ///
     /// </remarks>
-    internal static RealValueAst ParseRealValueAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
+    private static RealValueAst ParseRealValueAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
     {
         var node = new RealValueAst.Builder();
         node.RealLiteralToken = stream.Read<RealLiteralToken>();

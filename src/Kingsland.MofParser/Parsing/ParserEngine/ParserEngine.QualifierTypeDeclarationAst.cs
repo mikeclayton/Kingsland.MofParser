@@ -38,7 +38,7 @@ internal static partial class ParserEngine
     ///     qualifierScope           = SCOPE "(" ANY / scopeKindList ")"
     ///
     /// </returns>
-    internal static QualifierTypeDeclarationAst ParseQualifierTypeDeclarationAst(TokenStream stream, QualifierListAst qualifierList, ParserQuirks quirks = ParserQuirks.None)
+    private static QualifierTypeDeclarationAst ParseQualifierTypeDeclarationAst(TokenStream stream, QualifierListAst qualifierList, ParserQuirks quirks = ParserQuirks.None)
     {
 
         var node = new QualifierTypeDeclarationAst.Builder();

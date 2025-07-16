@@ -35,7 +35,7 @@ internal static partial class ParserEngine
     ///     CLASS            = "class" ; keyword: case insensitive
     ///
     /// </remarks>
-    internal static ClassDeclarationAst ParseClassDeclarationAst(TokenStream stream, QualifierListAst qualifierList, ParserQuirks quirks = ParserQuirks.None)
+    private static ClassDeclarationAst ParseClassDeclarationAst(TokenStream stream, QualifierListAst qualifierList, ParserQuirks quirks = ParserQuirks.None)
     {
 
         var node = new ClassDeclarationAst.Builder();

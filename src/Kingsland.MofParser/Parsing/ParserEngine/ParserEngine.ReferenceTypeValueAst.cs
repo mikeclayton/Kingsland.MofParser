@@ -23,7 +23,7 @@ internal static partial class ParserEngine
     ///     referenceTypeValue = objectPathValue / objectPathValueArray
     ///
     /// </remarks>
-    internal static PrimitiveTypeValueAst ParseReferenceTypeValueAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
+    private static PrimitiveTypeValueAst ParseReferenceTypeValueAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
     {
         if (stream.TryPeek<BlockOpenToken>())
         {

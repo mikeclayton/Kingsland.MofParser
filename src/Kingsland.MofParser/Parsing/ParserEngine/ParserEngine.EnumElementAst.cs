@@ -29,7 +29,7 @@ internal static partial class ParserEngine
     ///     enumLiteral        = IDENTIFIER
     ///
     /// </remarks>
-    internal static EnumElementAst ParseEnumElementAst(TokenStream stream, bool isIntegerEnum, bool isStringEnum, ParserQuirks quirks = ParserQuirks.None)
+    private static EnumElementAst ParseEnumElementAst(TokenStream stream, bool isIntegerEnum, bool isStringEnum, ParserQuirks quirks = ParserQuirks.None)
     {
 
         var node = new EnumElementAst.Builder();

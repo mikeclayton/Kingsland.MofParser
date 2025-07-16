@@ -22,7 +22,7 @@ internal static partial class ParserEngine
     ///     literalValueArray = "{" [ literalValue *( "," literalValue ) ] "}"
     ///
     /// </remarks>
-    internal static LiteralValueArrayAst ParseLiteralValueArrayAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
+    private static LiteralValueArrayAst ParseLiteralValueArrayAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
     {
         var node = new LiteralValueArrayAst.Builder();
         // "{"

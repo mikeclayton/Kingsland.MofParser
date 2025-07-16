@@ -22,7 +22,7 @@ internal static partial class ParserEngine
     ///     objectPathValueArray = "{" [ objectPathValue *( "," objectPathValue ) ]
     ///
     /// </remarks>
-    internal static PrimitiveTypeValueAst ParseObjectPathValueArrayAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
+    private static PrimitiveTypeValueAst ParseObjectPathValueArrayAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
     {
         throw new NotImplementedException();
     }

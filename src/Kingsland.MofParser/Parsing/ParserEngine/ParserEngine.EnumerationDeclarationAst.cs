@@ -40,7 +40,7 @@ internal static partial class ParserEngine
     ///     ENUMERATION            = "enumeration" ; keyword: case insensitive
     ///
     /// </remarks>
-    internal static EnumerationDeclarationAst ParseEnumerationDeclarationAst(TokenStream stream, QualifierListAst qualifierList, ParserQuirks quirks = ParserQuirks.None)
+    private static EnumerationDeclarationAst ParseEnumerationDeclarationAst(TokenStream stream, QualifierListAst qualifierList, ParserQuirks quirks = ParserQuirks.None)
     {
 
         var node = new EnumerationDeclarationAst.Builder();

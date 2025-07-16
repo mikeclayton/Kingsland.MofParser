@@ -26,7 +26,7 @@ internal static partial class ParserEngine
     ///     stringValue       = singleStringValue *( *WS singleStringValue )
     ///
     /// </remarks>
-    internal static StringValueAst ParseStringValueAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
+    private static StringValueAst ParseStringValueAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
     {
 
         var node = new StringValueAst.Builder();

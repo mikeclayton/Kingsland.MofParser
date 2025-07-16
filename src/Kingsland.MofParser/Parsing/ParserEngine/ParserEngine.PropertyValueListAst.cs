@@ -24,7 +24,7 @@ internal static partial class ParserEngine
     ///     propertyValueList = "{" *propertySlot "}"
     ///
     /// </remarks>
-    internal static PropertyValueListAst ParsePropertyValueListAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
+    private static PropertyValueListAst ParsePropertyValueListAst(TokenStream stream, ParserQuirks quirks = ParserQuirks.None)
     {
 
         var node = new PropertyValueListAst.Builder();
