@@ -9,131 +9,131 @@ internal static partial class ModelConverter
 
     #region 7.3 Compiler directives
 
-    internal static void ConvertCompilerDirectiveAst(CompilerDirectiveAst node)
-    {
-        throw new NotImplementedException();
-    }
+    //internal static void ConvertCompilerDirectiveAst(CompilerDirectiveAst node)
+    //{
+    //    throw new NotImplementedException();
+    //}
 
     #endregion
 
     #region 7.4 Qualifiers
 
-    internal static void ConvertQualifierTypeDeclarationAst(QualifierTypeDeclarationAst node)
-    {
-        throw new NotImplementedException();
-    }
+    //internal static void ConvertQualifierTypeDeclarationAst(QualifierTypeDeclarationAst node)
+    //{
+    //    throw new NotImplementedException();
+    //}
 
     #endregion
 
     #region 7.4.1 QualifierList
 
-    internal static void ConvertQualifierListAst(QualifierListAst node)
-    {
-        throw new NotImplementedException();
-    }
+    //internal static void ConvertQualifierListAst(QualifierListAst node)
+    //{
+    //    throw new NotImplementedException();
+    //}
 
-    internal static void ConvertQualifierValueAst(QualifierValueAst node)
-    {
-        throw new NotImplementedException();
-    }
+    //internal static void ConvertQualifierValueAst(QualifierValueAst node)
+    //{
+    //    throw new NotImplementedException();
+    //}
 
-    internal static void ConvertIQualifierInitializerAst(IQualifierInitializerAst node)
-    {
-        throw new NotImplementedException();
-    }
+    //internal static void ConvertIQualifierInitializerAst(IQualifierInitializerAst node)
+    //{
+    //    throw new NotImplementedException();
+    //}
 
-    internal static void ConvertQualifierValueInitializerAst(QualifierValueInitializerAst node)
-    {
-        throw new NotImplementedException();
-    }
+    //internal static void ConvertQualifierValueInitializerAst(QualifierValueInitializerAst node)
+    //{
+    //    throw new NotImplementedException();
+    //}
 
-    internal static void ConvertQualifierValueArrayInitializerAst(QualifierValueArrayInitializerAst node)
-    {
-        throw new NotImplementedException();
-    }
+    //internal static void ConvertQualifierValueArrayInitializerAst(QualifierValueArrayInitializerAst node)
+    //{
+    //    throw new NotImplementedException();
+    //}
 
     #endregion
 
     #region 7.5.1 Structure declaration
 
-    internal static void ConvertStructureDeclarationAst(StructureDeclarationAst node)
-    {
-        throw new NotImplementedException();
-    }
+    //internal static void ConvertStructureDeclarationAst(StructureDeclarationAst node)
+    //{
+    //    throw new NotImplementedException();
+    //}
 
-    internal static void ConvertStructureFeatureAst(IStructureFeatureAst node)
-    {
-        throw new NotImplementedException();
-    }
+    //internal static void ConvertStructureFeatureAst(IStructureFeatureAst node)
+    //{
+    //    throw new NotImplementedException();
+    //}
 
     #endregion
 
     #region 7.5.2 Class declaration
 
-    internal static void ConvertClassDeclarationAst(ClassDeclarationAst node)
-    {
-        throw new NotImplementedException();
-    }
+    //internal static void ConvertClassDeclarationAst(ClassDeclarationAst node)
+    //{
+    //    throw new NotImplementedException();
+    //}
 
-    internal static void ConvertClassFeatureAst(IClassFeatureAst node)
-    {
-        throw new NotImplementedException();
-    }
+    //internal static void ConvertClassFeatureAst(IClassFeatureAst node)
+    //{
+    //    throw new NotImplementedException();
+    //}
 
     #endregion
 
     #region 7.5.3 Association declaration
 
-    internal static void ConvertAssociationDeclarationAst(AssociationDeclarationAst node)
-    {
-        throw new NotImplementedException();
-    }
+    //internal static void ConvertAssociationDeclarationAst(AssociationDeclarationAst node)
+    //{
+    //    throw new NotImplementedException();
+    //}
 
     #endregion
 
     #region 7.5.4 Enumeration declaration
 
-    internal static Enumeration ConvertEnumerationDeclarationAst(EnumerationDeclarationAst node)
-    {
-        throw new NotImplementedException();
-    }
+    //internal static Enumeration ConvertEnumerationDeclarationAst(EnumerationDeclarationAst node)
+    //{
+    //    throw new NotImplementedException();
+    //}
 
-    internal static void ConvertEnumElementAst(EnumElementAst node)
-    {
-        throw new NotImplementedException();
-    }
+    //internal static void ConvertEnumElementAst(EnumElementAst node)
+    //{
+    //    throw new NotImplementedException();
+    //}
 
-    internal static void ConvertIEnumElementValueAst(IEnumElementValueAst node)
-    {
-        throw new NotImplementedException();
-    }
+    //internal static void ConvertIEnumElementValueAst(IEnumElementValueAst node)
+    //{
+    //    throw new NotImplementedException();
+    //}
 
     #endregion
 
     #region 7.5.5 Property declaration
 
-    internal static void ConvertPropertyDeclarationAst(PropertyDeclarationAst node)
-    {
-        throw new NotImplementedException();
-    }
+    //internal static void ConvertPropertyDeclarationAst(PropertyDeclarationAst node)
+    //{
+    //    throw new NotImplementedException();
+    //}
 
     #endregion
 
     #region 7.5.6 Method declaration
 
-    internal static void ConvertMethodDeclarationAst(MethodDeclarationAst node)
-    {
-        throw new NotImplementedException();
-    }
+    //internal static void ConvertMethodDeclarationAst(MethodDeclarationAst node)
+    //{
+    //    throw new NotImplementedException();
+    //}
 
     #endregion
 
     #region 7.5.7 Parameter declaration
 
-    internal static void ConvertParameterDeclarationAst(ParameterDeclarationAst node)
-    {
-        throw new NotImplementedException();
-    }
+    //internal static void ConvertParameterDeclarationAst(ParameterDeclarationAst node)
+    //{
+    //    throw new NotImplementedException();
+    //}
 
     #endregion
 
@@ -227,10 +227,10 @@ internal static partial class ModelConverter
         );
     }
 
-    internal static void ConvertStructureValueDeclarationAst(StructureValueDeclarationAst node)
-    {
-        throw new NotImplementedException();
-    }
+    //internal static void ConvertStructureValueDeclarationAst(StructureValueDeclarationAst node)
+    //{
+    //    throw new NotImplementedException();
+    //}
 
     #endregion
 
