@@ -9,7 +9,7 @@ internal static partial class ModelConverter
 
     #region 7.3 Compiler directives
 
-    //internal static void ConvertCompilerDirectiveAst(CompilerDirectiveAst node)
+    //private static void ConvertCompilerDirectiveAst(CompilerDirectiveAst node)
     //{
     //    throw new NotImplementedException();
     //}
@@ -18,7 +18,7 @@ internal static partial class ModelConverter
 
     #region 7.4 Qualifiers
 
-    //internal static void ConvertQualifierTypeDeclarationAst(QualifierTypeDeclarationAst node)
+    //private static void ConvertQualifierTypeDeclarationAst(QualifierTypeDeclarationAst node)
     //{
     //    throw new NotImplementedException();
     //}
@@ -27,27 +27,27 @@ internal static partial class ModelConverter
 
     #region 7.4.1 QualifierList
 
-    //internal static void ConvertQualifierListAst(QualifierListAst node)
+    //private static void ConvertQualifierListAst(QualifierListAst node)
     //{
     //    throw new NotImplementedException();
     //}
 
-    //internal static void ConvertQualifierValueAst(QualifierValueAst node)
+    //private static void ConvertQualifierValueAst(QualifierValueAst node)
     //{
     //    throw new NotImplementedException();
     //}
 
-    //internal static void ConvertIQualifierInitializerAst(IQualifierInitializerAst node)
+    //private static void ConvertIQualifierInitializerAst(IQualifierInitializerAst node)
     //{
     //    throw new NotImplementedException();
     //}
 
-    //internal static void ConvertQualifierValueInitializerAst(QualifierValueInitializerAst node)
+    //private static void ConvertQualifierValueInitializerAst(QualifierValueInitializerAst node)
     //{
     //    throw new NotImplementedException();
     //}
 
-    //internal static void ConvertQualifierValueArrayInitializerAst(QualifierValueArrayInitializerAst node)
+    //private static void ConvertQualifierValueArrayInitializerAst(QualifierValueArrayInitializerAst node)
     //{
     //    throw new NotImplementedException();
     //}
@@ -56,12 +56,12 @@ internal static partial class ModelConverter
 
     #region 7.5.1 Structure declaration
 
-    //internal static void ConvertStructureDeclarationAst(StructureDeclarationAst node)
+    //private static void ConvertStructureDeclarationAst(StructureDeclarationAst node)
     //{
     //    throw new NotImplementedException();
     //}
 
-    //internal static void ConvertStructureFeatureAst(IStructureFeatureAst node)
+    //private static void ConvertStructureFeatureAst(IStructureFeatureAst node)
     //{
     //    throw new NotImplementedException();
     //}
@@ -70,12 +70,12 @@ internal static partial class ModelConverter
 
     #region 7.5.2 Class declaration
 
-    //internal static void ConvertClassDeclarationAst(ClassDeclarationAst node)
+    //private static void ConvertClassDeclarationAst(ClassDeclarationAst node)
     //{
     //    throw new NotImplementedException();
     //}
 
-    //internal static void ConvertClassFeatureAst(IClassFeatureAst node)
+    //private static void ConvertClassFeatureAst(IClassFeatureAst node)
     //{
     //    throw new NotImplementedException();
     //}
@@ -84,7 +84,7 @@ internal static partial class ModelConverter
 
     #region 7.5.3 Association declaration
 
-    //internal static void ConvertAssociationDeclarationAst(AssociationDeclarationAst node)
+    //private static void ConvertAssociationDeclarationAst(AssociationDeclarationAst node)
     //{
     //    throw new NotImplementedException();
     //}
@@ -93,17 +93,17 @@ internal static partial class ModelConverter
 
     #region 7.5.4 Enumeration declaration
 
-    //internal static Enumeration ConvertEnumerationDeclarationAst(EnumerationDeclarationAst node)
+    //private static Enumeration ConvertEnumerationDeclarationAst(EnumerationDeclarationAst node)
     //{
     //    throw new NotImplementedException();
     //}
 
-    //internal static void ConvertEnumElementAst(EnumElementAst node)
+    //private static void ConvertEnumElementAst(EnumElementAst node)
     //{
     //    throw new NotImplementedException();
     //}
 
-    //internal static void ConvertIEnumElementValueAst(IEnumElementValueAst node)
+    //private static void ConvertIEnumElementValueAst(IEnumElementValueAst node)
     //{
     //    throw new NotImplementedException();
     //}
@@ -112,7 +112,7 @@ internal static partial class ModelConverter
 
     #region 7.5.5 Property declaration
 
-    //internal static void ConvertPropertyDeclarationAst(PropertyDeclarationAst node)
+    //private static void ConvertPropertyDeclarationAst(PropertyDeclarationAst node)
     //{
     //    throw new NotImplementedException();
     //}
@@ -121,7 +121,7 @@ internal static partial class ModelConverter
 
     #region 7.5.6 Method declaration
 
-    //internal static void ConvertMethodDeclarationAst(MethodDeclarationAst node)
+    //private static void ConvertMethodDeclarationAst(MethodDeclarationAst node)
     //{
     //    throw new NotImplementedException();
     //}
@@ -130,7 +130,7 @@ internal static partial class ModelConverter
 
     #region 7.5.7 Parameter declaration
 
-    //internal static void ConvertParameterDeclarationAst(ParameterDeclarationAst node)
+    //private static void ConvertParameterDeclarationAst(ParameterDeclarationAst node)
     //{
     //    throw new NotImplementedException();
     //}
@@ -139,7 +139,7 @@ internal static partial class ModelConverter
 
     #region 7.6.1 Primitive type value
 
-    internal static PrimitiveTypeValue ConvertPrimitiveTypeValueAst(PrimitiveTypeValueAst node)
+    private static PrimitiveTypeValue ConvertPrimitiveTypeValueAst(PrimitiveTypeValueAst node)
     {
         return node switch
         {
@@ -149,7 +149,7 @@ internal static partial class ModelConverter
         };
     }
 
-    internal static LiteralValue ConvertLiteralValueAst(LiteralValueAst node)
+    private static LiteralValue ConvertLiteralValueAst(LiteralValueAst node)
     {
         return node switch
         {
@@ -162,7 +162,7 @@ internal static partial class ModelConverter
         };
     }
 
-    internal static LiteralValueArray ConvertLiteralValueArrayAst(LiteralValueArrayAst node)
+    private static LiteralValueArray ConvertLiteralValueArrayAst(LiteralValueArrayAst node)
     {
         return new(
             node.Values.Select(ModelConverter.ConvertLiteralValueAst)
@@ -173,7 +173,7 @@ internal static partial class ModelConverter
 
     #region 7.6.1.1 Integer value
 
-    internal static IntegerValue ConvertIntegerValueAst(IntegerValueAst node)
+    private static IntegerValue ConvertIntegerValueAst(IntegerValueAst node)
     {
         return new(node.Value);
     }
@@ -182,7 +182,7 @@ internal static partial class ModelConverter
 
     #region 7.6.1.2 Real value
 
-    internal static RealValue ConvertRealValueAst(RealValueAst node)
+    private static RealValue ConvertRealValueAst(RealValueAst node)
     {
         return new(node.Value);
     }
@@ -191,7 +191,7 @@ internal static partial class ModelConverter
 
     #region 7.6.1.3 String values
 
-    internal static StringValue ConvertStringValueAst(StringValueAst node)
+    private static StringValue ConvertStringValueAst(StringValueAst node)
     {
         return new(node.Value);
     }
@@ -200,7 +200,7 @@ internal static partial class ModelConverter
 
     #region 7.6.1.5 Boolean value
 
-    internal static BooleanValue ConvertBooleanValueAst(BooleanValueAst node)
+    private static BooleanValue ConvertBooleanValueAst(BooleanValueAst node)
     {
         return new(node.Value);
     }
@@ -209,7 +209,7 @@ internal static partial class ModelConverter
 
     #region 7.6.1.6 Null value
 
-    internal static NullValue ConvertNullValueAst(NullValueAst node)
+    private static NullValue ConvertNullValueAst(NullValueAst node)
     {
         return NullValue.Null;
     }
@@ -218,7 +218,7 @@ internal static partial class ModelConverter
 
     #region 7.6.2 Complex type value
 
-    internal static Instance ConvertInstanceValueDeclarationAst(InstanceValueDeclarationAst node)
+    private static Instance ConvertInstanceValueDeclarationAst(InstanceValueDeclarationAst node)
     {
         return new Instance(
             typeName: node.TypeName.Name,
@@ -227,7 +227,7 @@ internal static partial class ModelConverter
         );
     }
 
-    //internal static void ConvertStructureValueDeclarationAst(StructureValueDeclarationAst node)
+    //private static void ConvertStructureValueDeclarationAst(StructureValueDeclarationAst node)
     //{
     //    throw new NotImplementedException();
     //}
@@ -236,7 +236,7 @@ internal static partial class ModelConverter
 
     #region 7.6.3 Enum type value
 
-    internal static EnumTypeValue ConvertEnumTypeValueAst(EnumTypeValueAst node)
+    private static EnumTypeValue ConvertEnumTypeValueAst(EnumTypeValueAst node)
     {
         return node switch
         {
@@ -246,7 +246,7 @@ internal static partial class ModelConverter
         };
     }
 
-    internal static EnumValue ConvertEnumValueAst(EnumValueAst node)
+    private static EnumValue ConvertEnumValueAst(EnumValueAst node)
     {
         return new(
             node.EnumName?.Name,
@@ -254,7 +254,7 @@ internal static partial class ModelConverter
         );
     }
 
-    internal static EnumValueArray ConvertEnumValueArrayAst(EnumValueArrayAst node)
+    private static EnumValueArray ConvertEnumValueArrayAst(EnumValueArrayAst node)
     {
         return new(
             node.Values.Select(ModelConverter.ConvertEnumValueAst)

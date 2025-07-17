@@ -356,7 +356,7 @@ internal static class TokenCompare
 
     #region Helper Methods
 
-    internal static bool AreEqual(SourceExtent? expected, SourceExtent? actual)
+    private static bool AreEqual(SourceExtent? expected, SourceExtent? actual)
     {
         if ((expected == null) && (actual == null))
         {
@@ -374,7 +374,7 @@ internal static class TokenCompare
         }
     }
 
-    internal static bool AreEqual(SourcePosition? expected, SourcePosition? actual)
+    private static bool AreEqual(SourcePosition? expected, SourcePosition? actual)
     {
         if ((expected == null) && (actual == null))
         {
