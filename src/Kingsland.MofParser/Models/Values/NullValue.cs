@@ -2,9 +2,11 @@
 
 namespace Kingsland.MofParser.Models.Values;
 
+[PublicAPI]
 public sealed class NullValue : LiteralValue
 {
 
+    [PublicAPI]
     public static readonly NullValue Null = new();
 
     private NullValue()

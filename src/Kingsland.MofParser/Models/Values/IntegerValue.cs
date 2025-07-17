@@ -2,14 +2,17 @@
 
 namespace Kingsland.MofParser.Models.Values;
 
+[PublicAPI]
 public sealed class IntegerValue : LiteralValue
 {
 
+    [PublicAPI]
     public IntegerValue(long value)
     {
         this.Value = value;
     }
 
+    [PublicAPI]
     public long Value
     {
         get;

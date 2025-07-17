@@ -3,20 +3,24 @@ using System.Text;
 
 namespace Kingsland.MofParser.Models.Values;
 
+[PublicAPI]
 public sealed class ComplexValueArray : ComplexTypeValue
 {
 
+    [PublicAPI]
     public ComplexValueArray(params ComplexValueBase[] values)
         : this((IEnumerable<ComplexValueBase>)values)
     {
     }
 
+    [PublicAPI]
     public ComplexValueArray(IEnumerable<ComplexValueBase> values)
     {
         this.Values = (values ?? throw new ArgumentNullException(nameof(values)))
             .ToList().AsReadOnly();
     }
 
+    [PublicAPI]
     public ReadOnlyCollection<ComplexValueBase> Values
     {
         get;

@@ -2,6 +2,7 @@
 
 namespace Kingsland.MofParser.Models.Types;
 
+[PublicAPI]
 public sealed record Property
 {
 
@@ -11,11 +12,13 @@ public sealed record Property
         this.Value = value ?? throw new ArgumentNullException(nameof(value));
     }
 
+    [PublicAPI]
     public string Name
     {
         get;
     }
 
+    [PublicAPI]
     public PropertyValue Value
     {
         get;

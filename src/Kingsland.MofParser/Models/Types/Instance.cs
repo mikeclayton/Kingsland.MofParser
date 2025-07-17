@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Kingsland.MofParser.Models.Types;
 
+[PublicAPI]
 public sealed record Instance
 {
 
@@ -19,16 +20,19 @@ public sealed record Instance
         this.Properties = (properties ?? []).ToList().AsReadOnly();
     }
 
+    [PublicAPI]
     public string TypeName
     {
         get;
     }
 
+    [PublicAPI]
     public string? Alias
     {
         get;
     }
 
+    [PublicAPI]
     public ReadOnlyCollection<Property> Properties
     {
         get;

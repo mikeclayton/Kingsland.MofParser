@@ -2,6 +2,7 @@
 
 namespace Kingsland.MofParser.Models.Types;
 
+[PublicAPI]
 public sealed record Module
 {
 
@@ -17,6 +18,7 @@ public sealed record Module
             .ToList().AsReadOnly();
     }
 
+    [PublicAPI]
     public ReadOnlyCollection<Instance> Instances
     {
         get;

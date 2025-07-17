@@ -3,20 +3,24 @@ using System.Text;
 
 namespace Kingsland.MofParser.Models.Values;
 
+[PublicAPI]
 public sealed class LiteralValueArray : PrimitiveTypeValue
 {
 
+    [PublicAPI]
     public LiteralValueArray(params LiteralValue[] values)
         : this((IEnumerable<LiteralValue>)values)
     {
     }
 
+    [PublicAPI]
     public LiteralValueArray(IEnumerable<LiteralValue> values)
     {
         this.Values = (values ?? throw new ArgumentNullException(nameof(values)))
             .ToList().AsReadOnly();
     }
 
+    [PublicAPI]
     public ReadOnlyCollection<LiteralValue> Values
     {
         get;
