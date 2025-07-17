@@ -1,6 +1,4 @@
-﻿using Kingsland.ParseFx.Attributes.StaticAnalysis;
-
-namespace Kingsland.ParseFx.Text;
+﻿namespace Kingsland.ParseFx.Text;
 
 /// <summary>
 /// Denotes the start position, end position and text of a section of source code.

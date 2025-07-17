@@ -6,16 +6,19 @@ using static Kingsland.ParseFx.Lexing.Scanner;
 
 namespace Kingsland.ParseFx.Lexing;
 
+[PublicAPI]
 public sealed class Lexer
 {
 
     #region Constructors
 
+    [PublicAPI]
     public Lexer()
         : this([])
     {
     }
 
+    [PublicAPI]
     public Lexer(IEnumerable<Scanner> scanners)
     {
         this.Scanners = (scanners == null) ?
@@ -29,6 +32,7 @@ public sealed class Lexer
 
     #region Properties
 
+    [PublicAPI]
     public ReadOnlyCollection<Scanner> Scanners
     {
         get;
@@ -44,12 +48,14 @@ public sealed class Lexer
 
     #region Lexing Methods
 
+    [PublicAPI]
     public List<SyntaxToken> Lex(string sourceText)
     {
         var reader = SourceReader.From(sourceText);
         return this.ReadToEnd(reader).ToList();
     }
 
+    [PublicAPI]
     public IEnumerable<SyntaxToken> ReadToEnd(SourceReader reader)
     {
         var thisReader = reader;
@@ -61,6 +67,7 @@ public sealed class Lexer
         }
     }
 
+    [PublicAPI]
     public ScannerResult ReadToken(SourceReader reader)
     {
         var peek = reader.Peek();
@@ -81,6 +88,7 @@ public sealed class Lexer
 
     #region Scanner Methods
 
+    [PublicAPI]
     public Lexer AddScanner(char value, Func<SourceExtent, SyntaxToken> factoryMethod)
     {
         return this.AddScanner(
@@ -95,26 +103,31 @@ public sealed class Lexer
         );
     }
 
+    [PublicAPI]
     public Lexer AddScanner(char[] values, ScannerAction action)
     {
         return this.AddScanner(new CharArrayMatch(values), action);
     }
 
+    [PublicAPI]
     public Lexer AddScanner(char value, ScannerAction action)
     {
         return this.AddScanner(new CharMatch(value), action);
     }
 
+    [PublicAPI]
     public Lexer AddScanner(char fromValue, char toValue, ScannerAction action)
     {
         return this.AddScanner(new RangeMatch(fromValue, toValue), action);
     }
 
+    [PublicAPI]
     public Lexer AddScanner(string pattern, ScannerAction action)
     {
         return this.AddScanner(new RegexMatch(pattern), action);
     }
 
+    [PublicAPI]
     public Lexer AddScanner(IMatch match, ScannerAction action)
     {
         var newScanners = this.Scanners.ToList();

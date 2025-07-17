@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <!-- only include JetBrains.Annotations when performing "dotnet tool run jb inspectcode" -->
+  <PropertyGroup>
+    <JETBRAINS_ANNOTATIONS>true</JETBRAINS_ANNOTATIONS>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(JETBRAINS_ANNOTATIONS)' != ''">
+    <DefineConstants>$(DefineConstants);JETBRAINS_ANNOTATIONS</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(JETBRAINS_ANNOTATIONS)' != ''">
+    <PackageReference Include="JetBrains.Annotations" Version="2024.3.0" />
+  </ItemGroup>
+
+</Project>

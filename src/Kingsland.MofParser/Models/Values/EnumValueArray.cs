@@ -3,20 +3,24 @@ using System.Text;
 
 namespace Kingsland.MofParser.Models.Values;
 
+[PublicAPI]
 public sealed class EnumValueArray : EnumTypeValue
 {
 
+    [PublicAPI]
     public EnumValueArray(params EnumValue[] values)
         : this((IEnumerable<EnumValue>)values)
     {
     }
 
+    [PublicAPI]
     public EnumValueArray(IEnumerable<EnumValue> values)
     {
         this.Values = (values ?? throw new ArgumentNullException(nameof(values)))
             .ToList().AsReadOnly();
     }
 
+    [PublicAPI]
     public ReadOnlyCollection<EnumValue> Values
     {
         get;

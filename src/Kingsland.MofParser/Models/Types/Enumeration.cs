@@ -1,8 +1,10 @@
 ﻿namespace Kingsland.MofParser.Models.Types;
 
+[PublicAPI]
 public sealed class Enumeration
 {
 
+    [PublicAPI]
     public Enumeration(string name, Type underlyingType)
     {
         this.Name = name ?? throw new ArgumentNullException(nameof(name));
@@ -16,11 +18,13 @@ public sealed class Enumeration
             );
     }
 
+    [PublicAPI]
     public string Name
     {
         get;
     }
 
+    [PublicAPI]
     public Type UnderlyingType
     {
         get;

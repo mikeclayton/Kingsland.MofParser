@@ -13,4 +13,8 @@
     <Description>A C# library to simplify some of the boring bits of writing a lexer and parser for custom text file formats.</Description>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Kingsland.MofParser.Annotations\Kingsland.MofParser.Annotations.csproj" />
+  </ItemGroup>
+
 </Project>

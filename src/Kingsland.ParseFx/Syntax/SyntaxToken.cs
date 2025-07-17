@@ -2,6 +2,7 @@
 
 namespace Kingsland.ParseFx.Syntax;
 
+[PublicAPI]
 public abstract record SyntaxToken
 {
 
@@ -16,11 +17,13 @@ public abstract record SyntaxToken
 
     #region Properties
 
+    [PublicAPI]
     public SourceExtent? Extent
     {
         get;
     }
 
+    [PublicAPI]
     public string? Text =>
         this.Extent?.Text;
 
@@ -28,11 +31,13 @@ public abstract record SyntaxToken
 
     #region Methods
 
+    [PublicAPI]
     public virtual string GetDebugString()
     {
         return $"{this.GetType().Name} (\"{this.Extent?.Text}\")";
     }
 
+    [PublicAPI]
     public virtual string GetSourceString()
     {
         return $"{this.Extent?.Text}";

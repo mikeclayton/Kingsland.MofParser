@@ -5,7 +5,7 @@ namespace Kingsland.MofParser.UnitTests.Helpers;
 internal static class ModelAssert
 {
 
-    public static void AreDeepEqual(object? actual, object? expected)
+    internal static void AreDeepEqual(object? actual, object? expected)
     {
         // handle null values
         if ((actual is null) || (expected is null))
@@ -50,7 +50,7 @@ internal static class ModelAssert
         }
     }
 
-    //public static void AreEqual(Module actual, Module expected)
+    //private static void AreEqual(Module actual, Module expected)
     //{
     //    Assert.That(expected, Is.Not.Null);
     //    Assert.That(actual, Is.Not.Null);
@@ -61,7 +61,7 @@ internal static class ModelAssert
     //    }
     //}
 
-    //public static void AreEqual(Instance actual, Instance expected)
+    //private static void AreEqual(Instance actual, Instance expected)
     //{
     //    Assert.That(expected, Is.Not.Null);
     //    Assert.That(actual, Is.Not.Null);
@@ -78,7 +78,7 @@ internal static class ModelAssert
     //    }
     //}
 
-    //public static void AreEqual(Property actual, Property expected)
+    //private static void AreEqual(Property actual, Property expected)
     //{
     //    Assert.That(expected, Is.Not.Null);
     //    Assert.That(actual, Is.Not.Null);
@@ -235,7 +235,7 @@ internal static class ModelAssert
     //    };
     //}
 
-    //public static void AreEqual(EnumValue actual, EnumValue expected)
+    //private static void AreEqual(EnumValue actual, EnumValue expected)
     //{
     //    Assert.That(expected, Is.Not.Null);
     //    Assert.That(actual, Is.Not.Null);
@@ -247,7 +247,7 @@ internal static class ModelAssert
     //    );
     //}
 
-    //public static void AreEqual(EnumValueArray actual, EnumValueArray expected)
+    //private static void AreEqual(EnumValueArray actual, EnumValueArray expected)
     //{
     //    Assert.That(expected, Is.Not.Null);
     //    Assert.That(actual, Is.Not.Null);

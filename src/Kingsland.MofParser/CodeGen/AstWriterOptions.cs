@@ -5,6 +5,7 @@ public sealed class AstWriterOptions
 
     #region Fields
 
+    [PublicAPI]
     public static readonly AstWriterOptions Default = new(
         newLine: Environment.NewLine,
         indentStep: "\t",
@@ -15,6 +16,7 @@ public sealed class AstWriterOptions
 
     #region Constructors
 
+    [PublicAPI]
     public AstWriterOptions(
         string newLine, string indentStep, MofQuirks quirks = MofQuirks.None
     )
@@ -28,16 +30,19 @@ public sealed class AstWriterOptions
 
     #region Properties
 
+    [PublicAPI]
     public string NewLine
     {
         get;
     }
 
+    [PublicAPI]
     public string IndentStep
     {
         get;
     }
 
+    [PublicAPI]
     public MofQuirks Quirks
     {
         get;
@@ -47,6 +52,7 @@ public sealed class AstWriterOptions
 
     #region Methods
 
+    [PublicAPI]
     public static AstWriterOptions Create(
         string? newLine = null, string? indentStep = null, MofQuirks? quirks = null
     )

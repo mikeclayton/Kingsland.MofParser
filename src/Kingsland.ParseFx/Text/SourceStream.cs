@@ -1,8 +1,8 @@
-﻿using Kingsland.ParseFx.Attributes.StaticAnalysis;
-using Kingsland.ParseFx.Lexing;
+﻿using Kingsland.ParseFx.Lexing;
 
 namespace Kingsland.ParseFx.Text;
 
+[PublicAPI]
 public sealed class SourceStream
 {
 

@@ -2,11 +2,13 @@
 
 namespace Kingsland.ParseFx.Lexing.Matches;
 
+[PublicAPI]
 public sealed class RegexMatch : IMatch
 {
 
     #region Constructors
 
+    [PublicAPI]
     public RegexMatch(string pattern)
     {
         this.Pattern = pattern;
@@ -17,11 +19,13 @@ public sealed class RegexMatch : IMatch
 
     #region Properties
 
+    [PublicAPI]
     public string Pattern
     {
         get;
     }
 
+    [PublicAPI]
     public Regex Regex
     {
         get;
@@ -31,6 +35,7 @@ public sealed class RegexMatch : IMatch
 
     #region LexerRule Members
 
+    [PublicAPI]
     public bool Matches(char value)
     {
         return this.Regex.IsMatch(

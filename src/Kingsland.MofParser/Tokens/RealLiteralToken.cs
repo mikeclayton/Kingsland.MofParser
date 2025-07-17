@@ -1,5 +1,4 @@
-﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
-using Kingsland.ParseFx.Syntax;
+﻿using Kingsland.ParseFx.Syntax;
 using Kingsland.ParseFx.Text;
 using System.Globalization;
 

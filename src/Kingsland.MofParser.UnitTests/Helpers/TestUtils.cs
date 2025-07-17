@@ -53,7 +53,7 @@ internal static class TestUtils
         return json;
     }
 
-    public static IEnumerable<TestCaseData> GetMofTestCase(string path)
+    internal static IEnumerable<TestCaseData> GetMofTestCase(string path)
     {
         var localPath = Assembly.GetExecutingAssembly().Location;
         var testCasePath = Path.Combine(

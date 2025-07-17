@@ -2,6 +2,7 @@
 
 namespace Kingsland.ParseFx.Parsing;
 
+[PublicAPI]
 public sealed class UnexpectedTokenException : Exception
 {
 
@@ -11,6 +12,7 @@ public sealed class UnexpectedTokenException : Exception
     {
     }
 
+    [PublicAPI]
     public UnexpectedTokenException(SyntaxToken foundToken)
     {
         this.FoundToken = foundToken
@@ -21,6 +23,7 @@ public sealed class UnexpectedTokenException : Exception
 
     #region Properties
 
+    [PublicAPI]
     public SyntaxToken? FoundToken
     {
         get;

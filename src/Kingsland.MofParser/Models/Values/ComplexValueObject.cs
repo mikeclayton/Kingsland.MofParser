@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Kingsland.MofParser.Models.Values;
 
+[PublicAPI]
 public sealed class ComplexValueObject : ComplexValueBase
 {
 
@@ -15,11 +16,13 @@ public sealed class ComplexValueObject : ComplexValueBase
             .ToList().AsReadOnly();
     }
 
+    [PublicAPI]
     public string TypeName
     {
         get;
     }
 
+    [PublicAPI]
     public ReadOnlyCollection<Property> Properties
     {
         get;

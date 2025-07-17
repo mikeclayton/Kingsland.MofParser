@@ -1,5 +1,6 @@
 ﻿namespace Kingsland.MofParser.Models.Types;
 
+[PublicAPI]
 public sealed record Class
 {
 
@@ -9,11 +10,13 @@ public sealed record Class
         this.SuperClass = superClass ?? throw new ArgumentNullException(nameof(superClass));
     }
 
+    [PublicAPI]
     public string ClassName
     {
         get;
     }
 
+    [PublicAPI]
     public string SuperClass
     {
         get;

@@ -2,21 +2,21 @@
 
 namespace Kingsland.MofParser.HtmlReport.Resources;
 
-public sealed class ScriptResource : DscResource
+internal sealed class ScriptResource : DscResource
 {
 
-    public ScriptResource(string filename, string computerName, Instance instance)
+    internal ScriptResource(string filename, string computerName, Instance instance)
         : base(filename, computerName, instance)
     {
     }
 
-    public string? GetScript =>
+    internal string? GetScript =>
         this.GetStringProperty(nameof(this.GetScript));
 
-    public string? TestScript =>
+    internal string? TestScript =>
         this.GetStringProperty(nameof(this.TestScript));
 
-    public string? SetScript =>
+    internal string? SetScript =>
         this.GetStringProperty(nameof(this.SetScript));
 
 }

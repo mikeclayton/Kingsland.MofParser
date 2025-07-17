@@ -1,5 +1,4 @@
-﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
-using Kingsland.MofParser.Tokens;
+﻿using Kingsland.MofParser.Tokens;
 
 namespace Kingsland.MofParser.Ast;
 
@@ -20,8 +19,8 @@ namespace Kingsland.MofParser.Ast;
 public sealed record BooleanValueAst : LiteralValueAst
 {
 
-    internal static readonly BooleanValueAst True = new(BooleanLiteralToken.True);
-    internal static readonly BooleanValueAst False = new(BooleanLiteralToken.False);
+    private static readonly BooleanValueAst True = new(BooleanLiteralToken.True);
+    private static readonly BooleanValueAst False = new(BooleanLiteralToken.False);
 
     #region Builder
 

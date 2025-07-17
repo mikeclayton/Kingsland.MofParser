@@ -8,11 +8,13 @@ using System.Text;
 
 namespace Kingsland.MofParser.Lexing;
 
+[PublicAPI]
 public static class Lexer
 {
 
     #region Methods
 
+    [PublicAPI]
     public static ParseFx.Lexing.Lexer Create()
     {
         return new ParseFx.Lexing.Lexer()
@@ -77,6 +79,7 @@ public static class Lexer
             );
     }
 
+    [PublicAPI]
     public static IEnumerable<SyntaxToken> Lex(SourceReader reader)
     {
         return Lexer.Create().ReadToEnd(reader);

@@ -9,12 +9,12 @@ namespace Kingsland.MofParser.UnitTests.Helpers;
 internal static class LexerAssert
 {
 
-    public static void AreEqual(SyntaxToken? expectedToken, SyntaxToken? actualToken, bool ignoreExtent)
+    internal static void AreEqual(SyntaxToken? expectedToken, SyntaxToken? actualToken, bool ignoreExtent)
     {
         LexerAssert.AreEqualInternal(expectedToken, actualToken, ignoreExtent);
     }
 
-    public static void AreEqual(List<SyntaxToken>? expectedTokens, List<SyntaxToken>? actualTokens, bool ignoreExtent)
+    internal static void AreEqual(List<SyntaxToken>? expectedTokens, List<SyntaxToken>? actualTokens, bool ignoreExtent)
     {
         if ((expectedTokens == null) && (actualTokens == null))
         {

@@ -1,6 +1,4 @@
-﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
-
-namespace Kingsland.MofParser.Ast;
+﻿namespace Kingsland.MofParser.Ast;
 
 /// <summary>
 /// </summary>
