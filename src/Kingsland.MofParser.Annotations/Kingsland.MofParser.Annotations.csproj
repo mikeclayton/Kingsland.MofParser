@@ -17,12 +17,4 @@
     <!--<PackageReference Include="JetBrains.Annotations" Version="2024.1.0" />-->
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Remove="CanBeNullAttribute.cs" />
-    <Compile Remove="ImplicitUseKindFlags.cs" />
-    <Compile Remove="ImplicitUseTargetFlags.cs" />
-    <Compile Remove="MeansImplicitUseAttribute.cs" />
-    <Compile Remove="UsedImplicitlyAttribute.cs" />
-  </ItemGroup>
-
 </Project>

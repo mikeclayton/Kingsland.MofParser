@@ -7,8 +7,6 @@ namespace Kingsland.MofParser.Annotations;
 /// that should not be removed and therefore should never be reported as unused.
 /// </summary>
 /// <remarks>
-/// </summary>
-/// <remarks>
 /// Private implementation of PublicAPIAttribute so we don't have to reference JetBrains.Annotations
 /// See https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#PublicAPIAttribute
 ///     https://github.com/JetBrains/JetBrains.Annotations
@@ -25,10 +23,14 @@ public sealed class PublicAPIAttribute : Attribute
     {
     }
 
+#if JETBRAINS_ANNOTATIONS
+    [JetBrains.Annotations.PublicAPI]
+#endif
     public PublicAPIAttribute(
 
 #if JETBRAINS_ANNOTATIONS
         [JetBrains.Annotations.NotNull]
+        [JetBrains.Annotations.PublicAPI]
 #endif
         string comment
     )
