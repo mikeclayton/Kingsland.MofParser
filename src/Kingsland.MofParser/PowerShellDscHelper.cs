@@ -7,9 +7,11 @@ using System.Collections.ObjectModel;
 
 namespace Kingsland.MofParser;
 
+[PublicAPI]
 public static class PowerShellDscHelper
 {
 
+    [PublicAPI]
     public static Module ParseMofFile(string filename)
     {
         // read the text from the mof file
@@ -25,6 +27,7 @@ public static class PowerShellDscHelper
         return module;
     }
 
+    [PublicAPI]
     public static ReadOnlyCollection<Instance> ParseMofFileInstances(string filename)
     {
         // read the text from the mof file

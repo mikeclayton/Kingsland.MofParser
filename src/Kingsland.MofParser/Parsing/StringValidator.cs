@@ -138,7 +138,7 @@ internal static class StringValidator
 
     #region decimalValue = [ "+" / "-" ] unsignedDecimalValue
 
-    private static bool IsDecimalValue(string value)
+    internal static bool IsDecimalValue(string value)
     {
         if (string.IsNullOrEmpty(value))
         {
@@ -158,7 +158,7 @@ internal static class StringValidator
 
     #region  unsignedDecimalValue = positiveDecimalDigit *decimalDigit
 
-    private static bool IsUnsignedDecimalValue(string value)
+    internal static bool IsUnsignedDecimalValue(string value)
     {
         if (string.IsNullOrEmpty(value)) { return false; }
         return StringValidator.IsPositiveDecimalDigit(value.First()) &&
@@ -200,7 +200,7 @@ internal static class StringValidator
 
     #region BACKSLASH = U+005C ; \
 
-    private static bool IsBackslash(char @char)
+    internal static bool IsBackslash(char @char)
     {
         return (@char == Constants.BACKSLASH);
     }
@@ -209,7 +209,7 @@ internal static class StringValidator
 
     #region DOUBLEQUOTE = U+0022 ; "
 
-    private static bool IsDoubleQuote(char @char)
+    internal static bool IsDoubleQuote(char @char)
     {
         return (@char == Constants.DOUBLEQUOTE);
     }
@@ -218,7 +218,7 @@ internal static class StringValidator
 
     #region SINGLEQUOTE = U+0027 ; '
 
-    private static bool IsSingleQuote(char @char)
+    internal static bool IsSingleQuote(char @char)
     {
         return (@char == Constants.SINGLEQUOTE);
     }
@@ -227,7 +227,7 @@ internal static class StringValidator
 
     #region UPPERALPHA = U+0041...U+005A ; A ... Z
 
-    private static bool IsUpperAlpha(char @char)
+    internal static bool IsUpperAlpha(char @char)
     {
         return @char is >= '\u0041' and <= '\u005A';
     }
@@ -236,7 +236,7 @@ internal static class StringValidator
 
     #region LOWERALPHA = U+0061...U+007A ; a ... z
 
-    private static bool IsLowerAlpha(char @char)
+    internal static bool IsLowerAlpha(char @char)
     {
         return @char is >= '\u0061' and <= '\u007A';
     }
@@ -245,7 +245,7 @@ internal static class StringValidator
 
     #region UNDERSCORE = U+005F ; _
 
-    private static bool IsUnderscore(char @char)
+    internal static bool IsUnderscore(char @char)
     {
         return (@char == Constants.UNDERSCORE);
     }
@@ -258,7 +258,7 @@ internal static class StringValidator
 
     #region FALSE = "false" ; keyword: case insensitive
 
-    private static bool IsFalse(string value)
+    internal static bool IsFalse(string value)
     {
         return string.Equals(value, Constants.FALSE, StringComparison.OrdinalIgnoreCase);
     }
@@ -267,7 +267,7 @@ internal static class StringValidator
 
     #region TRUE = "true" ; keyword: case insensitive
 
-    private static bool IsTrue(string value)
+    internal static bool IsTrue(string value)
     {
         return string.Equals(value, Constants.TRUE, StringComparison.OrdinalIgnoreCase);
     }
@@ -280,7 +280,7 @@ internal static class StringValidator
 
     #region NULL = "null" ; keyword: case insensitive
 
-    private static bool IsNull(string value)
+    internal static bool IsNull(string value)
     {
         return string.Equals(value, Constants.NULL, StringComparison.OrdinalIgnoreCase);
     }
@@ -335,7 +335,7 @@ internal static class StringValidator
 
     #region localName = IDENTIFIER
 
-    private static bool IsLocalName(string value)
+    internal static bool IsLocalName(string value)
     {
         return StringValidator.IsIdentifier(value);
     }
@@ -348,7 +348,7 @@ internal static class StringValidator
 
     #region schemaQualifiedName = schemaName UNDERSCORE IDENTIFIER
 
-    private static bool IsSchemaQualifiedName(string value)
+    internal static bool IsSchemaQualifiedName(string value)
     {
         if (string.IsNullOrEmpty(value))
         {
@@ -367,7 +367,7 @@ internal static class StringValidator
 
     #region schemaName = firstSchemaChar *( nextSchemaChar )
 
-    private static bool IsSchemaName(string value)
+    internal static bool IsSchemaName(string value)
     {
         return !string.IsNullOrEmpty(value) &&
                StringValidator.IsFirstSchemaChar(value[0]) &&
@@ -378,7 +378,7 @@ internal static class StringValidator
 
     #region firstSchemaChar = UPPERALPHA / LOWERALPHA
 
-    private static bool IsFirstSchemaChar(char value)
+    internal static bool IsFirstSchemaChar(char value)
     {
         return StringValidator.IsUpperAlpha(value) ||
                StringValidator.IsLowerAlpha(value);
@@ -388,7 +388,7 @@ internal static class StringValidator
 
     #region nextSchemaChar = firstSchemaChar / decimalDigit
 
-    private static bool IsNextSchemaChar(char value)
+    internal static bool IsNextSchemaChar(char value)
     {
         return StringValidator.IsFirstSchemaChar(value) ||
                StringValidator.IsDecimalDigit(value);
@@ -402,7 +402,7 @@ internal static class StringValidator
 
     #region aliasIdentifier = "$" IDENTIFIER
 
-    private static bool IsAliasIdentifier(string value)
+    internal static bool IsAliasIdentifier(string value)
     {
         return !string.IsNullOrEmpty(value) &&
                (value.First() == '$') &&
