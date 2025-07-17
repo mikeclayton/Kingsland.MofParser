@@ -1,5 +1,6 @@
 ﻿namespace Kingsland.ParseFx.Parsing;
 
+[PublicAPI]
 public sealed class UnexpectedEndOfStreamException : Exception
 {
 

@@ -4,11 +4,13 @@ using System.Text;
 
 namespace Kingsland.ParseFx.Parsing;
 
+[PublicAPI]
 public sealed class TokenStream
 {
 
     #region Constructors
 
+    [PublicAPI]
     public TokenStream(IEnumerable<SyntaxToken> source)
     {
         this.Source = (source ?? throw new ArgumentNullException(nameof(source)))
@@ -23,15 +25,16 @@ public sealed class TokenStream
     private List<SyntaxToken> Source
     {
         get;
-        set;
     }
 
+    [PublicAPI]
     public int Position
     {
         get;
         set;
     }
 
+    [PublicAPI]
     public bool Eof =>
         (this.Source.Count == 0) ||
         (this.Position >= this.Source.Count);
@@ -45,6 +48,7 @@ public sealed class TokenStream
     /// Throws an exception if the stream has no more tokens to read.
     /// </summary>
     /// <returns></returns>
+    [PublicAPI]
     public SyntaxToken Peek()
     {
         if ((this.Source.Count == 0) ||
@@ -61,6 +65,7 @@ public sealed class TokenStream
     /// Throws an exception if the stream has no more tokens to read.
     /// </summary>
     /// <returns></returns>
+    [PublicAPI]
     public T? Peek<T>() where T : SyntaxToken
     {
         if ((this.Source.Count == 0) ||
@@ -81,6 +86,7 @@ public sealed class TokenStream
     /// Returns false if the stream has no more tokens to read.
     /// </summary>
     /// <returns></returns>
+    [PublicAPI]
     public bool TryPeek<T>() where T : SyntaxToken
     {
 
@@ -100,6 +106,7 @@ public sealed class TokenStream
     /// Throws an exception if the stream has no more tokens to read.
     /// </summary>
     /// <returns></returns>
+    [PublicAPI]
     public bool TryPeek<T>(
         [NotNullWhen(true)] out T? result
     ) where T : SyntaxToken
@@ -120,6 +127,7 @@ public sealed class TokenStream
         return true;
     }
 
+    [PublicAPI]
     public bool TryPeek<T>(Func<T, bool> predicate, out T? result) where T : SyntaxToken
     {
 
@@ -146,6 +154,7 @@ public sealed class TokenStream
     /// Throws an exception if the stream has no more tokens to read.
     /// </summary>
     /// <returns></returns>
+    [PublicAPI]
     public SyntaxToken Read()
     {
         var value = this.Peek();
@@ -159,6 +168,7 @@ public sealed class TokenStream
     /// Throws an exception if the stream has no more tokens to read.
     /// </summary>
     /// <returns></returns>
+    [PublicAPI]
     public T Read<T>() where T : SyntaxToken
     {
         var token = this.Peek();
@@ -174,6 +184,7 @@ public sealed class TokenStream
 
     #region TryRead Methods
 
+    [PublicAPI]
     public bool TryRead<T>(
         [NotNullWhen(true)] out T? result
     ) where T : SyntaxToken
@@ -193,6 +204,7 @@ public sealed class TokenStream
     /// <summary>
     /// Moves the stream position back a token.
     /// </summary>
+    [PublicAPI]
     public void Backtrack()
     {
         this.Backtrack(1);
@@ -201,6 +213,7 @@ public sealed class TokenStream
     /// <summary>
     /// Moves the stream position back the specified number of tokens.
     /// </summary>
+    [PublicAPI]
     public void Backtrack(int count)
     {
         if (this.Position < count)

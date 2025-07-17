@@ -8,7 +8,7 @@ internal static class AstAssert
 
     #region Node Comparison Methods
 
-    public static void AreEqual(MofSpecificationAst? expected, MofSpecificationAst? actual, bool ignoreExtent)
+    internal static void AreEqual(MofSpecificationAst? expected, MofSpecificationAst? actual, bool ignoreExtent)
     {
         if ((expected == null) || (actual == null))
         {
