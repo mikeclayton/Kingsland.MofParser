@@ -1,6 +1,4 @@
-﻿using Kingsland.ParseFx.Attributes.StaticAnalysis;
-
-namespace Kingsland.ParseFx.Text;
+﻿namespace Kingsland.ParseFx.Text;
 
 /// <summary>
 /// Represents a character from a source stream together with the position,

@@ -1,5 +1,4 @@
 ﻿using Kingsland.MofParser.Ast;
-using Kingsland.MofParser.Attributes.StaticAnalysis;
 using Kingsland.MofParser.Models.Types;
 using Kingsland.MofParser.Models.Values;
 

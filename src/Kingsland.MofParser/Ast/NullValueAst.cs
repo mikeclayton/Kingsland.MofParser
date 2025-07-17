@@ -1,5 +1,4 @@
-﻿using Kingsland.MofParser.Attributes.StaticAnalysis;
-using Kingsland.MofParser.Tokens;
+﻿using Kingsland.MofParser.Tokens;
 
 namespace Kingsland.MofParser.Ast;
 

@@ -1,6 +1,4 @@
-﻿using Kingsland.ParseFx.Attributes.StaticAnalysis;
-
-namespace Kingsland.ParseFx.Text;
+﻿namespace Kingsland.ParseFx.Text;
 
 public sealed class SourcePosition
 {

@@ -7,4 +7,7 @@ fusion
 *.nupkg
 *.user
 
+.build
+.config
+
 build/TestResult.xml

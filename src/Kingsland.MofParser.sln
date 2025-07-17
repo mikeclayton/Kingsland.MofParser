@@ -36,8 +36,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{6E8906
 		Kingsland.MofParser.nuspec = Kingsland.MofParser.nuspec
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".docs", ".docs", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kingsland.MofParser.Annotations", "Kingsland.MofParser.Annotations\Kingsland.MofParser.Annotations.csproj", "{069A8644-9C60-4935-BE57-00727462B3E1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".misc", ".misc", "{27DC4420-11EE-4A9F-AAF6-FCA326392ACA}"
 	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
 		..\LICENSE = ..\LICENSE
 		..\LICENSE-lgpl3 = ..\LICENSE-lgpl3
 		..\LICENSE-mit = ..\LICENSE-mit
@@ -82,6 +85,10 @@ Global
 		{1C183A9B-9267-4495-8D63-FC8F834C35F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C183A9B-9267-4495-8D63-FC8F834C35F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C183A9B-9267-4495-8D63-FC8F834C35F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{069A8644-9C60-4935-BE57-00727462B3E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{069A8644-9C60-4935-BE57-00727462B3E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{069A8644-9C60-4935-BE57-00727462B3E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{069A8644-9C60-4935-BE57-00727462B3E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
