@@ -2,15 +2,15 @@
 
 namespace Kingsland.MofParser.HtmlReport.Wrappers;
 
-public static class HtmlHelper
+internal static class HtmlHelper
 {
 
-    public static string HtmlEncode(string value)
+    internal static string HtmlEncode(string value)
     {
         return System.Web.HttpUtility.HtmlEncode(value);
     }
 
-    public static string SplitTitleCaseWords(string value)
+    internal static string SplitTitleCaseWords(string value)
     {
         if (string.IsNullOrEmpty(value))
         {
@@ -23,7 +23,7 @@ public static class HtmlHelper
         return HtmlHelper.HtmlEncode(value);
     }
 
-    public static string ReplaceUnderscores(string value)
+    internal static string ReplaceUnderscores(string value)
     {
         if (string.IsNullOrEmpty(value))
         {

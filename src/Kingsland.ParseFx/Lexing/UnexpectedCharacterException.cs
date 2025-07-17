@@ -2,16 +2,19 @@
 
 namespace Kingsland.ParseFx.Lexing;
 
+[PublicAPI]
 public sealed class UnexpectedCharacterException : Exception
 {
 
     #region Constructors
 
+    [PublicAPI]
     public UnexpectedCharacterException(SourceChar foundChar)
     {
         this.FoundChar = foundChar;
     }
 
+    [PublicAPI]
     public UnexpectedCharacterException(SourceChar foundChar, char expectedChar)
     {
         this.FoundChar = foundChar;
@@ -22,16 +25,19 @@ public sealed class UnexpectedCharacterException : Exception
 
     #region Properties
 
+    [PublicAPI]
     public SourceChar FoundChar
     {
         get;
     }
 
+    [PublicAPI]
     public char? ExpectedChar
     {
         get;
     }
 
+    [PublicAPI]
     public override string Message
     {
         get

@@ -1,10 +1,12 @@
 ﻿namespace Kingsland.ParseFx.Lexing.Matches;
 
+[PublicAPI]
 public sealed class RangeMatch : IMatch
 {
 
     #region Constructors
 
+    [PublicAPI]
     public RangeMatch(char fromValue, char toValue)
     {
         if (fromValue > toValue)
@@ -19,11 +21,13 @@ public sealed class RangeMatch : IMatch
 
     #region Properties
 
+    [PublicAPI]
     public char FromValue
     {
         get;
     }
 
+    [PublicAPI]
     public char ToValue
     {
         get;
@@ -33,6 +37,7 @@ public sealed class RangeMatch : IMatch
 
     #region LexerRule Members
 
+    [PublicAPI]
     public bool Matches(char value)
     {
         return (value >= this.FromValue) && (value <= this.ToValue);

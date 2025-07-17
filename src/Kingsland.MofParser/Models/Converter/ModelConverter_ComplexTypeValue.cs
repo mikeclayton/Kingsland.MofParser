@@ -9,7 +9,7 @@ internal static partial class ModelConverter
 
     #region 7.5.9 Complex type value
 
-    public static PropertyValue ConvertComplexTypeValueAst(ComplexTypeValueAst node)
+    internal static PropertyValue ConvertComplexTypeValueAst(ComplexTypeValueAst node)
     {
         return node switch
         {
@@ -19,14 +19,14 @@ internal static partial class ModelConverter
         };
     }
 
-    public static ComplexValueArray ConvertComplexValueArrayAst(ComplexValueArrayAst node)
+    internal static ComplexValueArray ConvertComplexValueArrayAst(ComplexValueArrayAst node)
     {
         return new(
             node.Values.Select(ModelConverter.ConvertComplexValueAst)
         );
     }
 
-    public static ComplexValueBase ConvertComplexValueAst(ComplexValueAst node)
+    internal static ComplexValueBase ConvertComplexValueAst(ComplexValueAst node)
     {
         if (node.IsAlias)
         {
@@ -43,7 +43,7 @@ internal static partial class ModelConverter
         }
     }
 
-    public static IEnumerable<Property> ConvertPropertyValueListAst(PropertyValueListAst node)
+    internal static IEnumerable<Property> ConvertPropertyValueListAst(PropertyValueListAst node)
     {
         return node.PropertyValues
             .Select(
@@ -54,7 +54,7 @@ internal static partial class ModelConverter
             );
     }
 
-    public static PropertyValue ConvertPropertyValueAst(PropertyValueAst node)
+    internal static PropertyValue ConvertPropertyValueAst(PropertyValueAst node)
     {
         return node switch
         {

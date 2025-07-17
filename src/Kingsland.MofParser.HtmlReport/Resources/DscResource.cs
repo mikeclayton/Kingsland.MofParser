@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 
 namespace Kingsland.MofParser.HtmlReport.Resources;
 
-public class DscResource
+internal class DscResource
 {
 
     #region Constructors
@@ -20,57 +20,57 @@ public class DscResource
 
     #region Properties
 
-    public string Filename
+    internal string Filename
     {
         get;
     }
 
-    public string ComputerName
+    internal string ComputerName
     {
         get;
     }
 
-    public Instance Instance
+    internal Instance Instance
     {
         get;
     }
 
-    public string? ResourceId =>
+    internal string? ResourceId =>
         this.GetStringProperty("ResourceID");
 
-    public string TypeName =>
+    internal string TypeName =>
         this.Instance.TypeName;
 
-    public string? ResourceType =>
+    internal string? ResourceType =>
         // ResourceID = "[ResourceType]ResourceName"
         this.ResourceId == null
             ? null
             : DscResource.GetResourceTypeFromResourceId(this.ResourceId);
 
-    public string? ResourceName =>
+    internal string? ResourceName =>
         // ResourceID = "[ResourceType]ResourceName"
         this.ResourceId == null
             ? null
             : DscResource.GetResourceNameFromResourceId(this.ResourceId);
 
-    public ReadOnlyCollection<string> DependsOn =>
+    internal ReadOnlyCollection<string> DependsOn =>
         this.Instance.Properties
             .Where(property => property.Name == "ResourceID")
             .SelectMany(property => ((LiteralValueArray)property.Value).Values)
             .Select(literalValue => ((StringValue)literalValue).Value)
             .ToList().AsReadOnly();
 
-    public string? ModuleName =>
+    internal string? ModuleName =>
         this.GetStringProperty(nameof(this.ModuleName));
 
-    public string? ModuleVersion =>
+    internal string? ModuleVersion =>
         this.GetStringProperty(nameof(this.ModuleVersion));
 
     #endregion
 
     #region Methods
 
-    public static DscResource FromInstance(string filename, string computerName, Instance instance)
+    internal static DscResource FromInstance(string filename, string computerName, Instance instance)
     {
         return instance.TypeName switch
         {

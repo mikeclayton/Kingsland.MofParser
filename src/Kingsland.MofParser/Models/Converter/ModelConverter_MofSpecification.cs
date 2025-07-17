@@ -8,7 +8,7 @@ internal static partial class ModelConverter
 
     #region 7.2 MOF specification
 
-    public static Module ConvertMofSpecificationAst(MofSpecificationAst node)
+    internal static Module ConvertMofSpecificationAst(MofSpecificationAst node)
     {
         return new Module(
             //enumerations: node.Productions

@@ -8,7 +8,7 @@ internal static class TokenStreamExtensions
 
     #region PeekIdentifierToken Methods
 
-    public static bool TryPeekIdentifierToken(this TokenStream stream, string name, out IdentifierToken? result)
+    internal static bool TryPeekIdentifierToken(this TokenStream stream, string name, out IdentifierToken? result)
     {
         return stream.TryPeek(
             t => t.IsKeyword(name),
@@ -20,7 +20,7 @@ internal static class TokenStreamExtensions
 
     #region ReadIdentifierToken Methods
 
-    public static IdentifierToken ReadIdentifierToken(this TokenStream stream, string name)
+    internal static IdentifierToken ReadIdentifierToken(this TokenStream stream, string name)
     {
         var token = stream.Read<IdentifierToken>();
         if (!token.IsKeyword(name))
@@ -30,13 +30,13 @@ internal static class TokenStreamExtensions
         return token;
     }
 
-    public static IdentifierToken ReadIdentifierToken(this TokenStream stream, Func<IdentifierToken, bool> predicate)
+    internal static IdentifierToken ReadIdentifierToken(this TokenStream stream, Func<IdentifierToken, bool> predicate)
     {
         var token = stream.Read<IdentifierToken>();
         return predicate(token) ? token : throw new UnexpectedTokenException(token);
     }
 
-    public static bool TryReadIdentifierToken(this TokenStream stream, string name, out IdentifierToken? result)
+    internal static bool TryReadIdentifierToken(this TokenStream stream, string name, out IdentifierToken? result)
     {
         if (stream.TryPeekIdentifierToken(name, out result))
         {

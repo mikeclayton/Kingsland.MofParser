@@ -1,10 +1,12 @@
 ﻿namespace Kingsland.ParseFx.Lexing.Matches;
 
+[PublicAPI]
 public sealed class CharArrayMatch : IMatch
 {
 
     #region Constructors
 
+    [PublicAPI]
     public CharArrayMatch(char[] values)
     {
         this.Values = values;
@@ -14,6 +16,7 @@ public sealed class CharArrayMatch : IMatch
 
     #region Properties
 
+    [PublicAPI]
     public char[] Values
     {
         get;
@@ -23,6 +26,7 @@ public sealed class CharArrayMatch : IMatch
 
     #region LexerRule Members
 
+    [PublicAPI]
     public bool Matches(char value)
     {
         return this.Values.Contains(value);

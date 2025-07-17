@@ -2,6 +2,7 @@
 
 namespace Kingsland.ParseFx.Text;
 
+[PublicAPI]
 public sealed class SourceStream
 {
 
