@@ -8,13 +8,13 @@ public sealed class EnumValueArray : EnumTypeValue
 {
 
     [PublicAPI]
-    public EnumValueArray(params EnumValue[] values)
+    internal EnumValueArray(params EnumValue[] values)
         : this((IEnumerable<EnumValue>)values)
     {
     }
 
     [PublicAPI]
-    public EnumValueArray(IEnumerable<EnumValue> values)
+    internal EnumValueArray(IEnumerable<EnumValue> values)
     {
         this.Values = (values ?? throw new ArgumentNullException(nameof(values)))
             .ToList().AsReadOnly();

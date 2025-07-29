@@ -100,6 +100,15 @@ public sealed record EnumerationDeclarationAst : MofProductionAst, IStructureFea
     #region Constructors
 
     internal EnumerationDeclarationAst(
+        QualifierValueAst[] qualifierList,
+        IdentifierToken enumName,
+        IdentifierToken enumType
+    ) : this(new(qualifierList), enumName, enumType, null
+    )
+    {
+    }
+
+    internal EnumerationDeclarationAst(
         IdentifierToken enumName,
         IdentifierToken enumType,
         IEnumerable<string>? enumElements

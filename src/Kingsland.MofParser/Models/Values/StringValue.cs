@@ -1,26 +1,35 @@
 ﻿using Kingsland.MofParser.Tokens;
+using System.Collections.ObjectModel;
 
 namespace Kingsland.MofParser.Models.Values;
 
 [PublicAPI]
-public sealed class StringValue : LiteralValue
+public sealed class StringValue : LiteralValue, IEnumElementValue
 {
 
     [PublicAPI]
-    public StringValue(string value)
+    internal StringValue(params string[] values)
     {
-        this.Value = value ?? throw new ArgumentNullException(nameof(value));
+        this.Values = values.ToList().AsReadOnly();
     }
 
     [PublicAPI]
-    public string Value
+    public ReadOnlyCollection<string> Values
     {
         get;
     }
 
+    public string Value =>
+        string.Join(string.Empty, this.Values);
+
     public override string ToString()
     {
-        return $"\"{StringLiteralToken.EscapeString(this.Value)}\"";
+        return string.Join(
+            string.Empty,
+            this.Values.Select(s => $"\"{StringLiteralToken.EscapeString(s)}\"")
+        );
     }
+
+    public static implicit operator StringValue(string value) => new([value]);
 
 }

@@ -40,7 +40,7 @@ public static class PowerShellDscHelper
         var ast = Parser.Parse(tokens);
         // scan the ast for any "instance" definitions and convert them
         var module = ModelConverter.ConvertMofSpecificationAst(ast);
-        var instances = module.Instances;
+        var instances = module.GetInstances().ToList().AsReadOnly();
         // return the result
         return instances;
     }

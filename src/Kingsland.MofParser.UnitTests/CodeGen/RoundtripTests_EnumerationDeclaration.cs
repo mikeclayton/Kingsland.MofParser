@@ -1,4 +1,6 @@
 ﻿using Kingsland.MofParser.Ast;
+using Kingsland.MofParser.Models.Types;
+using Kingsland.MofParser.Models.Values;
 using Kingsland.MofParser.Parsing;
 using Kingsland.MofParser.Tokens;
 using Kingsland.MofParser.UnitTests.Extensions;
@@ -45,7 +47,12 @@ public static partial class RoundtripTests
                     "MonthsEnum", "Integer"
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Enumeration(
+                    "MonthsEnum", "Integer"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test]
@@ -79,7 +86,12 @@ public static partial class RoundtripTests
                     "MonthsEnum", "String"
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Enumeration(
+                    "MonthsEnum", "String"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test]
@@ -113,7 +125,12 @@ public static partial class RoundtripTests
                     "MonthsEnum", "GOLF_MyEnum"
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Enumeration(
+                    "MonthsEnum", "GOLF_MyEnum"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test]
@@ -221,7 +238,88 @@ public static partial class RoundtripTests
                     ]
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Enumeration(
+                    "MonthsEnum", "String",
+                    [
+                        new("January"),
+                        new("February"),
+                        new("March"),
+                        new("April"),
+                        new("May"),
+                        new("June"),
+                        new("July"),
+                        new("August"),
+                        new("September"),
+                        new("October"),
+                        new("November"),
+                        new("December")
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
+        }
+
+        [Test]
+        public static void EnumerationDeclarationWithQualifiedValueShouldRoundtrip()
+        {
+            var newline = Environment.NewLine;
+            var sourceText = @"
+                [Abstract, OCL{""-- the key property cannot be NULL"", ""inv: InstanceId.size() = 10""}]
+                enumeration MonthsEnum : String
+                {
+                };
+            ".TrimIndent(newline).TrimString(newline);
+            var expectedTokens = new TokenBuilder()
+                // [Abstract, OCL{"-- the key property cannot be NULL", "inv: InstanceId.size() = 10"}]
+                .AttributeOpenToken()
+                .IdentifierToken("Abstract")
+                .CommaToken()
+                .WhitespaceToken(" ")
+                .IdentifierToken("OCL")
+                .BlockOpenToken()
+                .StringLiteralToken("-- the key property cannot be NULL")
+                .CommaToken()
+                .WhitespaceToken(" ")
+                .StringLiteralToken("inv: InstanceId.size() = 10")
+                .BlockCloseToken()
+                .AttributeCloseToken()
+                .WhitespaceToken(newline)
+                // enumeration MonthsEnum : String
+                .IdentifierToken("enumeration")
+                .WhitespaceToken(" ")
+                .IdentifierToken("MonthsEnum")
+                .WhitespaceToken(" ")
+                .ColonToken()
+                .WhitespaceToken(" ")
+                .IdentifierToken("String")
+                .WhitespaceToken(newline)
+                // {
+                .BlockOpenToken()
+                .WhitespaceToken(newline)
+                // };
+                .BlockCloseToken()
+                .StatementEndToken()
+                .ToList();
+            var expectedAst = new MofSpecificationAst(
+                new EnumerationDeclarationAst(
+                    [
+                        new("Abstract"),
+                        new("OCL", new QualifierValueArrayInitializerAst("-- the key property cannot be NULL", "inv: InstanceId.size() = 10"))
+                    ],
+                    "MonthsEnum", "String"
+                )
+            );
+            var expectedModule = new Module(
+                new Enumeration(
+                    [
+                        new("Abstract"),
+                        new("OCL", new LiteralValueArray("-- the key property cannot be NULL", "inv: InstanceId.size() = 10"))
+                    ],
+                    "MonthsEnum", "String"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test(Description = "https://github.com/mikeclayton/MofParser/issues/52")]
@@ -295,7 +393,15 @@ public static partial class RoundtripTests
                     ]
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Enumeration(
+                    "MonthsEnum", "uint32",
+                    [
+                        new("July", "July")
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
     }
@@ -353,11 +459,25 @@ public static partial class RoundtripTests
                             [
                                 new("Description", "myDescription")
                             ],
-                            "January", 1)
+                            "January", 1
+                        )
                     ]
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Enumeration(
+                    "MonthsEnum", "integer",
+                    [
+                        new(
+                            [
+                                new("Description", "myDescription")
+                            ],
+                            "January", 1
+                        )
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test(Description = "https://github.com/mikeclayton/MofParser/issues/41")]
@@ -403,7 +523,15 @@ public static partial class RoundtripTests
                     ]
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Enumeration(
+                    "MonthsEnum", "integer",
+                    [
+                        new("January", 1)
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test]
@@ -445,7 +573,15 @@ public static partial class RoundtripTests
                     ]
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Enumeration(
+                    "GOLF_StatesEnum", "string",
+                    [
+                        new("AL")
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test]
@@ -491,7 +627,15 @@ public static partial class RoundtripTests
                     ]
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Enumeration(
+                    "GOLF_StatesEnum", "string",
+                    [
+                        new("AL", "Alabama")
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
     }

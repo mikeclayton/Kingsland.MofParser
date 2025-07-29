@@ -1,4 +1,5 @@
 ﻿using Kingsland.MofParser.Ast;
+using Kingsland.MofParser.Models.Types;
 using Kingsland.MofParser.Tokens;
 using Kingsland.MofParser.UnitTests.Extensions;
 using NUnit.Framework;
@@ -64,7 +65,20 @@ public static partial class RoundtripTests
                     ";"
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Structure(
+                    "Sponsor",
+                    [
+                        new Property(
+                            [
+                                new("Description", "Monthly salary in $US")
+                            ],
+                            "string", "Name"
+                        )
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test]
@@ -135,7 +149,15 @@ public static partial class RoundtripTests
                     ";"
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Structure(
+                    "Sponsor",
+                    [
+                        new Structure("Nested")
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test]
@@ -191,7 +213,17 @@ public static partial class RoundtripTests
                     ";"
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Structure(
+                    "Sponsor",
+                    [
+                        new Enumeration(
+                            "MonthsEnum", "Integer"
+                        )
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test]
@@ -235,7 +267,15 @@ public static partial class RoundtripTests
                     ";"
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Structure(
+                    "Sponsor",
+                    [
+                        new Property("string", "Name")
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
     }

@@ -209,7 +209,7 @@ public sealed record ParameterDeclarationAst : AstNode
     }
 
     [PublicAPI]
-    public IdentifierToken ParameterName
+    public IdentifierToken? ParameterRef
     {
         get;
     }
@@ -219,7 +219,7 @@ public sealed record ParameterDeclarationAst : AstNode
         this.ParameterRef is not null;
 
     [PublicAPI]
-    public IdentifierToken? ParameterRef
+    public IdentifierToken ParameterName
     {
         get;
     }

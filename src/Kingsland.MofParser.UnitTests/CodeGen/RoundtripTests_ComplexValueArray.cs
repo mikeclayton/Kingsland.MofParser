@@ -1,4 +1,6 @@
 ﻿using Kingsland.MofParser.Ast;
+using Kingsland.MofParser.Models.Types;
+using Kingsland.MofParser.Models.Values;
 using Kingsland.MofParser.Tokens;
 using Kingsland.MofParser.UnitTests.Extensions;
 using NUnit.Framework;
@@ -58,7 +60,17 @@ public static partial class RoundtripTests
                     ";"
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Instance(
+                    "GOLF_ClubMember",
+                    [
+                        new("LastPaymentDate", new ComplexValueArray(
+                            new ComplexValueAlias("MyAliasIdentifier")
+                        ))
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test]
@@ -109,7 +121,18 @@ public static partial class RoundtripTests
                     ";"
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Instance(
+                    "GOLF_ClubMember",
+                    [
+                        new("LastPaymentDate", new ComplexValueArray(
+                            new ComplexValueAlias("MyAliasIdentifier"),
+                            new ComplexValueAlias("MyOtherAliasIdentifier")
+                        ))
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
     }

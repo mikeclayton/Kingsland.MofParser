@@ -55,7 +55,7 @@ internal class DscResource
 
     internal ReadOnlyCollection<string> DependsOn =>
         this.Instance.Properties
-            .Where(property => property.Name == "ResourceID")
+            .Where(property => property.Key == "ResourceID")
             .SelectMany(property => ((LiteralValueArray)property.Value).Values)
             .Select(literalValue => ((StringValue)literalValue).Value)
             .ToList().AsReadOnly();
@@ -97,14 +97,12 @@ internal class DscResource
 
     protected string? GetStringProperty(string propertyName)
     {
-        var property = this.Instance.Properties
-            .SingleOrDefault(property => property.Name == propertyName);
-        if (property is null)
+        if (!this.Instance.Properties.TryGetValue(propertyName, out var propertyValue))
         {
             return null;
         }
-        var value = ((StringValue)property.Value).Value;
-        return value;
+        var stringValue = (StringValue)propertyValue;
+        return stringValue.Value;
     }
 
     #endregion

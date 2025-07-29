@@ -5,7 +5,7 @@ public sealed class ComplexValueAlias : ComplexValueBase
 {
 
     [PublicAPI]
-    public ComplexValueAlias(string name)
+    internal ComplexValueAlias(string name)
     {
         this.Name = name ?? throw new ArgumentNullException(nameof(name));
     }

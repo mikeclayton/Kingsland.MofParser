@@ -24,7 +24,7 @@ static class Program
         var module = Parser.ParseText(sourceText);
 
         // display the instances
-        foreach (var instance in module.Instances)
+        foreach (var instance in module.GetInstances())
         {
             Console.WriteLine("----------------------------------");
             Console.WriteLine($"typename = {instance.TypeName}");
@@ -32,7 +32,7 @@ static class Program
             Console.WriteLine("properties:");
             foreach (var property in instance.Properties)
             {
-                Console.WriteLine("    {0} = {1}", property.Name.PadRight(13), property.Value);
+                Console.WriteLine("    {0} = {1}", property.Key.PadRight(13), property.Value);
             }
             Console.WriteLine("----------------------------------");
         }

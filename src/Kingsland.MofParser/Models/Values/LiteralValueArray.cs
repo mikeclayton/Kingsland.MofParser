@@ -4,17 +4,17 @@ using System.Text;
 namespace Kingsland.MofParser.Models.Values;
 
 [PublicAPI]
-public sealed class LiteralValueArray : PrimitiveTypeValue
+public sealed class LiteralValueArray : PrimitiveTypeValue, IQualifierValue
 {
 
     [PublicAPI]
-    public LiteralValueArray(params LiteralValue[] values)
+    internal LiteralValueArray(params LiteralValue[] values)
         : this((IEnumerable<LiteralValue>)values)
     {
     }
 
     [PublicAPI]
-    public LiteralValueArray(IEnumerable<LiteralValue> values)
+    internal LiteralValueArray(IEnumerable<LiteralValue> values)
     {
         this.Values = (values ?? throw new ArgumentNullException(nameof(values)))
             .ToList().AsReadOnly();

@@ -1,4 +1,6 @@
 ﻿using Kingsland.MofParser.Ast;
+using Kingsland.MofParser.Models.Types;
+using Kingsland.MofParser.Models.Values;
 using Kingsland.MofParser.Tokens;
 using Kingsland.MofParser.UnitTests.Extensions;
 using NUnit.Framework;
@@ -53,7 +55,15 @@ public static partial class RoundtripTests
                     ]
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Class(
+                    "GOLF_Base",
+                    [
+                        new Property("Integer", "Severity")
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test]
@@ -98,7 +108,15 @@ public static partial class RoundtripTests
                     ]
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Class(
+                    "GOLF_Base",
+                    [
+                        new Property("Integer", "Severity", true)
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test]
@@ -145,7 +163,15 @@ public static partial class RoundtripTests
                     ]
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Class(
+                    "GOLF_Base",
+                    [
+                        new Property("Integer", "Severity", 0)
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test]
@@ -202,7 +228,15 @@ public static partial class RoundtripTests
                     ]
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Class(
+                    "GOLF_Base",
+                    [
+                        new Property("Integer", true, "Severity", new LiteralValueArray(1, 2, 3))
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test(Description = "https://github.com/mikeclayton/MofParser/issues/28")]
@@ -299,9 +333,134 @@ public static partial class RoundtripTests
                     }
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Class(
+                    "GOLF_Base",
+                    [
+                        new Property("uint8", "SeverityUint8"),
+                        new Property("uint16", "SeverityUint16"),
+                        new Property("uint32", "SeverityUint32"),
+                        new Property("uint64", "SeverityUint64"),
+                        new Property("sint8", "SeveritySint8"),
+                        new Property("sint16", "SeveritySint16"),
+                        new Property("sint32", "SeveritySint32"),
+                        new Property("sint64", "SeveritySint64")
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
+    }
+
+    [Test]
+    public static void PropertyDeclarationsWithQualifierListShouldRoundtrip()
+    {
+        var newline = Environment.NewLine;
+        var indent = "    ";
+        var sourceText = @"
+                class GOLF_Base
+                {
+                    [Description(""an instance of a class that derives from the GOLF_Base class. ""), Key] string InstanceID;
+                    [Description(""A short textual description (one- line string) of the""), MaxLen(64)] string Caption = Null;
+                };
+            ".TrimIndent(newline).TrimString(newline);
+        var expectedTokens = new TokenBuilder()
+            // class GOLF_Base
+            .IdentifierToken("class")
+            .WhitespaceToken(" ")
+            .IdentifierToken("GOLF_Base")
+            .WhitespaceToken(newline)
+            // {
+            .BlockOpenToken()
+            .WhitespaceToken(newline + indent)
+            //     [Description("an instance of a class that derives from the GOLF_Base class. "), Key] string InstanceID;;
+            .AttributeOpenToken()
+            .IdentifierToken("Description")
+            .ParenthesisOpenToken()
+            .StringLiteralToken("an instance of a class that derives from the GOLF_Base class. ")
+            .ParenthesisCloseToken()
+            .CommaToken()
+            .WhitespaceToken(" ")
+            .IdentifierToken("Key")
+            .AttributeCloseToken()
+            .WhitespaceToken(" ")
+            .IdentifierToken("string")
+            .WhitespaceToken(" ")
+            .IdentifierToken("InstanceID")
+            .StatementEndToken()
+            .WhitespaceToken(newline + indent)
+            //     [Description("A short textual description (one- line string) of the"), MaxLen(64)] string Caption = Null;
+            .AttributeOpenToken()
+            .IdentifierToken("Description")
+            .ParenthesisOpenToken()
+            .StringLiteralToken("A short textual description (one- line string) of the")
+            .ParenthesisCloseToken()
+            .CommaToken()
+            .WhitespaceToken(" ")
+            .IdentifierToken("MaxLen")
+            .ParenthesisOpenToken()
+            .IntegerLiteralToken(IntegerKind.DecimalValue, 64)
+            .ParenthesisCloseToken()
+            .AttributeCloseToken()
+            .WhitespaceToken(" ")
+            .IdentifierToken("string")
+            .WhitespaceToken(" ")
+            .IdentifierToken("Caption")
+            .WhitespaceToken(" ")
+            .EqualsOperatorToken()
+            .WhitespaceToken(" ")
+            .NullLiteralToken("Null")
+            .StatementEndToken()
+            .WhitespaceToken(newline)
+            // };
+            .BlockCloseToken()
+            .StatementEndToken()
+            .ToList();
+        var expectedAst = new MofSpecificationAst(
+            new ClassDeclarationAst(
+                "GOLF_Base",
+                [
+                    new PropertyDeclarationAst(
+                        [
+                            new("Description", "an instance of a class that derives from the GOLF_Base class. "),
+                            new("Key")
+                        ],
+                        "string", "InstanceID"
+                    ),
+                    new PropertyDeclarationAst(
+                        [
+                            new("Description", "A short textual description (one- line string) of the"),
+                            new("MaxLen", IntegerKind.DecimalValue, 64)
+                        ],
+                        "string", "Caption",
+                        NullValueAst.Null
+                    )
+                ]
+            )
+        );
+        var expectedModule = new Module(
+            new Class(
+                "GOLF_Base",
+                [
+                    new Property(
+                        [
+                            new("Description", new StringValue("an instance of a class that derives from the GOLF_Base class. ")),
+                            new("Key")
+                        ],
+                        "string", "InstanceID"
+                    ),
+                    new Property(
+                        [
+                            new("Description", new StringValue("A short textual description (one- line string) of the")),
+                            new("MaxLen", new IntegerValue(64))
+                        ],
+                        "string", "Caption", NullValue.Null
+                    )
+                ]
+            )
+        );
+        RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
     }
 
     #endregion

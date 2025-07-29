@@ -1,4 +1,6 @@
 ﻿using Kingsland.MofParser.Ast;
+using Kingsland.MofParser.Models.Types;
+using Kingsland.MofParser.Models.Values;
 using Kingsland.MofParser.Tokens;
 using Kingsland.MofParser.UnitTests.Extensions;
 using NUnit.Framework;
@@ -55,7 +57,17 @@ public static partial class RoundtripTests
                     ]
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Class(
+                    "GOLF_Club",
+                    [
+                        new Method(
+                            "Integer", "GetMembersWithOutstandingFees"
+                        )
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test]
@@ -105,7 +117,19 @@ public static partial class RoundtripTests
                     ]
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Class(
+                    "GOLF_Club",
+                    [
+                        new Method(
+                            "Integer", "GetMembersWithOutstandingFees", [
+                                new("GOLF_ClubMember", "lateMembers")
+                            ]
+                        )
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test]
@@ -157,7 +181,19 @@ public static partial class RoundtripTests
                     ]
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Class(
+                    "GOLF_Club",
+                    [
+                        new Method(
+                            "Integer", "GetMembersWithOutstandingFees", [
+                                new("GOLF_ClubMember", "lateMembers", true)
+                            ]
+                        )
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test]
@@ -204,6 +240,18 @@ public static partial class RoundtripTests
                         new MethodDeclarationAst(
                             "Integer", "GetMembersWithOutstandingFees", [
                                 new("GOLF_ClubMember", "REF", "lateMembers")
+                            ]
+                        )
+                    ]
+                )
+            );
+            var expectedModule = new Module(
+                new Class(
+                    "GOLF_Club",
+                    [
+                        new Method(
+                            "Integer", "GetMembersWithOutstandingFees", [
+                                new("GOLF_ClubMember", true, "lateMembers")
                             ]
                         )
                     ]
@@ -265,7 +313,19 @@ public static partial class RoundtripTests
                     ]
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Class(
+                    "GOLF_Club",
+                    [
+                        new Method(
+                            "Integer", "GetMembersWithOutstandingFees", [
+                                new("GOLF_ClubMember", true, "lateMembers", new ComplexValueAlias("MyDefaultValueAlias"))
+                            ]
+                        )
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test(Description = "https://github.com/mikeclayton/MofParser/issues/27")]
@@ -319,7 +379,19 @@ public static partial class RoundtripTests
                     ]
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Class(
+                    "GOLF_Professional", "GOLF_ClubMember",
+                    [
+                        new Method(
+                            "GOLF_ResultCodeEnum", "GetNumberOfProfessionals", [
+                                new("ProfessionalStatusEnum", "Status")
+                            ]
+                        )
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test]
@@ -377,7 +449,19 @@ public static partial class RoundtripTests
                     ]
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Class(
+                    "GOLF_Professional", "GOLF_ClubMember",
+                    [
+                        new Method(
+                            "GOLF_ResultCodeEnum", "GetNumberOfProfessionals", [
+                                new("ProfessionalStatusEnum", "Status", new EnumValue("Professional"))
+                            ]
+                        )
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test]
@@ -429,7 +513,19 @@ public static partial class RoundtripTests
                     ]
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Class(
+                    "GOLF_Club",
+                    [
+                        new Method(
+                            "Integer", true, "GetMembersWithOutstandingFees", [
+                                new("GOLF_ClubMember", "lateMembers")
+                            ]
+                        )
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test(Description = "https://github.com/mikeclayton/MofParser/issues/38")]
@@ -490,7 +586,8 @@ public static partial class RoundtripTests
                     "GOLF_Professional", "GOLF_ClubMember",
                     [
                         new MethodDeclarationAst(
-                            "GOLF_ResultCodeEnum", "GetNumberOfProfessionals", [
+                            "GOLF_ResultCodeEnum", "GetNumberOfProfessionals",
+                            [
                                 new("Integer", "NoOfPros"),
                                 new("GOLF_Club", "Club"),
                                 new("ProfessionalStatusEnum", "Status", new EnumValueAst("Professional"))
@@ -499,7 +596,21 @@ public static partial class RoundtripTests
                     ]
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Class(
+                    "GOLF_Professional", "GOLF_ClubMember",
+                    [
+                        new Method(
+                            "GOLF_ResultCodeEnum", "GetNumberOfProfessionals", [
+                                new("Integer", "NoOfPros"),
+                                new("GOLF_Club", "Club"),
+                                new("ProfessionalStatusEnum", "Status", new EnumValue("Professional"))
+                            ]
+                        )
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test(Description = "https://github.com/mikeclayton/MofParser/issues/28")]
@@ -704,7 +815,54 @@ public static partial class RoundtripTests
                     ]
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Class(
+                    "Win32_SoftwareFeature", "CIM_SoftwareFeature",
+                    [
+                        new Method(
+                            "uint8", "ReinstallUint8", [
+                                new("integer", "ReinstallMode", 1)
+                            ]
+                        ),
+                        new Method(
+                            "uint16", "ReinstallUint16", [
+                                new("integer", "ReinstallMode", 1)
+                            ]
+                        ),
+                        new Method(
+                            "uint32", "ReinstallUint32", [
+                                new("integer", "ReinstallMode", 1)
+                            ]
+                        ),
+                        new Method(
+                            "uint64", "ReinstallUint64", [
+                                new("integer", "ReinstallMode", 1)
+                            ]
+                        ),
+                        new Method(
+                            "sint8", "ReinstallUint8", [
+                                new("integer", "ReinstallMode", 1)
+                            ]
+                        ),
+                        new Method(
+                            "sint16", "ReinstallUint16", [
+                                new("integer", "ReinstallMode", 1)
+                            ]
+                        ),
+                        new Method(
+                            "sint32", "ReinstallUint32", [
+                                new("integer", "ReinstallMode", 1)
+                            ]
+                        ),
+                        new Method(
+                            "sint64", "ReinstallUint64", [
+                                new("integer", "ReinstallMode", 1)
+                            ]
+                        )
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test(Description = "https://github.com/mikeclayton/MofParser/issues/28")]
@@ -909,7 +1067,55 @@ public static partial class RoundtripTests
                     ]
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+
+            var expectedModule = new Module(
+                new Class(
+                    "Win32_SoftwareFeature", "CIM_SoftwareFeature",
+                    [
+
+                        new Method(
+                            "integer", "ReinstallUint8", [
+                                new("uint8", "ReinstallMode", 1)
+                            ]
+                        ),
+                        new Method(
+                            "integer", "ReinstallUint16", [
+                                new("uint16", "ReinstallMode", 1)
+                            ]
+                        ),
+                        new Method(
+                            "integer", "ReinstallUint32", [
+                                new("uint32", "ReinstallMode", 1)
+                            ]
+                        ),
+                        new Method(
+                            "integer", "ReinstallUint64", [
+                                new("uint64", "ReinstallMode", 1)
+                            ]
+                        ),
+                        new Method(
+                            "integer", "ReinstallUint8", [
+                                new("sint8", "ReinstallMode", 1)
+                            ]
+                        ),
+                        new Method(
+                            "integer", "ReinstallUint16", [
+                                new("sint16", "ReinstallMode", 1)
+                            ]
+                        ),
+                        new Method(
+                            "integer", "ReinstallUint32", [
+                                new("sint32", "ReinstallMode", 1)
+                            ]
+                        ),
+                        new Method(
+                            "integer", "ReinstallUint64", [
+                                new("sint64", "ReinstallMode", 1)
+                            ]
+                        )
+                    ]
+                )
+            ); RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
     }

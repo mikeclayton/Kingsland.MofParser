@@ -1,4 +1,5 @@
 ﻿using Kingsland.MofParser.Ast;
+using Kingsland.MofParser.Models.Types;
 using Kingsland.MofParser.Tokens;
 using Kingsland.MofParser.UnitTests.Extensions;
 using NUnit.Framework;
@@ -36,7 +37,13 @@ public static partial class RoundtripTests
                     "GlobalStructs/GOLF_Address.mof"
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Pragma(
+                    "include",
+                    "GlobalStructs/GOLF_Address.mof"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test]
@@ -65,7 +72,13 @@ public static partial class RoundtripTests
                     [ "GlobalStructs", "/", "GOLF_Address.mof" ]
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Pragma(
+                    "include",
+                    "GlobalStructs/GOLF_Address.mof"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
     }

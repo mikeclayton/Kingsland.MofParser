@@ -37,21 +37,19 @@ internal static partial class ModelConverter
         else
         {
             return new ComplexValueObject(
-                (node.TypeName ?? throw new InvalidOperationException()).Name,
+                node.TypeName?.Name,
+                node.Alias?.Name,
                 ModelConverter.ConvertPropertyValueListAst(node.PropertyValues)
             );
         }
     }
 
-    private static IEnumerable<Property> ConvertPropertyValueListAst(PropertyValueListAst node)
+    private static IDictionary<string, PropertyValue> ConvertPropertyValueListAst(PropertyValueListAst node)
     {
-        return node.PropertyValues
-            .Select(
-                kvp => new Property(
-                    name: kvp.Key,
-                    value: ModelConverter.ConvertPropertyValueAst(kvp.Value)
-                )
-            );
+        return node.PropertyValues.ToDictionary(
+            kvp => kvp.Key,
+            kvp => ModelConverter.ConvertPropertyValueAst(kvp.Value)
+        );
     }
 
     private static PropertyValue ConvertPropertyValueAst(PropertyValueAst node)

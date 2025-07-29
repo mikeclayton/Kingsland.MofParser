@@ -6,14 +6,19 @@ using System.Text;
 namespace Kingsland.MofParser.Models.Values;
 
 [PublicAPI]
-public sealed class ComplexValueObject : ComplexValueBase
+public sealed class ComplexValueObject : ComplexValueBase, IProduction
 {
 
-    internal ComplexValueObject(string typeName, IEnumerable<Property> properties)
+    internal ComplexValueObject(string typeName, IEnumerable<KeyValuePair<string, PropertyValue>>? properties = null)
+        : this(typeName, null, properties)
+    {
+    }
+
+    internal ComplexValueObject(string typeName, string? alias, IEnumerable<KeyValuePair<string, PropertyValue>>? properties = null)
     {
         this.TypeName = typeName ?? throw new ArgumentNullException(nameof(typeName));
-        this.Properties = (properties ?? throw new ArgumentNullException(nameof(properties)))
-            .ToList().AsReadOnly();
+        this.Alias = alias;
+        this.Properties = (properties ?? []).ToDictionary().AsReadOnly();
     }
 
     [PublicAPI]
@@ -23,33 +28,16 @@ public sealed class ComplexValueObject : ComplexValueBase
     }
 
     [PublicAPI]
-    public ReadOnlyCollection<Property> Properties
+    public string? Alias
     {
         get;
     }
 
-    //public T GetValue<T>(string name)
-    //{
-    //    return (T)this.Properties.Single(p => p.Name == name).Value;
-    //}
-
-    //public bool TryGetValue<T>(string name, out T result)
-    //{
-    //    var property = this.Properties.SingleOrDefault(p => p.Name == name);
-    //    if (property == null)
-    //    {
-    //        result = default;
-    //        return false;
-    //    }
-    //    var value = property.Value;
-    //    if (value is T typed)
-    //    {
-    //        result = typed;
-    //        return true;
-    //    }
-    //    result = default;
-    //    return false;
-    //}
+    [PublicAPI]
+    public ReadOnlyDictionary<string, PropertyValue> Properties
+    {
+        get;
+    }
 
     public override string ToString()
     {

@@ -6,22 +6,44 @@ namespace Kingsland.MofParser.Models.Types;
 public sealed record Module
 {
 
-    //[Obsolete("Use the constructor with IEnumerable<Instance> instead.")]
-    //internal Module(params Instance[] instances)
-    //    : this((IEnumerable<Instance>)instances)
-    //{
-    //}
-
-    internal Module(IEnumerable<Instance> instances)
+    internal Module(IEnumerable<IProduction>? productions = null)
     {
-        this.Instances = (instances ?? throw new ArgumentNullException(nameof(instances)))
-            .ToList().AsReadOnly();
+        this.Productions = (productions ?? []).ToList().AsReadOnly();
+    }
+
+    internal Module(params IProduction[] productions)
+    {
+        this.Productions = productions.ToList().AsReadOnly();
     }
 
     [PublicAPI]
-    public ReadOnlyCollection<Instance> Instances
+    public ReadOnlyCollection<IProduction> Productions
     {
         get;
+    }
+
+    [PublicAPI]
+    public IEnumerable<Association> GetAssociations()
+    {
+        return this.Productions
+            .Where(production => production is Association)
+            .Cast<Association>();
+    }
+
+    [PublicAPI]
+    public IEnumerable<Class> GetClasses()
+    {
+        return this.Productions
+            .Where(production => production is Class)
+            .Cast<Class>();
+    }
+
+    [PublicAPI]
+    public IEnumerable<Instance> GetInstances()
+    {
+        return this.Productions
+            .Where(production => production is Instance)
+            .Cast<Instance>();
     }
 
 }

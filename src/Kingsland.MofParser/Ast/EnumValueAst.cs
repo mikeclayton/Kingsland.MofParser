@@ -59,16 +59,12 @@ public sealed record EnumValueAst : EnumTypeValueAst
 
     #region Constructors
 
-    internal EnumValueAst(
-        IdentifierToken enumLiteral
-    ) : this(null, enumLiteral)
+    internal EnumValueAst(IdentifierToken enumLiteral)
+        : this(null, enumLiteral)
     {
     }
 
-    internal EnumValueAst(
-        IdentifierToken? enumName,
-        IdentifierToken enumLiteral
-    )
+    internal EnumValueAst(IdentifierToken? enumName, IdentifierToken enumLiteral)
     {
         this.EnumName = enumName;
         this.EnumLiteral = enumLiteral ?? throw new ArgumentNullException(nameof(enumLiteral));
@@ -92,13 +88,9 @@ public sealed record EnumValueAst : EnumTypeValueAst
 
     #endregion
 
-
     #region Converters
 
-    public static implicit operator EnumValueAst(string enumName)
-    {
-        return new EnumValueAst((IdentifierToken)enumName);
-    }
+    public static implicit operator EnumValueAst(string enumLiteral) => new((IdentifierToken)enumLiteral);
 
     #endregion
 

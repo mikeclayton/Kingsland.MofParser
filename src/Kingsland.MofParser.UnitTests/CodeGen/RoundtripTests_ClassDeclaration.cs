@@ -1,4 +1,6 @@
 ﻿using Kingsland.MofParser.Ast;
+using Kingsland.MofParser.Models.Types;
+using Kingsland.MofParser.Models.Values;
 using Kingsland.MofParser.Tokens;
 using Kingsland.MofParser.UnitTests.Extensions;
 using NUnit.Framework;
@@ -40,7 +42,12 @@ public static partial class RoundtripTests
                     "GOLF_Base"
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Class(
+                    "GOLF_Base"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test]
@@ -74,11 +81,74 @@ public static partial class RoundtripTests
                     "GOLF_Base", "GOLF_Superclass"
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Class(
+                    "GOLF_Base", "GOLF_Superclass"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test]
-        public static void ClassDeclarationWithClassFeaturesShouldRoundtrip()
+        public static void ClassDeclarationsWithQualifierListShouldRoundtrip()
+        {
+            var newline = Environment.NewLine;
+            var sourceText = @"
+                [Abstract, OCL{""-- the key property cannot be NULL"", ""inv: InstanceId.size() = 10""}]
+                class GOLF_Base
+                {
+                };
+            ".TrimIndent(newline).TrimString(newline);
+            var expectedTokens = new TokenBuilder()
+                // [Abstract, OCL{"-- the key property cannot be NULL", "inv: InstanceId.size() = 10"}]
+                .AttributeOpenToken()
+                .IdentifierToken("Abstract")
+                .CommaToken()
+                .WhitespaceToken(" ")
+                .IdentifierToken("OCL")
+                .BlockOpenToken()
+                .StringLiteralToken("-- the key property cannot be NULL")
+                .CommaToken()
+                .WhitespaceToken(" ")
+                .StringLiteralToken("inv: InstanceId.size() = 10")
+                .BlockCloseToken()
+                .AttributeCloseToken()
+                .WhitespaceToken(newline)
+                // class GOLF_Base
+                .IdentifierToken("class")
+                .WhitespaceToken(" ")
+                .IdentifierToken("GOLF_Base")
+                .WhitespaceToken(newline)
+                // {
+                .BlockOpenToken()
+                .WhitespaceToken(newline)
+                // };
+                .BlockCloseToken()
+                .StatementEndToken()
+                .ToList();
+            var expectedAst = new MofSpecificationAst(
+                new ClassDeclarationAst(
+                    [
+                        new("Abstract"),
+                        new("OCL", new QualifierValueArrayInitializerAst("-- the key property cannot be NULL", "inv: InstanceId.size() = 10"))
+                    ],
+                    "GOLF_Base"
+                )
+            );
+            var expectedModule = new Module(
+                new Class(
+                    [
+                        new("Abstract"),
+                        new("OCL", new LiteralValueArray("-- the key property cannot be NULL", "inv: InstanceId.size() = 10"))
+                    ],
+                    "GOLF_Base"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
+        }
+
+        [Test]
+        public static void ClassDeclarationWithPropertyDeclarationsShouldRoundtrip()
         {
             var newline = Environment.NewLine;
             var indent = "    ";
@@ -132,115 +202,16 @@ public static partial class RoundtripTests
                     ]
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
-        }
-
-        [Test]
-        public static void ClassDeclarationsWithQualifierListShouldRoundtrip()
-        {
-            var newline = Environment.NewLine;
-            var indent = "    ";
-            var sourceText = @"
-                [Abstract, OCL{""-- the key property cannot be NULL"", ""inv: InstanceId.size() = 10""}]
-                class GOLF_Base
-                {
-                    [Description(""an instance of a class that derives from the GOLF_Base class. ""), Key] string InstanceID;
-                    [Description(""A short textual description (one- line string) of the""), MaxLen(64)] string Caption = Null;
-                };
-            ".TrimIndent(newline).TrimString(newline);
-            var expectedTokens = new TokenBuilder()
-                // [Abstract, OCL{"-- the key property cannot be NULL", "inv: InstanceId.size() = 10"}]
-                .AttributeOpenToken()
-                .IdentifierToken("Abstract")
-                .CommaToken()
-                .WhitespaceToken(" ")
-                .IdentifierToken("OCL")
-                .BlockOpenToken()
-                .StringLiteralToken("-- the key property cannot be NULL")
-                .CommaToken()
-                .WhitespaceToken(" ")
-                .StringLiteralToken("inv: InstanceId.size() = 10")
-                .BlockCloseToken()
-                .AttributeCloseToken()
-                .WhitespaceToken(newline)
-                // class GOLF_Base
-                .IdentifierToken("class")
-                .WhitespaceToken(" ")
-                .IdentifierToken("GOLF_Base")
-                .WhitespaceToken(newline)
-                // {
-                .BlockOpenToken()
-                .WhitespaceToken(newline + indent)
-                //     [Description("an instance of a class that derives from the GOLF_Base class. "), Key] string InstanceID;;
-                .AttributeOpenToken()
-                .IdentifierToken("Description")
-                .ParenthesisOpenToken()
-                .StringLiteralToken("an instance of a class that derives from the GOLF_Base class. ")
-                .ParenthesisCloseToken()
-                .CommaToken()
-                .WhitespaceToken(" ")
-                .IdentifierToken("Key")
-                .AttributeCloseToken()
-                .WhitespaceToken(" ")
-                .IdentifierToken("string")
-                .WhitespaceToken(" ")
-                .IdentifierToken("InstanceID")
-                .StatementEndToken()
-                .WhitespaceToken(newline + indent)
-                //     [Description("A short textual description (one- line string) of the"), MaxLen(64)] string Caption = Null;
-                .AttributeOpenToken()
-                .IdentifierToken("Description")
-                .ParenthesisOpenToken()
-                .StringLiteralToken("A short textual description (one- line string) of the")
-                .ParenthesisCloseToken()
-                .CommaToken()
-                .WhitespaceToken(" ")
-                .IdentifierToken("MaxLen")
-                .ParenthesisOpenToken()
-                .IntegerLiteralToken(IntegerKind.DecimalValue, 64)
-                .ParenthesisCloseToken()
-                .AttributeCloseToken()
-                .WhitespaceToken(" ")
-                .IdentifierToken("string")
-                .WhitespaceToken(" ")
-                .IdentifierToken("Caption")
-                .WhitespaceToken(" ")
-                .EqualsOperatorToken()
-                .WhitespaceToken(" ")
-                .NullLiteralToken("Null")
-                .StatementEndToken()
-                .WhitespaceToken(newline)
-                // };
-                .BlockCloseToken()
-                .StatementEndToken()
-                .ToList();
-            var expectedAst = new MofSpecificationAst(
-                new ClassDeclarationAst(
-                    [
-                        new("Abstract"),
-                        new("OCL", new QualifierValueArrayInitializerAst("-- the key property cannot be NULL", "inv: InstanceId.size() = 10"))
-                    ],
+            var expectedModule = new Module(
+                new Class(
                     "GOLF_Base",
                     [
-                        new PropertyDeclarationAst(
-                            [
-                                new("Description", "an instance of a class that derives from the GOLF_Base class. "),
-                                new("Key")
-                            ],
-                            "string", "InstanceID"
-                        ),
-                        new PropertyDeclarationAst(
-                            [
-                                new("Description", "A short textual description (one- line string) of the"),
-                                new("MaxLen", IntegerKind.DecimalValue, 64)
-                            ],
-                            "string", "Caption",
-                            NullValueAst.Null
-                        )
+                        new Property("string", "InstanceID"),
+                        new Property("string", "Caption", NullValue.Null)
                     ]
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
     }
