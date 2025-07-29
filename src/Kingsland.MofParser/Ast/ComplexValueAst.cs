@@ -28,7 +28,7 @@ public sealed record ComplexValueAst : ComplexTypeValueAst
         [PublicAPI]
         public Builder()
         {
-            this.PropertyValues = new([]);
+            this.PropertyValues = new();
         }
 
         [PublicAPI]
