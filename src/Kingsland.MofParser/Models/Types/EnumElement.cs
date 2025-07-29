@@ -48,10 +48,10 @@ public sealed class EnumElement
                 // value can be null if the enum's underlying type is "string",
                 // in which case the value is the same as the name
                 null,
-            IntegerValue i => value,
-            StringValue s => value,
+            IntegerValue => value,
+            StringValue => value,
             _ => throw new ArgumentException(
-                $"Unsupported value type: {value?.GetType().Name}. Expected {nameof(IntegerValue)} or {nameof(StringValue)}.", nameof(value)
+                $"Unsupported value type: {value.GetType().Name}. Expected {nameof(IntegerValue)} or {nameof(StringValue)}.", nameof(value)
             )
         };
     }

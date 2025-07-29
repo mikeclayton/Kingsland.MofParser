@@ -13,7 +13,7 @@ public sealed class Method : IStructureFeature
     }
 
     internal Method(Qualifier[] qualifiers, string returnType, string name)
-        : this((IEnumerable<Qualifier>?) qualifiers, returnType, false, name, null)
+        : this(qualifiers, returnType, false, name, null)
     {
     }
 

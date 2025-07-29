@@ -15,7 +15,7 @@ internal static partial class ModelConverter
         );
     }
 
-    internal static IProduction ConvertMofProductionAst(MofProductionAst node)
+    private static IProduction ConvertMofProductionAst(MofProductionAst node)
     {
         return node switch
         {

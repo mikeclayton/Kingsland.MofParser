@@ -14,9 +14,7 @@ internal static partial class ModelConverter
             ModelConverter.ConvertQualifierListAst(node.QualifierList),
             node.ClassName.Name,
             node.SuperClass?.Name,
-            node.ClassFeatures.Select(
-                classFeature => ModelConverter.ConvertClassFeatureAst(classFeature)
-            )
+            node.ClassFeatures.Select(ModelConverter.ConvertClassFeatureAst)
         );
     }
 

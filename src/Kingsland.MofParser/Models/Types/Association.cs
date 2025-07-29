@@ -9,12 +9,12 @@ public sealed class Association : IProduction
 {
 
     internal Association(Qualifier[] qualifiers, string name)
-        : this((IEnumerable<Qualifier>?)qualifiers, name, null, null)
+        : this(qualifiers, name, null, null)
     {
     }
 
     internal Association(Qualifier[] qualifiers, string name, string? superAssociation)
-        : this((IEnumerable<Qualifier>?)qualifiers, name, superAssociation, null)
+        : this(qualifiers, name, superAssociation, null)
     {
     }
 

@@ -9,12 +9,12 @@ public sealed class Parameter
 {
 
     internal Parameter(Qualifier[] qualifiers, string type, string name)
-        : this((IEnumerable<Qualifier>?) qualifiers, type, false, name, false, null)
+        : this(qualifiers, type, false, name, false, null)
     {
     }
 
     internal Parameter(Qualifier[] qualifiers, string type, string name, PropertyValue? defaultValue)
-        : this((IEnumerable<Qualifier>?)qualifiers, type, false, name, false, defaultValue)
+        : this(qualifiers, type, false, name, false, defaultValue)
     {
     }
 

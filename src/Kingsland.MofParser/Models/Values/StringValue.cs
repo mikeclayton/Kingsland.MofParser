@@ -30,6 +30,6 @@ public sealed class StringValue : LiteralValue, IEnumElementValue
         );
     }
 
-    public static implicit operator StringValue(string value) => new([value]);
+    public static implicit operator StringValue(string value) => new(value);
 
 }

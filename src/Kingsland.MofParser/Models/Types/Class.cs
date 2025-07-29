@@ -9,7 +9,7 @@ public sealed class Class : IProduction
 {
 
     internal Class(Qualifier[] qualifiers, string name)
-        : this((IEnumerable<Qualifier>?)qualifiers, name, null, null)
+        : this(qualifiers, name, null, null)
     {
     }
 
@@ -19,7 +19,7 @@ public sealed class Class : IProduction
     }
 
     internal Class(Qualifier[] qualifiers, string name, string? superClass)
-        : this((IEnumerable<Qualifier>?)qualifiers, name, superClass, null)
+        : this(qualifiers, name, superClass, null)
     {
     }
 

@@ -6,13 +6,8 @@ namespace Kingsland.MofParser.Models.Qualifiers;
 public sealed class Qualifier
 {
 
-    internal Qualifier(string name)
-        : this(name, null, null)
-    {
-    }
-
     internal Qualifier(string name, string value)
-        : this(name, new StringValue(value), null)
+        : this(name, new StringValue(value))
     {
     }
 

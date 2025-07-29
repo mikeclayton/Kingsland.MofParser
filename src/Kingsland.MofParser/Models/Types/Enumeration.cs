@@ -16,7 +16,7 @@ public sealed class Enumeration : IProduction, IStructureFeature
 
     [PublicAPI]
     internal Enumeration(Qualifier[] qualifiers, string name, string underlyingType)
-        : this((IEnumerable<Qualifier>?)qualifiers, name, underlyingType, null)
+        : this(qualifiers, name, underlyingType, null)
     {
     }
 

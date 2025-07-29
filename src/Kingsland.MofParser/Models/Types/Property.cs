@@ -9,12 +9,12 @@ public sealed class Property : IStructureFeature
 {
 
     internal Property(Qualifier[] qualifiers, string returnType, string name)
-        : this((IEnumerable<Qualifier>?) qualifiers, returnType, false, name, false, null)
+        : this(qualifiers, returnType, false, name, false, null)
     {
     }
 
     internal Property(Qualifier[] qualifiers, string returnType, string name, PropertyValue? defaultValue)
-        : this((IEnumerable<Qualifier>?)qualifiers, returnType, false, name, false, defaultValue)
+        : this(qualifiers, returnType, false, name, false, defaultValue)
     {
     }
 
@@ -39,7 +39,7 @@ public sealed class Property : IStructureFeature
     }
 
     internal Property(Qualifier[] qualifiers, string returnType, string name, bool isArray)
-        : this((IEnumerable<Qualifier>?)qualifiers, returnType, false, name, isArray, null)
+        : this(qualifiers, returnType, false, name, isArray, null)
     {
     }
 
