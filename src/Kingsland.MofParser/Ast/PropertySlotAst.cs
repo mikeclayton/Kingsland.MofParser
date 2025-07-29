@@ -17,7 +17,7 @@ namespace Kingsland.MofParser.Ast;
 ///     propertyName      = IDENTIFIER
 ///
 /// </remarks>
-public sealed record PropertySlotAst : AstNode
+public sealed record PropertySlotAst : IAstNode
 {
 
     #region Builder

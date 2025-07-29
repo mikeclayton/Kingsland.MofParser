@@ -1,5 +1,5 @@
 ﻿using Kingsland.MofParser.Ast;
-using Kingsland.MofParser.Models.Types;
+using Kingsland.MofParser.Models.Language;
 using Kingsland.MofParser.Models.Values;
 using Kingsland.MofParser.Parsing;
 using Kingsland.MofParser.Tokens;
@@ -60,7 +60,7 @@ public static partial class RoundtripTests
                 )
             );
             var expectedModule = new Module(
-                new Instance(
+                new InstanceValue(
                     "GOLF_Date",
                     [
                         new("Month", new EnumValue("July"))
@@ -116,7 +116,7 @@ public static partial class RoundtripTests
                 )
             );
             var expectedModule = new Module(
-                new Instance(
+                new InstanceValue(
                     "GOLF_Date",
                     [
                         new("Month", new EnumValueArray("June"))
@@ -175,7 +175,7 @@ public static partial class RoundtripTests
                 )
             );
             var expectedModule = new Module(
-                new Instance(
+                new InstanceValue(
                     "GOLF_Date",
                     [
                         new("Month", new EnumValueArray("June", "July"))
@@ -234,7 +234,7 @@ public static partial class RoundtripTests
                 )
             );
             var expectedModule = new Module(
-                new Instance(
+                new InstanceValue(
                     "GOLF_Date",
                     [
                         new("Month", new EnumValue("July"))
@@ -297,7 +297,7 @@ public static partial class RoundtripTests
                 )
             );
             var expectedModule = new Module(
-                new Instance(
+                new InstanceValue(
                     "GOLF_Date",
                     [
                         new("Month", new LiteralValueArray())
@@ -353,7 +353,7 @@ public static partial class RoundtripTests
                 )
             );
             var expectedModule = new Module(
-                new Instance(
+                new InstanceValue(
                     "GOLF_Date",
                     [
                         new("Month", new EnumValueArray("June"))
@@ -412,7 +412,7 @@ public static partial class RoundtripTests
                 )
             );
             var expectedModule = new Module(
-                new Instance(
+                new InstanceValue(
                     "GOLF_Date",
                     [
                         new("Month", new EnumValueArray("January", "February"))
@@ -470,7 +470,7 @@ public static partial class RoundtripTests
                 )
             );
             var expectedModule = new Module(
-                new Instance(
+                new InstanceValue(
                     "GOLF_Date",
                     [
                         new("Month", new EnumValueArray([new("MonthEnums", "July")]))

@@ -1,4 +1,5 @@
 ﻿using Kingsland.MofParser.Ast;
+using Kingsland.MofParser.Models.Language;
 using Kingsland.MofParser.Models.Types;
 using Kingsland.MofParser.Tokens;
 using Kingsland.MofParser.UnitTests.Extensions;
@@ -38,7 +39,7 @@ public static partial class RoundtripTests
                 )
             );
             var expectedModule = new Module(
-                new Pragma(
+                new CompilerDirective(
                     "include",
                     "GlobalStructs/GOLF_Address.mof"
                 )
@@ -73,7 +74,7 @@ public static partial class RoundtripTests
                 )
             );
             var expectedModule = new Module(
-                new Pragma(
+                new CompilerDirective(
                     "include",
                     "GlobalStructs/GOLF_Address.mof"
                 )

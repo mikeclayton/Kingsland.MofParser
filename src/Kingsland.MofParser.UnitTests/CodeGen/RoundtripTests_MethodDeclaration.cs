@@ -1,4 +1,5 @@
 ﻿using Kingsland.MofParser.Ast;
+using Kingsland.MofParser.Models.Language;
 using Kingsland.MofParser.Models.Types;
 using Kingsland.MofParser.Models.Values;
 using Kingsland.MofParser.Tokens;
@@ -257,7 +258,7 @@ public static partial class RoundtripTests
                     ]
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test]
@@ -319,7 +320,7 @@ public static partial class RoundtripTests
                     [
                         new Method(
                             "Integer", "GetMembersWithOutstandingFees", [
-                                new("GOLF_ClubMember", true, "lateMembers", new ComplexValueAlias("MyDefaultValueAlias"))
+                                new("GOLF_ClubMember", true, "lateMembers", new AliasValue("MyDefaultValueAlias"))
                             ]
                         )
                     ]

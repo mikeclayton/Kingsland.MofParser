@@ -19,7 +19,7 @@ namespace Kingsland.MofParser.Ast;
 ///     qualiferValueArrayInitializer = "{" literalValue *( "," literalValue ) "}"
 ///
 /// </remarks>
-public sealed record QualifierValueAst : AstNode
+public sealed record QualifierValueAst : IAstNode
 {
 
     #region Builder

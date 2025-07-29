@@ -1,5 +1,5 @@
 ﻿using Kingsland.MofParser.Ast;
-using Kingsland.MofParser.Models.Types;
+using Kingsland.MofParser.Models.Language;
 using Kingsland.MofParser.Models.Values;
 using Kingsland.MofParser.Tokens;
 using Kingsland.MofParser.UnitTests.Extensions;
@@ -59,10 +59,10 @@ public static partial class RoundtripTests
                 )
             );
             var expectedModule = new Module(
-                new Instance(
+                new InstanceValue(
                     "GOLF_ClubMember",
                     [
-                        new("LastPaymentDate", new ComplexValueAlias("MyAliasIdentifier"))
+                        new("LastPaymentDate", new AliasValue("MyAliasIdentifier"))
                     ]
                 )
             );
@@ -139,10 +139,10 @@ public static partial class RoundtripTests
                 )
             );
             var expectedModule = new Module(
-                new Instance(
+                new InstanceValue(
                     "GOLF_ClubMember",
                     [
-                        new("LastPaymentDate", new ComplexValueObject(
+                        new("LastPaymentDate", new StructureValue(
                             "GOLF_Date",
                             [
                                 new("Month", new EnumValue("July"))

@@ -1,4 +1,6 @@
-﻿namespace Kingsland.MofParser.Models.Values;
+﻿using Kingsland.MofParser.Models.Qualifiers;
+
+namespace Kingsland.MofParser.Models.Values;
 
 [PublicAPI]
 public abstract class LiteralValue : PrimitiveTypeValue, IQualifierValue

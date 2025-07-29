@@ -1,4 +1,5 @@
 ﻿using Kingsland.MofParser.Ast;
+using Kingsland.MofParser.Models.Language;
 using Kingsland.MofParser.Models.Types;
 using Kingsland.MofParser.Models.Values;
 using Kingsland.MofParser.Tokens;
@@ -59,10 +60,10 @@ public static partial class RoundtripTests
                 )
             );
             var expectedModule = new Module(
-                new Instance(
+                new InstanceValue(
                     "GOLF_ClubMember",
                     [
-                        new("LastPaymentDate", new ComplexValueAlias("MyAliasIdentifier"))
+                        new("LastPaymentDate", new AliasValue("MyAliasIdentifier"))
                     ]
                 )
             );
@@ -115,12 +116,102 @@ public static partial class RoundtripTests
                 )
             );
             var expectedModule = new Module(
-                new Instance(
+                new InstanceValue(
                     "GOLF_ClubMember",
                     [
                         new("LastPaymentDate", new ComplexValueArray(
-                            new ComplexValueAlias("MyAliasIdentifier")
+                            new AliasValue("MyAliasIdentifier")
                         ))
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
+        }
+
+        [Test]
+        public static void ComplexTypeValueAsDefaultValueOfPropertyShouldRoundtrip()
+        {
+            var newline = Environment.NewLine;
+            var indent = "    ";
+            var sourceText = @"
+                class GOLF_Base
+                {
+                    GOLF_Id InstanceID = value of GOLF_Id
+                    {
+                        Id = 12345;
+                    };
+                };
+            ".TrimIndent(newline).TrimString(newline);
+            var expectedTokens = new TokenBuilder()
+                // class GOLF_Base
+                .IdentifierToken("class")
+                .WhitespaceToken(" ")
+                .IdentifierToken("GOLF_Base")
+                .WhitespaceToken(newline)
+                // {
+                .BlockOpenToken()
+                .WhitespaceToken(newline + indent)
+                //     GOLF_Id InstanceID = value of GOLF_Id
+                .IdentifierToken("GOLF_Id")
+                .WhitespaceToken(" ")
+                .IdentifierToken("InstanceID")
+                .WhitespaceToken(" ")
+                .EqualsOperatorToken()
+                .WhitespaceToken(" ")
+                .IdentifierToken("value")
+                .WhitespaceToken(" ")
+                .IdentifierToken("of")
+                .WhitespaceToken(" ")
+                .IdentifierToken("GOLF_Id")
+                .WhitespaceToken(newline + indent)
+                //     {
+                .BlockOpenToken()
+                .WhitespaceToken(newline + indent + indent)
+                //         Id = 12345;
+                .IdentifierToken("Id")
+                .WhitespaceToken(" ")
+                .EqualsOperatorToken()
+                .WhitespaceToken(" ")
+                .IntegerLiteralToken(IntegerKind.DecimalValue, 12345)
+                .StatementEndToken()
+                .WhitespaceToken(newline + indent)
+                //     };
+                .BlockCloseToken()
+                .StatementEndToken()
+                .WhitespaceToken(newline)
+                // };
+                .BlockCloseToken()
+                .StatementEndToken()
+                .ToList();
+            var expectedAst = new MofSpecificationAst(
+                new ClassDeclarationAst(
+                    "GOLF_Base",
+                    [
+                        new PropertyDeclarationAst(
+                            "GOLF_Id", "InstanceID",
+                            new ComplexValueAst(
+                                "value", "of", "GOLF_Id",
+                                [
+                                    new("Id", 12345)
+                                ]
+                            )
+                        )
+                    ]
+                )
+            );
+            var expectedModule = new Module(
+                new Class(
+                    "GOLF_Base",
+                    [
+                        new Property(
+                            "GOLF_Id", "InstanceID",
+                            new StructureValue(
+                                "GOLF_Id",
+                                [
+                                    new("Id", new IntegerValue(12345))
+                                ]
+                            )
+                        )
                     ]
                 )
             );

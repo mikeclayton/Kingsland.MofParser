@@ -1,6 +1,4 @@
-﻿using Kingsland.MofParser.Tokens;
-
-namespace Kingsland.MofParser.Models.Values;
+﻿namespace Kingsland.MofParser.Models.Values;
 
 [PublicAPI]
 public sealed class EnumValue : EnumTypeValue

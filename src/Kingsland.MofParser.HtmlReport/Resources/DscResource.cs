@@ -9,7 +9,7 @@ internal class DscResource
 
     #region Constructors
 
-    protected DscResource(string filename, string computerName, Instance instance)
+    protected DscResource(string filename, string computerName, InstanceValue instance)
     {
         this.Filename = filename;
         this.ComputerName = computerName;
@@ -30,7 +30,7 @@ internal class DscResource
         get;
     }
 
-    internal Instance Instance
+    internal InstanceValue Instance
     {
         get;
     }
@@ -70,7 +70,7 @@ internal class DscResource
 
     #region Methods
 
-    internal static DscResource FromInstance(string filename, string computerName, Instance instance)
+    internal static DscResource FromInstance(string filename, string computerName, InstanceValue instance)
     {
         return instance.TypeName switch
         {

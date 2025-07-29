@@ -1,5 +1,5 @@
 ﻿using Kingsland.MofParser.Ast;
-using Kingsland.MofParser.Models.Types;
+using Kingsland.MofParser.Models.Qualifiers;
 using Kingsland.MofParser.Models.Values;
 
 namespace Kingsland.MofParser.Models.Converter;

@@ -7,7 +7,7 @@ public sealed partial class AstWriter
 {
 
     [PublicAPI]
-    public void WriteAstNode(AstNode node)
+    public void WriteAstNode(IAstNode node)
     {
         switch (node)
         {

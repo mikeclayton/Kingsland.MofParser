@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using Kingsland.MofParser.Models.Qualifiers;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace Kingsland.MofParser.Models.Values;

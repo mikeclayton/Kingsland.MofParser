@@ -1,20 +1,20 @@
-﻿using Kingsland.MofParser.Models.Values;
+﻿using Kingsland.MofParser.Models.Language;
 using Kingsland.MofParser.Parsing;
 using System.Collections.ObjectModel;
 using System.Text;
 
-namespace Kingsland.MofParser.Models.Types;
+namespace Kingsland.MofParser.Models.Values;
 
 [PublicAPI]
-public sealed record Instance : IProduction
+public sealed class InstanceValue : IProduction
 {
 
-    internal Instance(string typeName, IEnumerable<KeyValuePair<string, PropertyValue>>? properties = null)
+    internal InstanceValue(string typeName, IEnumerable<KeyValuePair<string, PropertyValue>>? properties = null)
         : this(typeName, null, properties)
     {
     }
 
-    internal Instance(string typeName, string? alias, IEnumerable<KeyValuePair<string, PropertyValue>>? properties = null)
+    internal InstanceValue(string typeName, string? alias, IEnumerable<KeyValuePair<string, PropertyValue>>? properties = null)
     {
         this.TypeName = typeName ?? throw new ArgumentNullException(nameof(typeName));
         this.Alias = alias;

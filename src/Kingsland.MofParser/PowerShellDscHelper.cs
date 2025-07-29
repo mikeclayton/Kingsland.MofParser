@@ -1,6 +1,7 @@
 ﻿using Kingsland.MofParser.Lexing;
 using Kingsland.MofParser.Models.Converter;
-using Kingsland.MofParser.Models.Types;
+using Kingsland.MofParser.Models.Language;
+using Kingsland.MofParser.Models.Values;
 using Kingsland.MofParser.Parsing;
 using Kingsland.ParseFx.Text;
 using System.Collections.ObjectModel;
@@ -28,7 +29,7 @@ public static class PowerShellDscHelper
     }
 
     [PublicAPI]
-    public static ReadOnlyCollection<Instance> ParseMofFileInstances(string filename)
+    public static ReadOnlyCollection<InstanceValue> ParseMofFileInstances(string filename)
     {
         // read the text from the mof file
         var sourceText = File.ReadAllText(filename);

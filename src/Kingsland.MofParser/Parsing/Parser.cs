@@ -1,7 +1,7 @@
 ﻿using Kingsland.MofParser.Ast;
 using Kingsland.MofParser.Lexing;
 using Kingsland.MofParser.Models.Converter;
-using Kingsland.MofParser.Models.Types;
+using Kingsland.MofParser.Models.Language;
 using Kingsland.MofParser.Tokens;
 using Kingsland.ParseFx.Parsing;
 using Kingsland.ParseFx.Syntax;

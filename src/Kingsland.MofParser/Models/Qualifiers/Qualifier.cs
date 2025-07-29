@@ -1,9 +1,9 @@
 ﻿using Kingsland.MofParser.Models.Values;
 
-namespace Kingsland.MofParser.Models.Types;
+namespace Kingsland.MofParser.Models.Qualifiers;
 
 [PublicAPI]
-public sealed record Qualifier
+public sealed class Qualifier
 {
 
     internal Qualifier(string name)

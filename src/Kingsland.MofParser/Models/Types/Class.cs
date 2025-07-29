@@ -1,9 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿using Kingsland.MofParser.Models.Language;
+using Kingsland.MofParser.Models.Qualifiers;
+using System.Collections.ObjectModel;
 
 namespace Kingsland.MofParser.Models.Types;
 
 [PublicAPI]
-public sealed record Class : IProduction
+public sealed class Class : IProduction
 {
 
     internal Class(Qualifier[] qualifiers, string name)
@@ -67,6 +69,17 @@ public sealed record Class : IProduction
     public ReadOnlyCollection<IClassFeature> Features
     {
         get;
+    }
+
+    public IEnumerable<Property> GetProperties()
+    {
+        foreach (var feature in this.Features)
+        {
+            if (feature is Property property)
+            {
+                yield return property;
+            }
+        }
     }
 
 }

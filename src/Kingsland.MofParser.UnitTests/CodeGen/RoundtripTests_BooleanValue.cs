@@ -1,5 +1,6 @@
 ﻿using Kingsland.MofParser.Ast;
-using Kingsland.MofParser.Models.Types;
+using Kingsland.MofParser.Models.Language;
+using Kingsland.MofParser.Models.Values;
 using Kingsland.MofParser.Tokens;
 using Kingsland.MofParser.UnitTests.Extensions;
 using NUnit.Framework;
@@ -62,7 +63,7 @@ public static partial class RoundtripTests
                 )
             );
             var expectedModule = new Module(
-                new Instance(
+                new InstanceValue(
                     "myType", "Alias00000070",
                     [
                         new("Reference", true)

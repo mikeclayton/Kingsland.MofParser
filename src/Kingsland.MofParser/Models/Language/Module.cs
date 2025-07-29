@@ -1,9 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿using Kingsland.MofParser.Models.Types;
+using Kingsland.MofParser.Models.Values;
+using System.Collections.ObjectModel;
 
-namespace Kingsland.MofParser.Models.Types;
+namespace Kingsland.MofParser.Models.Language;
 
 [PublicAPI]
-public sealed record Module
+public sealed class Module
 {
 
     internal Module(IEnumerable<IProduction>? productions = null)
@@ -39,11 +41,11 @@ public sealed record Module
     }
 
     [PublicAPI]
-    public IEnumerable<Instance> GetInstances()
+    public IEnumerable<InstanceValue> GetInstances()
     {
         return this.Productions
-            .Where(production => production is Instance)
-            .Cast<Instance>();
+            .Where(production => production is InstanceValue)
+            .Cast<InstanceValue>();
     }
 
 }

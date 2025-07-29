@@ -1,5 +1,5 @@
 ﻿using Kingsland.MofParser.Ast;
-using Kingsland.MofParser.Models.Types;
+using Kingsland.MofParser.Models.Language;
 
 namespace Kingsland.MofParser.Models.Converter;
 
@@ -11,11 +11,11 @@ internal static partial class ModelConverter
     internal static Module ConvertMofSpecificationAst(MofSpecificationAst node)
     {
         return new Module(
-            node.Productions.Select(ModelConverter.ConvertProductionAst)
+            node.Productions.Select(ModelConverter.ConvertMofProductionAst)
         );
     }
 
-    internal static IProduction ConvertProductionAst(MofProductionAst node)
+    internal static IProduction ConvertMofProductionAst(MofProductionAst node)
     {
         return node switch
         {

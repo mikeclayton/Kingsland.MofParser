@@ -1,10 +1,10 @@
-﻿using Kingsland.MofParser.Models.Values;
+﻿using Kingsland.MofParser.Models.Qualifiers;
 using System.Collections.ObjectModel;
 
 namespace Kingsland.MofParser.Models.Types;
 
 [PublicAPI]
-public sealed record Method : IStructureFeature
+public sealed class Method : IStructureFeature
 {
 
     internal Method(string returnType, string name)

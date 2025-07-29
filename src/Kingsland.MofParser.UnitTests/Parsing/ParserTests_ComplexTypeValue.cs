@@ -1,7 +1,7 @@
 ﻿using Kingsland.MofParser.Ast;
 using Kingsland.MofParser.Lexing;
 using Kingsland.MofParser.Models.Converter;
-using Kingsland.MofParser.Models.Types;
+using Kingsland.MofParser.Models.Language;
 using Kingsland.MofParser.Models.Values;
 using Kingsland.MofParser.Parsing;
 using Kingsland.MofParser.Tokens;
@@ -60,7 +60,7 @@ public static partial class ParserTests
             Assert.That(actualJson, Is.EqualTo(expectedJson));
             var actualModule = ModelConverter.ConvertMofSpecificationAst(actualAst);
             var expectedModule = new Module(
-                new Instance(
+                new InstanceValue(
                     "myType", "Alias0000006E",
                     [
                         new("ServerURL", "https://URL")
@@ -109,10 +109,10 @@ public static partial class ParserTests
             Assert.That(actualJson, Is.EqualTo(expectedJson));
             var actualModule = ModelConverter.ConvertMofSpecificationAst(actualAst);
             var expectedModule = new Module(
-                new Instance(
+                new InstanceValue(
                     "myType", "Alias00000070",
                     [
-                        new("Reference", new ComplexValueAlias("Alias0000006E"))
+                        new("Reference", new AliasValue("Alias0000006E"))
                     ]
                 )
             );
@@ -154,7 +154,7 @@ public static partial class ParserTests
             Assert.That(actualJson, Is.EqualTo(expectedJson));
             var actualModule = ModelConverter.ConvertMofSpecificationAst(actualAst);
             var expectedModule = new Module(
-                new Instance(
+                new InstanceValue(
                     "myType", "Alias00000070",
                     [
                         new("Reference", new LiteralValueArray())
@@ -205,11 +205,11 @@ public static partial class ParserTests
             Assert.That(actualJson, Is.EqualTo(expectedJson));
             var actualModule = ModelConverter.ConvertMofSpecificationAst(actualAst);
             var expectedModule = new Module(
-                new Instance(
+                new InstanceValue(
                     "myType", "Alias00000070",
                     [
                         new("Reference", new ComplexValueArray(
-                            new ComplexValueAlias("Alias0000006E")
+                            new AliasValue("Alias0000006E")
                         ))
                     ]
                 )
@@ -265,7 +265,7 @@ public static partial class ParserTests
             Assert.That(actualJson, Is.EqualTo(expectedJson));
             var actualModule = ModelConverter.ConvertMofSpecificationAst(actualAst);
             var expectedModule = new Module(
-                new Instance(
+                new InstanceValue(
                     "myType", "Alias00000070",
                     [
                         new("ServerURLs", new LiteralValueArray(
@@ -352,7 +352,7 @@ public static partial class ParserTests
             Assert.That(actualJson, Is.EqualTo(expectedJson));
             var actualModule = ModelConverter.ConvertMofSpecificationAst(actualAst);
             var expectedModule = new Module(
-                new Instance(
+                new InstanceValue(
                     "myType", "Alias00000070",
                     [
                         new("MyBinaryValue", 42),

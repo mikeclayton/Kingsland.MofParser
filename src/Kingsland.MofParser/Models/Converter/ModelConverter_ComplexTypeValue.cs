@@ -1,5 +1,4 @@
 ﻿using Kingsland.MofParser.Ast;
-using Kingsland.MofParser.Models.Types;
 using Kingsland.MofParser.Models.Values;
 
 namespace Kingsland.MofParser.Models.Converter;
@@ -26,21 +25,25 @@ internal static partial class ModelConverter
         );
     }
 
-    private static ComplexValueBase ConvertComplexValueAst(ComplexValueAst node)
+    private static ComplexValue ConvertComplexValueAst(ComplexValueAst node)
     {
         if (node.IsAlias)
         {
-            return new ComplexValueAlias(
+            return new AliasValue(
                 (node.Alias ?? throw new InvalidOperationException()).Name
+            );
+        }
+        else if (node.IsValue)
+        {
+            return new StructureValue(
+                (node.TypeName ?? throw new InvalidOperationException()).Name,
+                null,
+                ModelConverter.ConvertPropertyValueListAst(node.PropertyValues)
             );
         }
         else
         {
-            return new ComplexValueObject(
-                node.TypeName?.Name,
-                node.Alias?.Name,
-                ModelConverter.ConvertPropertyValueListAst(node.PropertyValues)
-            );
+            throw new InvalidOperationException($"{nameof(ComplexValueAst)} must be an alias or a value.");
         }
     }
 

@@ -16,7 +16,7 @@ namespace Kingsland.MofParser.Ast;
 ///     enumLiteral            = IDENTIFIER
 ///
 /// </remarks>
-public sealed record EnumElementAst : AstNode
+public sealed record EnumElementAst : IAstNode
 {
 
     #region Builder

@@ -1,9 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿using Kingsland.MofParser.Models.Language;
+using Kingsland.MofParser.Models.Qualifiers;
+using System.Collections.ObjectModel;
 
 namespace Kingsland.MofParser.Models.Types;
 
 [PublicAPI]
-public sealed record Structure : IProduction, IStructureFeature
+public sealed class Structure : IProduction, IStructureFeature
 {
 
     internal Structure(string name)

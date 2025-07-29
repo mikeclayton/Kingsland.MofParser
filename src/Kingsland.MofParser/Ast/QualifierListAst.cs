@@ -13,7 +13,7 @@ namespace Kingsland.MofParser.Ast;
 ///     qualifierList = "[" qualifierValue *( "," qualifierValue ) "]"
 ///
 /// </remarks>
-public sealed record QualifierListAst : AstNode
+public sealed record QualifierListAst : IAstNode
 {
 
     #region Builder

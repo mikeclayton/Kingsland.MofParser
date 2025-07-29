@@ -117,8 +117,18 @@ public sealed record StructureValueDeclarationAst : MofProductionAst
         IdentifierToken value,
         IdentifierToken of,
         IdentifierToken typeName,
-        IdentifierToken @as,
-        AliasIdentifierToken alias,
+        PropertySlotAst[] propertyValues,
+        StatementEndToken statementEnd
+    ) : this(value, of, typeName, null, null, propertyValues, statementEnd)
+    {
+    }
+
+    internal StructureValueDeclarationAst(
+        IdentifierToken value,
+        IdentifierToken of,
+        IdentifierToken typeName,
+        IdentifierToken? @as,
+        AliasIdentifierToken? alias,
         StatementEndToken statementEnd
     ) : this(value, of, typeName, @as, alias, (PropertyValueListAst?)null, statementEnd)
     {
@@ -128,8 +138,8 @@ public sealed record StructureValueDeclarationAst : MofProductionAst
         IdentifierToken value,
         IdentifierToken of,
         IdentifierToken typeName,
-        IdentifierToken @as,
-        AliasIdentifierToken alias,
+        IdentifierToken? @as,
+        AliasIdentifierToken? alias,
         PropertySlotAst[] propertyValues,
         StatementEndToken statementEnd
     ) : this(value, of, typeName, @as, alias, new PropertyValueListAst(propertyValues), statementEnd)

@@ -1,4 +1,5 @@
 ﻿using Kingsland.MofParser.Ast;
+using Kingsland.MofParser.Models.Language;
 using Kingsland.MofParser.Models.Types;
 using Kingsland.MofParser.Models.Values;
 using Kingsland.MofParser.Tokens;
@@ -49,7 +50,7 @@ public static partial class RoundtripTests
                 )
             );
             var expectedModule = new Module(
-                new ComplexValueObject(
+                new StructureValue(
                     "GOLF_ClubMember", "MyAliasIdentifier"
                 )
             );
@@ -114,7 +115,7 @@ public static partial class RoundtripTests
                 )
             );
             var expectedModule = new Module(
-                new ComplexValueObject(
+                new StructureValue(
                     "GOLF_ClubMember", "MyAliasIdentifier",
                     [
                         new("FirstName", new StringValue("John")),

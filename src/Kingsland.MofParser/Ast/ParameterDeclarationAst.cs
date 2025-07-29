@@ -38,7 +38,7 @@ namespace Kingsland.MofParser.Ast;
 ///     DT_REFERENCE              = className REF
 ///
 /// </remarks>
-public sealed record ParameterDeclarationAst : AstNode
+public sealed record ParameterDeclarationAst : IAstNode
 {
 
     #region Builder
