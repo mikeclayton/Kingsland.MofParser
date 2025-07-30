@@ -1,14 +1,27 @@
-﻿namespace Kingsland.MofParser.Parsing;
+﻿using System.Runtime.CompilerServices;
+
+namespace Kingsland.MofParser.Parsing;
 
 internal static class StringValidator
 {
 
     #region 5.2 Whitespace
 
-    #region WS = U+0020 / U+0009 / U+000D / U+000A
+    private static readonly char[] WhitespaceChars = [
+        '\u0020', // space
+        '\u0009', // horizontal tab
+        '\u000D', // carriage return
+        '\u000A'  // line feed
+    ];
 
-    private static readonly char[] WhitespaceChars = ['\u0020', '\u0009', '\u000D', '\u000A'];
+    /// <summary>
+    /// Checks if the specified character is a whitespace character as defined in the MOF specification.
+    /// </summary>
+    /// <remarks>
+    /// WS = U+0020 / U+0009 / U+000D / U+000A
+    /// </remarks>
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsWhitespace(char @char)
     {
         return StringValidator.WhitespaceChars.Contains(@char);
@@ -16,12 +29,20 @@ internal static class StringValidator
 
     #endregion
 
-    #endregion
-
     #region 5.3 Line termination
 
-    private static readonly char[] LineTerminatorChars = ['\u000D', '\u000A'];
+    private static readonly char[] LineTerminatorChars = [
+        '\u000D', // carriage return
+        '\u000A'  // line feed
+    ];
 
+    /// <summary>
+    /// Checks if the specified character is a line terminator.
+    /// </summary>
+    /// <remarks>
+    /// U+000D / U+000A
+    /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsLineTerminator(char @char)
     {
         return StringValidator.LineTerminatorChars.Contains(@char);
@@ -31,14 +52,13 @@ internal static class StringValidator
 
     #region 7.5.1 Structure declaration
 
-    #region structureName = elementName
-
     /// <summary>
+    /// Checks if the given value is a valid structure name as defined in the MOF specification.
     /// </summary>
-    /// <param name="value"></param>
     /// <remarks>
-    /// structureName = ( IDENTIFIER / schemaQualifiedName )
+    /// structureName = elementName
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsStructureName(string value)
     {
         return StringValidator.IsElementName(value);
@@ -46,18 +66,16 @@ internal static class StringValidator
 
     #endregion
 
-    #endregion
-
     #region 7.5.2 Class declaration
 
-    #region className = elementName
-
     /// <summary>
+    /// Checks if the given value is a valid class name as defined in the MOF specification.
     /// </summary>
     /// <param name="value"></param>
     /// <remarks>
     /// className = elementName
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsClassName(string value)
     {
         return StringValidator.IsElementName(value);
@@ -65,18 +83,15 @@ internal static class StringValidator
 
     #endregion
 
-    #endregion
-
     #region 7.5.3 Association declaration
 
-    #region associationName = elementName
-
     /// <summary>
+    /// Checks if the given value is a valid association name as defined in the MOF specification.
     /// </summary>
-    /// <param name="value"></param>
     /// <remarks>
     /// associationName = schemaQualifiedName
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsAssociationName(string value)
     {
         return StringValidator.IsElementName(value);
@@ -84,18 +99,15 @@ internal static class StringValidator
 
     #endregion
 
-    #endregion
-
     #region 7.5.4 Enumeration declaration
 
-    #region enumName = elementName
-
     /// <summary>
+    /// Checks if the given value is a valid enumeration name as defined in the MOF specification.
     /// </summary>
-    /// <param name="value"></param>
     /// <remarks>
     /// enumName = elementName
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsEnumName(string value)
     {
         return StringValidator.IsElementName(value);
@@ -103,30 +115,39 @@ internal static class StringValidator
 
     #endregion
 
-    #endregion
-
     #region 7.6.1.1 Integer value
 
-    #region binaryDigit = "0" / "1"
-
+    /// <summary>
+    /// Checks if the specified character is a binary digit as defined in the MOF specification.
+    /// </summary>
+    /// <returns>
+    /// binaryDigit = "0" / "1"
+    /// </returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsBinaryDigit(char value)
     {
         return value is >= '0' and <= '1';
     }
 
-    #endregion
-
-    #region octalDigit = "0" / "1" / "2" / "3" / "4" / "5" / "6" / "7"
-
+    /// <summary>
+    /// Checks if the specified character is a valid octal digit as defined in the MOF specification.
+    /// </summary>
+    /// <returns>
+    /// octalDigit = "0" / "1" / "2" / "3" / "4" / "5" / "6" / "7"
+    /// </returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsOctalDigit(char value)
     {
         return value is >= '0' and <= '7';
     }
 
-    #endregion
-
-    #region hexDigit = decimalDigit / "a" / "A" / "b" / "B" / "c" / "C" / "d" / "D" / "e" / "E" / "f" / "F"
-
+    /// <summary>
+    /// Checks if the specified character is a hexadecimal digit as defined in the MOF specification.
+    /// </summary>
+    /// <returns>
+    /// hexDigit = decimalDigit / "a" / "A" / "b" / "B" / "c" / "C" / "d" / "D" / "e" / "E" / "f" / "F"
+    /// </returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsHexDigit(char value)
     {
         return StringValidator.IsDecimalDigit(value) ||
@@ -134,10 +155,13 @@ internal static class StringValidator
                (value is >= 'A' and <= 'F');
     }
 
-    #endregion
-
-    #region decimalValue = [ "+" / "-" ] unsignedDecimalValue
-
+    /// <summary>
+    /// Checks if the given value is a valid decimal value as defined in the MOF specification.
+    /// </summary>
+    /// <returns>
+    /// decimalValue = [ "+" / "-" ] unsignedDecimalValue
+    /// </returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsDecimalValue(string value)
     {
         if (string.IsNullOrEmpty(value))
@@ -154,10 +178,13 @@ internal static class StringValidator
                chars[1..].All(StringValidator.IsDecimalDigit);
     }
 
-    #endregion
-
-    #region  unsignedDecimalValue = positiveDecimalDigit *decimalDigit
-
+    /// <summary>
+    /// Checks if the given value represents an unsigned decimal value.
+    /// </summary>
+    /// <remarks>
+    /// unsignedDecimalValue = positiveDecimalDigit *decimalDigit
+    /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsUnsignedDecimalValue(string value)
     {
         if (string.IsNullOrEmpty(value)) { return false; }
@@ -167,24 +194,41 @@ internal static class StringValidator
 
     #endregion
 
-    #endregion
-
     #region 7.6.1.2 Real value
 
-    // realValue = ["+" / "-"] * decimalDigit "." 1*decimalDigit
-    //             [ ("e" / "E") [ "+" / "-" ] 1*decimalDigit ]
+    /// <summary>
+    /// Checks if the given value is a valid real value as defined in the MOF specification.
+    /// </summary>
+    /// <remarks>
+    /// realValue = ["+" / "-"] * decimalDigit "." 1*decimalDigit
+    ///             [ ("e" / "E") [ "+" / "-" ] 1*decimalDigit ]
+    /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    internal static bool IsRealValue(string value)
+    {
+        throw new NotImplementedException();
+    }
 
-    #region decimalDigit = "0" / positiveDecimalDigit
-
+    /// <summary>
+    /// Checks if the specified character is a decimal digit as defined in the MOF specification.
+    /// </summary>
+    /// <remarks>
+    /// decimalDigit = "0" / positiveDecimalDigit
+    /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsDecimalDigit(char value)
     {
         return (value == '0') || StringValidator.IsPositiveDecimalDigit(value);
     }
 
-    #endregion
-
-    #region positiveDecimalDigit = "1"..."9"
-
+    /// <summary>
+    /// Checks if the specified character is a positive decimal digit as defined in the MOF specification.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns>
+    /// positiveDecimalDigit = "1"..."9"
+    /// </returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsPositiveDecimalDigit(char value)
     {
         return value is >= '1' and <= '9';
@@ -192,59 +236,75 @@ internal static class StringValidator
 
     #endregion
 
-    #endregion
-
     #region 7.6.1.3 String values
 
-    // The following special characters are used in other ABNF rules in this specification:
-
-    #region BACKSLASH = U+005C ; \
-
+    /// <summary>
+    /// Checks if the specified character is a backslash as defined in the MOF specification.
+    /// </summary>
+    /// <remarks>
+    /// BACKSLASH = U+005C ; \
+    /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsBackslash(char @char)
     {
         return (@char == Constants.BACKSLASH);
     }
 
-    #endregion
-
-    #region DOUBLEQUOTE = U+0022 ; "
-
+    /// <summary>
+    /// Checks if the specified character is a double quote as defined in the MOF specification.
+    /// </summary>
+    /// <remarks>
+    /// DOUBLEQUOTE = U+0022 ; "
+    /// </remarks>>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsDoubleQuote(char @char)
     {
         return (@char == Constants.DOUBLEQUOTE);
     }
 
-    #endregion
-
-    #region SINGLEQUOTE = U+0027 ; '
-
+    /// <summary>
+    /// Checks if the specified character is a single quote as defined in the MOF specification.
+    /// </summary>
+    /// <remarks>
+    /// SINGLEQUOTE = U+0027 ; '
+    /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsSingleQuote(char @char)
     {
         return (@char == Constants.SINGLEQUOTE);
     }
 
-    #endregion
-
-    #region UPPERALPHA = U+0041...U+005A ; A ... Z
-
+    /// <summary>
+    /// Checks if the specified character is an uppercase alphabetic character as defined in the MOF specification.
+    /// </summary>
+    /// <remarks>
+    /// UPPERALPHA = U+0041...U+005A ; A ... Z
+    /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsUpperAlpha(char @char)
     {
         return @char is >= '\u0041' and <= '\u005A';
     }
 
-    #endregion
-
-    #region LOWERALPHA = U+0061...U+007A ; a ... z
-
+    /// <summary>
+    /// Checks if the specified character is a lowercase alphabetic character as defined in the MOF specification.
+    /// </summary>
+    /// <remarks>
+    /// LOWERALPHA = U+0061...U+007A ; a ... z
+    /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsLowerAlpha(char @char)
     {
         return @char is >= '\u0061' and <= '\u007A';
     }
 
-    #endregion
-
-    #region UNDERSCORE = U+005F ; _
-
+    /// <summary>
+    /// Checks if the specified character is an underscore as defined in the MOF specification.
+    /// </summary>
+    /// <remarks>
+    /// UNDERSCORE = U+005F ; _
+    /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsUnderscore(char @char)
     {
         return (@char == Constants.UNDERSCORE);
@@ -252,21 +312,28 @@ internal static class StringValidator
 
     #endregion
 
-    #endregion
-
     #region 7.6.1.5 Boolean value
 
-    #region FALSE = "false" ; keyword: case insensitive
-
+    /// <summary>
+    /// Checks if the given value is a valid representation of a false boolean value as defined in the MOF specification.
+    /// </summary>
+    /// <remarks>
+    /// FALSE = "false" ; keyword: case insensitive
+    /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsFalse(string value)
     {
         return string.Equals(value, Constants.FALSE, StringComparison.OrdinalIgnoreCase);
     }
 
-    #endregion
 
-    #region TRUE = "true" ; keyword: case insensitive
-
+    /// <summary>
+    /// Checks if the given value is a valid representation of a true boolean value as defined in the MOF specification.
+    /// </summary>
+    /// <remarks>
+    /// TRUE = "true" ; keyword: case insensitive
+    /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsTrue(string value)
     {
         return string.Equals(value, Constants.TRUE, StringComparison.OrdinalIgnoreCase);
@@ -274,12 +341,15 @@ internal static class StringValidator
 
     #endregion
 
-    #endregion
-
     #region 7.6.1.6 Null value
 
-    #region NULL = "null" ; keyword: case insensitive
-
+    /// <summary>
+    /// Checks if the given value is a valid representation of a null value as defined in the MOF specification.
+    /// </summary>
+    /// <remarks>
+    /// NULL = "null" ; keyword: case insensitive
+    /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsNull(string value)
     {
         return string.Equals(value, Constants.NULL, StringComparison.OrdinalIgnoreCase);
@@ -287,12 +357,15 @@ internal static class StringValidator
 
     #endregion
 
-    #endregion
-
     #region 7.7.1 Names
 
-    #region IDENTIFIER = firstIdentifierChar *( nextIdentifierChar )
-
+    /// <summary>
+    /// Checks if the given value is a valid identifier as defined in the MOF specification.
+    /// </summary>
+    /// <remarks>
+    /// IDENTIFIER = firstIdentifierChar *( nextIdentifierChar )
+    /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsIdentifier(string value)
     {
         return !string.IsNullOrEmpty(value) &&
@@ -300,10 +373,13 @@ internal static class StringValidator
                value.Skip(1).All(StringValidator.IsNextIdentifierChar);
     }
 
-    #endregion
-
-    #region firstIdentifierChar = UPPERALPHA / LOWERALPHA / UNDERSCORE
-
+    /// <summary>
+    /// Checks if the specified character is a valid first character of an identifier as defined in the MOF specification.
+    /// </summary>
+    /// <remarks>
+    /// firstIdentifierChar = UPPERALPHA / LOWERALPHA / UNDERSCORE
+    /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsFirstIdentifierChar(char value)
     {
         return StringValidator.IsUpperAlpha(value) ||
@@ -311,30 +387,39 @@ internal static class StringValidator
                StringValidator.IsUnderscore(value);
     }
 
-    #endregion
-
-    #region nextIdentifierChar = firstIdentifierChar / decimalDigit
-
+    /// <summary>
+    /// Checks if the specified character is a valid next character of an identifier as defined in the MOF specification.
+    /// </summary>
+    /// <remarks>
+    /// nextIdentifierChar = firstIdentifierChar / decimalDigit
+    /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsNextIdentifierChar(char value)
     {
         return StringValidator.IsFirstIdentifierChar(value) ||
                StringValidator.IsDecimalDigit(value);
     }
 
-    #endregion
-
-    #region elementName = localName / schemaQualifiedName
-
+    /// <summary>
+    /// Checks if the given value is a valid element name as defined in the MOF specification.
+    /// </summary>
+    /// <remarks>
+    /// elementName = localName / schemaQualifiedName
+    /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsElementName(string value)
     {
         return StringValidator.IsLocalName(value) ||
                StringValidator.IsSchemaQualifiedName(value);
     }
 
-    #endregion
-
-    #region localName = IDENTIFIER
-
+    /// <summary>
+    /// Checks if the given value is a valid local name as defined in the MOF specification.
+    /// </summary>
+    /// <remarks>
+    /// localName = IDENTIFIER
+    /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsLocalName(string value)
     {
         return StringValidator.IsIdentifier(value);
@@ -342,12 +427,15 @@ internal static class StringValidator
 
     #endregion
 
-    #endregion
-
     #region 7.7.2 Schema-qualified name
 
-    #region schemaQualifiedName = schemaName UNDERSCORE IDENTIFIER
-
+    /// <summary>
+    /// Check if the given value is a valid schema-qualified name as defined in the MOF specification.
+    /// </summary>
+    /// <remarks>
+    /// schemaQualifiedName = schemaName UNDERSCORE IDENTIFIER
+    /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsSchemaQualifiedName(string value)
     {
         if (string.IsNullOrEmpty(value))
@@ -363,10 +451,13 @@ internal static class StringValidator
                StringValidator.IsIdentifier(value[(underscore + 1)..]);
     }
 
-    #endregion
-
-    #region schemaName = firstSchemaChar *( nextSchemaChar )
-
+    /// <summary>
+    /// Check if the given value is a valid schema name as defined in the MOF specification.
+    /// </summary>
+    /// <remarks>
+    /// schemaName = firstSchemaChar *( nextSchemaChar )
+    /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsSchemaName(string value)
     {
         return !string.IsNullOrEmpty(value) &&
@@ -374,20 +465,27 @@ internal static class StringValidator
                value.Skip(1).All(StringValidator.IsNextSchemaChar);
     }
 
-    #endregion
-
-    #region firstSchemaChar = UPPERALPHA / LOWERALPHA
-
+    /// <summary>
+    /// Check if the specified character is a valid first character of a schema name as defined in the MOF specification.
+    /// </summary>
+    /// <remarks>
+    /// firstSchemaChar = UPPERALPHA / LOWERALPHA
+    /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsFirstSchemaChar(char value)
     {
         return StringValidator.IsUpperAlpha(value) ||
                StringValidator.IsLowerAlpha(value);
     }
 
-    #endregion
-
-    #region nextSchemaChar = firstSchemaChar / decimalDigit
-
+    /// <summary>
+    /// CHeck if the specified character is a valid next character of a schema name as defined in the MOF specification.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <remarks>
+    /// nextSchemaChar = firstSchemaChar / decimalDigit
+    /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsNextSchemaChar(char value)
     {
         return StringValidator.IsFirstSchemaChar(value) ||
@@ -396,12 +494,15 @@ internal static class StringValidator
 
     #endregion
 
-    #endregion
-
     #region 7.7.3 Alias identifier
 
-    #region aliasIdentifier = "$" IDENTIFIER
-
+    /// <summary>
+    /// Check if the given value is a valid alias identifier as defined in the MOF specification.
+    /// </summary>
+    /// <remarks>
+    /// aliasIdentifier = "$" IDENTIFIER
+    /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool IsAliasIdentifier(string value)
     {
         return !string.IsNullOrEmpty(value) &&
@@ -410,13 +511,5 @@ internal static class StringValidator
     }
 
     #endregion
-
-    #endregion
-
-    private static bool IsSpecialName(string name)
-    {
-        return name.StartsWith("__") &&
-            StringValidator.IsIdentifier(name[2..]);
-    }
 
 }

@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 namespace Kingsland.MofParser.Models.Types;
 
 [PublicAPI]
-public sealed class Enumeration : IProduction, IStructureFeature
+public sealed class Enumeration : Production, IStructureFeature
 {
 
     [PublicAPI]

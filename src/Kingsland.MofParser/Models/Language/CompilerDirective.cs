@@ -1,7 +1,7 @@
 ﻿namespace Kingsland.MofParser.Models.Language;
 
 [PublicAPI]
-public sealed class CompilerDirective : IProduction
+public sealed class CompilerDirective : Production
 {
 
     internal CompilerDirective(string name, string value)

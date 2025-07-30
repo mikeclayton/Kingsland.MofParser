@@ -21,7 +21,7 @@ internal static partial class ModelConverter
     {
         return new StructureValue(
             node.TypeName.Name,
-            node.Alias?.Name,
+            node.Alias.Name,
             ModelConverter.ConvertPropertyValueListAst(node.PropertyValues)
         );
     }

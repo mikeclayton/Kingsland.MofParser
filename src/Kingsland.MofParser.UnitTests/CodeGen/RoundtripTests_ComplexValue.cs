@@ -142,7 +142,7 @@ public static partial class RoundtripTests
                 new InstanceValue(
                     "GOLF_ClubMember",
                     [
-                        new("LastPaymentDate", new StructureValue(
+                        new("LastPaymentDate", new ComplexObjectValue(
                             "GOLF_Date",
                             [
                                 new("Month", new EnumValue("July"))

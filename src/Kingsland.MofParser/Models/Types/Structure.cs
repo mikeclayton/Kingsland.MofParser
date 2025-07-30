@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 namespace Kingsland.MofParser.Models.Types;
 
 [PublicAPI]
-public sealed class Structure : IProduction, IStructureFeature
+public sealed class Structure : Production, IStructureFeature
 {
 
     internal Structure(string name)

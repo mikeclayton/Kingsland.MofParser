@@ -49,7 +49,7 @@
       <FileName>Models\Values\ComplexValue.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kingsland.MofParser.Models.Values.StructureValue" Collapsed="true">
+  <Class Name="Kingsland.MofParser.Models.Values.ComplexObjectValue" Collapsed="true">
     <Position X="18.75" Y="5.5" Width="1.5" />
     <InheritanceLine Type="Kingsland.MofParser.Models.Values.ComplexValue" FixedToPoint="true">
       <Path>
@@ -59,10 +59,10 @@
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAIAAAAEAAAAAAAAAAAAABAAAAAAAAACAAA=</HashCode>
-      <FileName>Models\Values\StructureValue.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAABAAAAAAAAACAAA=</HashCode>
+      <FileName>Models\Values\ComplexObjectValue.cs</FileName>
+      <NewMemberFileName>Models\Values\StructureValue.cs</NewMemberFileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Kingsland.MofParser.Models.Values.EnumTypeValue" Collapsed="true">
     <Position X="20.75" Y="2" Width="1.5" />
@@ -174,67 +174,70 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Kingsland.MofParser.Models.Values.InstanceValue" Collapsed="true">
-    <Position X="4.75" Y="8" Width="1.5" />
+    <Position X="5.25" Y="7.5" Width="1.5" />
+    <InheritanceLine Type="Kingsland.MofParser.Models.Language.Production" FixedToPoint="true">
+      <Path>
+        <Point X="5" Y="2.812" />
+        <Point X="5" Y="7.875" />
+        <Point X="5.25" Y="7.875" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAIAAAAEAAAAAAAAAAAAABAAAAAAAAACAAA=</HashCode>
       <FileName>Models\Values\InstanceValue.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Kingsland.MofParser.Models.Types.Association" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="4.75" Y="4" Width="1.5" />
+    <Position X="5.25" Y="3.5" Width="1.5" />
+    <InheritanceLine Type="Kingsland.MofParser.Models.Language.Production" FixedToPoint="true">
+      <Path>
+        <Point X="5" Y="2.812" />
+        <Point X="5" Y="3.875" />
+        <Point X="5.25" Y="3.875" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AEAAAAAAAAAAAAAAAAAFAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Types\Association.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Kingsland.MofParser.Models.Types.EnumElement" Collapsed="true">
-    <Position X="7.5" Y="8.25" Width="1.5" />
+    <Position X="8" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAgAAAAAAA=</HashCode>
       <FileName>Models\Types\EnumElement.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kingsland.MofParser.Models.Types.Module" Collapsed="true">
-    <Position X="7.5" Y="4" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAABAAAAAAQAAAQAAAAACA=</HashCode>
-      <FileName>Models\Types\Module.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Kingsland.MofParser.Models.Types.Parameter" Collapsed="true">
-    <Position X="7.5" Y="7.5" Width="1.5" />
+    <Position X="8" Y="7" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEAAAAAAAACAAAAEAAAAAAQAAAhAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>Models\Types\Parameter.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kingsland.MofParser.Models.Types.CompilerDirective" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="4.75" Y="6" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAgAAAAAAA=</HashCode>
-      <FileName>Models\Types\CompilerDirective.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="Kingsland.MofParser.Models.Types.Qualifier" Collapsed="true">
-    <Position X="7.5" Y="4.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAEAAAAABQAAAAAAAAAAAAgAAAAAAA=</HashCode>
-      <FileName>Models\Types\Qualifier.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Kingsland.MofParser.Models.Types.Class" Collapsed="true">
-    <Position X="4.75" Y="5" Width="1.5" />
+    <Position X="5.25" Y="4.5" Width="1.5" />
+    <InheritanceLine Type="Kingsland.MofParser.Models.Language.Production" FixedToPoint="true">
+      <Path>
+        <Point X="5" Y="2.812" />
+        <Point X="5" Y="4.875" />
+        <Point X="5.25" Y="4.875" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AEAAAAAAAAAAAAAAAAABAAQAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <HashCode>AEAACAAAAAAAAAAAAAABAAQAAAAAAAAAAAAAAAAAAAg=</HashCode>
       <FileName>Models\Types\Class.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Kingsland.MofParser.Models.Types.Structure" Collapsed="true">
-    <Position X="4.75" Y="9" Width="1.5" />
+    <Position X="5.25" Y="8.5" Width="1.5" />
+    <InheritanceLine Type="Kingsland.MofParser.Models.Language.Production" FixedToPoint="true">
+      <Path>
+        <Point X="5" Y="2.812" />
+        <Point X="5" Y="8.875" />
+        <Point X="5.25" Y="8.875" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AEAACAAAAAAAAAAAAAABAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Types\Structure.cs</FileName>
@@ -242,7 +245,14 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Kingsland.MofParser.Models.Types.Enumeration" Collapsed="true">
-    <Position X="4.75" Y="7" Width="1.5" />
+    <Position X="5.25" Y="6.5" Width="1.5" />
+    <InheritanceLine Type="Kingsland.MofParser.Models.Language.Production" FixedToPoint="true">
+      <Path>
+        <Point X="5" Y="2.812" />
+        <Point X="5" Y="6.875" />
+        <Point X="5.25" Y="6.875" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AUAAAAAAAAAAAAAAAAAQAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Types\Enumeration.cs</FileName>
@@ -250,7 +260,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Kingsland.MofParser.Models.Types.Property" Collapsed="true">
-    <Position X="7.5" Y="5.75" Width="1.5" />
+    <Position X="8" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEAAAAAAAACAAAAEAAAAAAQAAAhAAAAAAAAAAAAEAAA=</HashCode>
       <FileName>Models\Types\Property.cs</FileName>
@@ -258,25 +268,67 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Kingsland.MofParser.Models.Types.Method" Collapsed="true">
-    <Position X="7.5" Y="6.75" Width="1.5" />
+    <Position X="8" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEAAAAAAAAAAAAAEAAAAAAQAAAgAAAAAAIAAAAAEAAA=</HashCode>
       <FileName>Models\Types\Method.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
+  <Class Name="Kingsland.MofParser.Models.Qualifiers.Qualifier" Collapsed="true">
+    <Position X="8" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAABQAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Models\Qualifiers\Qualifier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kingsland.MofParser.Models.Language.Module" Collapsed="true">
+    <Position X="8" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAABAAAAAAQAAAQAAAAACA=</HashCode>
+      <FileName>Models\Language\Module.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kingsland.MofParser.Models.Language.CompilerDirective" Collapsed="true">
+    <Position X="5.25" Y="5.5" Width="1.5" />
+    <InheritanceLine Type="Kingsland.MofParser.Models.Language.Production" FixedToPoint="true">
+      <Path>
+        <Point X="5" Y="2.812" />
+        <Point X="5" Y="5.875" />
+        <Point X="5.25" Y="5.875" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Models\Language\CompilerDirective.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kingsland.MofParser.Models.Values.StructureValue" Collapsed="true">
+    <Position X="5.25" Y="9.5" Width="1.5" />
+    <InheritanceLine Type="Kingsland.MofParser.Models.Language.Production" FixedToPoint="true">
+      <Path>
+        <Point X="5" Y="2.812" />
+        <Point X="5" Y="9.875" />
+        <Point X="5.25" Y="9.875" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAEAAAAAAAAAAAAABAAAAAAAAACAAA=</HashCode>
+      <FileName>Models\Values\StructureValue.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kingsland.MofParser.Models.Language.Production" Collapsed="true">
+    <Position X="4.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Language\Production.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Interface Name="Kingsland.MofParser.Models.Values.IEnumElementValue" Collapsed="true">
     <Position X="7" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Values\IEnumElementValue.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="Kingsland.MofParser.Models.Values.IQualifierValue" Collapsed="true">
-    <Position X="7" Y="1.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Models\Values\IQualifierValue.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Kingsland.MofParser.Models.Types.IClassFeature" Collapsed="true">
@@ -299,6 +351,13 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Types\IStructureFeature.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kingsland.MofParser.Models.Qualifiers.IQualifierValue" Collapsed="true">
+    <Position X="7" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Qualifiers\IQualifierValue.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

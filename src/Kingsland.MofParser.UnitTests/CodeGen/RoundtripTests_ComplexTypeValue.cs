@@ -205,7 +205,7 @@ public static partial class RoundtripTests
                     [
                         new Property(
                             "GOLF_Id", "InstanceID",
-                            new StructureValue(
+                            new ComplexObjectValue(
                                 "GOLF_Id",
                                 [
                                     new("Id", new IntegerValue(12345))

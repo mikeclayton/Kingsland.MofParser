@@ -6,7 +6,7 @@ using System.Text;
 namespace Kingsland.MofParser.Models.Values;
 
 [PublicAPI]
-public sealed class InstanceValue : IProduction
+public sealed class InstanceValue : Production
 {
 
     internal InstanceValue(string typeName, IEnumerable<KeyValuePair<string, PropertyValue>>? properties = null)

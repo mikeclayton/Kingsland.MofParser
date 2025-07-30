@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 namespace Kingsland.MofParser.Models.Types;
 
 [PublicAPI]
-public sealed class Class : IProduction
+public sealed class Class : Production
 {
 
     internal Class(Qualifier[] qualifiers, string name)

@@ -27,6 +27,21 @@ internal static partial class ModelConverter
 
     private static ComplexValue ConvertComplexValueAst(ComplexValueAst node)
     {
+        // section 7.5.9 of the MOF spec says:
+        //
+        // complexValue = aliasIdentifier /
+        //                ( VALUE OF
+        //                  ( structureName / className / associationName )
+        //                  propertyValueList )
+        //
+        // but the text says:
+        //
+        //     The keyword "value" corresponds to the StructureValue CIM metaelement.
+        //
+        // although it mustn't have an "alias" like a StructureValueDeclaration does
+        // so we've introduced a "ComplexObjectValue" to represent the "VALUE OF ..."
+        // portion of the definition.
+        //
         if (node.IsAlias)
         {
             return new AliasValue(
@@ -35,9 +50,8 @@ internal static partial class ModelConverter
         }
         else if (node.IsValue)
         {
-            return new StructureValue(
+            return new ComplexObjectValue(
                 (node.TypeName ?? throw new InvalidOperationException()).Name,
-                null,
                 ModelConverter.ConvertPropertyValueListAst(node.PropertyValues)
             );
         }

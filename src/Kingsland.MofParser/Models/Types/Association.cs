@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 namespace Kingsland.MofParser.Models.Types;
 
 [PublicAPI]
-public sealed class Association : IProduction
+public sealed class Association : Production
 {
 
     internal Association(Qualifier[] qualifiers, string name)

@@ -8,18 +8,18 @@ namespace Kingsland.MofParser.Models.Language;
 public sealed class Module
 {
 
-    internal Module(IEnumerable<IProduction>? productions = null)
+    internal Module(IEnumerable<Production>? productions = null)
     {
         this.Productions = (productions ?? []).ToList().AsReadOnly();
     }
 
-    internal Module(params IProduction[] productions)
+    internal Module(params Production[] productions)
     {
         this.Productions = productions.ToList().AsReadOnly();
     }
 
     [PublicAPI]
-    public ReadOnlyCollection<IProduction> Productions
+    public ReadOnlyCollection<Production> Productions
     {
         get;
     }
