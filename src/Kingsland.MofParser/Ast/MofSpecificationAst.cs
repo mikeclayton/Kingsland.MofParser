@@ -13,7 +13,7 @@ namespace Kingsland.MofParser.Ast;
 ///     mofSpecification = *mofProduction
 ///
 /// </remarks>
-public sealed record MofSpecificationAst : AstNode
+public sealed record MofSpecificationAst : IAstNode
 {
 
     #region Builder

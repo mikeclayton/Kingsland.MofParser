@@ -16,7 +16,7 @@ namespace Kingsland.MofParser.Ast;
 ///     enumLiteral            = IDENTIFIER
 ///
 /// </remarks>
-public sealed record EnumElementAst : AstNode
+public sealed record EnumElementAst : IAstNode
 {
 
     #region Builder
@@ -74,7 +74,7 @@ public sealed record EnumElementAst : AstNode
         IdentifierToken enumElementName,
         string? enumElementValue
     ) : this(
-        new QualifierListAst(),
+        new(),
         enumElementName,
         (enumElementValue is null) ? null : new StringValueAst(enumElementValue)
     )
@@ -85,7 +85,7 @@ public sealed record EnumElementAst : AstNode
         IdentifierToken enumElementName,
         long? enumElementValue
     ) : this(
-        new QualifierListAst(),
+        new(),
         enumElementName,
         (enumElementValue is null) ? null : new IntegerValueAst(enumElementValue)
     )
@@ -97,7 +97,7 @@ public sealed record EnumElementAst : AstNode
         IdentifierToken enumElementName,
         string? enumElementValue
     ) : this(
-        new QualifierListAst(qualifierList),
+        new(qualifierList),
         enumElementName,
         (enumElementValue is null) ? null : new StringValueAst(enumElementValue)
     )
@@ -109,7 +109,7 @@ public sealed record EnumElementAst : AstNode
         IdentifierToken enumElementName,
         long? enumElementValue
     ) : this(
-        new QualifierListAst(qualifierList),
+        new(qualifierList),
         enumElementName,
         (enumElementValue is null) ? null : new IntegerValueAst(enumElementValue)
     )
@@ -132,7 +132,7 @@ public sealed record EnumElementAst : AstNode
     #region Properties
 
     [PublicAPI]
-    public QualifierListAst? QualifierList
+    public QualifierListAst QualifierList
     {
         get;
     }

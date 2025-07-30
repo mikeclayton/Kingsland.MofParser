@@ -1,5 +1,6 @@
 ﻿using Kingsland.MofParser.Ast;
-using Kingsland.MofParser.Models.Types;
+using Kingsland.MofParser.Models.Language;
+using Kingsland.MofParser.Models.Values;
 using Kingsland.MofParser.Tokens;
 using Kingsland.MofParser.UnitTests.Extensions;
 using NUnit.Framework;
@@ -44,9 +45,49 @@ public static partial class RoundtripTests
                 )
             );
             var expectedModule = new Module(
-                [
-                    new("GOLF_ClubMember")
-                ]
+                new InstanceValue("GOLF_ClubMember")
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
+        }
+
+
+        [Test]
+        public static void InstanceValueDeclarationWithAliasShouldRoundtrip()
+        {
+            var newline = Environment.NewLine;
+            var sourceText = @"
+                instance of GOLF_ClubMember as $MyAliasIdentifier
+                {
+                };
+            ".TrimIndent(newline).TrimString(newline);
+            var expectedTokens = new TokenBuilder()
+                // instance of GOLF_ClubMember as $MyAliasIdentifier
+                .IdentifierToken("instance")
+                .WhitespaceToken(" ")
+                .IdentifierToken("of")
+                .WhitespaceToken(" ")
+                .IdentifierToken("GOLF_ClubMember")
+                .WhitespaceToken(" ")
+                .IdentifierToken("as")
+                .WhitespaceToken(" ")
+                .AliasIdentifierToken("MyAliasIdentifier")
+                .WhitespaceToken(newline)
+                // {
+                .BlockOpenToken()
+                .WhitespaceToken(newline)
+                // };
+                .BlockCloseToken()
+                .StatementEndToken()
+                .ToList();
+            var expectedAst = new MofSpecificationAst(
+                new InstanceValueDeclarationAst(
+                    "instance", "of", "GOLF_ClubMember", "as", "MyAliasIdentifier", ";"
+                )
+            );
+            var expectedModule = new Module(
+                new InstanceValue(
+                    "GOLF_ClubMember", "MyAliasIdentifier"
+                )
             );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
@@ -105,58 +146,13 @@ public static partial class RoundtripTests
                 )
             );
             var expectedModule = new Module(
-                [
-                    new Instance(
-                        "GOLF_ClubMember",
-                        [
-                            new Property("FirstName", "John"),
-                            new Property("LastName", "Doe")
-                        ]
-                    )
-                ]
-            );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
-        }
-
-        [Test]
-        public static void InstanceValueDeclarationWithAliasShouldRoundtrip()
-        {
-            var newline = Environment.NewLine;
-            var sourceText = @"
-                instance of GOLF_ClubMember as $MyAliasIdentifier
-                {
-                };
-            ".TrimIndent(newline).TrimString(newline);
-            var expectedTokens = new TokenBuilder()
-                // instance of GOLF_ClubMember as $MyAliasIdentifier
-                .IdentifierToken("instance")
-                .WhitespaceToken(" ")
-                .IdentifierToken("of")
-                .WhitespaceToken(" ")
-                .IdentifierToken("GOLF_ClubMember")
-                .WhitespaceToken(" ")
-                .IdentifierToken("as")
-                .WhitespaceToken(" ")
-                .AliasIdentifierToken("MyAliasIdentifier")
-                .WhitespaceToken(newline)
-                // {
-                .BlockOpenToken()
-                .WhitespaceToken(newline)
-                // };
-                .BlockCloseToken()
-                .StatementEndToken()
-                .ToList();
-            var expectedAst = new MofSpecificationAst(
-                new InstanceValueDeclarationAst(
-                    "instance", "of", "GOLF_ClubMember", "as", "MyAliasIdentifier", ";"
+                new InstanceValue(
+                    "GOLF_ClubMember",
+                    [
+                        new("FirstName", "John"),
+                        new("LastName", "Doe")
+                    ]
                 )
-            );
-            var expectedModule = new Module(
-                [
-                    new Instance(
-                        "GOLF_ClubMember", "MyAliasIdentifier"
-                    )
-                ]
             );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }

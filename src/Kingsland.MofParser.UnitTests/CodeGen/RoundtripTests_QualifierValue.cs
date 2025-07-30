@@ -1,4 +1,7 @@
 ﻿using Kingsland.MofParser.Ast;
+using Kingsland.MofParser.Models.Language;
+using Kingsland.MofParser.Models.Types;
+using Kingsland.MofParser.Models.Values;
 using Kingsland.MofParser.Parsing;
 using Kingsland.MofParser.Tokens;
 using Kingsland.MofParser.UnitTests.Extensions;
@@ -137,8 +140,33 @@ public static partial class RoundtripTests
                     ]
                 )
             );
+            var expectedModule = new Module(
+                new Class(
+                    [
+                        new("Locale",  new IntegerValue(1033), flavors: ["ToInstance"]),
+                        new("UUID", new StringValue("{BE46D060-7A7C-11d2-BC85-00104B2CF71C}"), flavors: ["ToInstance"])
+                    ],
+                    "Win32_PrivilegesStatus", "__ExtendedStatus",
+                    [
+                        new Property(
+                            [
+                                new("read", flavors: ["ToSubClass"]),
+                                new("MappingStrings", new LiteralValueArray("Win32API|AccessControl|Windows NT Privileges"), flavors: ["ToSubClass"])
+                            ],
+                            "string", "PrivilegesNotHeld", true
+                        ),
+                        new Property(
+                            [
+                                new("read", flavors: ["ToSubClass"]),
+                                new("MappingStrings", new LiteralValueArray("Win32API|AccessControl|Windows NT Privileges"), flavors: ["ToSubClass"])
+                            ],
+                            "string", "PrivilegesRequired", true
+                        )
+                    ]
+                )
+            );
             var quirks = ParserQuirks.AllowMofV2Qualifiers;
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, null, quirks);
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule, quirks);
         }
 
         [Test]

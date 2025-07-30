@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System.Collections;
 
 namespace Kingsland.MofParser.UnitTests.Helpers;
 
@@ -28,10 +29,32 @@ internal static class ModelAssert
             Assert.That((string)actual, Is.EqualTo(expectedString));
             return;
         }
-        // handle collections
-        if (expected is System.Collections.IEnumerable expectedEnumerable)
+        // handle dictionaries
+        if (expected is IDictionary expectedDictionary)
         {
-            var actualItems = ((System.Collections.IEnumerable)actual).Cast<object>().ToList();
+            var actualDictionary = (IDictionary)actual;
+            Assert.That(actualDictionary.Keys.Count, Is.EqualTo(expectedDictionary.Keys.Count));
+            // loop through keys comparing values
+            foreach (var expectedKey in expectedDictionary.Keys)
+            {
+                Assert.That(actualDictionary.Contains(expectedKey), Is.True, $"Key '{expectedKey}' not found in actual dictionary.");
+                var actualValue = actualDictionary[expectedKey];
+                var expectedValue = expectedDictionary[expectedKey];
+                if (expectedValue is null)
+                {
+                    Assert.That(actualValue, Is.Null, $"Value for key '{expectedKey}' should be null.");
+                }
+                else
+                {
+                    ModelAssert.AreDeepEqual(actualValue, expectedValue);
+                }
+            }
+            return;
+        }
+        // handle collections
+        if (expected is IEnumerable expectedEnumerable)
+        {
+            var actualItems = ((IEnumerable)actual).Cast<object>().ToList();
             var expectedItems = expectedEnumerable.Cast<object>().ToList();
             Assert.That(actualItems.Count, Is.EqualTo(expectedItems.Count));
             for (var i = 0; i < expectedItems.Count; i++)

@@ -1,5 +1,4 @@
 ﻿using Kingsland.MofParser.Ast;
-using Kingsland.MofParser.Models.Types;
 using Kingsland.MofParser.Models.Values;
 
 namespace Kingsland.MofParser.Models.Converter;
@@ -26,32 +25,48 @@ internal static partial class ModelConverter
         );
     }
 
-    private static ComplexValueBase ConvertComplexValueAst(ComplexValueAst node)
+    private static ComplexValue ConvertComplexValueAst(ComplexValueAst node)
     {
+        // section 7.5.9 of the MOF spec says:
+        //
+        // complexValue = aliasIdentifier /
+        //                ( VALUE OF
+        //                  ( structureName / className / associationName )
+        //                  propertyValueList )
+        //
+        // but the text says:
+        //
+        //     The keyword "value" corresponds to the StructureValue CIM metaelement.
+        //
+        // although it mustn't have an "alias" like a StructureValueDeclaration does
+        // so we've introduced a "ComplexObjectValue" to represent the "VALUE OF ..."
+        // portion of the definition.
+        //
         if (node.IsAlias)
         {
-            return new ComplexValueAlias(
+            return new AliasValue(
                 (node.Alias ?? throw new InvalidOperationException()).Name
             );
         }
-        else
+        else if (node.IsValue)
         {
-            return new ComplexValueObject(
+            return new ComplexObjectValue(
                 (node.TypeName ?? throw new InvalidOperationException()).Name,
                 ModelConverter.ConvertPropertyValueListAst(node.PropertyValues)
             );
         }
+        else
+        {
+            throw new InvalidOperationException($"{nameof(ComplexValueAst)} must be an alias or a value.");
+        }
     }
 
-    private static IEnumerable<Property> ConvertPropertyValueListAst(PropertyValueListAst node)
+    private static IDictionary<string, PropertyValue> ConvertPropertyValueListAst(PropertyValueListAst node)
     {
-        return node.PropertyValues
-            .Select(
-                kvp => new Property(
-                    name: kvp.Key,
-                    value: ModelConverter.ConvertPropertyValueAst(kvp.Value)
-                )
-            );
+        return node.PropertyValues.ToDictionary(
+            kvp => kvp.Key,
+            kvp => ModelConverter.ConvertPropertyValueAst(kvp.Value)
+        );
     }
 
     private static PropertyValue ConvertPropertyValueAst(PropertyValueAst node)

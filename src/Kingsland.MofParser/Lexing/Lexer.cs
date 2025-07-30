@@ -625,7 +625,7 @@ public static class Lexer
                         // * a hexValue prefix               => "0x" / "0X"
                         // * a decimalValue                  => "0" / positiveDecimalDigit *decimalDigit
                         // * the integer part of a realValue => *decimalDigit
-                        var peekChar = thisReader.Peek();
+                        //
                         // we don't know which base the value is in yet, but if it's hexadecimal then
                         // we should be reading the "0" from the "0x" prefix here, so regardless of base
                         // the next thing we want to read is a block of decimal digits
@@ -650,7 +650,7 @@ public static class Lexer
                         }
                         // check the next character to see if it tells us anything
                         // about which type of literal we're reading
-                        peekChar = thisReader.Peek();
+                        var peekChar = thisReader.Peek();
                         if (peekChar.Value is 'b' or 'B')
                         {
                             // binaryValue

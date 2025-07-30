@@ -8,20 +8,20 @@ public sealed class ComplexValueArray : ComplexTypeValue
 {
 
     [PublicAPI]
-    public ComplexValueArray(params ComplexValueBase[] values)
-        : this((IEnumerable<ComplexValueBase>)values)
+    internal ComplexValueArray(params ComplexValue[] values)
+        : this((IEnumerable<ComplexValue>)values)
     {
     }
 
     [PublicAPI]
-    public ComplexValueArray(IEnumerable<ComplexValueBase> values)
+    internal ComplexValueArray(IEnumerable<ComplexValue> values)
     {
         this.Values = (values ?? throw new ArgumentNullException(nameof(values)))
             .ToList().AsReadOnly();
     }
 
     [PublicAPI]
-    public ReadOnlyCollection<ComplexValueBase> Values
+    public ReadOnlyCollection<ComplexValue> Values
     {
         get;
     }

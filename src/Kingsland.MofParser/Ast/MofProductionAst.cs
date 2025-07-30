@@ -18,15 +18,11 @@
 ///                     qualifierTypeDeclaration
 ///
 /// </remarks>
-public abstract record MofProductionAst : AstNode
+public abstract record MofProductionAst : IAstNode
 {
 
-    #region Constructors
-
-    internal MofProductionAst()
+    protected MofProductionAst()
     {
     }
-
-    #endregion
 
 }

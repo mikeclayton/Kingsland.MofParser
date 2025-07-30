@@ -4,6 +4,10 @@ using System.Collections.ObjectModel;
 namespace Kingsland.MofParser.Ast;
 
 /// <summary>
+/// An association represents a relationship between two or more classes. The associated classes are
+/// specified by the reference properties of the association. Within an association instance each reference
+/// property refers to one instance of the referenced class or its subclass. An association instance is the
+/// relationship between all referenced class instances.
 /// </summary>
 /// <remarks>
 ///
@@ -84,6 +88,13 @@ public sealed record AssociationDeclarationAst : MofProductionAst
     #endregion
 
     #region Constructors
+
+    internal AssociationDeclarationAst(
+        QualifierValueAst[] qualifierList,
+        IdentifierToken associationName
+    ) : this(new(qualifierList), associationName, null, null)
+    {
+    }
 
     internal AssociationDeclarationAst(
         IdentifierToken associationName,

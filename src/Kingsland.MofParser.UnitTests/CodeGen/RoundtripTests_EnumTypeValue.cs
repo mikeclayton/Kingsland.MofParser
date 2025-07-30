@@ -1,4 +1,6 @@
 ﻿using Kingsland.MofParser.Ast;
+using Kingsland.MofParser.Models.Language;
+using Kingsland.MofParser.Models.Values;
 using Kingsland.MofParser.Parsing;
 using Kingsland.MofParser.Tokens;
 using Kingsland.MofParser.UnitTests.Extensions;
@@ -57,7 +59,15 @@ public static partial class RoundtripTests
                     ";"
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new InstanceValue(
+                    "GOLF_Date",
+                    [
+                        new("Month", new EnumValue("July"))
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test]
@@ -105,7 +115,15 @@ public static partial class RoundtripTests
                     ";"
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new InstanceValue(
+                    "GOLF_Date",
+                    [
+                        new("Month", new EnumValueArray("June"))
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test]
@@ -156,7 +174,15 @@ public static partial class RoundtripTests
                     ";"
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new InstanceValue(
+                    "GOLF_Date",
+                    [
+                        new("Month", new EnumValueArray("June", "July"))
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
     }
@@ -165,7 +191,7 @@ public static partial class RoundtripTests
     {
 
         [Test]
-        public static void UnqalifiedEnumValueShouldRoundtrip()
+        public static void UnqualifiedEnumValueShouldRoundtrip()
         {
             var newline = Environment.NewLine;
             var indent = "    ";
@@ -207,55 +233,15 @@ public static partial class RoundtripTests
                     ";"
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
-        }
-
-        [Test]
-        public static void QualifiedEnumValueShouldRoundtrip()
-        {
-            var newline = Environment.NewLine;
-            var indent = "    ";
-            var sourceText = @"
-                instance of GOLF_Date
-                {
-                    Month = MonthEnums.July;
-                };
-            ".TrimIndent(newline).TrimString(newline);
-            var expectedTokens = new TokenBuilder()
-                // instance of GOLF_Date
-                .IdentifierToken("instance")
-                .WhitespaceToken(" ")
-                .IdentifierToken("of")
-                .WhitespaceToken(" ")
-                .IdentifierToken("GOLF_Date")
-                .WhitespaceToken(newline)
-                // {
-                .BlockOpenToken()
-                .WhitespaceToken(newline + indent)
-                //     Month = MonthEnums.July;
-                .IdentifierToken("Month")
-                .WhitespaceToken(" ")
-                .EqualsOperatorToken()
-                .WhitespaceToken(" ")
-                .IdentifierToken("MonthEnums")
-                .DotOperatorToken()
-                .IdentifierToken("July")
-                .StatementEndToken()
-                .WhitespaceToken(newline)
-                // };
-                .BlockCloseToken()
-                .StatementEndToken()
-                .ToList();
-            var expectedAst = new MofSpecificationAst(
-                new InstanceValueDeclarationAst(
-                    "instance", "of", "GOLF_Date",
+            var expectedModule = new Module(
+                new InstanceValue(
+                    "GOLF_Date",
                     [
-                        new("Month", new EnumValueAst("MonthEnums", "July"))
-                    ],
-                    ";"
+                        new("Month", new EnumValue("July"))
+                    ]
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
     }
@@ -266,6 +252,9 @@ public static partial class RoundtripTests
         [Test]
         public static void EmptyEnumValueArrayShouldRoundtrip()
         {
+            // note - this parses as an array of *literal* values rather than
+            // an array of *enum* values as there's no schema available for the
+            // class that tells us the return type of the "Month" property
             var newline = Environment.NewLine;
             var indent = "    ";
             var sourceText = @"
@@ -307,7 +296,15 @@ public static partial class RoundtripTests
                     ";"
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new InstanceValue(
+                    "GOLF_Date",
+                    [
+                        new("Month", new LiteralValueArray())
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test]
@@ -355,7 +352,15 @@ public static partial class RoundtripTests
                     ";"
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new InstanceValue(
+                    "GOLF_Date",
+                    [
+                        new("Month", new EnumValueArray("June"))
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test]
@@ -406,7 +411,15 @@ public static partial class RoundtripTests
                     ";"
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new InstanceValue(
+                    "GOLF_Date",
+                    [
+                        new("Month", new EnumValueArray("January", "February"))
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test(Description = "https://github.com/mikeclayton/MofParser/issues/25")]
@@ -456,8 +469,16 @@ public static partial class RoundtripTests
                     ";"
                 )
             );
+            var expectedModule = new Module(
+                new InstanceValue(
+                    "GOLF_Date",
+                    [
+                        new("Month", new EnumValueArray([new("MonthEnums", "July")]))
+                    ]
+                )
+            );
             var quirks = ParserQuirks.EnumValueArrayContainsEnumValuesNotEnumNames;
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, null, quirks);
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule, quirks);
         }
 
         [Test(Description = "https://github.com/mikeclayton/MofParser/issues/25")]
@@ -473,7 +494,7 @@ public static partial class RoundtripTests
             var errorline = 3;
             var expectedMessage = @$"
                 Unexpected token found at Position {45 + (errorline - 1) * newline.Length}, Line Number {errorline}, Column Number 24.
-                Token Type: 'DotOperatorToken'
+                Token Type: '{nameof(DotOperatorToken)}'
                 Token Text: '.'
             ".TrimIndent(newline).TrimString(newline);
             RoundtripTests.AssertRoundtripException(sourceText, expectedMessage);

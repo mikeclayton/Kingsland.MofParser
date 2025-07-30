@@ -1,5 +1,5 @@
 ﻿using Kingsland.MofParser.Ast;
-using Kingsland.MofParser.Models.Types;
+using Kingsland.MofParser.Models.Language;
 using Kingsland.MofParser.Models.Values;
 using Kingsland.MofParser.Tokens;
 using Kingsland.MofParser.UnitTests.Extensions;
@@ -58,7 +58,15 @@ public static partial class RoundtripTests
                     ";"
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new InstanceValue(
+                    "GOLF_ClubMember",
+                    [
+                        new("LastPaymentDate", new AliasValue("MyAliasIdentifier"))
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test]
@@ -120,36 +128,28 @@ public static partial class RoundtripTests
                 new InstanceValueDeclarationAst(
                     "instance", "of", "GOLF_ClubMember",
                     [
-                        new(
-                            "LastPaymentDate",
-                            new ComplexValueAst(
-                                "value", "of", "GOLF_Date",
-                                [
-                                    new("Month", new EnumValueAst("July"))
-                                ]
-                            )
-                        )
+                        new("LastPaymentDate", new ComplexValueAst(
+                            "value", "of", "GOLF_Date",
+                            [
+                                new("Month", new EnumValueAst("July"))
+                            ]
+                        ))
                     ],
                     ";"
                 )
             );
             var expectedModule = new Module(
-                [
-                    new Instance(
-                        "GOLF_ClubMember",
-                        [
-                            new Property(
-                                "LastPaymentDate",
-                                new ComplexValueObject(
-                                    "GOLF_Date",
-                                    [
-                                        new("Month", new EnumValue("July"))
-                                    ]
-                                )
-                            )
-                        ]
-                    )
-                ]
+                new InstanceValue(
+                    "GOLF_ClubMember",
+                    [
+                        new("LastPaymentDate", new ComplexObjectValue(
+                            "GOLF_Date",
+                            [
+                                new("Month", new EnumValue("July"))
+                            ]
+                        ))
+                    ]
+                )
             );
             RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }

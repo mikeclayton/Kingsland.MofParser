@@ -3,11 +3,11 @@
 namespace Kingsland.MofParser.Models.Values;
 
 [PublicAPI]
-public sealed class IntegerValue : LiteralValue
+public sealed class IntegerValue : LiteralValue, IEnumElementValue
 {
 
     [PublicAPI]
-    public IntegerValue(long value)
+    internal IntegerValue(long value)
     {
         this.Value = value;
     }
@@ -22,5 +22,7 @@ public sealed class IntegerValue : LiteralValue
     {
         return this.Value.ToString(CultureInfo.InvariantCulture);
     }
+
+    public static implicit operator IntegerValue(int value) => new(value);
 
 }

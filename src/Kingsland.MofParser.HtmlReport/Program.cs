@@ -30,7 +30,7 @@ static class Program
         {
             var module = Parser.ParseText(filename);
             resources.AddRange(
-                module.Instances.Select(
+                module.GetInstances().Select(
                     instance => DscResource.FromInstance(
                         Path.GetFileName(
                             Path.GetDirectoryName(

@@ -1,4 +1,7 @@
 ﻿using Kingsland.MofParser.Ast;
+using Kingsland.MofParser.Models.Language;
+using Kingsland.MofParser.Models.Types;
+using Kingsland.MofParser.Models.Values;
 using Kingsland.MofParser.Tokens;
 using Kingsland.MofParser.UnitTests.Extensions;
 using NUnit.Framework;
@@ -63,7 +66,20 @@ public static partial class RoundtripTests
                     ]
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Class(
+                    "Sponsor",
+                    [
+                        new Property(
+                            [
+                                new("Description", new StringValue("Monthly salary in $US"))
+                            ],
+                            "string", "Name"
+                        )
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test]
@@ -131,7 +147,15 @@ public static partial class RoundtripTests
                     ]
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Class(
+                    "Sponsor",
+                    [
+                        new Structure("Nested")
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test]
@@ -186,7 +210,17 @@ public static partial class RoundtripTests
                     ]
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Class(
+                    "Sponsor",
+                    [
+                        new Enumeration(
+                            "MonthsEnum", "Integer"
+                        )
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
         [Test]
@@ -229,7 +263,68 @@ public static partial class RoundtripTests
                     ]
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Class(
+                    "Sponsor",
+                    [
+                        new Property("string", "Name"),
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
+        }
+
+        [Test]
+        public static void ClassFeatureWithMethodDeclarationShouldRoundtrip()
+        {
+            var newline = Environment.NewLine;
+            var indent = "    ";
+            var sourceText = @"
+                class Sponsor
+                {
+                    Integer GetMembersWithOutstandingFees();
+                };
+            ".TrimIndent(newline).TrimString(newline);
+            var expectedTokens = new TokenBuilder()
+                // class Sponsor
+                .IdentifierToken("class")
+                .WhitespaceToken(" ")
+                .IdentifierToken("Sponsor")
+                .WhitespaceToken(newline)
+                // {
+                .BlockOpenToken()
+                .WhitespaceToken(newline + indent)
+                //     Integer GetMembersWithOutstandingFees();
+                .IdentifierToken("Integer")
+                .WhitespaceToken(" ")
+                .IdentifierToken("GetMembersWithOutstandingFees")
+                .ParenthesisOpenToken()
+                .ParenthesisCloseToken()
+                .StatementEndToken()
+                .WhitespaceToken(newline)
+                // };
+                .BlockCloseToken()
+                .StatementEndToken()
+                .ToList();
+            var expectedAst = new MofSpecificationAst(
+                new ClassDeclarationAst(
+                    "Sponsor",
+                    [
+                        new MethodDeclarationAst(
+                            "Integer", "GetMembersWithOutstandingFees"
+                        )
+                    ]
+                )
+            );
+            var expectedModule = new Module(
+                new Class(
+                    "Sponsor",
+                    [
+                        new Method("Integer", "GetMembersWithOutstandingFees")
+                    ]
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
     }

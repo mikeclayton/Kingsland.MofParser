@@ -1,4 +1,7 @@
 ﻿using Kingsland.MofParser.Ast;
+using Kingsland.MofParser.Models.Language;
+using Kingsland.MofParser.Models.Types;
+using Kingsland.MofParser.Models.Values;
 using Kingsland.MofParser.Tokens;
 using Kingsland.MofParser.UnitTests.Extensions;
 using NUnit.Framework;
@@ -67,7 +70,22 @@ public static partial class RoundtripTests
                     "GOLF_Club", "GOLF_Base"
                 )
             );
-            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst);
+            var expectedModule = new Module(
+                new Class(
+                    [
+                        new(
+                            "Description",
+                            new StringValue(
+                                "Instances of this class represent golf clubs. A golf club is ",
+                                "an organization that provides member services to golf players ",
+                                "both amateur and professional."
+                            )
+                        )
+                    ],
+                    "GOLF_Club", "GOLF_Base"
+                )
+            );
+            RoundtripTests.AssertRoundtrip(sourceText, expectedTokens, expectedAst, expectedModule);
         }
 
     }

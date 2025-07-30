@@ -1,5 +1,4 @@
-﻿using Kingsland.MofParser.Models.Types;
-using Kingsland.MofParser.Models.Values;
+﻿using Kingsland.MofParser.Models.Values;
 using System.Collections.ObjectModel;
 
 namespace Kingsland.MofParser.HtmlReport.Resources;
@@ -9,7 +8,7 @@ internal class DscResource
 
     #region Constructors
 
-    protected DscResource(string filename, string computerName, Instance instance)
+    protected DscResource(string filename, string computerName, InstanceValue instance)
     {
         this.Filename = filename;
         this.ComputerName = computerName;
@@ -30,7 +29,7 @@ internal class DscResource
         get;
     }
 
-    internal Instance Instance
+    internal InstanceValue Instance
     {
         get;
     }
@@ -55,7 +54,7 @@ internal class DscResource
 
     internal ReadOnlyCollection<string> DependsOn =>
         this.Instance.Properties
-            .Where(property => property.Name == "ResourceID")
+            .Where(property => property.Key == "ResourceID")
             .SelectMany(property => ((LiteralValueArray)property.Value).Values)
             .Select(literalValue => ((StringValue)literalValue).Value)
             .ToList().AsReadOnly();
@@ -70,7 +69,7 @@ internal class DscResource
 
     #region Methods
 
-    internal static DscResource FromInstance(string filename, string computerName, Instance instance)
+    internal static DscResource FromInstance(string filename, string computerName, InstanceValue instance)
     {
         return instance.TypeName switch
         {
@@ -97,14 +96,12 @@ internal class DscResource
 
     protected string? GetStringProperty(string propertyName)
     {
-        var property = this.Instance.Properties
-            .SingleOrDefault(property => property.Name == propertyName);
-        if (property is null)
+        if (!this.Instance.Properties.TryGetValue(propertyName, out var propertyValue))
         {
             return null;
         }
-        var value = ((StringValue)property.Value).Value;
-        return value;
+        var stringValue = (StringValue)propertyValue;
+        return stringValue.Value;
     }
 
     #endregion

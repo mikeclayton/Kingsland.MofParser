@@ -18,7 +18,6 @@ The library was initially created with the goal of producing documentation from 
 
 For the full list of implemented language elements, see [Supported Syntax](wiki/supported_syntax.md).
 
-
 Quick Start
 -----------
 
@@ -47,7 +46,7 @@ instance of MSFT_RoleResource as $MSFT_RoleResource1ref
 var module = Parser.ParseText(sourceText);
 
 // display the instances
-foreach (var instance in module.Instances)
+foreach (var instance in module.GetInstances())
 {
     Console.WriteLine($"----------------------------------");
     Console.WriteLine($"typename = {instance.TypeName}");

@@ -1,5 +1,5 @@
 ﻿using Kingsland.MofParser.Ast;
-using Kingsland.MofParser.Models.Types;
+using Kingsland.MofParser.Models.Language;
 
 namespace Kingsland.MofParser.Models.Converter;
 
@@ -11,15 +11,24 @@ internal static partial class ModelConverter
     internal static Module ConvertMofSpecificationAst(MofSpecificationAst node)
     {
         return new Module(
-            //enumerations: node.Productions
-            //    .OfType<EnumerationDeclarationAst>()
-            //    .Select(ModelConverter.ConvertEnumerationDeclarationAst)
-            //    .ToList(),
-            instances: node.Productions
-                .OfType<InstanceValueDeclarationAst>()
-                .Select(ModelConverter.ConvertInstanceValueDeclarationAst)
-                .ToList()
+            node.Productions.Select(ModelConverter.ConvertMofProductionAst)
         );
+    }
+
+    private static Production ConvertMofProductionAst(MofProductionAst node)
+    {
+        return node switch
+        {
+            CompilerDirectiveAst n => ModelConverter.ConvertCompilerDirectiveAst(n),
+            StructureDeclarationAst n => ModelConverter.ConvertStructureDeclarationAst(n),
+            ClassDeclarationAst n => ModelConverter.ConvertClassDeclarationAst(n),
+            AssociationDeclarationAst n => ModelConverter.ConvertAssociationDeclarationAst(n),
+            EnumerationDeclarationAst n => ModelConverter.ConvertEnumerationDeclarationAst(n),
+            InstanceValueDeclarationAst n => ModelConverter.ConvertInstanceValueDeclarationAst(n),
+            StructureValueDeclarationAst n => ModelConverter.ConvertStructureValueDeclarationAst(n),
+            //QualifierTypeDeclarationAst n => ModelConverter.ConvertQualifierTypeDeclaration(n),
+            _ => throw new NotImplementedException($"Conversion for {node.GetType().Name} is not implemented.")
+        };
     }
 
     #endregion

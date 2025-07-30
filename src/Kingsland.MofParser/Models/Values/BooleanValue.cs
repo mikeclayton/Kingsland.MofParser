@@ -13,7 +13,7 @@ public sealed class BooleanValue : LiteralValue
     public static readonly BooleanValue False = new(false);
 
     [PublicAPI]
-    public BooleanValue(bool value)
+    internal BooleanValue(bool value)
     {
         this.Value = value;
     }

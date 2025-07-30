@@ -19,7 +19,7 @@ namespace Kingsland.MofParser.Ast;
 ///     propertyName      = IDENTIFIER
 ///
 /// </remarks>
-public sealed record PropertyValueListAst : AstNode
+public sealed record PropertyValueListAst : IAstNode
 {
 
     #region Builder

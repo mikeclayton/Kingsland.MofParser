@@ -7,13 +7,13 @@ public sealed class RealValue : LiteralValue
 {
 
     [PublicAPI]
-    public RealValue(double value)
+    internal RealValue(double value)
     {
         this.Value = value;
     }
 
     [PublicAPI]
-    public double Value
+    internal double Value
     {
         get;
     }

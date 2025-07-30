@@ -1,15 +1,79 @@
-﻿using Kingsland.MofParser.Models.Values;
+﻿using Kingsland.MofParser.Models.Qualifiers;
+using Kingsland.MofParser.Models.Values;
+using System.Collections.ObjectModel;
 
 namespace Kingsland.MofParser.Models.Types;
 
 [PublicAPI]
-public sealed record Property
+public sealed class Property : IStructureFeature
 {
 
-    internal Property(string name, PropertyValue value)
+    internal Property(Qualifier[] qualifiers, string returnType, string name)
+        : this(qualifiers, returnType, false, name, false, null)
     {
+    }
+
+    internal Property(Qualifier[] qualifiers, string returnType, string name, PropertyValue? defaultValue)
+        : this(qualifiers, returnType, false, name, false, defaultValue)
+    {
+    }
+
+    internal Property(string returnType, string name)
+        : this(null, returnType, false, name, false, null)
+    {
+    }
+
+    internal Property(string returnType, string name, PropertyValue? defaultValue)
+        : this(null, returnType, false, name, false, defaultValue)
+    {
+    }
+
+    internal Property(string returnType, bool isRef, string name)
+        : this(null, returnType, isRef, name, false, null)
+    {
+    }
+
+    internal Property(string returnType, bool isRef, string name, PropertyValue? defaultValue)
+        : this(null, returnType, isRef, name, false, defaultValue)
+    {
+    }
+
+    internal Property(Qualifier[] qualifiers, string returnType, string name, bool isArray)
+        : this(qualifiers, returnType, false, name, isArray, null)
+    {
+    }
+
+    internal Property(string returnType, string name, bool isArray)
+        : this(null, returnType, false, name, isArray, null)
+    {
+    }
+
+    internal Property(IEnumerable<Qualifier>? qualifiers, string returnType, bool isRef, string name, bool isArray, PropertyValue? defaultValue)
+    {
+        this.Qualifiers = (qualifiers ?? []).ToList().AsReadOnly();
+        this.ReturnType = returnType ?? throw new ArgumentNullException(nameof(returnType));
+        this.IsRef = isRef;
         this.Name = name ?? throw new ArgumentNullException(nameof(name));
-        this.Value = value ?? throw new ArgumentNullException(nameof(value));
+        this.IsArray = isArray;
+        this.DefaultValue = defaultValue;
+    }
+
+    [PublicAPI]
+    public ReadOnlyCollection<Qualifier> Qualifiers
+    {
+        get;
+    }
+
+    [PublicAPI]
+    public string ReturnType
+    {
+        get;
+    }
+
+    [PublicAPI]
+    public bool IsRef
+    {
+        get;
     }
 
     [PublicAPI]
@@ -19,14 +83,20 @@ public sealed record Property
     }
 
     [PublicAPI]
-    public PropertyValue Value
+    public bool IsArray
+    {
+        get;
+    }
+
+    [PublicAPI]
+    public PropertyValue? DefaultValue
     {
         get;
     }
 
     public override string ToString()
     {
-        return $"{this.Name} = {this.Value}";
+        return $"{this.Name} = {this.DefaultValue}";
     }
 
 }

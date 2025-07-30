@@ -82,13 +82,12 @@ internal static class Constants
     public const char FORMFEED_ESC = 'f';
     public const char CARRIAGERETURN_ESC = 'r';
 
-    public const char BACKSLASH = '\x005C'; // \
+    public const char BACKSLASH = '\x005C';   // \
     public const char DOUBLEQUOTE = '\x0022'; // "
     public const char SINGLEQUOTE = '\x0027'; // '
     //public const char UPPERALPHA = "\x0041...\x005A"; // A ... Z
     //public const char LOWERALPHA = "\x0061...\x007A"; // a ... z
-    public const char UNDERSCORE = '\x005F'; //_
-
+    public const char UNDERSCORE = '\x005F';  //_
 
     // 7.6.1.5 Boolean value
     public const string FALSE = "false";

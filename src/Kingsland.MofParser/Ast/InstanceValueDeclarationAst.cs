@@ -29,7 +29,7 @@ public sealed record InstanceValueDeclarationAst : MofProductionAst
         [PublicAPI]
         public Builder()
         {
-            this.PropertyValues = new([]);
+            this.PropertyValues = new();
         }
 
         [PublicAPI]

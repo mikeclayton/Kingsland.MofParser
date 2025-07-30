@@ -1,7 +1,7 @@
 ﻿using Kingsland.MofParser.Ast;
 using Kingsland.MofParser.Lexing;
 using Kingsland.MofParser.Models.Converter;
-using Kingsland.MofParser.Models.Types;
+using Kingsland.MofParser.Models.Language;
 using Kingsland.MofParser.Models.Values;
 using Kingsland.MofParser.Parsing;
 using Kingsland.MofParser.Tokens;
@@ -60,14 +60,12 @@ public static partial class ParserTests
             Assert.That(actualJson, Is.EqualTo(expectedJson));
             var actualModule = ModelConverter.ConvertMofSpecificationAst(actualAst);
             var expectedModule = new Module(
-                [
-                    new Instance(
-                        "myType", "Alias0000006E",
-                        [
-                            new Property("ServerURL", "https://URL")
-                        ]
-                    )
-                ]
+                new InstanceValue(
+                    "myType", "Alias0000006E",
+                    [
+                        new("ServerURL", "https://URL")
+                    ]
+                )
             );
             ModelAssert.AreDeepEqual(expectedModule, actualModule);
         }
@@ -111,14 +109,12 @@ public static partial class ParserTests
             Assert.That(actualJson, Is.EqualTo(expectedJson));
             var actualModule = ModelConverter.ConvertMofSpecificationAst(actualAst);
             var expectedModule = new Module(
-                [
-                    new Instance(
-                        "myType", "Alias00000070",
-                        [
-                            new Property("Reference", new ComplexValueAlias("Alias0000006E"))
-                        ]
-                    )
-                ]
+                new InstanceValue(
+                    "myType", "Alias00000070",
+                    [
+                        new("Reference", new AliasValue("Alias0000006E"))
+                    ]
+                )
             );
             ModelAssert.AreDeepEqual(expectedModule, actualModule);
         }
@@ -158,14 +154,12 @@ public static partial class ParserTests
             Assert.That(actualJson, Is.EqualTo(expectedJson));
             var actualModule = ModelConverter.ConvertMofSpecificationAst(actualAst);
             var expectedModule = new Module(
-                [
-                    new Instance(
-                        "myType", "Alias00000070",
-                        [
-                            new Property("Reference", new LiteralValueArray())
-                        ]
-                    )
-                ]
+                new InstanceValue(
+                    "myType", "Alias00000070",
+                    [
+                        new("Reference", new LiteralValueArray())
+                    ]
+                )
             );
             ModelAssert.AreDeepEqual(expectedModule, actualModule);
         }
@@ -211,16 +205,14 @@ public static partial class ParserTests
             Assert.That(actualJson, Is.EqualTo(expectedJson));
             var actualModule = ModelConverter.ConvertMofSpecificationAst(actualAst);
             var expectedModule = new Module(
-                [
-                    new Instance(
-                        "myType", "Alias00000070",
-                        [
-                            new Property("Reference", new ComplexValueArray(
-                                new ComplexValueAlias("Alias0000006E")
-                            ))
-                        ]
-                    )
-                ]
+                new InstanceValue(
+                    "myType", "Alias00000070",
+                    [
+                        new("Reference", new ComplexValueArray(
+                            new AliasValue("Alias0000006E")
+                        ))
+                    ]
+                )
             );
             ModelAssert.AreDeepEqual(expectedModule, actualModule);
         }
@@ -273,16 +265,14 @@ public static partial class ParserTests
             Assert.That(actualJson, Is.EqualTo(expectedJson));
             var actualModule = ModelConverter.ConvertMofSpecificationAst(actualAst);
             var expectedModule = new Module(
-                [
-                    new Instance(
-                        "myType", "Alias00000070",
-                        [
-                            new Property("ServerURLs", new LiteralValueArray(
-                                "https://URL1", "https://URL2"
-                            ))
-                        ]
-                    )
-                ]
+                new InstanceValue(
+                    "myType", "Alias00000070",
+                    [
+                        new("ServerURLs", new LiteralValueArray(
+                            "https://URL1", "https://URL2"
+                        ))
+                    ]
+                )
             );
             ModelAssert.AreDeepEqual(expectedModule, actualModule);
         }
@@ -362,19 +352,16 @@ public static partial class ParserTests
             Assert.That(actualJson, Is.EqualTo(expectedJson));
             var actualModule = ModelConverter.ConvertMofSpecificationAst(actualAst);
             var expectedModule = new Module(
-                [
-                    new Instance(
-                        typeName: "myType",
-                        alias: "Alias00000070",
-                        properties: [
-                            new Property("MyBinaryValue", 42),
-                            new Property("MyOctalValue", 149796),
-                            new Property("MyHexValue", 11256099),
-                            new Property("MyDecimalValue", 12345),
-                            new Property("MyRealValue", 123.45)
-                        ]
-                    )
-                ]
+                new InstanceValue(
+                    "myType", "Alias00000070",
+                    [
+                        new("MyBinaryValue", 42),
+                        new("MyOctalValue", 149796),
+                        new("MyHexValue", 11256099),
+                        new("MyDecimalValue", 12345),
+                        new("MyRealValue", 123.45)
+                    ]
+                )
             );
             ModelAssert.AreDeepEqual(expectedModule, actualModule);
         }

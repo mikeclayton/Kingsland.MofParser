@@ -95,8 +95,12 @@ public sealed record StructureValueDeclarationAst : MofProductionAst
                 typeName: this.TypeName ?? throw new InvalidOperationException(
                     $"{nameof(this.TypeName)} property must be set before calling {nameof(Build)}."
                 ),
-                @as: this.As,
-                alias: this.Alias,
+                @as: this.As ?? throw new InvalidOperationException(
+                    $"{nameof(this.As)} property must be set before calling {nameof(Build)}."
+                ),
+                alias: this.Alias ?? throw new InvalidOperationException(
+                    $"{nameof(this.Alias)} property must be set before calling {nameof(Build)}."
+                ),
                 propertyValues: (this.PropertyValues ?? throw new InvalidOperationException(
                         $"{nameof(this.PropertyValues)} property must be set before calling {nameof(Build)}."
                     )
@@ -140,8 +144,8 @@ public sealed record StructureValueDeclarationAst : MofProductionAst
         IdentifierToken value,
         IdentifierToken of,
         IdentifierToken typeName,
-        IdentifierToken? @as,
-        AliasIdentifierToken? alias,
+        IdentifierToken @as,
+        AliasIdentifierToken alias,
         PropertyValueListAst? propertyValues,
         StatementEndToken statementEnd
     )
@@ -149,11 +153,8 @@ public sealed record StructureValueDeclarationAst : MofProductionAst
         this.Value = value ?? throw new ArgumentNullException(nameof(value));
         this.Of = of ?? throw new ArgumentNullException(nameof(of));
         this.TypeName = typeName ?? throw new ArgumentNullException(nameof(typeName));
-        if ((@as is not null) || (alias is not null))
-        {
-            this.As = @as ?? throw new ArgumentNullException(nameof(@as));
-            this.Alias = alias ?? throw new ArgumentNullException(nameof(alias));
-        }
+        this.As = @as ?? throw new ArgumentNullException(nameof(@as));
+        this.Alias = alias ?? throw new ArgumentNullException(nameof(alias));
         this.PropertyValues = propertyValues ?? new();
         this.StatementEnd = statementEnd ?? throw new ArgumentNullException(nameof(statementEnd));
     }
@@ -181,13 +182,13 @@ public sealed record StructureValueDeclarationAst : MofProductionAst
     }
 
     [PublicAPI]
-    public IdentifierToken? As
+    public IdentifierToken As
     {
         get;
     }
 
     [PublicAPI]
-    public AliasIdentifierToken? Alias
+    public AliasIdentifierToken Alias
     {
         get;
     }

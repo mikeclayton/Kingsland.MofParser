@@ -3,6 +3,7 @@
 namespace Kingsland.MofParser.Ast;
 
 /// <summary>
+/// Represents a single boolean value.
 /// </summary>
 /// <remarks>
 ///

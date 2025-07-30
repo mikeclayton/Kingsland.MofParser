@@ -2,7 +2,7 @@
 using Kingsland.MofParser.CodeGen;
 using Kingsland.MofParser.Lexing;
 using Kingsland.MofParser.Models.Converter;
-using Kingsland.MofParser.Models.Types;
+using Kingsland.MofParser.Models.Language;
 using Kingsland.MofParser.Parsing;
 using Kingsland.MofParser.UnitTests.Helpers;
 using Kingsland.ParseFx.Parsing;
@@ -73,7 +73,7 @@ public static partial class RoundtripTests
             AstAssert.AreEqual(expectedAst, actualAst, true);
         }
         // check the code generator builds the original source text
-        var actualAstText = actualAst.ToString(
+        var actualAstText = ((Ast.IAstNode)actualAst).ToMofString(
             new AstWriterOptions(
                 newLine: Environment.NewLine,
                 indentStep: "    ",

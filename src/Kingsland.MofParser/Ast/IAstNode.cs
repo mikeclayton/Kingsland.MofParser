@@ -2,13 +2,11 @@
 
 namespace Kingsland.MofParser.Ast;
 
-public abstract record AstNode : ParseFx.Parsing.AstNode
+public interface IAstNode
 {
 
-    #region Object Overrides
-
     [PublicAPI]
-    public sealed override string ToString()
+    public string ToMofString()
     {
         var buffer = new StringWriter();
         var writer = new AstWriter(
@@ -21,7 +19,7 @@ public abstract record AstNode : ParseFx.Parsing.AstNode
     }
 
     [PublicAPI]
-    public string ToString(AstWriterOptions options)
+    public string ToMofString(AstWriterOptions options)
     {
         var buffer = new StringWriter();
         var writer = new AstWriter(
@@ -32,7 +30,5 @@ public abstract record AstNode : ParseFx.Parsing.AstNode
         return buffer.ToString();
 
     }
-
-    #endregion
 
 }

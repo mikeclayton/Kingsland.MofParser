@@ -1,11 +1,11 @@
 ﻿namespace Kingsland.MofParser.Models.Values;
 
 [PublicAPI]
-public sealed class ComplexValueAlias : ComplexValueBase
+public sealed class AliasValue : ComplexValue
 {
 
     [PublicAPI]
-    public ComplexValueAlias(string name)
+    internal AliasValue(string name)
     {
         this.Name = name ?? throw new ArgumentNullException(nameof(name));
     }

@@ -5,28 +5,30 @@ public sealed class EnumValue : EnumTypeValue
 {
 
     [PublicAPI]
-    public EnumValue(string name)
-        : this(null, name)
+    internal EnumValue(string value)
+        : this(null, value)
     {
     }
 
     [PublicAPI]
-    public EnumValue(string? type, string name)
+    internal EnumValue(string? name, string literal)
     {
-        this.Type = type;
-        this.Name = name ?? throw new ArgumentNullException(nameof(name));
+        this.Name = name;
+        this.Literal = literal ?? throw new ArgumentNullException(nameof(literal));
     }
 
     [PublicAPI]
-    public string? Type
+    public string? Name
     {
         get;
     }
 
     [PublicAPI]
-    public string Name
+    public string Literal
     {
         get;
     }
+
+    public static implicit operator EnumValue(string literal) => new(literal);
 
 }
