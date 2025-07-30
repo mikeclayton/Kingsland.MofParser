@@ -1,6 +1,4 @@
-﻿using Kingsland.MofParser.Parsing;
-
-namespace Kingsland.MofParser.Sample;
+﻿namespace Kingsland.MofParser.Sample;
 
 internal static class Program
 {

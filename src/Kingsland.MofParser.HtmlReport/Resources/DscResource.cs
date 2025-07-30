@@ -1,5 +1,4 @@
-﻿using Kingsland.MofParser.Models.Types;
-using Kingsland.MofParser.Models.Values;
+﻿using Kingsland.MofParser.Models.Values;
 using System.Collections.ObjectModel;
 
 namespace Kingsland.MofParser.HtmlReport.Resources;
