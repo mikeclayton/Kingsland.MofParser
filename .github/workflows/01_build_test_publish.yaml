@@ -1,8 +1,8 @@
 name: "01 - Build, Test, Publish"
 
 on:
-  push:
-    # run on all commits
+  #push:
+  #  # run on all commits
   pull_request:
     # run on all pull requests
   workflow_dispatch:
@@ -92,11 +92,11 @@ jobs:
 
       - name: prepare nuspec
         run: |
-          pwsh ./.build/prepare_nuspec.ps1
+          pwsh .build/prepare_nuspec.ps1
 
       - name: nuget pack
         run: |
-          nuget pack ./.build/Kingsland.MofParser.nuspec
+          nuget pack .build/Kingsland.MofParser.nuspec -basepath src
 
       - name: upload nuget package
         uses: actions/upload-artifact@v4
@@ -112,7 +112,7 @@ jobs:
 
       - name: rewrite jb-inspectcode.sarif paths
         run: |
-            pwsh ./.build/rewrite_sarif.ps1
+            pwsh .build/rewrite_sarif.ps1
 
       - name: upload jb-inspectcode.sarif
         uses: github/codeql-action/upload-sarif@v3
