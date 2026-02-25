@@ -16,7 +16,7 @@ function Install-DotNetTool
     if ($null -eq $tool)
     {
 
-        $cmdArgs = @("tool", "install, $Name)
+        $cmdArgs = @("tool", "install", $Name)
 
         if( -not [string]::IsNullOrEmpty($Version) )
         {
