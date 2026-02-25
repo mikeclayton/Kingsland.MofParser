@@ -15,7 +15,7 @@ write-host ($versions | format-list | out-string)
 
 # get the target framework from the csproj
 $csproj = [xml] (get-content "src/Kingsland.MofParser/Kingsland.MofParser.csproj" -raw)
-$targetFramework = $csproj.Project.PropertyGroup.TargetFramework | where-object { $null -ne $_ }
+$targetFramework = $csproj.SelectSingleNode("/Project/PropertyGroup/TargetFramework").InnerText
 write-host "target framework = '$targetFramework'"
 
 # insert values into the nuspec file

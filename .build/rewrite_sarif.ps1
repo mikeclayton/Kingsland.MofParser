@@ -1,7 +1,7 @@
 $ErrorActionPreference = "Stop"
 Set-StrictMode -Version "Latest"
 
- # "dotnet tool run jb inspectcode" generates a SARIF file with paths relative to the solution file
+# "dotnet tool run jb inspectcode" generates a SARIF file with paths relative to the solution file
 # but github expects them to be relative to the root of the repository so we need to rewrite them
 
 $sarifFile = ".build/out/jb-inspectcode.sarif"

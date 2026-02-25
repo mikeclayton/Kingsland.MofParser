@@ -35,6 +35,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{6E8906
 	ProjectSection(SolutionItems) = preProject
 		Kingsland.MofParser.nuspec = Kingsland.MofParser.nuspec
 		..\.build\prepare_nuspec.ps1 = ..\.build\prepare_nuspec.ps1
+		..\.build\rewrite_sarif.ps1 = ..\.build\rewrite_sarif.ps1
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kingsland.MofParser.Annotations", "Kingsland.MofParser.Annotations\Kingsland.MofParser.Annotations.csproj", "{069A8644-9C60-4935-BE57-00727462B3E1}"
