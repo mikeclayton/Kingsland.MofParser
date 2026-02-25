@@ -1,7 +1,7 @@
 $ErrorActionPreference = "Stop"
 Set-StrictMode -Version "Latest"
 
-. "./Install-DotNetTool.ps1"
+. "$PSScriptRoot/Install-DotNetTool.ps1"
 
 # install the gitversion tool if it isn't already installed
 # and get the version numbers for this commit

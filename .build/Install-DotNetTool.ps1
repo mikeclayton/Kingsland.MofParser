@@ -1,7 +1,8 @@
 function Install-DotNetTool
 {
 
-    param(
+    param
+    (
         [string] $Name,
         [string] $Version
     )
@@ -9,8 +10,8 @@ function Install-DotNetTool
     # calling "dotnet tool install" when already installed will give an error
     # see https://github.com/dotnet/sdk/issues/9500
 
-    $tools      = dotnet tool list --format json | convertfrom-json
-    $tool       = $tools.data | where-object { $_.packageId -eq $Name }
+    $tools = dotnet tool list --format json | convertfrom-json
+    $tool  = $tools.data | where-object { $_.packageId -eq $Name }
 
     if ($null -eq $tool)
     {
