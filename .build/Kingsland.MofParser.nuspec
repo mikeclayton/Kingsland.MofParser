@@ -18,7 +18,9 @@
   </metadata>
   <files>
       <file src="..\README.md" target="\README.md" />
-      <file src="Kingsland.MofParser\bin\Release\{{ targetFramework }}\*.dll" target="\lib\{{ targetFramework }}" />
-      <file src="Kingsland.MofParser\bin\Release\{{ targetFramework }}\*.pdb" target="\lib\{{ targetFramework }}" />
+      <file src="Kingsland.MofParser\bin\Release\{{ targetFramework }}\Kingsland.MofParser.dll" target="\lib\{{ targetFramework }}" />
+      <file src="Kingsland.MofParser\bin\Release\{{ targetFramework }}\Kingsland.MofParser.pdb" target="\lib\{{ targetFramework }}" />
+      <file src="Kingsland.MofParser\bin\Release\{{ targetFramework }}\Kingsland.ParseFx.dll"   target="\lib\{{ targetFramework }}" />
+      <file src="Kingsland.MofParser\bin\Release\{{ targetFramework }}\Kingsland.ParseFx.pdb"   target="\lib\{{ targetFramework }}" />
   </files>
 </package>
