@@ -1,14 +1,13 @@
 $ErrorActionPreference = "Stop"
 Set-StrictMode -Version "Latest"
 
+. "./Install-DotNetTool.ps1"
+
 # install the gitversion tool if it isn't already installed
 # and get the version numbers for this commit
-$tools      = dotnet tool list --format json | convertfrom-json
-$gitversion = $tools.data | where-object { $_.packageId -eq "gitversion.tool" }
-if ($null -eq $gitVersion)
-{
-	dotnet tool install GitVersion.Tool --version 5.8.2
-}
+Install-DotNetTool `
+    -Name    "gitversion.tool" `
+    -Version "5.8.2"
 $versions = dotnet-gitversion | convertfrom-json
 write-host "versions = "
 write-host ($versions | format-list | out-string)

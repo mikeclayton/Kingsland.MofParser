@@ -106,9 +106,7 @@ jobs:
 
       - name: dotnet tool jb inspectcode
         run: |
-          dotnet new tool-manifest
-          dotnet tool install JetBrains.ReSharper.GlobalTools
-          dotnet tool run jb inspectcode "src/Kingsland.MofParser.sln" -output=".build/out/jb-inspectcode.sarif" --no-build
+          pwsh .build/inspect_code.ps1
 
       - name: rewrite jb-inspectcode.sarif paths
         run: |
