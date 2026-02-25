@@ -96,7 +96,7 @@ jobs:
 
       - name: nuget pack
         run: |
-          nuget pack src/Kingsland.MofParser.nuspec
+          nuget pack ./.build/Kingsland.MofParser.nuspec
 
       - name: upload nuget package
         uses: actions/upload-artifact@v4
