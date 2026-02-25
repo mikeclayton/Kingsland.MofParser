@@ -19,7 +19,7 @@ $targetFramework = $csproj.SelectSingleNode("/Project/PropertyGroup/TargetFramew
 write-host "target framework = '$targetFramework'"
 
 # insert values into the nuspec file
-$nuspecPath = "src/Kingsland.MofParser.nuspec"
+$nuspecPath = "$($env:GITHUB_WORKSPACE")/src/Kingsland.MofParser.nuspec"
 $nuspecText = get-content $nuspecPath -raw
 write-host "nuspec before = "
 write-host "------------"
