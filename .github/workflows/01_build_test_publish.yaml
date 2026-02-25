@@ -90,9 +90,9 @@ jobs:
         with:
           nuget-version: latest
 
-      - name: version nuspec
+      - name: prepare nuspec
         run: |
-          sed -i "s/<version>.*<\/version>/<version>${{ env.BUILD_NUMBER }}<\/version>/" src/Kingsland.MofParser.nuspec
+          pwsh ./.build/prepare_nuspec.ps1
 
       - name: nuget pack
         run: |
