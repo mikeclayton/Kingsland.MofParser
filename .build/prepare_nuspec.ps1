@@ -14,12 +14,12 @@ write-host "versions = "
 write-host ($versions | format-list | out-string)
 
 # get the target framework from the csproj
-$csproj = [xml] (get-content "src\Kingsland.MofParser\Kingsland.MofParser.csproj" -raw)
+$csproj = [xml] (get-content "src/Kingsland.MofParser/Kingsland.MofParser.csproj" -raw)
 $targetFramework = $csproj.Project.PropertyGroup.TargetFramework | where-object { $null -ne $_ }
 write-host "target framework = '$targetFramework'"
 
 # insert values into the nuspec file
-$nuspecPath = "src\Kingsland.MofParser.nuspec"
+$nuspecPath = "src/Kingsland.MofParser.nuspec"
 $nuspecText = get-content $nuspecPath -raw
 write-host "nuspec before = "
 write-host "------------"
