@@ -23,7 +23,7 @@ function Install-DotNetTool
             $cmdArgs += @("--version", $Version)
         }
 
-	    dotnet tool install $Name $cmdArgs
+	    dotnet $cmdArgs
     }
 
 }
