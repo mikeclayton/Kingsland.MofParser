@@ -6,7 +6,7 @@
     <authors>Michael Clayton</authors>
     <owners>Michael Clayton</owners>
     <license type="expression">MIT OR LGPL-3.0-only</license>
-    <readme>PACKAGE.md</readme>
+    <readme>README.md</readme>
     <projectUrl>https://github.com/mikeclayton/Kingsland.MofParser</projectUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>A C# library for parsing the contents of Managed Object Format (MOF) files</description>
@@ -17,7 +17,8 @@
     <tags>powershell dsc mof parsing csharp</tags>
   </metadata>
   <files>
-    <file src="Kingsland.MofParser\bin\Release\{{ targetFramework }}\*.dll" target="\lib\{{ targetFramework }}" />
-    <file src="Kingsland.MofParser\bin\Release\{{ targetFramework }}\*.pdb" target="\lib\{{ targetFramework }}" />
+      <file src="..\README.md" target="\README.md" />
+      <file src="Kingsland.MofParser\bin\Release\{{ targetFramework }}\*.dll" target="\lib\{{ targetFramework }}" />
+      <file src="Kingsland.MofParser\bin\Release\{{ targetFramework }}\*.pdb" target="\lib\{{ targetFramework }}" />
   </files>
 </package>
