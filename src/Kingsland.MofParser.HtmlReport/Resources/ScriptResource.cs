@@ -2,7 +2,7 @@
 
 namespace Kingsland.MofParser.HtmlReport.Resources;
 
-internal sealed class ScriptResource : DscResource
+public sealed class ScriptResource : DscResource
 {
 
     internal ScriptResource(string filename, string computerName, InstanceValue instance)

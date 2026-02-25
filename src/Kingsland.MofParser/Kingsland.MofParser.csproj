@@ -1,22 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
 
-  <PropertyGroup>
-    <Company>Kingsland Consulting</Company>
-    <Authors>Michael Clayton</Authors>
-    <Copyright>Copyright © 2023</Copyright>
-    <PackageProjectUrl>https://github.com/KingslandConsulting/Kingsland.MofParser</PackageProjectUrl>
-    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
-    <Description>A C# library for parsing the contents of Managed Object Format (MOF) files</Description>
-  </PropertyGroup>
+    <PropertyGroup>
+        <Authors>Michael Clayton</Authors>
+        <Copyright>Copyright © 2026</Copyright>
+        <PackageProjectUrl>https://https://github.com/mikeclayton/Kingsland.MofParser</PackageProjectUrl>
+        <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+        <Description>A C# library for parsing the contents of Managed Object Format (MOF) files</Description>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Kingsland.ParseFx\Kingsland.ParseFx.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Kingsland.ParseFx\Kingsland.ParseFx.csproj" />
+    </ItemGroup>
 
 </Project>

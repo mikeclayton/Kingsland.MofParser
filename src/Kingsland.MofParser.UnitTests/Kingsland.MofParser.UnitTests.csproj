@@ -1,98 +1,97 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
 
-  <PropertyGroup>
-    <Company>Kingsland Consulting</Company>
-    <Authors>Michael Clayton</Authors>
-    <Copyright>Copyright © 2023</Copyright>
-  </PropertyGroup>
+    <PropertyGroup>
+        <Authors>Michael Clayton</Authors>
+        <Copyright>Copyright © 2026</Copyright>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <Content Include="Parsing\DSP0221_3.0.1\D.01 GOLF_Schema.mof">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Parsing\DSP0221_3.0.1\D.02 GOLF_Base.mof">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Parsing\DSP0221_3.0.1\D.03 GOLF_Club.mof">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Parsing\DSP0221_3.0.1\D.04 GOLF_ClubMember.mof">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Parsing\DSP0221_3.0.1\D.05 GOLF_Professional.mof">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Parsing\DSP0221_3.0.1\D.06 GOLF_Locker.mof">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Parsing\DSP0221_3.0.1\D.07 GOLF_Tournament.mof">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Parsing\DSP0221_3.0.1\D.08 GOLF_MemberLocker.mof">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Parsing\DSP0221_3.0.1\D.09 GOLF_Lesson.mof">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Parsing\DSP0221_3.0.1\D.10 GOLF_ProfessionalMember.mof">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Parsing\DSP0221_3.0.1\D.11 GOLF_ProfessionalStaffMember.mof">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Parsing\DSP0221_3.0.1\D.12 GOLF_TournamentParticipant.mof">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Parsing\DSP0221_3.0.1\D.13 GOLF_Address.mof">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Parsing\DSP0221_3.0.1\D.14 GOLF_Date.mof">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Parsing\DSP0221_3.0.1\D.15 GOLF_PhoneNumber.mof">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Parsing\DSP0221_3.0.1\D.16 GOLF_ResultCodeEnum.mof">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Parsing\DSP0221_3.0.1\D.17 GOLF_ProfessionalStatusEnum.mof">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Parsing\DSP0221_3.0.1\D.18 GOLF_MemberStatusEnum.mof">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Parsing\DSP0221_3.0.1\D.19 GOLF_StatesEnum.mof">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Parsing\DSP0221_3.0.1\D.20 JohnDoe.mo_">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Parsing\WMI\WinXp\WinXpProSp3CIMV2.mof">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Parsing\WMI\WinXp\WinXpProSp3Microsoft.mof">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Parsing\WMI\WinXp\WinXpProSp3WMI.mof">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
+    <ItemGroup>
+        <Content Include="Parsing\DSP0221_3.0.1\D.01 GOLF_Schema.mof">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Parsing\DSP0221_3.0.1\D.02 GOLF_Base.mof">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Parsing\DSP0221_3.0.1\D.03 GOLF_Club.mof">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Parsing\DSP0221_3.0.1\D.04 GOLF_ClubMember.mof">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Parsing\DSP0221_3.0.1\D.05 GOLF_Professional.mof">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Parsing\DSP0221_3.0.1\D.06 GOLF_Locker.mof">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Parsing\DSP0221_3.0.1\D.07 GOLF_Tournament.mof">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Parsing\DSP0221_3.0.1\D.08 GOLF_MemberLocker.mof">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Parsing\DSP0221_3.0.1\D.09 GOLF_Lesson.mof">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Parsing\DSP0221_3.0.1\D.10 GOLF_ProfessionalMember.mof">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Parsing\DSP0221_3.0.1\D.11 GOLF_ProfessionalStaffMember.mof">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Parsing\DSP0221_3.0.1\D.12 GOLF_TournamentParticipant.mof">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Parsing\DSP0221_3.0.1\D.13 GOLF_Address.mof">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Parsing\DSP0221_3.0.1\D.14 GOLF_Date.mof">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Parsing\DSP0221_3.0.1\D.15 GOLF_PhoneNumber.mof">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Parsing\DSP0221_3.0.1\D.16 GOLF_ResultCodeEnum.mof">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Parsing\DSP0221_3.0.1\D.17 GOLF_ProfessionalStatusEnum.mof">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Parsing\DSP0221_3.0.1\D.18 GOLF_MemberStatusEnum.mof">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Parsing\DSP0221_3.0.1\D.19 GOLF_StatesEnum.mof">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Parsing\DSP0221_3.0.1\D.20 JohnDoe.mo_">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Parsing\WMI\WinXp\WinXpProSp3CIMV2.mof">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Parsing\WMI\WinXp\WinXpProSp3Microsoft.mof">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Parsing\WMI\WinXp\WinXpProSp3WMI.mof">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
-    <PackageReference Include="NUnit" Version="4.3.2" />
-    <PackageReference Include="NUnit3TestAdapter" Version="5.0.0" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.3.0" />
+        <PackageReference Include="NUnit" Version="4.5.0" />
+        <PackageReference Include="NUnit3TestAdapter" Version="6.1.0" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Kingsland.MofParser\Kingsland.MofParser.csproj" />
-    <ProjectReference Include="..\Kingsland.ParseFx\Kingsland.ParseFx.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Kingsland.MofParser\Kingsland.MofParser.csproj" />
+        <ProjectReference Include="..\Kingsland.ParseFx\Kingsland.ParseFx.csproj" />
+    </ItemGroup>
 
 </Project>

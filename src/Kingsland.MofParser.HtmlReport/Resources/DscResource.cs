@@ -3,12 +3,12 @@ using System.Collections.ObjectModel;
 
 namespace Kingsland.MofParser.HtmlReport.Resources;
 
-internal class DscResource
+public class DscResource
 {
 
     #region Constructors
 
-    protected DscResource(string filename, string computerName, InstanceValue instance)
+    private protected DscResource(string filename, string computerName, InstanceValue instance)
     {
         this.Filename = filename;
         this.ComputerName = computerName;

@@ -32,16 +32,16 @@ public sealed class PublicAPIAttribute : Attribute
         [JetBrains.Annotations.NotNull]
         [JetBrains.Annotations.PublicAPI]
 #endif
-        string comment
+        string? comment
     )
     {
-        this.Comment = comment ?? throw new ArgumentNullException(nameof(comment));
+        this.Comment = comment;
     }
 
 #if JETBRAINS_ANNOTATIONS
     [JetBrains.Annotations.CanBeNull]
 #endif
-    public string Comment 
+    public string? Comment
     { 
         get;
     }
