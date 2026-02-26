@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Kingsland.MofParser</id>
+    <version>{{ version }}</version>
+    <authors>Michael Clayton</authors>
+    <owners>Michael Clayton</owners>
+    <license type="expression">MIT OR LGPL-3.0-only</license>
+    <readme>README.md</readme>
+    <projectUrl>https://github.com/mikeclayton/Kingsland.MofParser</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>A C# library for parsing the contents of Managed Object Format (MOF) files</description>
+    <repository type="git" url="https://github.com/mikeclayton/Kingsland.MofParser" commit="{{ commit }}"/>
+    <dependencies>
+      <group targetFramework="{{ targetFramework }}" />
+    </dependencies>
+    <tags>powershell dsc mof parsing csharp</tags>
+  </metadata>
+  <files>
+      <file src="..\README.md" target="\README.md" />
+      <file src="Kingsland.MofParser\bin\Release\{{ targetFramework }}\Kingsland.MofParser.dll" target="\lib\{{ targetFramework }}" />
+      <file src="Kingsland.MofParser\bin\Release\{{ targetFramework }}\Kingsland.MofParser.pdb" target="\lib\{{ targetFramework }}" />
+      <file src="Kingsland.MofParser\bin\Release\{{ targetFramework }}\Kingsland.ParseFx.dll"   target="\lib\{{ targetFramework }}" />
+      <file src="Kingsland.MofParser\bin\Release\{{ targetFramework }}\Kingsland.ParseFx.pdb"   target="\lib\{{ targetFramework }}" />
+  </files>
+</package>

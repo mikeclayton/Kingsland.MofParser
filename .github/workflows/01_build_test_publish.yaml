@@ -1,8 +1,8 @@
 name: "01 - Build, Test, Publish"
 
 on:
-  push:
-    # run on all commits
+  #push:
+  #  # run on all commits
   pull_request:
     # run on all pull requests
   workflow_dispatch:
@@ -90,13 +90,13 @@ jobs:
         with:
           nuget-version: latest
 
-      - name: version nuspec
+      - name: prepare nuspec
         run: |
-          sed -i "s/<version>.*<\/version>/<version>${{ env.BUILD_NUMBER }}<\/version>/" src/Kingsland.MofParser.nuspec
+          pwsh .build/prepare_nuspec.ps1
 
       - name: nuget pack
         run: |
-          nuget pack src/Kingsland.MofParser.nuspec
+          nuget pack .build/Kingsland.MofParser.nuspec -basepath src
 
       - name: upload nuget package
         uses: actions/upload-artifact@v4
@@ -106,36 +106,11 @@ jobs:
 
       - name: dotnet tool jb inspectcode
         run: |
-          dotnet new tool-manifest
-          dotnet tool install JetBrains.ReSharper.GlobalTools
-          dotnet tool run jb inspectcode "src/Kingsland.MofParser.sln" -output=".build/out/jb-inspectcode.sarif" --no-build
+          pwsh .build/inspect_code.ps1
 
       - name: rewrite jb-inspectcode.sarif paths
-        shell: pwsh
         run: |
-          # "dotnet tool run jb inspectcode" generates a SARIF file with paths relative to the solution file
-          # but github expects them to be relative to the root of the repository so we need to rewrite them
-          $sarifFile = ".build/out/jb-inspectcode.sarif"
-          # read the sarif file from disk
-          $sarif = Get-Content $sarifFile | ConvertFrom-Json
-          # update the paths in the SARIF file
-          foreach( $run in $sarif.runs )
-          {
-            foreach( $result in $run.results )
-            {
-              # rewrite the file path to be relative to the root of the repository
-              $newPath = $result.locations[0].physicalLocation.artifactLocation.uri
-              # add a "src/" to the path if it doesn't already have it
-              if( -not $newPath.StartsWith("src/") )
-              {
-                  $newPath = "src/$newPath"
-              }
-              # update the sarif file
-              $result.locations[0].physicalLocation.artifactLocation.uri = $newPath
-            }
-          }
-          # write the modified SARIF file back to disk
-          $sarif | ConvertTo-Json -Depth 99 | Set-Content $sarifFile
+            pwsh .build/rewrite_sarif.ps1
 
       - name: upload jb-inspectcode.sarif
         uses: github/codeql-action/upload-sarif@v3
