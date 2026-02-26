@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{6E890646-7B55-4818-9DFC-71561A9DF646}"
 	ProjectSection(SolutionItems) = preProject
+		..\.build\inspect_code.ps1 = ..\.build\inspect_code.ps1
+		..\.build\Install-DotNetTool.ps1 = ..\.build\Install-DotNetTool.ps1
 		Kingsland.MofParser.nuspec = Kingsland.MofParser.nuspec
 		..\.build\prepare_nuspec.ps1 = ..\.build\prepare_nuspec.ps1
 		..\.build\rewrite_sarif.ps1 = ..\.build\rewrite_sarif.ps1
